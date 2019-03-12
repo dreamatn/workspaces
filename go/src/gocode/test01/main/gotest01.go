@@ -9,3 +9,4 @@ func main() {
 	fmt.Println("john\t12\t河北\t北京")
 	
 }
+
