@@ -1,0 +1,2 @@
+class FooClass():
+    """my"""
