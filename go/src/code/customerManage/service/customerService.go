@@ -1,6 +1,6 @@
 package service
 import (
-	"go_code/customerManage/model"
+	"../model"
 
 )
 

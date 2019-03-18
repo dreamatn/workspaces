@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "D:\\dev_app\\Python\\Python27\\python.exe"
+    "python.pythonPath": "D:\\dev_app\\Python\\Python27\\python.exe",
+    "go.goroot": "D:\\workspaces\\go\\src",
+    "go.inferGopath": true
 }
