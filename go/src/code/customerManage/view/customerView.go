@@ -1,9 +1,9 @@
 package main
 
 import (
+	"code/customerManage/service"
+	"code/customerManage/model"
 	"fmt"
-	"../service"
-	"../model"
 )
 
 type customerView struct {

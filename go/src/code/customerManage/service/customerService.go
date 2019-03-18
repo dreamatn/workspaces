@@ -1,7 +1,6 @@
 package service
 import (
-	"../model"
-
+	"code/customerManage/model"
 )
 
 //该CustomerService， 完成对Customer的操作,包括
