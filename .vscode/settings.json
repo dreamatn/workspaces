@@ -1,3 +1,9 @@
 {
-    "python.pythonPath": "D:\\dev_app\\Python\\Python27\\python.exe"
+    "python.pythonPath": "D:\\dev_app\\Python\\Python27\\python.exe",
+    "python.unitTest.pyTestArgs": [
+        "python"
+    ],
+    "python.unitTest.unittestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
+    "python.unitTest.pyTestEnabled": true
 }
