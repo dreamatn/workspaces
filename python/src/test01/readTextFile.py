@@ -1,7 +1,7 @@
 "readTextFile.py -- read and display text file"
 
 # get file name
-fname = input("Enter file name : ")
+fname = raw_input("Enter file name : ")
 print 
 
 # attempt to open file for reading
