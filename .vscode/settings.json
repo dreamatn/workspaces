@@ -4,7 +4,17 @@
         "python"
     ],
     "python.unitTest.unittestEnabled": false,
-    "python.unitTest.nosetestsEnabled": false,
-    "python.unitTest.pyTestEnabled": true,
-    "wolf.disableHotModeWarning": true
+    "python.unitTest.nosetestsEnabled": true,
+    "python.unitTest.pyTestEnabled": false,
+    "wolf.disableHotModeWarning": true,
+    "python.unitTest.unittestArgs": [
+        "-v",
+        "-s",
+        "./python",
+        "-p",
+        "test*.py"
+    ],
+    "python.unitTest.nosetestArgs": [
+        "python"
+    ]
 }
