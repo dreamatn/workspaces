@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.4.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context.spring-context-4.2.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+	<context:annotation-config />
+	<!-- 配置自动扫描包，完成Bean的创建和自动依赖注入的功能 -->
+	<context:component-scan
+		base-package="com.dreamatn.springmvc.controller" />
+	<!-- 这两个类用来配置annotation类型 的处理器映射器和处理器适配器 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<!-- 配置视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<propety name="prefix" value="/WEB-INF/views/"></propety>
+		<propety name="suffix" value=".jsp"></propety>
+	</bean>
+</beans>
