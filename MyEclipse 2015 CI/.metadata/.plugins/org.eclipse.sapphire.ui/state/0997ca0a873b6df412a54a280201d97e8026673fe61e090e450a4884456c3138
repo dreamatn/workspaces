@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MasterDetailsEditorPageState>
+    <ContentOutlineState>
+        <Root>
+            <Children>
+                <MasterDetailsNodeState>
+                    <Label>Application</Label>
+                    <Expanded>true</Expanded>
+                    <Children>
+                        <MasterDetailsNodeState>
+                            <Label>https://graph.facebook.com</Label>
+                            <Selected>true</Selected>
+                        </MasterDetailsNodeState>
+                    </Children>
+                </MasterDetailsNodeState>
+            </Children>
+        </Root>
+        <Ratio>0.2996207332490518</Ratio>
+    </ContentOutlineState>
+</MasterDetailsEditorPageState>
