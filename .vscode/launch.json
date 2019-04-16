@@ -5,13 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch",
-            "type": "go",
-            "request": "launch",
-            "mode": "auto",
-            "program": "${fileDirname}",
-            "env": {},
-            "args": []
+            "type": "chrome",
+            "request": "attach",
+            "name": "Attach to Chrome",
+            "port":9222,
+            "webRoot": "${workspaceRoot}/src",
+            "url":"http://localhost:8080/#/",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+            }
         }
     ]
 }
