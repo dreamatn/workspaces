@@ -1411,3 +1411,4 @@ java.io.StreamCorruptedException: invalid stream header: 00000000
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:332) [org.eclipse.ui.workbench_3.106.0.v20140530-0732.jar:na]
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54) [org.eclipse.core.jobs_3.6.0.v20140424-0053.jar:na]
 2019-04-18 10:25:31,396 [Worker-6] INFO  c.g.e.m.h.c.ui.Html5AppCoreUIPlugin - Pluging started
+2019-04-18 14:35:54,762 [Worker-0] INFO  c.g.e.m.h.c.ui.Html5AppCoreUIPlugin - Pluging started
