@@ -1,0 +1,5 @@
+package com.dreamatn.dao;
+
+public class Car {
+
+}

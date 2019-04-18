@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Car.java&apos; to &apos;spring04-17/src/com.dreamatn.dao&apos;&#x0D;&#x0A;- Original project: &apos;spring04-18&apos;&#x0D;&#x0A;- Destination element: &apos;spring04-17/src/com.dreamatn.dao&apos;&#x0D;&#x0A;- Original element: &apos;com.dreamatn.dao.Car.java&apos;" description="Copy compilation unit" destination="=spring04-17/src&lt;com.dreamatn.dao" element1="/src&lt;com.dreamatn.dao{Car.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1555556523266" units="1" version="1.0"/>
+</session>

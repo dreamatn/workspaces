@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+">
+	<!-- bean有参数构造器  index/type/name/value-->
+	<bean id="car1" class="com.dreamatn.dao.Car">
+		<constructor-arg index="0" value="Audi"></constructor-arg>
+		<constructor-arg index="1" value="120"></constructor-arg>
+		<constructor-arg index="2" value="black"></constructor-arg>
+	</bean>
+	<bean id="car1" class="com.dreamatn.dao.Car">
+		<constructor-arg index="0" value="Audi"></constructor-arg>
+		<constructor-arg index="1" value="120"></constructor-arg>
+		<constructor-arg index="2" value="black"></constructor-arg>
+	</bean>
+	<bean id="car1" class="com.dreamatn.dao.Car">
+		<constructor-arg index="0" value="Audi"></constructor-arg>
+		<constructor-arg index="1" value="120"></constructor-arg>
+		<constructor-arg index="2" value="black"></constructor-arg>
+	</bean>
+</beans>
