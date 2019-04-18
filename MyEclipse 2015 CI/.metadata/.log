@@ -6989,3 +6989,91 @@ Binding(ALT+SHIFT+ARROW_LEFT,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2019-04-18 16:37:34.817
+!MESSAGE Internal Error
+!STACK 1
+Java Model Exception: Java Model Status [Unknown javadoc format for HttpServlet {key=Ljavax/servlet/http/HttpServlet;} [in HttpServlet.class [in javax.servlet.http [in D:\dev_app\MyEclipse\plugins\com.genuitec.eclipse.j2eedt.core_13.0.0.me201410030611\data\libraryset\EE_7\javaee-api-7.0.jar]]]]
+	at org.eclipse.jdt.internal.core.JavadocContents.getTypeDoc(JavadocContents.java:81)
+	at org.eclipse.jdt.internal.core.BinaryType.getAttachedJavadoc(BinaryType.java:999)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:500)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:689)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:607)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:599)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+!SUBENTRY 1 org.eclipse.jdt.core 4 1009 2019-04-18 16:37:34.841
+!MESSAGE Unknown javadoc format for HttpServlet {key=Ljavax/servlet/http/HttpServlet;} [in HttpServlet.class [in javax.servlet.http [in D:\dev_app\MyEclipse\plugins\com.genuitec.eclipse.j2eedt.core_13.0.0.me201410030611\data\libraryset\EE_7\javaee-api-7.0.jar]]]
+
+!ENTRY com.genuitec.eclipse.sqlexplorer 4 4 2019-04-18 16:49:06.097
+!MESSAGE Error processing query:     select
+        *
+    from
+        "SYSTEM"."AQ_EVENT_TABLE"
+!STACK 0
+java.sql.SQLSyntaxErrorException: ORA-00942: 表或视图不存在
+
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:450)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:399)
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1059)
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:522)
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:257)
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:587)
+	at oracle.jdbc.driver.T4CStatement.doOall8(T4CStatement.java:210)
+	at oracle.jdbc.driver.T4CStatement.doOall8(T4CStatement.java:30)
+	at oracle.jdbc.driver.T4CStatement.executeForDescribe(T4CStatement.java:762)
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:925)
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1111)
+	at oracle.jdbc.driver.OracleStatement.executeInternal(OracleStatement.java:1792)
+	at oracle.jdbc.driver.OracleStatement.execute(OracleStatement.java:1745)
+	at oracle.jdbc.driver.OracleStatementWrapper.execute(OracleStatementWrapper.java:334)
+	at com.genuitec.eclipse.sqlexplorer.views.SqlExecProgress.processQuery(SqlExecProgress.java:234)
+	at com.genuitec.eclipse.sqlexplorer.views.SqlExecProgress.run(SqlExecProgress.java:184)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+
+!ENTRY com.genuitec.eclipse.sqlexplorer 4 4 2019-04-18 16:50:16.267
+!MESSAGE Error processing query: drop tables
+!STACK 0
+java.sql.SQLSyntaxErrorException: ORA-00950: 无效 DROP 选项
+
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:450)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:399)
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1059)
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:522)
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:257)
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:587)
+	at oracle.jdbc.driver.T4CStatement.doOall8(T4CStatement.java:210)
+	at oracle.jdbc.driver.T4CStatement.doOall8(T4CStatement.java:30)
+	at oracle.jdbc.driver.T4CStatement.executeForRows(T4CStatement.java:931)
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1150)
+	at oracle.jdbc.driver.OracleStatement.executeInternal(OracleStatement.java:1792)
+	at oracle.jdbc.driver.OracleStatement.execute(OracleStatement.java:1745)
+	at oracle.jdbc.driver.OracleStatementWrapper.execute(OracleStatementWrapper.java:334)
+	at com.genuitec.eclipse.sqlexplorer.views.SqlExecProgress.processQuery(SqlExecProgress.java:234)
+	at com.genuitec.eclipse.sqlexplorer.views.SqlExecProgress.run(SqlExecProgress.java:184)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+
+!ENTRY com.genuitec.eclipse.sqlexplorer 4 4 2019-04-18 16:50:23.708
+!MESSAGE Error processing query: 
+drop table
+!STACK 0
+java.sql.SQLSyntaxErrorException: ORA-00903: 表名无效
+
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:450)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:399)
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1059)
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:522)
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:257)
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:587)
+	at oracle.jdbc.driver.T4CStatement.doOall8(T4CStatement.java:210)
+	at oracle.jdbc.driver.T4CStatement.doOall8(T4CStatement.java:30)
+	at oracle.jdbc.driver.T4CStatement.executeForRows(T4CStatement.java:931)
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1150)
+	at oracle.jdbc.driver.OracleStatement.executeInternal(OracleStatement.java:1792)
+	at oracle.jdbc.driver.OracleStatement.execute(OracleStatement.java:1745)
+	at oracle.jdbc.driver.OracleStatementWrapper.execute(OracleStatementWrapper.java:334)
+	at com.genuitec.eclipse.sqlexplorer.views.SqlExecProgress.processQuery(SqlExecProgress.java:234)
+	at com.genuitec.eclipse.sqlexplorer.views.SqlExecProgress.run(SqlExecProgress.java:184)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)

@@ -49,4 +49,13 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
 		<ref bean="car1"></ref>
 		<ref bean="car2"></ref>
 	</util:list>
+	<!-- 
+	     大型项目中我们一般使用autowire属性自动装备Bean，autowire属性有两个值：byName和byType
+	        byName：根据Bean的名字和当前的Bean的setter属性名称进行装配
+	        byType：根据Bean的类型进行装配，若有1个以上的类型，则抛异常
+	-->
+	<bean id="person" class="com.dreamatn.dao.Person" autowire="byType">
+	     <property name="name" value="hzg"></property>
+	     <property name="age" value="32"></property>
+	</bean>
 </beans>
