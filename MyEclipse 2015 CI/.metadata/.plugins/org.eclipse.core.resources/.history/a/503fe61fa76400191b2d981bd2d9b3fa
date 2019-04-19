@@ -1,0 +1,6 @@
+package com.dreamatn.controller;
+
+@Controller
+public class UserController {
+
+}

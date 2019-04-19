@@ -1,0 +1,6 @@
+package com.dreamatn.autowired.dao;
+
+@Repostory
+public interface UserRepostory {
+	void save();
+}

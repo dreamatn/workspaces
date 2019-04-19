@@ -1,0 +1,5 @@
+package com.dreamatn.autowired.repostory;
+
+public interface UserRepostory {
+	void save();
+}

@@ -1,0 +1,14 @@
+package com.dreamatn.common;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.dreamatn.dao.MyDataSource;
+
+public class Main {
+	public static void main(String[] args){
+		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+		MyDataSource mds = (MyDataSource) ac.getBean("dataSource");
+		System.out.println(mds);
+	}
+}

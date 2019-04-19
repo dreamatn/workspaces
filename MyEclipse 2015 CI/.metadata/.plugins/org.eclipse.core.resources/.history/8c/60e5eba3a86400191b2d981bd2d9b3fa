@@ -1,0 +1,13 @@
+package com.dreamatn.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+	@Autowired
+	private UserRepostory userRepostory;
+	public void diao(){
+		System.out.println("UserService diao");
+		userRepostory.save();
+	}
+}

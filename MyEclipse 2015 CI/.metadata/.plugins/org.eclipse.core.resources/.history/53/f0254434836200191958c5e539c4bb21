@@ -1,0 +1,15 @@
+package com.dreamatn.action;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.dreamatn.entity.Car;
+
+public class Main {
+	public static void main(String[] args){
+		@SuppressWarnings("resource")
+		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+		Car car = (Car) ac.getBean("car");
+		System.out.println(car);
+	}
+}

@@ -1,0 +1,12 @@
+package com.dreamatn.autowired.repostory.impl;
+
+
+public class UserRepostoryImpl implements UserRepostory {
+
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		System.out.println("UserRepostory save");
+	}
+
+}

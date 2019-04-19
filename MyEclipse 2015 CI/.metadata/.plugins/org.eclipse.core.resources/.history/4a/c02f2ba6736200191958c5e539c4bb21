@@ -1,0 +1,5 @@
+package com.dreamatn.entity;
+
+public class MyDataSource {
+
+}

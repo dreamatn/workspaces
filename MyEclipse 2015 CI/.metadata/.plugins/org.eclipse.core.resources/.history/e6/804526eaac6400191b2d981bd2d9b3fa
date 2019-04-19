@@ -1,0 +1,6 @@
+package com.dreamatn.autowired.dao;
+
+public class Snippet {
+	Injection of autowired dependencies failed;
+}
+

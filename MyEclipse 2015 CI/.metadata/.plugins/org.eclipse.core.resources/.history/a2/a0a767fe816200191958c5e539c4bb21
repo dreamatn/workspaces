@@ -1,0 +1,15 @@
+package com.dreamatn.action;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.dreamatn.entity.MyDataSource;
+
+public class Main {
+	public static void main(String[] args){
+		@SuppressWarnings("resource")
+		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+		MyDataSource mds = (MyDataSource) ac.getBean("dataSource");
+		System.out.println(mds);
+	}
+}
