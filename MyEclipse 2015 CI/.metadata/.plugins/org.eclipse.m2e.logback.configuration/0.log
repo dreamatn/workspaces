@@ -1506,3 +1506,4 @@ Caused by: org.apache.maven.model.building.ModelBuildingException: 1 problem was
 	at org.apache.maven.model.building.DefaultModelBuilder.build(DefaultModelBuilder.java:307) ~[maven-model-builder-3.2.1.jar:3.2.1]
 	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:145) ~[maven-core-3.2.1.jar:3.2.1]
 	... 14 common frames omitted
+2019-04-19 09:05:47,701 [Worker-6] INFO  c.g.e.m.h.c.ui.Html5AppCoreUIPlugin - Pluging started
