@@ -1,0 +1,12 @@
+<application>
+  <component name="libraryTable">
+    <library name="Global Libraries">
+      <CLASSES>
+        <root url="file://D:/dev_app/Eplugins/JAR" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://D:/dev_app/Eplugins/JAR" recursive="false" />
+    </library>
+  </component>
+</application>
