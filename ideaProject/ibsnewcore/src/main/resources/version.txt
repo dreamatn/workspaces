@@ -1,0 +1,61 @@
+version=560
+
+version 1.5 20181122
+1.删除UserMapper接口中的sql注解
+2.新增UserMapper接口映射xml文件
+3.新增逆向工程配置文件generatorConfig
+
+version 1.4 20181115
+1.新增IbsCoreConfigurer类，用于加载参数文件中ibscore的参数配置
+2.修改POM文件，新增Oracle JDBC驱动包
+3.修改参数文件，新增oracle数据库配置(单一数据库源)
+4.丰富User对象属性与类型
+5.新增UserMapper接口，处理数据库接口(sql为注解版本)
+6.新增UserService类，定义User接口
+7.新增UserServiceImpl类，实现User接口
+8.修改UserController，新增删除，查询，修改功能
+9.新增MapperScan注解
+10.新增事务注解@Transactional(propagation = Propagation.REQUIRED)
+
+version 1.3 20180919
+1.新增IbsExceptionService接口类，用于定义IbsException类的接口
+2.新增IbsExceptionServiceImpl接口实现类，用于实现IbsExceptionService接口
+3.新增IbsErrorController类，实现全局Http异常的Url /error 的捕捉
+4.新增IbsErrorIntercepter类，实现全局Http异常报文输出
+5.新增IbsMsgConstant类，用于存放SC系统报错信息
+6.删除IbsRequestFilter和IbsRequestFilter过滤器
+7.新增ReciveTiaIntercepter拦截器，实现json/xml格式报文的输入和输出转换，实现全局系统异常报文输出。
+8.新增CheckLoginIntercepter拦截器，预留对柜员登陆状态检查功能逻辑的实现
+9.新增CheckTiaIntercepter拦截器，预留对Tia报文公共检查功能逻辑的实现
+10.删除IbsExcp类，修改IbsTool类，新增异常处理功能
+
+version 1.2 20180913
+1.新增BpMsgConstant类，用于存放BP应用的报错信息
+2.新增IbsRequestResponseBodyMethodProcessor类，删除IbsArgumentResolver和IbsHandleReturnValue类，
+    用于合并注解IbsRequestBody和注解IbsResponseBody逻辑功能，实现xml/json格式的输入与输出转换
+3.新增IbsException类，用于应用异常
+4.新增IbsExceptionHandler类，用于捕捉应用异常
+5.新增IbsExcp类，实现应用程序统一调用异常处理功能
+
+version 1.1 20180911
+1.新增注解IbsRequestBody，用于获取IbsGwaContext
+2.新增注解IbsResponseBody，用于获取IbsToaResponse和页面输出
+3.新增IbsWebMvcConfigurer作为配置类
+4.新增IbsContextListener实现内存树的加载
+5.新增IbsRequestFilter过滤器，用于报文接收，实现xml/json输入报文转换成IbsTiaRequest
+6.新增TokenFilter过滤器，用于用户登陆状态的检查
+7.新增IbsFormat类，封装平台各类工具
+8.修改IbsGwaContext、IbsGwaContext、IbsToaResponse类为dto传输类
+9.新增IbsArgumentResolver，实现注解IbsRequestBody逻辑
+10.新增IbsHandleReturnValue，实现注解IbsResponseBody逻辑
+
+version 1.0 20180904
+1.新增IbsMemoryTree类，用于内存树的共享
+2.新增IbsParm类，用于parm表的读取
+3.新增IbsTiaRequest类，用于接收httpbody报文
+4.新增IbsGwaContext类，用于Gwa数据传输
+5.新增IbsToaResponse类，用于返回httpbody报文
+6.新增UserController类，用于Mapping Url /ibscore/bp/user/add
+7.新增User类，用于柜员业务
+
+
