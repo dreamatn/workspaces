@@ -1,4 +1,4 @@
-package com.hisun.model;
+package com.hisun.domain;
 
 import lombok.Getter;
 import lombok.Setter;
