@@ -1,17 +1,15 @@
 package com.hisun.service;
 
-import com.hisun.dao.UserDao;
-import com.hisun.model.MyResult;
-import com.hisun.model.User;
-import com.hisun.service.UserService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.transform.Result;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.hisun.dao.UserDao;
+import com.hisun.domain.MyResult;
+import com.hisun.domain.User;
 
 /**
  * Created by MoHuaiyi
@@ -48,7 +46,6 @@ public class UserServiceImpl implements UserService {
         System.out.println("显示开始");
 //        System.out.println(user.getUsername());
 //        System.out.println(user.getPassword());
-
         System.out.println(user.getVersionNo());
         System.out.println(user.isCompInd());
         System.out.println(user.isEncrInd());

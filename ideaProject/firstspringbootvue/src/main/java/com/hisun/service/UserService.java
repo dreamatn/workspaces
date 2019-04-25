@@ -1,10 +1,10 @@
 package com.hisun.service;
 
-import com.hisun.model.MyResult;
-import com.hisun.model.User;
-
 import java.util.List;
 import java.util.Map;
+
+import com.hisun.domain.MyResult;
+import com.hisun.domain.User;
 
 /**
  * Created by MoHuaiyi

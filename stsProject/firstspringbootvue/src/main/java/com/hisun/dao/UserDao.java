@@ -1,9 +1,9 @@
 package com.hisun.dao;
 
-import com.hisun.model.User;
-
 import java.util.List;
 import java.util.Map;
+
+import com.hisun.domain.User;
 
 public interface UserDao {
 
