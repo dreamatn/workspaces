@@ -1,6 +1,5 @@
-<aiml version = "1.0.1" encoding = "UTF-8">
+<aiml version="1.0">
     <!-- std_startup.xml -->
-
     <!-- Category 是一个自动的aiml单元 -->
     <category>
         <!-- Pattern 匹配用户输入 -->
@@ -10,9 +9,8 @@
         <!-- Template 是模式的响应 -->
         <!-- 这里学习一个aiml文件 -->
         <template>
-            <learn>basic_chat.aiml</learn>
+            <learn>*.aiml</learn>
             <!-- 你可以在这里添加更多的aiml文件 -->
-
         </template>
     </category>
 </aiml>

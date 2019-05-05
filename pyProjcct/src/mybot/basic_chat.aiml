@@ -1,16 +1,16 @@
 <aiml version="1.0.1" encoding="UTF-8">
-    <!-- basic_chat.aiml -->
+<!-- basic_chat.aiml -->
     <category>
-        <pattern>hello<pattern>
-        <template>Well hello<template>
+        <pattern>hello</pattern>
+        <template>Well hello</template>
     </category>
     <category>
-        <pattern>what are you<pattern>
-        <template>I'm a bot, silly!<template>
+        <pattern>你是谁*</pattern>
+        <template>I'm a bot, silly!</template>
     </category>
     <!-- 随机响应 -->
     <category>
-        <pattern>one time i *<pattern>
+        <pattern>one time *</pattern>
         <template>
             <random>
                 <li>1. Go on!</li>
@@ -18,6 +18,6 @@
                 <li>3. I did not know that.</li>
                 <li>4. Are you telling the truth?</li>
             </random>
-        <template>
+        </template>
     </category>
 </aiml>

@@ -8,13 +8,13 @@ def get_module_dir(name):
     if not path:
         raise AttributeError('module %s has not attibute __file__' % name) 
 
-alice_path = get_module_dir('aiml') + '/botdata/alice'
+alice_path = 'D:/dev_app/Python37/Lib/site-packages/aiml/botdata/alice'
 # 切换到语料库目录
-os.chdir()
+os.chdir(alice_path)
 
 alice = aiml.Kernel()
 alice.learn('startup.xml')
-alice.respond('LOAD ALICE')
+alice.respond('load alice')
 
 while True:
     print(alice.respond(input('Enter your message >> ')))
