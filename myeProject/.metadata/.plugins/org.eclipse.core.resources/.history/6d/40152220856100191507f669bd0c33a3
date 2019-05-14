@@ -1,8 +1,0 @@
-package com.dreamatn.dao;
-
-public class Person {
-
-	private String name;
-	private int age;
-	private List<Car> cars;
-}
