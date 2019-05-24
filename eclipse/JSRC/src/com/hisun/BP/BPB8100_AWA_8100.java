@@ -1,0 +1,48 @@
+package com.hisun.BP;
+
+public class BPB8100_AWA_8100 {
+    public String CL_TYP = " ";
+    public short CL_TYP_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public String CALD_CD1 = " ";
+    public short CALD_CD1_NO = 0;
+    public String CALD_CD2 = " ";
+    public short CALD_CD2_NO = 0;
+    public String CALD_CD3 = " ";
+    public short CALD_CD3_NO = 0;
+    public String CALD_CD4 = " ";
+    public short CALD_CD4_NO = 0;
+    public String CALD_CD5 = " ";
+    public short CALD_CD5_NO = 0;
+    public String CALD_CD6 = " ";
+    public short CALD_CD6_NO = 0;
+    public String CALD_CD7 = " ";
+    public short CALD_CD7_NO = 0;
+    public String CALD_CD8 = " ";
+    public short CALD_CD8_NO = 0;
+    public String CALD_CD9 = " ";
+    public short CALD_CD9_NO = 0;
+    public String CALD_CD = " ";
+    public short CALD_CD_NO = 0;
+    public String CITY_CD1 = " ";
+    public short CITY_CD1_NO = 0;
+    public String CITY_CD2 = " ";
+    public short CITY_CD2_NO = 0;
+    public String CITY_CD3 = " ";
+    public short CITY_CD3_NO = 0;
+    public String CITY_CD4 = " ";
+    public short CITY_CD4_NO = 0;
+    public String CITY_CD5 = " ";
+    public short CITY_CD5_NO = 0;
+    public String CITY_CD6 = " ";
+    public short CITY_CD6_NO = 0;
+    public String CITY_CD7 = " ";
+    public short CITY_CD7_NO = 0;
+    public String CITY_CD8 = " ";
+    public short CITY_CD8_NO = 0;
+    public String CITY_CD9 = " ";
+    public short CITY_CD9_NO = 0;
+    public String CITY_CD = " ";
+    public short CITY_CD_NO = 0;
+}

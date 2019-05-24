@@ -1,0 +1,48 @@
+package com.hisun.DD;
+
+public class DDCUCCCY {
+    public String CARD_NO = " ";
+    public String AC = " ";
+    public String AC_CNM = " ";
+    public String AC_ENM = " ";
+    public String CCY = " ";
+    public char CCY_TYPE = ' ';
+    public String PSBK_NO = " ";
+    public char CHQ_TYPE = ' ';
+    public String CHQ_NO = " ";
+    public String PSWD = " ";
+    public String ID_TYPE = " ";
+    public String ID_NO = " ";
+    public double PRIN = 0;
+    public double DEP_INT = 0;
+    public double OD_INT = 0;
+    public double INT_TAX = 0;
+    public double TOT_BAL = 0;
+    public char PAY_MTH = ' ';
+    public String TRF_CARD = " ";
+    public String TRF_AC = " ";
+    public char TRF_STLT = ' ';
+    public String TRF_CNM = " ";
+    public String TRF_ENM = " ";
+    public String CASH_NO = " ";
+    public String NARRATIVE = " ";
+    public String REMARK = " ";
+    public char PAY_TYPE = ' ';
+    public short PAY_SIGN_NO = 0;
+    public char GD_WITHDR_FLG = ' ';
+    public String RVS_NO = " ";
+    public String CI_NO = " ";
+    public double FEE_AMT = 0;
+    public char BV_TYP = ' ';
+    public int DOMICILE_BR = 0;
+    public char CROS_DR_FLG = ' ';
+    public String RLT_AC = " ";
+    public String RLT_AC_NAME = " ";
+    public String RLT_BANK = " ";
+    public String RLT_REF_NO = " ";
+    public String RLT_CCY = " ";
+    public String TX_MMO = " ";
+    public String TRF_CCY = " ";
+    public char TRF_CCY_TYPE = ' ';
+    public String REG_CD = " ";
+}

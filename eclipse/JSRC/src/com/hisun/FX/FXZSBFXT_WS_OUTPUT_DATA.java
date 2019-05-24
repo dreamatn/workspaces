@@ -1,0 +1,43 @@
+package com.hisun.FX;
+
+public class FXZSBFXT_WS_OUTPUT_DATA {
+    String TIK_NO1 = " ";
+    char STATUS = ' ';
+    String CI_NO = " ";
+    String TRA_AC = " ";
+    String CI_CNM = " ";
+    char FILLER13 = 0X02;
+    String CI_ENM = " ";
+    char FILLER15 = 0X02;
+    String ID_TYP = " ";
+    String ID_NO = " ";
+    char FILLER18 = 0X02;
+    String CNTY_CD = " ";
+    char CNTY_FLG = ' ';
+    String PROD_CD = " ";
+    String PROD_NM = " ";
+    char FILLER23 = 0X02;
+    char B_CS_FLG = ' ';
+    String BUY_CCY = " ";
+    double BUY_AMT = 0;
+    char S_CS_FLG = ' ';
+    String SELL_CCY = " ";
+    double SELL_AMT = 0;
+    String EX_CODE = " ";
+    String EX_GROUP = " ";
+    double SYS_RATE = 0;
+    char FILLER33 = 0X01;
+    double PRE_RATE = 0;
+    char FILLER35 = 0X01;
+    double SPREAD = 0;
+    char FILLER37 = 0X01;
+    double EX_RATE = 0;
+    char FILLER39 = 0X01;
+    int VALUE_DT = 0;
+    int OPT_END_DT = 0;
+    short BEFF_TM = 0;
+    String CRT_TLR = " ";
+    String UPD_TLR = " ";
+    String SUP1 = " ";
+    int CRE_DT = 0;
+}

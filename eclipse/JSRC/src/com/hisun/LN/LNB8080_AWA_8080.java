@@ -1,0 +1,40 @@
+package com.hisun.LN;
+
+public class LNB8080_AWA_8080 {
+    public String LOAN_AC = " ";
+    public short LOAN_AC_NO = 0;
+    public String CTA_NO = " ";
+    public short CTA_NO_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String CI_CNM = " ";
+    public short CI_CNM_NO = 0;
+    public int DOMI_BR = 0;
+    public short DOMI_BR_NO = 0;
+    public String PAY_AC = " ";
+    public short PAY_AC_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public char CONT_STS = ' ';
+    public short CONT_STS_NO = 0;
+    public double LOW_AMT = 0;
+    public short LOW_AMT_NO = 0;
+    public double HIGH_AMT = 0;
+    public short HIGH_AMT_NO = 0;
+    public double LOW_BAL = 0;
+    public short LOW_BAL_NO = 0;
+    public double HIGH_BAL = 0;
+    public short HIGH_BAL_NO = 0;
+    public int DD_START = 0;
+    public short DD_START_NO = 0;
+    public int DD_END = 0;
+    public short DD_END_NO = 0;
+    public int DUE_DT_S = 0;
+    public short DUE_DT_S_NO = 0;
+    public int DUE_DT_E = 0;
+    public short DUE_DT_E_NO = 0;
+    public short PAGE_ROW = 0;
+    public short PAGE_ROW_NO = 0;
+    public int PAGE_NUM = 0;
+    public short PAGE_NUM_NO = 0;
+}

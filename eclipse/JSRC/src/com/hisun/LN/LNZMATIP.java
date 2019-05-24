@@ -1,0 +1,299 @@
+package com.hisun.LN;
+
+import com.hisun.BP.*;
+import com.hisun.SC.*;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class LNZMATIP {
+    String JIBS_tmp_str[] = new String[10];
+    boolean pgmRtn = false;
+    char K_ENTER = 'E';
+    char K_ADD = 'A';
+    String K_CPN_LN_S_TMPPM_MAIN = "LN-S-TMPP-MAIN";
+    char K_MODIFY = 'M';
+    char K_DELETE = 'D';
+    LNZMATIP_WS_TEMP_VARIABLE WS_TEMP_VARIABLE = new LNZMATIP_WS_TEMP_VARIABLE();
+    long WS_SEQ_NO = 0;
+    String WS_ERR_MSG = " ";
+    String WS_ERR_INFO = " ";
+    char WS_UPDATE_FLG = ' ';
+    char WS_FND_FLG = ' ';
+    char WS_ITEM_FND_FLG = ' ';
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    LNCMSG_ERROR_MSG LNCMSG_ERROR_MSG = new LNCMSG_ERROR_MSG();
+    LNCSPAIP LNCSPAIP = new LNCSPAIP();
+    LNCSTMPP LNCSTMPP = new LNCSTMPP();
+    BPCSGSEQ BPCSGSEQ = new BPCSGSEQ();
+    LNCTMPP1 LNCTMPP1 = new LNCTMPP1();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCFMT SCCFMT = new SCCFMT();
+    LNCMTSCH LNCMTSCH = new LNCMTSCH();
+    LNCCMSCH LNCCMSCH = new LNCCMSCH();
+    LNRSCHT LNRSCHT = new LNRSCHT();
+    LNRPLPI LNRPLPI = new LNRPLPI();
+    LNCCLOAN LNCCLOAN = new LNCCLOAN();
+    LNCSCPAI LNCSCPAI = new LNCSCPAI();
+    LNCCONTM LNCCONTM = new LNCCONTM();
+    int WS_START_NUM = 0;
+    SCCGWA SCCGWA;
+    LNCMATIP LNCMATIP;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    public void MP(SCCGWA SCCGWA, LNCMATIP LNCMATIP) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.LNCMATIP = LNCMATIP;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROCESS();
+        if (pgmRtn) return;
+        B000_MAIN_PROCESS();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "LNZMATIP return!");
+        Z_RET();
+        if (pgmRtn) return;
+    }
+    public void A000_INIT_PROCESS() throws IOException,SQLException,Exception {
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+    }
+    public void B000_MAIN_PROCESS() throws IOException,SQLException,Exception {
+        B100_CHECK_INPUT();
+        if (pgmRtn) return;
+        if (LNCMATIP.COMM_DATA.FUNC == 'I') {
+            B100_INQUIRE_PROCESS();
+            if (pgmRtn) return;
+        } else if (LNCMATIP.COMM_DATA.FUNC == 'A') {
+            B100_ADD_PROCESS();
+            if (pgmRtn) return;
+        } else if (LNCMATIP.COMM_DATA.FUNC == 'M') {
+            B300_MODIFY_PROCESS();
+            if (pgmRtn) return;
+        } else if (LNCMATIP.COMM_DATA.FUNC == 'D') {
+            B400_DELETE_PROCESS();
+            if (pgmRtn) return;
+        } else if (LNCMATIP.COMM_DATA.FUNC == 'C') {
+            B500_VERIFY_PROCESS();
+            if (pgmRtn) return;
+        } else {
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void B100_CHECK_INPUT() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, LNCMATIP.COMM_DATA.CTA_NO);
+        if (LNCMATIP.COMM_DATA.CTA_NO.trim().length() == 0) {
+            WS_ERR_MSG = LNCMSG_ERROR_MSG.LN_ERR_MUST_INPUT;
+            if (LNCMATIP.COMM_DATA.CTA_NO.trim().length() == 0) WS_TEMP_VARIABLE.WS_FLD_NO = 0;
+            else WS_TEMP_VARIABLE.WS_FLD_NO = Short.parseShort(LNCMATIP.COMM_DATA.CTA_NO);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, LNCMATIP.COMM_DATA.FUNC);
+        if (LNCMATIP.COMM_DATA.FUNC != 'I' 
+            && LNCMATIP.COMM_DATA.FUNC != 'A' 
+            && LNCMATIP.COMM_DATA.FUNC != 'M' 
+            && LNCMATIP.COMM_DATA.FUNC != 'D' 
+            && LNCMATIP.COMM_DATA.FUNC != 'C') {
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_MUST_INPUT, LNCMATIP.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void B100_INQUIRE_PROCESS() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCCLOAN);
+        LNCCLOAN.COMM_DATA.LN_AC = LNCMATIP.COMM_DATA.CTA_NO;
+        LNCCLOAN.COMM_DATA.CHECK_TYP = K_ENTER;
+        S000_CALL_FUN_LNZCLOAN();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, LNCSTMPP);
+        LNCSTMPP.REC_DATA.KEY.LN_AC = LNCMATIP.COMM_DATA.CTA_NO;
+        LNCSTMPP.REC_DATA.KEY.SUF_NO = LNCMATIP.COMM_DATA.SUF_NO;
+        LNCSTMPP.REC_DATA.KEY.PHS_NO = LNCMATIP.COMM_DATA.PHS_NO;
+        LNCSTMPP.FUNC = '5';
+        LNCSTMPP.REC_DATA.KEY.TRAN_SEQ = LNCMATIP.COMM_DATA.TRAN_SEQ;
+        LNCSTMPP.REC_DATA.PAGE_ROW = LNCMATIP.COMM_DATA.PAGE_ROW;
+        LNCSTMPP.REC_DATA.PAGE_NUM = LNCMATIP.COMM_DATA.PAGE_NUM;
+        S000_CALL_LNZSTMPP();
+        if (pgmRtn) return;
+    }
+    public void B100_ADD_PROCESS() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCCLOAN);
+        LNCCLOAN.COMM_DATA.LN_AC = LNCMATIP.COMM_DATA.CTA_NO;
+        LNCCLOAN.COMM_DATA.CHECK_TYP = K_ADD;
+        S000_CALL_FUN_LNZCLOAN();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, LNCSTMPP);
+        LNCSTMPP.REC_DATA.KEY.TRAN_SEQ = LNCMATIP.COMM_DATA.TRAN_SEQ;
+        LNCSTMPP.REC_DATA.KEY.LN_AC = LNCMATIP.COMM_DATA.CTA_NO;
+        LNCSTMPP.REC_DATA.KEY.SUF_NO = LNCMATIP.COMM_DATA.SUF_NO;
+        LNCSTMPP.REC_DATA.KEY.PHS_NO = LNCMATIP.COMM_DATA.PHS_NO;
+        LNCSTMPP.REC_DATA.INST_MTH = LNCMATIP.COMM_DATA.INST_MTH;
+        LNCSTMPP.REC_DATA.PERD = LNCMATIP.COMM_DATA.PERD;
+        LNCSTMPP.REC_DATA.PERD_UNIT = LNCMATIP.COMM_DATA.PER_UNIT;
+        LNCSTMPP.REC_DATA.PHS_INST_AMT = LNCMATIP.COMM_DATA.INST_AMT;
+        LNCSTMPP.REC_DATA.PHS_PRIN_AMT = LNCMATIP.COMM_DATA.PRIN_AMT;
+        LNCSTMPP.REC_DATA.PHS_TOT_TERM = LNCMATIP.COMM_DATA.TOT_TERM;
+        LNCSTMPP.REC_DATA.PHS_REM_PRIN_AMT = LNCMATIP.COMM_DATA.PRIN_AMT;
+        LNCSTMPP.REC_DATA.PHS_CAL_TERM = LNCMATIP.COMM_DATA.CAL_TERM;
+        LNCSTMPP.REC_DATA.PHS_CMP_TERM = LNCMATIP.COMM_DATA.CMP_TERM;
+        LNCSTMPP.REC_DATA.CUR_INST_AMT = LNCMATIP.COMM_DATA.CNST_AMT;
+        LNCSTMPP.REC_DATA.CUR_INST_IRAT = LNCMATIP.COMM_DATA.INST_RAT;
+        LNCSTMPP.REC_DATA.COGN_TERM = LNCMATIP.COMM_DATA.COG_TERM;
+        LNCSTMPP.REC_DATA.COGN_INST_AMT = LNCMATIP.COMM_DATA.GNST_AMT;
+        LNCSTMPP.REC_DATA.CEL_INST_AMT = LNCMATIP.COMM_DATA.LNST_AMT;
+        LNCSTMPP.REC_DATA.FLT_INST_AMT = LNCMATIP.COMM_DATA.FNST_AMT;
+        LNCSTMPP.REC_DATA.PHS_REMP_AMT = LNCMATIP.COMM_DATA.REMP_AMT;
+        LNCSTMPP.FUNC = '0';
+        S000_CALL_LNZSTMPP();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, LNCSTMPP);
+        LNCSTMPP.REC_DATA.KEY.LN_AC = LNCMATIP.COMM_DATA.CTA_NO;
+        LNCSTMPP.REC_DATA.KEY.SUF_NO = LNCMATIP.COMM_DATA.SUF_NO;
+        LNCSTMPP.REC_DATA.KEY.PHS_NO = LNCMATIP.COMM_DATA.PHS_NO;
+        LNCSTMPP.FUNC = '5';
+        LNCSTMPP.REC_DATA.KEY.TRAN_SEQ = LNCMATIP.COMM_DATA.TRAN_SEQ;
+        LNCSTMPP.REC_DATA.PAGE_ROW = LNCMATIP.COMM_DATA.PAGE_ROW;
+        LNCSTMPP.REC_DATA.PAGE_NUM = LNCMATIP.COMM_DATA.PAGE_NUM;
+        S000_CALL_LNZSTMPP();
+        if (pgmRtn) return;
+    }
+    public void B300_MODIFY_PROCESS() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCCLOAN);
+        LNCCLOAN.COMM_DATA.LN_AC = LNCMATIP.COMM_DATA.CTA_NO;
+        LNCCLOAN.COMM_DATA.CHECK_TYP = K_MODIFY;
+        S000_CALL_FUN_LNZCLOAN();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, LNCSTMPP);
+        LNCSTMPP.REC_DATA.KEY.TRAN_SEQ = LNCMATIP.COMM_DATA.TRAN_SEQ;
+        LNCSTMPP.REC_DATA.KEY.LN_AC = LNCMATIP.COMM_DATA.CTA_NO;
+        LNCSTMPP.REC_DATA.KEY.PHS_NO = LNCMATIP.COMM_DATA.PHS_NO;
+        LNCSTMPP.REC_DATA.INST_MTH = LNCMATIP.COMM_DATA.INST_MTH;
+        LNCSTMPP.REC_DATA.PERD = LNCMATIP.COMM_DATA.PERD;
+        LNCSTMPP.REC_DATA.PERD_UNIT = LNCMATIP.COMM_DATA.PER_UNIT;
+        LNCSTMPP.REC_DATA.PHS_PRIN_AMT = LNCMATIP.COMM_DATA.PRIN_AMT;
+        LNCSTMPP.REC_DATA.PHS_TOT_TERM = LNCMATIP.COMM_DATA.TOT_TERM;
+        LNCSTMPP.REC_DATA.COGN_TERM = LNCMATIP.COMM_DATA.COG_TERM;
+        LNCSTMPP.REC_DATA.COGN_INST_AMT = LNCMATIP.COMM_DATA.GNST_AMT;
+        LNCSTMPP.REC_DATA.PHS_REMP_AMT = LNCMATIP.COMM_DATA.REMP_AMT;
+        LNCSTMPP.FUNC = '2';
+        S000_CALL_LNZSTMPP();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, LNCSTMPP);
+        LNCSTMPP.REC_DATA.KEY.LN_AC = LNCMATIP.COMM_DATA.CTA_NO;
+        LNCSTMPP.REC_DATA.KEY.SUF_NO = LNCMATIP.COMM_DATA.SUF_NO;
+        LNCSTMPP.REC_DATA.KEY.PHS_NO = LNCMATIP.COMM_DATA.PHS_NO;
+        LNCSTMPP.FUNC = '5';
+        LNCSTMPP.REC_DATA.KEY.TRAN_SEQ = LNCMATIP.COMM_DATA.TRAN_SEQ;
+        LNCSTMPP.REC_DATA.PAGE_ROW = LNCMATIP.COMM_DATA.PAGE_ROW;
+        LNCSTMPP.REC_DATA.PAGE_NUM = LNCMATIP.COMM_DATA.PAGE_NUM;
+        S000_CALL_LNZSTMPP();
+        if (pgmRtn) return;
+    }
+    public void B400_DELETE_PROCESS() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCCLOAN);
+        LNCCLOAN.COMM_DATA.LN_AC = LNCMATIP.COMM_DATA.CTA_NO;
+        LNCCLOAN.COMM_DATA.CHECK_TYP = K_DELETE;
+        S000_CALL_FUN_LNZCLOAN();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, LNCSTMPP);
+        LNCSTMPP.REC_DATA.KEY.TRAN_SEQ = LNCMATIP.COMM_DATA.TRAN_SEQ;
+        LNCSTMPP.REC_DATA.KEY.LN_AC = LNCMATIP.COMM_DATA.CTA_NO;
+        LNCSTMPP.REC_DATA.KEY.SUF_NO = LNCMATIP.COMM_DATA.SUF_NO;
+        LNCSTMPP.REC_DATA.KEY.PHS_NO = LNCMATIP.COMM_DATA.PHS_NO;
+        LNCSTMPP.FUNC = '1';
+        S000_CALL_LNZSTMPP();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, LNCSTMPP);
+        LNCSTMPP.REC_DATA.KEY.LN_AC = LNCMATIP.COMM_DATA.CTA_NO;
+        LNCSTMPP.REC_DATA.KEY.SUF_NO = LNCMATIP.COMM_DATA.SUF_NO;
+        LNCSTMPP.REC_DATA.KEY.PHS_NO = LNCMATIP.COMM_DATA.PHS_NO;
+        LNCSTMPP.FUNC = '5';
+        LNCSTMPP.REC_DATA.KEY.TRAN_SEQ = LNCMATIP.COMM_DATA.TRAN_SEQ;
+        LNCSTMPP.REC_DATA.PAGE_ROW = LNCMATIP.COMM_DATA.PAGE_ROW;
+        LNCSTMPP.REC_DATA.PAGE_NUM = LNCMATIP.COMM_DATA.PAGE_NUM;
+        S000_CALL_LNZSTMPP();
+        if (pgmRtn) return;
+    }
+    public void B500_VERIFY_PROCESS() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCSTMPP);
+        LNCSTMPP.REC_DATA.KEY.LN_AC = LNCMATIP.COMM_DATA.CTA_NO;
+        LNCSTMPP.REC_DATA.KEY.SUF_NO = LNCMATIP.COMM_DATA.SUF_NO;
+        LNCSTMPP.REC_DATA.KEY.PHS_NO = LNCMATIP.COMM_DATA.PHS_NO;
+        LNCSTMPP.FUNC = '5';
+        LNCSTMPP.REC_DATA.KEY.TRAN_SEQ = LNCMATIP.COMM_DATA.TRAN_SEQ;
+        LNCSTMPP.REC_DATA.PAGE_ROW = LNCMATIP.COMM_DATA.PAGE_ROW;
+        LNCSTMPP.REC_DATA.PAGE_NUM = LNCMATIP.COMM_DATA.PAGE_NUM;
+        S000_CALL_LNZSTMPP();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, LNCCONTM);
+        LNCCONTM.FUNC = '3';
+        LNCCONTM.REC_DATA.KEY.CONTRACT_NO = LNCMATIP.COMM_DATA.CTA_NO;
+        S000_CALL_LNZCONTM();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, LNCSTMPP.REC_DATA.END_TD);
+        CEP.TRC(SCCGWA, LNCCONTM.REC_DATA.MAT_DATE);
+        if (LNCSTMPP.REC_DATA.END_TD != LNCCONTM.REC_DATA.MAT_DATE) {
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.MAT_LESS_CONMAT, WS_TEMP_VARIABLE.WS_MSGID);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        IBS.init(SCCGWA, LNCSCPAI);
+        LNCSCPAI.REC_DATA.TRAN_SEQ = LNCMATIP.COMM_DATA.TRAN_SEQ;
+        LNCSCPAI.REC_DATA.CONTRACT_NO = LNCMATIP.COMM_DATA.CTA_NO;
+        S000_CALL_LNZSCPAI();
+        if (pgmRtn) return;
+    }
+    public void S000_CALL_FUN_LNZCLOAN() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "LN-FUN-CHECK-LNTLOAN", LNCCLOAN);
+        if (LNCCLOAN.RC.RC_RTNCODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, LNCCLOAN.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_LNZSTMPP() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, K_CPN_LN_S_TMPPM_MAIN, LNCSTMPP);
+        if (LNCSTMPP.RC.RC_RTNCODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, LNCSTMPP.RC);
+            WS_TEMP_VARIABLE.WS_FLD_NO = 0;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_LNZCONTM() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "LN-SRC-CONT-MAINT", LNCCONTM);
+        if (LNCCONTM.RC.RC_RTNCODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, LNCCONTM.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_LNZSCPAI() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "LN-SVR-COM-PAIP", LNCSCPAI);
+        if (LNCSCPAI.RC.RC_RTNCODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, LNCSCPAI.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, WS_TEMP_VARIABLE.WS_MSGID);
+        CEP.ERR(SCCGWA, JIBS_tmp_str[0], WS_TEMP_VARIABLE.WS_FLD_NO);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+    if (SCCGWA.COMM_AREA.BSP_FLG.equalsIgnoreCase("BSP") || SCCGWA.COMM_AREA.CHNL.equalsIgnoreCase("BAT")) { //FROM #IFDEF BAT
+        if (LNCMATIP.RC.RC_RTNCODE != 0) {
+            CEP.TRC(SCCGWA, "LNCMATIP=");
+            CEP.TRC(SCCGWA, LNCMATIP);
+        }
+    } //FROM #ENDIF
+        pgmRtn = true;
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

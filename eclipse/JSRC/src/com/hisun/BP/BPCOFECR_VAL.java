@@ -1,0 +1,47 @@
+package com.hisun.BP;
+
+public class BPCOFECR_VAL {
+    public String REB_DESC = " ";
+    public int EFF_DATE = 0;
+    public int EXP_DATE = 0;
+    public String TX_MMO = " ";
+    public char R_CYCLE = ' ';
+    public short PER_CNT = 0;
+    public short REB_STDT = 0;
+    public short REB_DATE = 0;
+    public int L_REB_DT = 0;
+    public int N_REB_DT = 0;
+    public char REB_TYPE = ' ';
+    public char AGG_TYPE = ' ';
+    public String REB_INFO = " ";
+    public double UP_AMT1 = 0;
+    public short UP_CNT1 = 0;
+    public double UP_D_AMT1 = 0;
+    public char AGG_MTH1 = ' ';
+    public double FEE_AMT1 = 0;
+    public double FEE_PER1 = 0;
+    public double UP_AMT2 = 0;
+    public short UP_CNT2 = 0;
+    public double UP_D_AMT2 = 0;
+    public char AGG_MTH2 = ' ';
+    public double FEE_AMT2 = 0;
+    public double FEE_PER2 = 0;
+    public double UP_AMT3 = 0;
+    public short UP_CNT3 = 0;
+    public double UP_D_AMT3 = 0;
+    public char AGG_MTH3 = ' ';
+    public double FEE_AMT3 = 0;
+    public double FEE_PER3 = 0;
+    public double UP_AMT4 = 0;
+    public short UP_CNT4 = 0;
+    public double UP_D_AMT4 = 0;
+    public char AGG_MTH4 = ' ';
+    public double FEE_AMT4 = 0;
+    public double FEE_PER4 = 0;
+    public int UP_AMT5 = 0;
+    public int UP_CNT5 = 0;
+    public double UP_D_AMT5 = 0;
+    public char AGG_MTH5 = ' ';
+    public double FEE_AMT5 = 0;
+    public double FEE_PER5 = 0;
+}

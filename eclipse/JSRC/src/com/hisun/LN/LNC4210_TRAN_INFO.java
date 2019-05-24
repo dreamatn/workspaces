@@ -1,0 +1,40 @@
+package com.hisun.LN;
+
+public class LNC4210_TRAN_INFO {
+    public char DEL_FLG = ' ';
+    public int TR_VALDT = 0;
+    public int TR_DTE = 0;
+    public long TR_JRNNO = 0;
+    public short TXN_TERM = 0;
+    public int DUE_DT = 0;
+    public double P_AMT = 0;
+    public double I_AMT = 0;
+    public double O_AMT = 0;
+    public double L_AMT = 0;
+    public double PC_AMT = 0;
+    public double F_AMT = 0;
+    public double OS_BAL = 0;
+    public String REQ_FRM_NO = " ";
+    public char PAY_METH = ' ';
+    public int TR_BR = 0;
+    public char AC_FLG1 = ' ';
+    public String AC_TYP1 = " ";
+    public String PAY_AC1 = " ";
+    public String PAY_AC_NAM1 = " ";
+    public char AC_FLG2 = ' ';
+    public String AC_TYP2 = " ";
+    public String PAY_AC2 = " ";
+    public String PAY_AC_NAM2 = " ";
+    public char AC_FLG3 = ' ';
+    public String AC_TYP3 = " ";
+    public String PAY_AC3 = " ";
+    public String PAY_AC_NAM3 = " ";
+    public char AC_FLG4 = ' ';
+    public String AC_TYP4 = " ";
+    public String PAY_AC4 = " ";
+    public String PAY_AC_NAM4 = " ";
+    public char AC_FLG5 = ' ';
+    public String AC_TYP5 = " ";
+    public String PAY_AC5 = " ";
+    public String PAY_AC_NAM5 = " ";
+}

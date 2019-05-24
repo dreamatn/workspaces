@@ -1,0 +1,42 @@
+package com.hisun.AI;
+
+public class AIOT5506_WS_OUTPUT_DATA {
+    int WS_OUT_TR_DT = 0;
+    int WS_OUT_TR_TM = 0;
+    int WS_OUT_AC_DT = 0;
+    int WS_OUT_VAL_DT = 0;
+    String WS_OUT_VCHNO = " ";
+    int WS_OUT_SEQ = 0;
+    long WS_OUT_JRNNO = 0;
+    String WS_OUT_TX_CD = " ";
+    char WS_OUT_TYP = ' ';
+    int WS_OUT_TR_BR = 0;
+    int WS_OUT_BR = 0;
+    String WS_OUT_ITM = " ";
+    String WS_OUT_CCY = " ";
+    char WS_OUT_DRCRFLG = ' ';
+    double WS_OUT_AMT = 0;
+    char AIOT5506_FILLER25 = 0X01;
+    char WS_OUT_EC_IND = ' ';
+    String WS_OUT_VCHRF_NO = " ";
+    String WS_OUT_BR_AC = " ";
+    String WS_OUT_CI_NO = " ";
+    String WS_OUT_OPPO_NO = " ";
+    String WS_OUT_BSREF_NO = " ";
+    String WS_OUT_PRDMO_CD = " ";
+    String WS_OUT_PROD_CD = " ";
+    String WS_OUT_EVEN_CD = " ";
+    int WS_OUT_GL_MSTNO = 0;
+    String WS_OUT_APP = " ";
+    String WS_OUT_CHNL_NO = " ";
+    String WS_OUT_TLR_NO = " ";
+    char WS_OUT_ODE_FLG = ' ';
+    String WS_OUT_REF_NO = " ";
+    char WS_OUT_RED_FLG = ' ';
+    String WS_OUT_CREV_NO = " ";
+    String WS_OUT_NARR_CD = " ";
+    String WS_OUT_TXN_NARR = " ";
+    char AIOT5506_FILLER45 = 0X02;
+    String WS_OUT_DESC = " ";
+    char AIOT5506_FILLER47 = 0X02;
+}

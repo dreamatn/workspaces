@@ -1,0 +1,40 @@
+package com.hisun.BP;
+
+public class BPRNHIST {
+    public BPRNHIST_KEY KEY = new BPRNHIST_KEY();
+    public int TX_BR = 0;
+    public short TX_DP = 0;
+    public int TX_DT = 0;
+    public int TX_TM = 0;
+    public char TX_TYP = ' ';
+    public String TX_TYP_CD = " ";
+    public String TX_CHNL = " ";
+    public String TX_REQ_CHNL = " ";
+    public String TX_CHNL_DTL = " ";
+    public String TX_REQFM = " ";
+    public String REF_NO = " ";
+    public String APP_MMO = " ";
+    public String TX_CD = " ";
+    public String AC = " ";
+    public int AC_SEQ = 0;
+    public String CCY = " ";
+    public char CCY_TYPE = ' ';
+    public String CI_NO = " ";
+    public String TX_TOOL = " ";
+    public char TX_STS = ' ';
+    public String TX_RMK = " ";
+    public String TX_TLR = " ";
+    public String SUP1 = " ";
+    public String SUP2 = " ";
+    public String MAKER_TLR = " ";
+    public int TX_REV_DT = 0;
+    public int ORG_AC_DT = 0;
+    public long ORG_JRNNO = 0;
+    public int UPDATE_DT = 0;
+    public String FMT_ID = " ";
+    public int FMT_LEN = 0;
+    public String BLOB_NEW_DATA = " ";
+    public String BLOB_OLD_DATA = " ";
+    public int TX_VAL_DT = 0;
+    public String TS = " ";
+}

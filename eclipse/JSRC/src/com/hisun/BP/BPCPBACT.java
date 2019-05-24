@@ -1,0 +1,7 @@
+package com.hisun.BP;
+
+public class BPCPBACT {
+    public BPCPBACT_RC RC = new BPCPBACT_RC();
+    public BPCPBACT_INPUT_DATA INPUT_DATA = new BPCPBACT_INPUT_DATA();
+    public BPCPBACT_OUTPUT_DATA OUTPUT_DATA = new BPCPBACT_OUTPUT_DATA();
+}

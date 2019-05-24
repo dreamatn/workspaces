@@ -1,0 +1,6 @@
+package com.hisun.BP;
+
+public class BPZBVCHG_WS_EEUC_DATA_TEMP {
+    BPZBVCHG_WS_KEY WS_KEY = new BPZBVCHG_WS_KEY();
+    BPZBVCHG_WS_TXT_DATA WS_TXT_DATA = new BPZBVCHG_WS_TXT_DATA();
+}

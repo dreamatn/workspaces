@@ -1,0 +1,44 @@
+package com.hisun.CM;
+
+public class CMCS1200_AMT {
+    public short AMT_PT1 = 0;
+    public double AMT_S1 = 0;
+    public short AMT_PT2 = 0;
+    public double AMT_S2 = 0;
+    public short AMT_PT3 = 0;
+    public double AMT_S3 = 0;
+    public short AMT_PT4 = 0;
+    public double AMT_S4 = 0;
+    public short AMT_PT5 = 0;
+    public double AMT_S5 = 0;
+    public short AMT_PT6 = 0;
+    public double AMT_S6 = 0;
+    public short AMT_PT7 = 0;
+    public double AMT_S7 = 0;
+    public short AMT_PT8 = 0;
+    public double AMT_S8 = 0;
+    public short AMT_PT9 = 0;
+    public double AMT_S9 = 0;
+    public short AMT_PT10 = 0;
+    public double AMT_S10 = 0;
+    public short AMT_PT11 = 0;
+    public double AMT_S11 = 0;
+    public short AMT_PT12 = 0;
+    public double AMT_S12 = 0;
+    public short AMT_PT13 = 0;
+    public double AMT_S13 = 0;
+    public short AMT_PT14 = 0;
+    public double AMT_S14 = 0;
+    public short AMT_PT15 = 0;
+    public double AMT_S15 = 0;
+    public short AMT_PT16 = 0;
+    public double AMT_S16 = 0;
+    public short AMT_PT17 = 0;
+    public double AMT_S17 = 0;
+    public short AMT_PT18 = 0;
+    public double AMT_S18 = 0;
+    public short AMT_PT19 = 0;
+    public double AMT_S19 = 0;
+    public short AMT_PT20 = 0;
+    public double AMT_S20 = 0;
+}

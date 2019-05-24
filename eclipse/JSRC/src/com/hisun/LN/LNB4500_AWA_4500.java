@@ -1,0 +1,66 @@
+package com.hisun.LN;
+
+public class LNB4500_AWA_4500 {
+    public String RC_APP = " ";
+    public short RC_APP_NO = 0;
+    public short RC_CODE = 0;
+    public short RC_CODE_NO = 0;
+    public String CTA_NO = " ";
+    public short CTA_NO_NO = 0;
+    public int BR = 0;
+    public short BR_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String CI_CNM = " ";
+    public short CI_CNM_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public double BAL = 0;
+    public short BAL_NO = 0;
+    public double BALANCE = 0;
+    public short BALANCE_NO = 0;
+    public int TR_DATE = 0;
+    public short TR_DATE_NO = 0;
+    public String APT_REF = " ";
+    public short APT_REF_NO = 0;
+    public double TOT_AMT = 0;
+    public short TOT_AMT_NO = 0;
+    public double P_AMT = 0;
+    public short P_AMT_NO = 0;
+    public double I_AMT = 0;
+    public short I_AMT_NO = 0;
+    public double O_AMT = 0;
+    public short O_AMT_NO = 0;
+    public double L_AMT = 0;
+    public short L_AMT_NO = 0;
+    public String MMO = " ";
+    public short MMO_NO = 0;
+    public double HRG_AMT = 0;
+    public short HRG_AMT_NO = 0;
+    public char RDI_FLG = ' ';
+    public short RDI_FLG_NO = 0;
+    public double RDI_AMT = 0;
+    public short RDI_AMT_NO = 0;
+    public char ADJ_TYP = ' ';
+    public short ADJ_TYP_NO = 0;
+    public String ADJ_AC = " ";
+    public short ADJ_AC_NO = 0;
+    public char MLT_STL = ' ';
+    public short MLT_STL_NO = 0;
+    public char CUR_TRM = ' ';
+    public short CUR_TRM_NO = 0;
+    public char CLN_CUT = ' ';
+    public short CLN_CUT_NO = 0;
+    public char SUBS_FLG = ' ';
+    public short SUBS_FLG_NO = 0;
+    public LNB4500_ACAMT[] ACAMT = new LNB4500_ACAMT[5];
+    public LNB4500_PART_DAT[] PART_DAT = new LNB4500_PART_DAT[10];
+    public String CCY_TYPE = " ";
+    public short CCY_TYPE_NO = 0;
+    public LNB4500_AWA_4500() {
+        for (int i=0;i<5;i++) ACAMT[i] = new LNB4500_ACAMT();
+        for (int i=0;i<10;i++) PART_DAT[i] = new LNB4500_PART_DAT();
+    }
+}

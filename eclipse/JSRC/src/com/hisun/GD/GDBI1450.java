@@ -1,0 +1,67 @@
+package com.hisun.GD;
+
+public class GDBI1450 {
+    public char TR_TYPE = ' ';
+    public String REQ_JRN = " ";
+    public int REQ_DATE = 0;
+    public String REQ_SYS = " ";
+    public int TR_BR = 0;
+    public String AP_REF = " ";
+    public GDBI1450_DR_SEC[] DR_SEC = new GDBI1450_DR_SEC[5];
+    public char MN_FLG = ' ';
+    public String TXCCY = " ";
+    public char TXTYP = ' ';
+    public int TXBR = 0;
+    public double PN_AMT = 0;
+    public double TXAMT_S = 0;
+    public int TX_CRBR = 0;
+    public String TX_CRNO = " ";
+    public char TXADV_F = ' ';
+    public int TXADV_AC = 0;
+    public String CNTR_NO = " ";
+    public String TXRMK = " ";
+    public String TXMMO = " ";
+    public char PROC_STS = ' ';
+    public String RET_CODE = " ";
+    public String RET_MSG = " ";
+    public int DATE = 0;
+    public long JRNNO = 0;
+    public double TX_AMT1 = 0;
+    public double TX_AMT2 = 0;
+    public double TX_AMT3 = 0;
+    public double TX_AMT4 = 0;
+    public double TX_AMT5 = 0;
+    public double ADV_AMT = 0;
+    public String ADV_TYPE = " ";
+    public String CI_NO = " ";
+    public String PROD_TYP = " ";
+    public short OCAL_PD = 0;
+    public char OCAL_UT = ' ';
+    public char DW_BK_TP = ' ';
+    public String DRAW_ACT = " ";
+    public String DRAW_AC = " ";
+    public char PA_BK_TP = ' ';
+    public String PAY_AC_T = " ";
+    public String PAY_AC = " ";
+    public char PEN_RRAT = ' ';
+    public char PEN_TYP = ' ';
+    public String PEN_RATT = " ";
+    public String PEN_RATC = " ";
+    public double PEN_SPR = 0;
+    public double PEN_PCT = 0;
+    public double PEN_IRAT = 0;
+    public char CPND_USE = ' ';
+    public char INT_MTH = ' ';
+    public char CPND_RTY = ' ';
+    public char CPND_TYP = ' ';
+    public String CPNDRATT = " ";
+    public String CPNDRATC = " ";
+    public double CPND_SPR = 0;
+    public double CPND_PCT = 0;
+    public double CPNDIRAT = 0;
+    public String CNTRT_NO = " ";
+    public double DRW_AMT = 0;
+    public GDBI1450() {
+        for (int i=0;i<5;i++) DR_SEC[i] = new GDBI1450_DR_SEC();
+    }
+}

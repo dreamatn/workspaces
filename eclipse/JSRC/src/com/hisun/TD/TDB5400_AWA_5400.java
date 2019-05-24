@@ -1,0 +1,40 @@
+package com.hisun.TD;
+
+public class TDB5400_AWA_5400 {
+    public char OPTION = ' ';
+    public short OPTION_NO = 0;
+    public String MAIN_AC = " ";
+    public short MAIN_AC_NO = 0;
+    public int AC_SEQ = 0;
+    public short AC_SEQ_NO = 0;
+    public String BV_NO = " ";
+    public short BV_NO_NO = 0;
+    public int STR_DATE = 0;
+    public short STR_DATE_NO = 0;
+    public int END_DATE = 0;
+    public short END_DATE_NO = 0;
+    public String RUL_CD = " ";
+    public short RUL_CD_NO = 0;
+    public char RATE_SEL = ' ';
+    public short RATE_SEL_NO = 0;
+    public String RATE_TYP = " ";
+    public short RATE_TYP_NO = 0;
+    public String TENOR = " ";
+    public short TENOR_NO = 0;
+    public double PRD_RATE = 0;
+    public short PRD_RATE_NO = 0;
+    public double CON_RATE = 0;
+    public short CON_RATE_NO = 0;
+    public double SPRD_PNT = 0;
+    public short SPRD_PNT_NO = 0;
+    public double SPRD_PCT = 0;
+    public short SPRD_PCT_NO = 0;
+    public char UP_FLG = ' ';
+    public short UP_FLG_NO = 0;
+    public String RMK = " ";
+    public short RMK_NO = 0;
+    public char ERLY_TYP = ' ';
+    public short ERLY_TYP_NO = 0;
+    public char DOCU_FLG = ' ';
+    public short DOCU_FLG_NO = 0;
+}

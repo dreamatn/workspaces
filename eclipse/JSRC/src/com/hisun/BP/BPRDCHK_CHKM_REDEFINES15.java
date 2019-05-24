@@ -1,0 +1,6 @@
+package com.hisun.BP;
+
+public class BPRDCHK_CHKM_REDEFINES15 {
+    String DATA_TEXT1 = " ";
+    BPRDCHK_CHKM_REDEFINES17 CHKM_REDEFINES17 = new BPRDCHK_CHKM_REDEFINES17();
+}

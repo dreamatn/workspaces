@@ -1,0 +1,41 @@
+package com.hisun.AI;
+
+public class AIRCMIB {
+    public AIRCMIB_KEY KEY = new AIRCMIB_KEY();
+    public String ENG_NM = " ";
+    public String CHS_NM = " ";
+    public char STS = ' ';
+    public char AC_TYP = ' ';
+    public char CCY_LMT = ' ';
+    public char BAL_DIR = ' ';
+    public char BAL_RFLG = ' ';
+    public char AMT_DIR = ' ';
+    public char DTL_FLG = ' ';
+    public char RVS_TYP = ' ';
+    public char RVS_KND = ' ';
+    public short RVS_EXP = 0;
+    public char RVS_UNIT = ' ';
+    public int AC_EXP = 0;
+    public char MANUAL_FLG = ' ';
+    public char ONL_FLG = ' ';
+    public char CARD_FLG = ' ';
+    public char HOT_FLG = ' ';
+    public double DRLT_BAL = 0;
+    public double CRLT_BAL = 0;
+    public char BAL_CHK = ' ';
+    public String APP1 = " ";
+    public String APP2 = " ";
+    public String APP3 = " ";
+    public String APP4 = " ";
+    public String APP5 = " ";
+    public String APP6 = " ";
+    public String APP7 = " ";
+    public String APP8 = " ";
+    public String APP9 = " ";
+    public String APP10 = " ";
+    public int EFF_DATE = 0;
+    public int EXP_DATE = 0;
+    public String LAST_UPDATE_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public String TS = " ";
+}

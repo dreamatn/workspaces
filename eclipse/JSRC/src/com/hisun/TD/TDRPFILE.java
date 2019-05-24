@@ -1,0 +1,45 @@
+package com.hisun.TD;
+
+public class TDRPFILE {
+    public int AC_BR = 0;
+    public char FILLER1 = ' ';
+    public String CI_CNM = " ";
+    public char FILLER2 = ' ';
+    public String ID_TYPE = " ";
+    public char FILLER3 = ' ';
+    public String ID_NO = " ";
+    public char FILLER4 = ' ';
+    public String PHNO1 = " ";
+    public char FILLER5 = ' ';
+    public String PHNO2 = " ";
+    public char FILLER6 = ' ';
+    public String CARD_NO = " ";
+    public char FILLER7 = ' ';
+    public int SEQ = 0;
+    public char FILLER8 = ' ';
+    public String PROD_CD = " ";
+    public char FILLER9 = ' ';
+    public String CCY = " ";
+    public char FILLER10 = ' ';
+    public char CCY_TYP = ' ';
+    public char FILLER11 = ' ';
+    public char AC_TYP = ' ';
+    public char FILLER12 = ' ';
+    public double BAL = 0;
+    public char FILLER13 = ' ';
+    public int OPEN_DATE = 0;
+    public char FILLER14 = ' ';
+    public int EXP_DATE = 0;
+    public char FILLER15 = ' ';
+    public char STS = ' ';
+    public char FILLER16 = ' ';
+    public String CON_RATE = " ";
+    public char FILLER17 = ' ';
+    public String TERM = " ";
+    public char FILLER18 = ' ';
+    public char INSTR_MTH = ' ';
+    public char FILLER19 = ' ';
+    public String AC = " ";
+    public char FILLER20 = ' ';
+    public String VIA_AC = " ";
+}

@@ -1,0 +1,42 @@
+package com.hisun.AI;
+
+public class AICOGGC_DATA {
+    public char FLG = ' ';
+    public int TX_DT = 0;
+    public int BR = 0;
+    public String RVS_NO = " ";
+    public int RVS_SEQ = 0;
+    public String AC = " ";
+    public String CCY = " ";
+    public double AMT = 0;
+    public char FILLER20 = 0X01;
+    public char STS = ' ';
+    public String THEIR_AC = " ";
+    public String CI_NO = " ";
+    public String CI_CNMS = " ";
+    public char FILLER25 = 0X02;
+    public int TR_BR = 0;
+    public String TR_TELLER = " ";
+    public String SET_NO = " ";
+    public short SET_SEQ = 0;
+    public String PART = " ";
+    public char FILLER31 = 0X02;
+    public String PAY_MAN = " ";
+    public char FILLER33 = 0X02;
+    public int PAY_BR = 0;
+    public String TR_CODE = " ";
+    public String APP = " ";
+    public String CHNL_NO = " ";
+    public String TX_SUP_TLR = " ";
+    public String PROD_TYPE = " ";
+    public String CNTR_TYPE = " ";
+    public String ITM_S = " ";
+    public int SEQ_S = 0;
+    public String AC_NO = " ";
+    public int BR_S = 0;
+    public char SIGN = ' ';
+    public int GLMST = 0;
+    public int VAL_DT = 0;
+    public String EVENT_TYPE = " ";
+    public String REF_NO = " ";
+}

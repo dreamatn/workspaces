@@ -1,0 +1,20 @@
+package com.hisun.SO;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class SOZUPARM {
+    boolean pgmRtn = false;
+    char SOZUPARM_FILLER1 = ' ';
+    int SOZUPARM_FILLER1 = 14000000;
+    int SOZUPARM_FILLER2 = 14000000;
+    int SOZUPARM_FILLER3 = 14000000;
+    int SOZUPARM_FILLER4 = 15000000;
+    int SOZUPARM_FILLER5 = 15000000;
+    int SOZUPARM_FILLER6 = 8000000;
+    int SOZUPARM_FILLER7 = 15000000;
+    int SOZUPARM_FILLER8 = 18000000;
+    int SOZUPARM_FILLER9 = 13000000;
+    int SOZUPARM_FILLER10 = 25000000;
+    int SOZUPARM_FILLER11 = 5000000;
+    int SOZUPARM_FILLER12 = 14000000;

@@ -1,0 +1,42 @@
+package com.hisun.CM;
+
+public class CMB1300_EV_ARRAY {
+    public String PRDMO_CD = " ";
+    public short PRDMO_CD_NO = 0;
+    public String EVENT_CD = " ";
+    public short EVENT_CD_NO = 0;
+    public String PRO_OLD = " ";
+    public short PRO_OLD_NO = 0;
+    public String PRO_NEW = " ";
+    public short PRO_NEW_NO = 0;
+    public String CAT_OLD = " ";
+    public short CAT_OLD_NO = 0;
+    public String CAT_NEW = " ";
+    public short CAT_NEW_NO = 0;
+    public int VAL_DT = 0;
+    public short VAL_DT_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public int BR_OLD = 0;
+    public short BR_OLD_NO = 0;
+    public int BR_NEW = 0;
+    public short BR_NEW_NO = 0;
+    public int BR_3 = 0;
+    public short BR_3_NO = 0;
+    public int BR_4 = 0;
+    public short BR_4_NO = 0;
+    public int BR_5 = 0;
+    public short BR_5_NO = 0;
+    public String AC_NO = " ";
+    public short AC_NO_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public char RED_FLG = ' ';
+    public short RED_FLG_NO = 0;
+    public String RVS_NO = " ";
+    public short RVS_NO_NO = 0;
+    public String DESC = " ";
+    public short DESC_NO = 0;
+    public String RMK = " ";
+    public short RMK_NO = 0;
+}

@@ -1,0 +1,46 @@
+package com.hisun.LN;
+
+public class LNCCMMT_REC_DATA {
+    public LNCCMMT_KEY KEY = new LNCCMMT_KEY();
+    public String STATUS = " ";
+    public String FATHER_CONTRACT = " ";
+    public String CTA_NAME = " ";
+    public String CNTR_NO = " ";
+    public int RTIO_VAL_DATE = 0;
+    public short TRIO_VAL_DATE_NO = 0;
+    public int BOOK_BR = 0;
+    public int DOMI_BR = 0;
+    public String PROD_CD = " ";
+    public char REVOLVING_FLAG = ' ';
+    public String CTA_CCY = " ";
+    public double CTA_AMT = 0;
+    public double USED_AMT = 0;
+    public double ACCU_USED_AMT = 0;
+    public double AVAIL_AMT = 0;
+    public double ORI_CTA_AMT = 0;
+    public int CTA_AMT_CHG_DATE = 0;
+    public double EXCHANGE_RATE = 0;
+    public int AVAIL_START_DATE = 0;
+    public int AVAIL_END_DATE = 0;
+    public char HOLIDAY_METHOD = ' ';
+    public char HOLIDAY_OVERRIDE = ' ';
+    public String REF_CTY_CODE_INF = " ";
+    public LNCCMMT_REDEFINES36 REDEFINES36 = new LNCCMMT_REDEFINES36();
+    public int NEXT_SEQ = 0;
+    public int NEXT_SUB_SEQ = 0;
+    public String AGENT = " ";
+    public double GLOBAL_AMT = 0;
+    public String REMARK1 = " ";
+    public String REMARK2 = " ";
+    public String REMARK3 = " ";
+    public String REMARK4 = " ";
+    public String REMARK5 = " ";
+    public int SIGN_DATE = 0;
+    public int FIRST_DD_DATE = 0;
+    public int CLOSE_DATE = 0;
+    public int CRT_DATE = 0;
+    public String CRT_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public String UPDTBL_TLR = " ";
+    public String TS = " ";
+}

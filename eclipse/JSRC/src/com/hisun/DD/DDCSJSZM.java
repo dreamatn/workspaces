@@ -1,0 +1,6 @@
+package com.hisun.DD;
+
+public class DDCSJSZM {
+    public DDCSJSZM_INPUT_DATA INPUT_DATA = new DDCSJSZM_INPUT_DATA();
+    public DDCSJSZM_OUTPUT_DATA OUTPUT_DATA = new DDCSJSZM_OUTPUT_DATA();
+}

@@ -1,0 +1,111 @@
+package com.hisun.GD;
+
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class GDOT5300 {
+    short WS_FLD_NO = 0;
+    String WS_ERR_MSG = " ";
+    GDCMSG_ERROR_MSG GDCMSG_ERROR_MSG = new GDCMSG_ERROR_MSG();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    GDCSCUTM GDCSCUTM = new GDCSCUTM();
+    SCCGWA SCCGWA;
+    GDB5300_AWA_5300 GDB5300_AWA_5300;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROCESS();
+        B000_MAIN_PROCESS();
+        CEP.TRC(SCCGWA, "GDOT5300 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROCESS() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "GDB5300_AWA_5300>");
+        GDB5300_AWA_5300 = (GDB5300_AWA_5300) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+    }
+    public void B000_MAIN_PROCESS() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.REQ_SYSTEM);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.RSEQ);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.DD_AC);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.AC_TYP);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.CI_NM);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.SEQ);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.CCY);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.CCY_TYP);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.CTA_NO);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.REF_NO);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.RMK);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.CI_NO);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.OTCI_NM);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.PROD_CD);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.BAL);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.AMT1);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.AMT2);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.SYS_NO);
+        B100_CHECK_INPUT_DATA();
+        B200_TRANS_DATA_PROC();
+    }
+    public void B100_CHECK_INPUT_DATA() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.RSEQ);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.DD_AC);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.AC_TYP);
+        CEP.TRC(SCCGWA, GDB5300_AWA_5300.AMT2);
+        if (GDB5300_AWA_5300.DD_AC.trim().length() == 0) {
+            WS_ERR_MSG = GDCMSG_ERROR_MSG.GD_AC_NO_M_INPUT;
+            S000_ERR_MSG_PROC_CONTINUE();
+        }
+        if (GDB5300_AWA_5300.AMT2 == 0) {
+            WS_ERR_MSG = GDCMSG_ERROR_MSG.GD_CUT_AMT_M_INPUT;
+            S000_ERR_MSG_PROC_CONTINUE();
+        } else {
+            if (GDB5300_AWA_5300.AMT2 < 0) {
+                WS_ERR_MSG = GDCMSG_ERROR_MSG.GD_AMT_INVALID;
+                S000_ERR_MSG_PROC_CONTINUE();
+            }
+        }
+        WS_ERR_MSG = GDCMSG_ERROR_MSG.GD_INPUT_DATA_ERR;
+        S000_ERR_MSG_PROC_LAST();
+    }
+    public void B200_TRANS_DATA_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, GDCSCUTM);
+        GDCSCUTM.VAL.RSEQ = GDB5300_AWA_5300.RSEQ;
+        GDCSCUTM.VAL.AC = GDB5300_AWA_5300.DD_AC;
+        GDCSCUTM.VAL.AC_TYP = GDB5300_AWA_5300.AC_TYP;
+        GDCSCUTM.VAL.AC_NM = GDB5300_AWA_5300.CI_NM;
+        GDCSCUTM.VAL.AC_SEQ = GDB5300_AWA_5300.SEQ;
+        GDCSCUTM.VAL.CCY = GDB5300_AWA_5300.CCY;
+        GDCSCUTM.VAL.CCY_TYP = GDB5300_AWA_5300.CCY_TYP;
+        GDCSCUTM.VAL.CTA_NO = GDB5300_AWA_5300.CTA_NO;
+        GDCSCUTM.VAL.REF_NO = GDB5300_AWA_5300.REF_NO;
+        GDCSCUTM.VAL.CUT_AMT = GDB5300_AWA_5300.AMT2;
+        GDCSCUTM.VAL.RMK = GDB5300_AWA_5300.RMK;
+        GDCSCUTM.VAL.CI_NO = GDB5300_AWA_5300.CI_NO;
+        GDCSCUTM.VAL.CI_NM = GDB5300_AWA_5300.OTCI_NM;
+        GDCSCUTM.VAL.PROD_CD = GDB5300_AWA_5300.PROD_CD;
+        GDCSCUTM.VAL.BAL = GDB5300_AWA_5300.BAL;
+        GDCSCUTM.VAL.RL_AMT = GDB5300_AWA_5300.AMT1;
+        GDCSCUTM.VAL.SYS_NO = GDB5300_AWA_5300.SYS_NO;
+        S000_CALL_GDZSCUTM();
+    }
+    public void S000_CALL_GDZSCUTM() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "GD-SVR-GDZSCUTM", GDCSCUTM);
+    }
+    public void S000_ERR_MSG_PROC_CONTINUE() throws IOException,SQLException,Exception {
+        CEP.ERRC(SCCGWA, WS_ERR_MSG, WS_FLD_NO);
+    }
+    public void S000_ERR_MSG_PROC_LAST() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

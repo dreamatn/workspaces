@@ -1,0 +1,48 @@
+package com.hisun.DC;
+
+public class DCCSSPOT {
+    public String CARD_PROD_CD = " ";
+    public String CARD_NO = " ";
+    public String PRIM_CARD_NO = " ";
+    public String PRIM_CARD_IDTYP = " ";
+    public String PRIM_CARD_IDNO = " ";
+    public String PRIM_CARD_PASSWD = " ";
+    public String HOLDER_IDTYP = " ";
+    public String HOLDER_IDNO = " ";
+    public String HOLDER_CINO = " ";
+    public String HOLDER_NAME = " ";
+    public String OWNER_IDTYP = " ";
+    public String OWNER_IDNO = " ";
+    public String OWNER_CINO = " ";
+    public String OWNER_NAME = " ";
+    public String AC_NO = " ";
+    public char AC_TYP = ' ';
+    public char CARD_AUTO_OPNAC = ' ';
+    public char SAME_NM_FLG = ' ';
+    public char DIFF_NM_FLG = ' ';
+    public char OVERSEA_FLG = ' ';
+    public char CARD_LNK_TYP = ' ';
+    public char PROD_LMT_FLG = ' ';
+    public char DIR_TRSF_FLG = ' ';
+    public String HOLDER_TEL_NUM = " ";
+    public String HOLDER_POST_CODE = " ";
+    public String HOLDER_ADDR = " ";
+    public String HOLDER_EMAIL = " ";
+    public char AC_TYPE = ' ';
+    public char AGENT_FLG = ' ';
+    public String AGENT_IDTYP = " ";
+    public String AGENT_IDNO = " ";
+    public String AGENT_NAME = " ";
+    public String CARD_CLS_PROD = " ";
+    public String BV_CD_NO = " ";
+    public char DB_FREE = ' ';
+    public String TRT_CTLW = " ";
+    public String CUS_MGR = " ";
+    public String REG_CENT = " ";
+    public String SUB_BIZ = " ";
+    public char PSW_MAIL_FLG = ' ';
+    public char BV_USE_FLG = ' ';
+    public String O_CARD_PSW = " ";
+    public char BATCH_OPEN_FLG = ' ';
+    public DCCSSPOT_RC RC = new DCCSSPOT_RC();
+}

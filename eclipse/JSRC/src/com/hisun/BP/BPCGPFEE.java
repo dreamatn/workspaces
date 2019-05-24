@@ -1,0 +1,11 @@
+package com.hisun.BP;
+
+public class BPCGPFEE {
+    public BPCGPFEE_SVR_DATA SVR_DATA = new BPCGPFEE_SVR_DATA();
+    public BPCGPFEE_TX_DATA TX_DATA = new BPCGPFEE_TX_DATA();
+    public BPCGPFEE_CUS_DATA CUS_DATA = new BPCGPFEE_CUS_DATA();
+    public BPCGPFEE_AC_INFO AC_INFO = new BPCGPFEE_AC_INFO();
+    public BPCGPFEE_TX_DATA2 TX_DATA2 = new BPCGPFEE_TX_DATA2();
+    public BPCGPFEE_TX_DATA3 TX_DATA3 = new BPCGPFEE_TX_DATA3();
+    public String FILLER = " ";
+}

@@ -1,0 +1,6 @@
+package com.hisun.LN;
+
+public class LNRADVS {
+    public LNRADVS_BASIC_INFO BASIC_INFO = new LNRADVS_BASIC_INFO();
+    public LNRADVS_STL_INSTRCT1 STL_INSTRCT1 = new LNRADVS_STL_INSTRCT1();
+}

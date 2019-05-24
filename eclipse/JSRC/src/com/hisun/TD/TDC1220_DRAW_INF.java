@@ -1,0 +1,48 @@
+package com.hisun.TD;
+
+public class TDC1220_DRAW_INF {
+    public String DBV_CD = " ";
+    public char DBV_TYP = ' ';
+    public String DBV_NO = " ";
+    public String DCUS_NO = " ";
+    public int DAC_SEQ = 0;
+    public String DACO_AC = " ";
+    public String DNAME = " ";
+    public short DCVV = 0;
+    public String DTRK2 = " ";
+    public String DTRK3 = " ";
+    public char DPRT = ' ';
+    public String DCCY = " ";
+    public char DCCY_TYP = ' ';
+    public double DPBAL = 0;
+    public int DPVAL_DT = 0;
+    public int DVAL_DT = 0;
+    public int DEXP_DT = 0;
+    public char DPV_FLG = ' ';
+    public double DOF_AMT = 0;
+    public char DBT_FLG = ' ';
+    public double DTXN_AMT = 0;
+    public char DINT_FLG = ' ';
+    public double DINT_RAT = 0;
+    public double DINT = 0;
+    public char DN_BVTP = ' ';
+    public String DN_BVCD = " ";
+    public String DN_BVNO = " ";
+    public char DD_MTH = ' ';
+    public String DPSW = " ";
+    public String DID_TYP = " ";
+    public String DID_NO = " ";
+    public char DCT_FLG = ' ';
+    public String DOP_AC = " ";
+    public String DOP_BVNO = " ";
+    public short DOP_CVV = 0;
+    public String DOP_TRK2 = " ";
+    public String DOP_TRK3 = " ";
+    public String DOP_NAME = " ";
+    public String DCREV_NO = " ";
+    public char DOPPRT = ' ';
+    public String DTX_CHNL = " ";
+    public char DPSW_FLG = ' ';
+    public String DMMO = " ";
+    public String DRMK = " ";
+}

@@ -1,0 +1,41 @@
+package com.hisun.BA;
+
+public class BAOT3041_WS_OUTPUT_LIST {
+    int WS_TX_DT = 0;
+    long WS_CRE_JRN = 0;
+    int WS_TX_TM = 0;
+    int WS_DRW_DT = 0;
+    int WS_ACPT_DT = 0;
+    String WS_BILL_NO = " ";
+    String WS_DRWR_AC = " ";
+    String WS_DRWR_NM = " ";
+    char BAOT3041_FILLER12 = 0X02;
+    String WS_PYE_AC = " ";
+    String WS_PYE_NM = " ";
+    char BAOT3041_FILLER15 = 0X02;
+    String WS_PYE_B_CD = " ";
+    String WS_BILL_CCY = " ";
+    double WS_BILL_AMT = 0;
+    int WS_B_MAT_DT = 0;
+    String WS_ACP_R_NO = " ";
+    char BAOT3041_FILLER21 = 0X02;
+    char WS_BILL_STS = ' ';
+    char WS_AMT_STS = ' ';
+    char WS_CHG_FLG = ' ';
+    int WS_CHG_DT = 0;
+    int WS_RET_DT = 0;
+    int WS_C_REC_DT = 0;
+    int WS_PAY_DT = 0;
+    char WS_WO_PAY = ' ';
+    String WS_ACPT_BK_NM = " ";
+    char BAOT3041_FILLER31 = 0X02;
+    String WS_PYE_BK_NM = " ";
+    char BAOT3041_FILLER33 = 0X02;
+    char WS_DBT_SEQ = ' ';
+    char WS_CLCT_FLG = ' ';
+    char WS_LOSS_FLG = ' ';
+    String WS_REMK = " ";
+    char BAOT3041_FILLER38 = 0X02;
+    String WS_NEW_DRWR_AC = " ";
+    String WS_OLD_DRWR_AC = " ";
+}

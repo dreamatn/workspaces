@@ -1,0 +1,42 @@
+package com.hisun.CM;
+
+public class CMCS3100 {
+    public String CHN_TYP = " ";
+    public char TXN_TYP = ' ';
+    public char TRF_TYP = ' ';
+    public String TR_CTL = " ";
+    public String CHK_CTL = " ";
+    public char TRAC_TYP = ' ';
+    public String CUS_AC = " ";
+    public int AC_SEQ = 0;
+    public String CCY = " ";
+    public char CCY_TYP = ' ';
+    public String BAK_AC = " ";
+    public double TXN_AMT = 0;
+    public String AC_NM = " ";
+    public String ID_TYP = " ";
+    public String ID_NO = " ";
+    public String TRK2_DAT = " ";
+    public String TRK3_DAT = " ";
+    public String PSW = " ";
+    public String CHQ_TYP = " ";
+    public int SIGN_DT = 0;
+    public double CHQ_AMT = 0;
+    public String CHQ_NO = " ";
+    public String PAY_PSW = " ";
+    public String RMK_CD = " ";
+    public String RMK_CD2 = " ";
+    public String OPP_AC = " ";
+    public String OPP_ACNM = " ";
+    public String OPP_BKNM = " ";
+    public String HLD_NO = " ";
+    public String FEE_CD = " ";
+    public double FEE_AMT = 0;
+    public int BOOK_DT = 0;
+    public String REMARK = " ";
+    public short CARD_SEQ = 0;
+    public String ARQC = " ";
+    public String ARQC_DATA = " ";
+    public String VERIFY_RLT = " ";
+    public String ISSUE_DATA = " ";
+}

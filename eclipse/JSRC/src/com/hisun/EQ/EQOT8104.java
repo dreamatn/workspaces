@@ -1,0 +1,133 @@
+package com.hisun.EQ;
+
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class EQOT8104 {
+    String K_BSZ_BANKID = "01";
+    String WS_ERR_MSG = " ";
+    short WS_FLD_NO = 0;
+    EQCMSG_ERROR_MSG EQCMSG_ERROR_MSG = new EQCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCCKDT SCCCKDT = new SCCCKDT();
+    EQCSACT EQCSACT = new EQCSACT();
+    SCCGWA SCCGWA;
+    EQB1100_AWA_1100 EQB1100_AWA_1100;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    SCCGAPV SCCGAPV;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "EQOT8104 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "EQB1100_AWA_1100>");
+        EQB1100_AWA_1100 = (EQB1100_AWA_1100) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        SCCGAPV = (SCCGAPV) GWA_SC_AREA.APVL_AREA_PTR;
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B010_CHECK_INPUT();
+        CEP.TRC(SCCGWA, "AUTHHHHHH");
+        B020_MAIN_PROC();
+        EQB1100_AWA_1100.EQ_AC = EQCSACT.DATA.EQ_AC;
+    }
+    public void B010_CHECK_INPUT() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.EQ_BKID);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.PROD_CD);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.PROD_NM);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.EQ_ACT);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.EQ_CINO);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.EQ_AC);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.PSBK_NO);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.CI_NO);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.ID_TYP);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.ID_NO);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.EQ_CNM);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.EQ_TYP);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.ADD_BR);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.EQ_QTY);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.FRZ_QTY);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.PLG_QTY);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.WDAL_QTY);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.WDAL_PRI);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.WDAL_AMT);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.DIV_AC);
+        if (EQB1100_AWA_1100.EQ_BKID.trim().length() == 0) {
+            WS_ERR_MSG = EQCMSG_ERROR_MSG.EQ_BANKID_MUST_INPUT;
+            WS_FLD_NO = EQB1100_AWA_1100.EQ_BKID_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+        }
+        if (EQB1100_AWA_1100.CI_NO.trim().length() == 0) {
+            WS_ERR_MSG = EQCMSG_ERROR_MSG.EQ_CI_NO_MUST_INPUT;
+            WS_FLD_NO = EQB1100_AWA_1100.CI_NO_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+        }
+        if (EQB1100_AWA_1100.WDAL_PRI == 0) {
+            WS_ERR_MSG = EQCMSG_ERROR_MSG.WDAL_PRICE_MUST_INPUT;
+            WS_FLD_NO = EQB1100_AWA_1100.WDAL_PRI_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+        } else {
+            if (EQB1100_AWA_1100.WDAL_PRI <= 0) {
+                WS_ERR_MSG = EQCMSG_ERROR_MSG.WDAL_PRICE_INVALID;
+                WS_FLD_NO = EQB1100_AWA_1100.WDAL_PRI_NO;
+                S000_ERR_MSG_PROC_CONTINUE();
+            }
+        }
+        if (EQB1100_AWA_1100.DIV_AC.trim().length() == 0) {
+            WS_ERR_MSG = EQCMSG_ERROR_MSG.EQ_DIV_AC_MUST_INPUT;
+            WS_FLD_NO = EQB1100_AWA_1100.DIV_AC_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+        }
+        WS_ERR_MSG = EQCMSG_ERROR_MSG.EQ_INPUT_DATA_ERR;
+        S000_ERR_MSG_PROC_LAST();
+    }
+    public void B020_MAIN_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, EQCSACT);
+        EQCSACT.FUNC = 'Q';
+        EQCSACT.DATA.EQ_BKID = EQB1100_AWA_1100.EQ_BKID;
+        EQCSACT.DATA.PROD_CD = EQB1100_AWA_1100.PROD_CD;
+        EQCSACT.DATA.EQ_ACT = EQB1100_AWA_1100.EQ_ACT;
+        EQCSACT.DATA.EQ_CINO = EQB1100_AWA_1100.EQ_CINO;
+        EQCSACT.DATA.EQ_AC = EQB1100_AWA_1100.EQ_AC;
+        EQCSACT.DATA.PSBK_NO = EQB1100_AWA_1100.PSBK_NO;
+        EQCSACT.DATA.CI_NO = EQB1100_AWA_1100.CI_NO;
+        EQCSACT.DATA.EQ_TYP = EQB1100_AWA_1100.EQ_TYP;
+        EQCSACT.DATA.ADD_BR = EQB1100_AWA_1100.ADD_BR;
+        EQCSACT.DATA.EQ_QTY = EQB1100_AWA_1100.EQ_QTY;
+        EQCSACT.DATA.FRZ_QTY = EQB1100_AWA_1100.FRZ_QTY;
+        EQCSACT.DATA.PLG_QTY = EQB1100_AWA_1100.PLG_QTY;
+        EQCSACT.DATA.WDAL_QTY = EQB1100_AWA_1100.WDAL_QTY;
+        EQCSACT.DATA.WDAL_PRI = EQB1100_AWA_1100.WDAL_PRI;
+        EQCSACT.DATA.WDAL_AMT = EQB1100_AWA_1100.WDAL_AMT;
+        EQCSACT.DATA.DIV_AC = EQB1100_AWA_1100.DIV_AC;
+        CEP.TRC(SCCGWA, "8104AAA");
+        S000_CALL_EQZSACT();
+    }
+    public void S000_CALL_EQZSACT() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "EQ-S-MAIN-SACT", EQCSACT);
+    }
+    public void S000_ERR_MSG_PROC_CONTINUE() throws IOException,SQLException,Exception {
+        CEP.ERRC(SCCGWA, WS_ERR_MSG, WS_FLD_NO);
+    }
+    public void S000_ERR_MSG_PROC_LAST() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+        CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.MSG_PROC_AREA.MSG_TYPE);
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

@@ -1,0 +1,43 @@
+package com.hisun.BP;
+
+public class BPCOFBAS_VAL {
+    public short FEE_NO = 0;
+    public String FEE_DESC = " ";
+    public String FEE_TYPE = " ";
+    public double UP_AMT = 0;
+    public double DWN_AMT = 0;
+    public double UP_PCT = 0;
+    public double DWN_PCT = 0;
+    public String AREA_TYPE = " ";
+    public char FEE_UPD_FLG = ' ';
+    public int GL_MASTERNO1 = 0;
+    public int GL_MASTERNO2 = 0;
+    public int GL_MASTERNO3 = 0;
+    public int GL_MASTERNO4 = 0;
+    public String RATE_GROUP = " ";
+    public char FEE_EXG_TYP = ' ';
+    public char FEE_OWN_FLG = ' ';
+    public double TRN_BR_PCT = 0;
+    public double AC_BR1_PCT = 0;
+    public double AC_BR2_PCT = 0;
+    public String FEE_TX_MMO = " ";
+    public char FEE_CHG_TYPE = ' ';
+    public char FEE_GTH_METH = ' ';
+    public char FEE_CYC_METH = ' ';
+    public char FEE_DIS_METH = ' ';
+    public char FEE_AMOT_FLG = ' ';
+    public String AMOT_CODE = " ";
+    public char FEE_REB_FLG = ' ';
+    public String REB_CODE = " ";
+    public char ACCRUAL_FLG = ' ';
+    public char ACCRUAL_CYC = ' ';
+    public short ACCRUAL_TIMES = 0;
+    public short ACCRUAL_DAY = 0;
+    public char DEBT_METH = ' ';
+    public char RECH_METH = ' ';
+    public short MAX_RECH_CNT = 0;
+    public char ADV_FLG = ' ';
+    public double THR_FREB_PER = 0;
+    public int FEE_EFF_DATE = 0;
+    public int FEE_EXP_DATE = 0;
+}

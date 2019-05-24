@@ -1,0 +1,40 @@
+package com.hisun.TD;
+
+public class TDB5790_AWA_5790 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String CI_NAME = " ";
+    public short CI_NAME_NO = 0;
+    public String ID_TYP = " ";
+    public short ID_TYP_NO = 0;
+    public String ID_NO = " ";
+    public short ID_NO_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public char YH_TYP = ' ';
+    public short YH_TYP_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public String TERM = " ";
+    public short TERM_NO = 0;
+    public double BAL = 0;
+    public short BAL_NO = 0;
+    public char FLG = ' ';
+    public short FLG_NO = 0;
+    public double SPRD_PNT = 0;
+    public short SPRD_PNT_NO = 0;
+    public double SPRD_PCT = 0;
+    public short SPRD_PCT_NO = 0;
+    public double XS_RAT = 0;
+    public short XS_RAT_NO = 0;
+    public String ZC_TYP = " ";
+    public short ZC_TYP_NO = 0;
+    public int SDT = 0;
+    public short SDT_NO = 0;
+    public int DDT = 0;
+    public short DDT_NO = 0;
+    public String SMK = " ";
+    public short SMK_NO = 0;
+}

@@ -1,0 +1,48 @@
+package com.hisun.CI;
+
+public class CICMFDM_DATA {
+    public String CI_NO = " ";
+    public char BAS_CI_TYP = ' ';
+    public String BAS_SVR_LVL = " ";
+    public String BAS_SVR_LVL1 = " ";
+    public String BAS_SVR_LVL2 = " ";
+    public String BAS_SVR_LVL3 = " ";
+    public char BAS_CI_ATTR = ' ';
+    public String BAS_STSW = " ";
+    public int BAS_OPEN_DT = 0;
+    public String BAS_OPEN_CHNL = " ";
+    public int BAS_CLOSE_DT = 0;
+    public String BAS_ORIGIN = " ";
+    public String BAS_CI_NM = " ";
+    public String BAS_ID_TYPE = " ";
+    public String BAS_ID_NO = " ";
+    public String BAS_ID_RGN = " ";
+    public int BAS_BBR = 0;
+    public String BAS_OIC_NO = " ";
+    public char RESIDENT = ' ';
+    public String CI_SUB_TYP = " ";
+    public String INTEL_TYPE = " ";
+    public String FIN_TYPE = " ";
+    public String ECO = " ";
+    public String HECO = " ";
+    public String BUSN_SCP = " ";
+    public int REG_DT = 0;
+    public String REG_CCY = " ";
+    public double REG_AMT = 0;
+    public String NED_TYP = " ";
+    public String INDUS1 = " ";
+    public String INDUS2 = " ";
+    public String INDUS3 = " ";
+    public String INDUS4 = " ";
+    public String ORG_TYPE = " ";
+    public String ENC_CD = " ";
+    public char SIZE = ' ';
+    public char INSIZE = ' ';
+    public char TAX_CLS = ' ';
+    public char CAS_FLG = ' ';
+    public char SID_FLG = ' ';
+    public char LEGAL_FLG = ' ';
+    public char CTL_FLG = ' ';
+    public String HCNTY = " ";
+    public String FATCA = " ";
+}

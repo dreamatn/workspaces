@@ -1,0 +1,1104 @@
+package com.hisun.BP;
+
+import com.hisun.SC.*;
+import java.lang.reflect.Method;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class BPZSCPRI {
+    int JIBS_tmp_int;
+    String JIBS_tmp_str[] = new String[10];
+    boolean pgmRtn = false;
+    String K_OUTPUT_FMT = "BP510";
+    String K_HIS_REMARK = "PRIVILEGE COPY MAINTAIN";
+    String K_HIS_COPYBOOK = "BPCCPIRV";
+    String WS_ERR_MSG = " ";
+    short WS_I = 0;
+    short WS_J = 0;
+    int WS_TO_ASS_SUPR_ORG = 0;
+    short WS_TLR_LENG = 0;
+    short WS_ORG_LENG = 0;
+    BPZSCPRI_WS_OPER_ROLE_TXT WS_OPER_ROLE_TXT = new BPZSCPRI_WS_OPER_ROLE_TXT();
+    BPZSCPRI_WS_AUTH_ROLE_TXT WS_AUTH_ROLE_TXT = new BPZSCPRI_WS_AUTH_ROLE_TXT();
+    BPZSCPRI_WS_OPER_TATH_TXT WS_OPER_TATH_TXT = new BPZSCPRI_WS_OPER_TATH_TXT();
+    BPZSCPRI_WS_AUTH_TATH_TXT WS_AUTH_TATH_TXT = new BPZSCPRI_WS_AUTH_TATH_TXT();
+    char WS_TBL_TATH_FLAG = ' ';
+    char WS_TBL_GRPL_FLAG = ' ';
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCFMT SCCFMT = new SCCFMT();
+    SCCMPAG SCCMPAG = new SCCMPAG();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    BPRGRPL BPRGRPL = new BPRGRPL();
+    BPRTATH BPRTATH = new BPRTATH();
+    BPCRGRPL BPCRGRPL = new BPCRGRPL();
+    BPCRTATH BPCRTATH = new BPCRTATH();
+    BPCFTLRQ BPCFTLRQ = new BPCFTLRQ();
+    BPCPQORG BPCPQORG = new BPCPQORG();
+    BPCFOTRO BPCFOTRO = new BPCFOTRO();
+    BPCFOTTA BPCFOTTA = new BPCFOTTA();
+    BPCOCPRI BPCOCPRI = new BPCOCPRI();
+    BPCPNHIS BPCPNHIS = new BPCPNHIS();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    BPCSCPRI BPCSCPRI;
+    public void MP(SCCGWA SCCGWA, BPCSCPRI BPCSCPRI) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.BPCSCPRI = BPCSCPRI;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        if (pgmRtn) return;
+        B000_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "BPZSCPRI return!");
+        Z_RET();
+        if (pgmRtn) return;
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPRTATH);
+        IBS.init(SCCGWA, BPCRGRPL);
+        IBS.init(SCCGWA, BPCRTATH);
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.TR_TIME);
+        WS_TLR_LENG = 8;
+        WS_ORG_LENG = 6;
+        CEP.TRC(SCCGWA, WS_TLR_LENG);
+        CEP.TRC(SCCGWA, WS_ORG_LENG);
+        B010_CHECK_INPUT_DATA();
+        if (pgmRtn) return;
+        B020_COPY_PRIV_PROCESS();
+        if (pgmRtn) return;
+        B030_DATA_OUTPUT();
+        if (pgmRtn) return;
+    }
+    public void B010_CHECK_INPUT_DATA() throws IOException,SQLException,Exception {
+        if (BPCSCPRI.ASS_TYP == 'T') {
+            IBS.init(SCCGWA, BPCFTLRQ);
+            if (BPCSCPRI.FROM_ASS_ID == null) BPCSCPRI.FROM_ASS_ID = "";
+            JIBS_tmp_int = BPCSCPRI.FROM_ASS_ID.length();
+            for (int i=0;i<30-JIBS_tmp_int;i++) BPCSCPRI.FROM_ASS_ID += " ";
+            BPCFTLRQ.INFO.TLR = BPCSCPRI.FROM_ASS_ID.substring(0, WS_TLR_LENG);
+            S000_CALL_BPZFTLRQ();
+            if (pgmRtn) return;
+            if (BPCFTLRQ.INFO.TLR_STS != 'N') {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_TLR_STS;
+                S000_ERR_MSG_PROC();
+                if (pgmRtn) return;
+            }
+            IBS.init(SCCGWA, BPCFTLRQ);
+            if (BPCSCPRI.TO_ASS_ID == null) BPCSCPRI.TO_ASS_ID = "";
+            JIBS_tmp_int = BPCSCPRI.TO_ASS_ID.length();
+            for (int i=0;i<30-JIBS_tmp_int;i++) BPCSCPRI.TO_ASS_ID += " ";
+            BPCFTLRQ.INFO.TLR = BPCSCPRI.TO_ASS_ID.substring(0, WS_TLR_LENG);
+            S000_CALL_BPZFTLRQ();
+            if (pgmRtn) return;
+            if (BPCFTLRQ.INFO.TLR_STS != 'N') {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_TLR_STS;
+                S000_ERR_MSG_PROC();
+                if (pgmRtn) return;
+            }
+            WS_TO_ASS_SUPR_ORG = BPCFTLRQ.INFO.TLR_BR;
+        } else if (BPCSCPRI.ASS_TYP == 'O') {
+            IBS.init(SCCGWA, BPCPQORG);
+            BPCPQORG.BNK = SCCGWA.COMM_AREA.TR_BANK;
+            if (BPCSCPRI.FROM_ASS_ID == null) BPCSCPRI.FROM_ASS_ID = "";
+            JIBS_tmp_int = BPCSCPRI.FROM_ASS_ID.length();
+            for (int i=0;i<30-JIBS_tmp_int;i++) BPCSCPRI.FROM_ASS_ID += " ";
+            if (BPCSCPRI.FROM_ASS_ID.substring(0, WS_ORG_LENG).trim().length() == 0) BPCPQORG.BR = 0;
+            else BPCPQORG.BR = Integer.parseInt(BPCSCPRI.FROM_ASS_ID.substring(0, WS_ORG_LENG));
+            S000_CALL_BPZPQORG();
+            if (pgmRtn) return;
+            IBS.init(SCCGWA, BPCPQORG);
+            BPCPQORG.BNK = SCCGWA.COMM_AREA.TR_BANK;
+            if (BPCSCPRI.TO_ASS_ID == null) BPCSCPRI.TO_ASS_ID = "";
+            JIBS_tmp_int = BPCSCPRI.TO_ASS_ID.length();
+            for (int i=0;i<30-JIBS_tmp_int;i++) BPCSCPRI.TO_ASS_ID += " ";
+            if (BPCSCPRI.TO_ASS_ID.substring(0, WS_ORG_LENG).trim().length() == 0) BPCPQORG.BR = 0;
+            else BPCPQORG.BR = Integer.parseInt(BPCSCPRI.TO_ASS_ID.substring(0, WS_ORG_LENG));
+            S000_CALL_BPZPQORG();
+            if (pgmRtn) return;
+            WS_TO_ASS_SUPR_ORG = BPCPQORG.SUPR_BR;
+        } else {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_INPUT_ERROR;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPCSCPRI.PRIV_TYP == '0') {
+            B010_01_CHECK_OPER_ROLE();
+            if (pgmRtn) return;
+            B010_03_CHECK_OPER_TATH();
+            if (pgmRtn) return;
+        } else if (BPCSCPRI.PRIV_TYP == '1') {
+            B010_02_CHECK_AUTH_ROLE();
+            if (pgmRtn) return;
+            B010_04_CHECK_AUTH_TATH();
+            if (pgmRtn) return;
+        } else if (BPCSCPRI.PRIV_TYP == '2') {
+            B010_01_CHECK_OPER_ROLE();
+            if (pgmRtn) return;
+            B010_02_CHECK_AUTH_ROLE();
+            if (pgmRtn) return;
+            B010_03_CHECK_OPER_TATH();
+            if (pgmRtn) return;
+            B010_04_CHECK_AUTH_TATH();
+            if (pgmRtn) return;
+        } else {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_INPUT_ERROR;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void B010_01_CHECK_OPER_ROLE() throws IOException,SQLException,Exception {
+        WS_OPER_ROLE_TXT.WS_OPER_ROLE_CNT = 0;
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPCRGRPL);
+        BPRGRPL.KEY.ASS_TYP = BPCSCPRI.ASS_TYP;
+        BPRGRPL.KEY.ASS_ID = BPCSCPRI.FROM_ASS_ID;
+        BPRGRPL.KEY.ATH_TYP = '0';
+        BPCRGRPL.INFO.FUNC = 'Q';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+        if (BPCRGRPL.RETURN_INFO == 'F') {
+            for (WS_I = 1; WS_I <= BPRGRPL.ROLE_CNT; WS_I += 1) {
+                if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EFF_DT <= SCCGWA.COMM_AREA.AC_DATE 
+                    && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EXP_DT > SCCGWA.COMM_AREA.AC_DATE) {
+                    if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_STS == '0' 
+                        || BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_STS == '2' 
+                        || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_STS == '1' 
+                        && (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EFF_DT < SCCGWA.COMM_AREA.AC_DATE 
+                        || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+                        && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EFF_TM < SCCGWA.COMM_AREA.TR_TIME)) 
+                        && (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EXP_DT > SCCGWA.COMM_AREA.AC_DATE) 
+                        || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+                        && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EXP_TM > SCCGWA.COMM_AREA.TR_TIME))) {
+                        WS_OPER_ROLE_TXT.WS_OPER_ROLE_CNT += 1;
+                        WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_OPER_ROLE_TXT.WS_OPER_ROLE_CNT-1].WS_OPER_ROLE = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD;
+                        WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_OPER_ROLE_TXT.WS_OPER_ROLE_CNT-1].WS_OPER_ROLE_MOV_FLG = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_FLG;
+                        WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_OPER_ROLE_TXT.WS_OPER_ROLE_CNT-1].WS_OPER_ROLE_EFF_DT = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EFF_DT;
+                        WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_OPER_ROLE_TXT.WS_OPER_ROLE_CNT-1].WS_OPER_ROLE_EXP_DT = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EXP_DT;
+                        IBS.init(SCCGWA, BPCFOTRO);
+                        BPCFOTRO.ASSTYP = 'O';
+                        BPCFOTRO.ATH_TYP = '0';
+                        BPCFOTRO.ASS_ID = "" + WS_TO_ASS_SUPR_ORG;
+                        JIBS_tmp_int = BPCFOTRO.ASS_ID.length();
+                        for (int i=0;i<6-JIBS_tmp_int;i++) BPCFOTRO.ASS_ID = "0" + BPCFOTRO.ASS_ID;
+                        BPCFOTRO.ROLE_CD = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD;
+                        S000_CALL_BPZFOTRO();
+                        if (pgmRtn) return;
+                        if (BPCFOTRO.PRIV_FLG != 'Y') {
+                            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_UP_ORG_NO_PRIV;
+                            S000_ERR_MSG_PROC();
+                            if (pgmRtn) return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void B010_02_CHECK_AUTH_ROLE() throws IOException,SQLException,Exception {
+        WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_CNT = 0;
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPCRGRPL);
+        BPRGRPL.KEY.ASS_TYP = BPCSCPRI.ASS_TYP;
+        BPRGRPL.KEY.ASS_ID = BPCSCPRI.FROM_ASS_ID;
+        BPRGRPL.KEY.ATH_TYP = '1';
+        BPCRGRPL.INFO.FUNC = 'Q';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+        if (BPCRGRPL.RETURN_INFO == 'F') {
+            for (WS_I = 1; WS_I <= BPRGRPL.ROLE_CNT; WS_I += 1) {
+                if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EFF_DT <= SCCGWA.COMM_AREA.AC_DATE 
+                    && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EXP_DT > SCCGWA.COMM_AREA.AC_DATE) {
+                    if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_STS == '0' 
+                        || BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_STS == '2' 
+                        || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_STS == '1' 
+                        && (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EFF_DT < SCCGWA.COMM_AREA.AC_DATE 
+                        || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+                        && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EFF_TM < SCCGWA.COMM_AREA.TR_TIME)) 
+                        && (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EXP_DT > SCCGWA.COMM_AREA.AC_DATE) 
+                        || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+                        && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EXP_TM > SCCGWA.COMM_AREA.TR_TIME))) {
+                        WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_CNT += 1;
+                        WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_CNT-1].WS_AUTH_ROLE = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD;
+                        WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_CNT-1].WS_AUTH_ROLE_MOV_FLG = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_FLG;
+                        WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_CNT-1].WS_AUTH_ROLE_EFF_DT = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EFF_DT;
+                        WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_CNT-1].WS_AUTH_ROLE_EXP_DT = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EXP_DT;
+                        IBS.init(SCCGWA, BPCFOTRO);
+                        BPCFOTRO.ASSTYP = 'O';
+                        BPCFOTRO.ATH_TYP = '1';
+                        BPCFOTRO.ASS_ID = "" + WS_TO_ASS_SUPR_ORG;
+                        JIBS_tmp_int = BPCFOTRO.ASS_ID.length();
+                        for (int i=0;i<6-JIBS_tmp_int;i++) BPCFOTRO.ASS_ID = "0" + BPCFOTRO.ASS_ID;
+                        BPCFOTRO.ROLE_CD = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD;
+                        S000_CALL_BPZFOTRO();
+                        if (pgmRtn) return;
+                        if (BPCFOTRO.PRIV_FLG != 'Y') {
+                            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_UP_ORG_NO_PRIV;
+                            S000_ERR_MSG_PROC();
+                            if (pgmRtn) return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void B010_03_CHECK_OPER_TATH() throws IOException,SQLException,Exception {
+        WS_OPER_TATH_TXT.WS_OPER_TATH_CNT = 0;
+        IBS.init(SCCGWA, BPRTATH);
+        IBS.init(SCCGWA, BPCRTATH);
+        BPRTATH.KEY.ASS_TYP = BPCSCPRI.ASS_TYP;
+        BPRTATH.KEY.ASS_ID = BPCSCPRI.FROM_ASS_ID;
+        BPRTATH.KEY.ATH_TYP = '0';
+        BPCRTATH.INFO.FUNC = 'Q';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+        if (BPCRTATH.RETURN_INFO == 'F') {
+            for (WS_I = 1; WS_I <= BPRTATH.TXIF_CNT; WS_I += 1) {
+                if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EFF_DT <= SCCGWA.COMM_AREA.AC_DATE 
+                    && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EXP_DT > SCCGWA.COMM_AREA.AC_DATE) {
+                    if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_STS == '0' 
+                        || BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_STS == '2' 
+                        || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_STS == '1' 
+                        && (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EFF_DT < SCCGWA.COMM_AREA.AC_DATE 
+                        || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+                        && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EFF_TM < SCCGWA.COMM_AREA.TR_TIME)) 
+                        && (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EXP_DT > SCCGWA.COMM_AREA.AC_DATE) 
+                        || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+                        && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EXP_TM > SCCGWA.COMM_AREA.TR_TIME))) {
+                        WS_OPER_TATH_TXT.WS_OPER_TATH_CNT += 1;
+                        WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_OPER_TATH_TXT.WS_OPER_TATH_CNT-1].WS_OPER_IN_FLG = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG;
+                        WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_OPER_TATH_TXT.WS_OPER_TATH_CNT-1].WS_OPER_SYS_MMO = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO;
+                        WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_OPER_TATH_TXT.WS_OPER_TATH_CNT-1].WS_OPER_TX_CD = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD;
+                        WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_OPER_TATH_TXT.WS_OPER_TATH_CNT-1].WS_OPER_TATH_MOV_FLG = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_FLG;
+                        WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_OPER_TATH_TXT.WS_OPER_TATH_CNT-1].WS_OPER_TATH_EFF_DT = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EFF_DT;
+                        WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_OPER_TATH_TXT.WS_OPER_TATH_CNT-1].WS_OPER_TATH_EXP_DT = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EXP_DT;
+                        IBS.init(SCCGWA, BPCFOTTA);
+                        BPCFOTTA.ASSTYP = 'O';
+                        BPCFOTTA.ATH_TYP = '0';
+                        BPCFOTTA.ASS_ID = "" + WS_TO_ASS_SUPR_ORG;
+                        JIBS_tmp_int = BPCFOTTA.ASS_ID.length();
+                        for (int i=0;i<6-JIBS_tmp_int;i++) BPCFOTTA.ASS_ID = "0" + BPCFOTTA.ASS_ID;
+                        BPCFOTTA.IN_FLG = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG;
+                        BPCFOTTA.SYS_MMO = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO;
+                        BPCFOTTA.TX_CD = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD;
+                        S000_CALL_BPZFOTTA();
+                        if (pgmRtn) return;
+                        if (BPCFOTTA.PRIV_FLG != 'Y') {
+                            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_UP_ORG_NO_PRIV;
+                            S000_ERR_MSG_PROC();
+                            if (pgmRtn) return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void B010_04_CHECK_AUTH_TATH() throws IOException,SQLException,Exception {
+        WS_AUTH_TATH_TXT.WS_AUTH_TATH_CNT = 0;
+        IBS.init(SCCGWA, BPRTATH);
+        IBS.init(SCCGWA, BPCRTATH);
+        BPRTATH.KEY.ASS_TYP = BPCSCPRI.ASS_TYP;
+        BPRTATH.KEY.ASS_ID = BPCSCPRI.FROM_ASS_ID;
+        BPRTATH.KEY.ATH_TYP = '1';
+        BPCRTATH.INFO.FUNC = 'Q';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+        if (BPCRTATH.RETURN_INFO == 'F') {
+            for (WS_I = 1; WS_I <= BPRTATH.TXIF_CNT; WS_I += 1) {
+                if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EFF_DT <= SCCGWA.COMM_AREA.AC_DATE 
+                    && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EXP_DT > SCCGWA.COMM_AREA.AC_DATE) {
+                    if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_STS == '0' 
+                        || BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_STS == '2' 
+                        || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_STS == '1' 
+                        && (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EFF_DT < SCCGWA.COMM_AREA.AC_DATE 
+                        || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+                        && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EFF_TM < SCCGWA.COMM_AREA.TR_TIME)) 
+                        && (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EXP_DT > SCCGWA.COMM_AREA.AC_DATE) 
+                        || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+                        && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EXP_TM > SCCGWA.COMM_AREA.TR_TIME))) {
+                        WS_AUTH_TATH_TXT.WS_AUTH_TATH_CNT += 1;
+                        WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_AUTH_TATH_TXT.WS_AUTH_TATH_CNT-1].WS_AUTH_IN_FLG = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG;
+                        WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_AUTH_TATH_TXT.WS_AUTH_TATH_CNT-1].WS_AUTH_SYS_MMO = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO;
+                        WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_AUTH_TATH_TXT.WS_AUTH_TATH_CNT-1].WS_AUTH_TX_CD = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD;
+                        WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_AUTH_TATH_TXT.WS_AUTH_TATH_CNT-1].WS_AUTH_TATH_MOV_FLG = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_FLG;
+                        WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_AUTH_TATH_TXT.WS_AUTH_TATH_CNT-1].WS_AUTH_TATH_EFF_DT = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EFF_DT;
+                        WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_AUTH_TATH_TXT.WS_AUTH_TATH_CNT-1].WS_AUTH_TATH_EXP_DT = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EXP_DT;
+                        IBS.init(SCCGWA, BPCFOTTA);
+                        BPCFOTTA.ASSTYP = 'O';
+                        BPCFOTTA.ATH_TYP = '1';
+                        BPCFOTTA.ASS_ID = "" + WS_TO_ASS_SUPR_ORG;
+                        JIBS_tmp_int = BPCFOTTA.ASS_ID.length();
+                        for (int i=0;i<6-JIBS_tmp_int;i++) BPCFOTTA.ASS_ID = "0" + BPCFOTTA.ASS_ID;
+                        BPCFOTTA.IN_FLG = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG;
+                        BPCFOTTA.SYS_MMO = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO;
+                        BPCFOTTA.TX_CD = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD;
+                        S000_CALL_BPZFOTTA();
+                        if (pgmRtn) return;
+                        if (BPCFOTTA.PRIV_FLG != 'Y') {
+                            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_UP_ORG_NO_PRIV;
+                            S000_ERR_MSG_PROC();
+                            if (pgmRtn) return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void B020_COPY_PRIV_PROCESS() throws IOException,SQLException,Exception {
+        if (BPCSCPRI.PRIV_TYP == '0') {
+            B021_DISPOST_OPER_ROLE();
+            if (pgmRtn) return;
+            B023_DISPOST_OPER_TATH();
+            if (pgmRtn) return;
+        } else if (BPCSCPRI.PRIV_TYP == '1') {
+            B022_DISPOST_AUTH_ROLE();
+            if (pgmRtn) return;
+            B024_DISPOST_AUTH_TATH();
+            if (pgmRtn) return;
+        } else if (BPCSCPRI.PRIV_TYP == '2') {
+            B021_DISPOST_OPER_ROLE();
+            if (pgmRtn) return;
+            B022_DISPOST_AUTH_ROLE();
+            if (pgmRtn) return;
+            B023_DISPOST_OPER_TATH();
+            if (pgmRtn) return;
+            B024_DISPOST_AUTH_TATH();
+            if (pgmRtn) return;
+        } else {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_INPUT_ERROR;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void B021_DISPOST_OPER_ROLE() throws IOException,SQLException,Exception {
+        if (WS_OPER_ROLE_TXT.WS_OPER_ROLE_CNT > 0) {
+            IBS.init(SCCGWA, BPRGRPL);
+            IBS.init(SCCGWA, BPCRGRPL);
+            BPRGRPL.KEY.ASS_TYP = BPCSCPRI.ASS_TYP;
+            BPRGRPL.KEY.ASS_ID = BPCSCPRI.TO_ASS_ID;
+            BPRGRPL.KEY.ATH_TYP = '0';
+            BPCRGRPL.INFO.FUNC = 'R';
+            S000_CALL_BPZRGRPL();
+            if (pgmRtn) return;
+            if (BPCRGRPL.RETURN_INFO == 'F') {
+                B021_02_ADD_OPER_ROLE();
+                if (pgmRtn) return;
+                BPCRGRPL.INFO.FUNC = 'U';
+                S000_CALL_BPZRGRPL();
+                if (pgmRtn) return;
+            }
+            if (BPCRGRPL.RETURN_INFO == 'N') {
+                B021_01_COPY_OPER_ROLE();
+                if (pgmRtn) return;
+            }
+        }
+    }
+    public void B022_DISPOST_AUTH_ROLE() throws IOException,SQLException,Exception {
+        if (WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_CNT > 0) {
+            IBS.init(SCCGWA, BPRGRPL);
+            IBS.init(SCCGWA, BPCRGRPL);
+            BPRGRPL.KEY.ASS_TYP = BPCSCPRI.ASS_TYP;
+            BPRGRPL.KEY.ASS_ID = BPCSCPRI.TO_ASS_ID;
+            BPRGRPL.KEY.ATH_TYP = '1';
+            BPCRGRPL.INFO.FUNC = 'R';
+            S000_CALL_BPZRGRPL();
+            if (pgmRtn) return;
+            if (BPCRGRPL.RETURN_INFO == 'F') {
+                B022_02_ADD_AUTH_ROLE();
+                if (pgmRtn) return;
+                BPCRGRPL.INFO.FUNC = 'U';
+                S000_CALL_BPZRGRPL();
+                if (pgmRtn) return;
+            }
+            if (BPCRGRPL.RETURN_INFO == 'N') {
+                B022_01_COPY_AUTH_ROLE();
+                if (pgmRtn) return;
+            }
+        }
+    }
+    public void B023_DISPOST_OPER_TATH() throws IOException,SQLException,Exception {
+        if (WS_OPER_TATH_TXT.WS_OPER_TATH_CNT > 0) {
+            IBS.init(SCCGWA, BPRTATH);
+            IBS.init(SCCGWA, BPCRTATH);
+            BPRTATH.KEY.ASS_TYP = BPCSCPRI.ASS_TYP;
+            BPRTATH.KEY.ASS_ID = BPCSCPRI.TO_ASS_ID;
+            BPRTATH.KEY.ATH_TYP = '0';
+            BPCRTATH.INFO.FUNC = 'R';
+            S000_CALL_BPZRTATH();
+            if (pgmRtn) return;
+            if (BPCRTATH.RETURN_INFO == 'F') {
+                B023_02_ADD_OPER_TATH();
+                if (pgmRtn) return;
+                BPCRTATH.INFO.FUNC = 'U';
+                S000_CALL_BPZRTATH();
+                if (pgmRtn) return;
+            }
+            if (BPCRTATH.RETURN_INFO == 'N') {
+                B023_01_COPY_OPER_TATH();
+                if (pgmRtn) return;
+            }
+        }
+    }
+    public void B024_DISPOST_AUTH_TATH() throws IOException,SQLException,Exception {
+        if (WS_AUTH_TATH_TXT.WS_AUTH_TATH_CNT > 0) {
+            IBS.init(SCCGWA, BPRTATH);
+            IBS.init(SCCGWA, BPCRTATH);
+            BPRTATH.KEY.ASS_TYP = BPCSCPRI.ASS_TYP;
+            BPRTATH.KEY.ASS_ID = BPCSCPRI.TO_ASS_ID;
+            BPRTATH.KEY.ATH_TYP = '1';
+            BPCRTATH.INFO.FUNC = 'R';
+            S000_CALL_BPZRTATH();
+            if (pgmRtn) return;
+            if (BPCRTATH.RETURN_INFO == 'F') {
+                B024_02_ADD_AUTH_TATH();
+                if (pgmRtn) return;
+                BPCRTATH.INFO.FUNC = 'U';
+                S000_CALL_BPZRTATH();
+                if (pgmRtn) return;
+            }
+            if (BPCRTATH.RETURN_INFO == 'N') {
+                B024_01_COPY_AUTH_TATH();
+                if (pgmRtn) return;
+            }
+        }
+    }
+    public void B021_01_COPY_OPER_ROLE() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPCRGRPL);
+        BPRGRPL.KEY.ASS_TYP = BPCSCPRI.ASS_TYP;
+        BPRGRPL.KEY.ASS_ID = BPCSCPRI.TO_ASS_ID;
+        BPRGRPL.KEY.ATH_TYP = '0';
+        BPCRGRPL.INFO.FUNC = 'A';
+        BPRGRPL.ROLE_CNT = WS_OPER_ROLE_TXT.WS_OPER_ROLE_CNT;
+        for (WS_I = 1; WS_I <= WS_OPER_ROLE_TXT.WS_OPER_ROLE_CNT; WS_I += 1) {
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_FLG = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_MOV_FLG;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EFF_DT = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_EFF_DT;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EXP_DT = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_EXP_DT;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_STS = '0';
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EFF_DT = 0;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EXP_DT = 0;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EFF_TM = 0;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EXP_TM = 0;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_TLR = " ";
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        }
+        BPRGRPL.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+        BPRGRPL.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+    }
+    public void B021_02_ADD_OPER_ROLE() throws IOException,SQLException,Exception {
+        for (WS_I = 1; WS_I <= WS_OPER_ROLE_TXT.WS_OPER_ROLE_CNT; WS_I += 1) {
+            WS_TBL_GRPL_FLAG = 'N';
+            for (WS_J = 1; WS_J <= BPRGRPL.ROLE_CNT 
+                && WS_TBL_GRPL_FLAG != 'Y'; WS_J += 1) {
+                if (WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE.equalsIgnoreCase(BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].ROLE_CD)) {
+                    WS_TBL_GRPL_FLAG = 'Y';
+                    if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS == '0'
+                        || BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS == '2') {
+                        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE 
+                            || BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EXP_DT <= SCCGWA.COMM_AREA.AC_DATE) {
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_FLG = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_MOV_FLG;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EFF_DT = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_EFF_DT;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EXP_DT = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_EXP_DT;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                            BPRGRPL.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                        }
+                    } else if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS == '1') {
+                        if ((BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_DT > SCCGWA.COMM_AREA.AC_DATE 
+                            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+                            && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_TM > SCCGWA.COMM_AREA.TR_TIME)) 
+                            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_DT < SCCGWA.COMM_AREA.AC_DATE 
+                            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+                            && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_TM < SCCGWA.COMM_AREA.TR_TIME))) {
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_FLG = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_MOV_FLG;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EFF_DT = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_EFF_DT;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EXP_DT = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_EXP_DT;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS = '0';
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_DT = 0;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_DT = 0;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_TM = 0;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_TM = 0;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_TLR = " ";
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                            BPRGRPL.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                        }
+                    } else if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS == '3') {
+                        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE 
+                            || BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EXP_DT <= SCCGWA.COMM_AREA.AC_DATE) {
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EFF_DT = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_EFF_DT;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EXP_DT = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_EXP_DT;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                            BPRGRPL.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                        } else {
+                            if ((BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_DT < SCCGWA.COMM_AREA.AC_DATE 
+                                || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+                                && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_TM < SCCGWA.COMM_AREA.TR_TIME)) 
+                                || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_DT > SCCGWA.COMM_AREA.AC_DATE 
+                                || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+                                && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_TM > SCCGWA.COMM_AREA.TR_TIME))) {
+                                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS = '2';
+                                BPRGRPL.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                                BPRGRPL.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                            }
+                        }
+                    }
+                }
+            }
+            if (WS_TBL_GRPL_FLAG == 'N') {
+                BPRGRPL.ROLE_CNT += 1;
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].ROLE_CD = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_FLG = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_MOV_FLG;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].EFF_DT = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_EFF_DT;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].EXP_DT = WS_OPER_ROLE_TXT.WS_OPER_ROLE_INFO[WS_I-1].WS_OPER_ROLE_EXP_DT;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_STS = '0';
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_EFF_DT = 0;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_EXP_DT = 0;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_EFF_TM = 0;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_EXP_TM = 0;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_TLR = " ";
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                BPRGRPL.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+            }
+        }
+    }
+    public void B022_01_COPY_AUTH_ROLE() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPCRGRPL);
+        BPRGRPL.KEY.ASS_TYP = BPCSCPRI.ASS_TYP;
+        BPRGRPL.KEY.ASS_ID = BPCSCPRI.TO_ASS_ID;
+        BPRGRPL.KEY.ATH_TYP = '1';
+        BPCRGRPL.INFO.FUNC = 'A';
+        BPRGRPL.ROLE_CNT = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_CNT;
+        for (WS_I = 1; WS_I <= WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_CNT; WS_I += 1) {
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_FLG = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_MOV_FLG;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EFF_DT = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_EFF_DT;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EXP_DT = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_EXP_DT;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_STS = '0';
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EFF_DT = 0;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EXP_DT = 0;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EFF_TM = 0;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EXP_TM = 0;
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_TLR = " ";
+            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        }
+        BPRGRPL.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+        BPRGRPL.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+    }
+    public void B022_02_ADD_AUTH_ROLE() throws IOException,SQLException,Exception {
+        for (WS_I = 1; WS_I <= WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_CNT; WS_I += 1) {
+            WS_TBL_GRPL_FLAG = 'N';
+            for (WS_J = 1; WS_J <= BPRGRPL.ROLE_CNT 
+                && WS_TBL_GRPL_FLAG != 'Y'; WS_J += 1) {
+                if (WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE.equalsIgnoreCase(BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].ROLE_CD)) {
+                    WS_TBL_GRPL_FLAG = 'Y';
+                    if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS == '0'
+                        || BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS == '2') {
+                        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE 
+                            || BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EXP_DT <= SCCGWA.COMM_AREA.AC_DATE) {
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_FLG = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_MOV_FLG;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EFF_DT = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_EFF_DT;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EXP_DT = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_EXP_DT;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                            BPRGRPL.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                        }
+                    } else if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS == '1') {
+                        if ((BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_DT > SCCGWA.COMM_AREA.AC_DATE 
+                            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+                            && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_TM > SCCGWA.COMM_AREA.TR_TIME)) 
+                            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_DT < SCCGWA.COMM_AREA.AC_DATE 
+                            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+                            && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_TM < SCCGWA.COMM_AREA.TR_TIME))) {
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_FLG = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_MOV_FLG;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EFF_DT = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_EFF_DT;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EXP_DT = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_EXP_DT;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS = '0';
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_DT = 0;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_DT = 0;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_TM = 0;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_TM = 0;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_TLR = " ";
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                            BPRGRPL.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                        }
+                    } else if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS == '3') {
+                        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE 
+                            || BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EXP_DT <= SCCGWA.COMM_AREA.AC_DATE) {
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EFF_DT = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_EFF_DT;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EXP_DT = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_EXP_DT;
+                            BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                            BPRGRPL.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                            BPRGRPL.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                        } else {
+                            if ((BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_DT < SCCGWA.COMM_AREA.AC_DATE 
+                                || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+                                && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_TM < SCCGWA.COMM_AREA.TR_TIME)) 
+                                || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_DT > SCCGWA.COMM_AREA.AC_DATE 
+                                || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+                                && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_TM > SCCGWA.COMM_AREA.TR_TIME))) {
+                                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS = '2';
+                                BPRGRPL.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                                BPRGRPL.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                            }
+                        }
+                    }
+                }
+            }
+            if (WS_TBL_GRPL_FLAG == 'N') {
+                BPRGRPL.ROLE_CNT += 1;
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].ROLE_CD = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_FLG = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_MOV_FLG;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].EFF_DT = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_EFF_DT;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].EXP_DT = WS_AUTH_ROLE_TXT.WS_AUTH_ROLE_INFO[WS_I-1].WS_AUTH_ROLE_EXP_DT;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_STS = '0';
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_EFF_DT = 0;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_EXP_DT = 0;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_EFF_TM = 0;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_EXP_TM = 0;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[BPRGRPL.ROLE_CNT-1].MOV_TLR = " ";
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                BPRGRPL.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+            }
+        }
+    }
+    public void B023_01_COPY_OPER_TATH() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRTATH);
+        IBS.init(SCCGWA, BPCRTATH);
+        BPRTATH.KEY.ASS_TYP = BPCSCPRI.ASS_TYP;
+        BPRTATH.KEY.ASS_ID = BPCSCPRI.TO_ASS_ID;
+        BPRTATH.KEY.ATH_TYP = '0';
+        BPCRTATH.INFO.FUNC = 'A';
+        BPRTATH.TXIF_CNT = WS_OPER_TATH_TXT.WS_OPER_TATH_CNT;
+        for (WS_I = 1; WS_I <= WS_OPER_TATH_TXT.WS_OPER_TATH_CNT; WS_I += 1) {
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_IN_FLG;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_SYS_MMO;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TX_CD;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_FLG = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_MOV_FLG;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EFF_DT = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_EFF_DT;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EXP_DT = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_EXP_DT;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_STS = '0';
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EFF_DT = 0;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EXP_DT = 0;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EFF_TM = 0;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EXP_TM = 0;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_TLR = " ";
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        }
+        BPRTATH.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+        BPRTATH.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+    }
+    public void B023_02_ADD_OPER_TATH() throws IOException,SQLException,Exception {
+        for (WS_I = 1; WS_I <= WS_OPER_TATH_TXT.WS_OPER_TATH_CNT; WS_I += 1) {
+            WS_TBL_TATH_FLAG = 'N';
+            for (WS_J = 1; WS_J <= BPRTATH.TXIF_CNT 
+                && WS_TBL_TATH_FLAG != 'Y'; WS_J += 1) {
+                if (WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_IN_FLG == BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].IN_FLG 
+                    && WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_SYS_MMO.equalsIgnoreCase(BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].SYS_MMO) 
+                    && WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TX_CD.equalsIgnoreCase(BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].TX_CD)) {
+                    WS_TBL_TATH_FLAG = 'Y';
+                    if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS == '0'
+                        || BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS == '2') {
+                        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE 
+                            || BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EXP_DT <= SCCGWA.COMM_AREA.AC_DATE) {
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_FLG = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_MOV_FLG;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EFF_DT = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_EFF_DT;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EXP_DT = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_EXP_DT;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                            BPRTATH.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                        }
+                    } else if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS == '1') {
+                        if ((BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_DT > SCCGWA.COMM_AREA.AC_DATE 
+                            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+                            && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_TM > SCCGWA.COMM_AREA.TR_TIME)) 
+                            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_DT < SCCGWA.COMM_AREA.AC_DATE 
+                            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+                            && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_TM < SCCGWA.COMM_AREA.TR_TIME))) {
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_FLG = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_MOV_FLG;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EFF_DT = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_EFF_DT;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EXP_DT = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_EXP_DT;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS = '0';
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_DT = 0;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_DT = 0;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_TM = 0;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_TM = 0;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_TLR = " ";
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                            BPRTATH.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                        }
+                    } else if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS == '3') {
+                        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE 
+                            || BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EXP_DT <= SCCGWA.COMM_AREA.AC_DATE) {
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EFF_DT = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_EFF_DT;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EXP_DT = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_EXP_DT;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                            BPRTATH.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                        } else {
+                            if ((BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_DT < SCCGWA.COMM_AREA.AC_DATE 
+                                || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+                                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_TM < SCCGWA.COMM_AREA.TR_TIME)) 
+                                || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_DT > SCCGWA.COMM_AREA.AC_DATE 
+                                || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+                                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_TM > SCCGWA.COMM_AREA.TR_TIME))) {
+                                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS = '2';
+                                BPRTATH.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                                BPRTATH.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                            }
+                        }
+                    }
+                }
+            }
+            if (WS_TBL_TATH_FLAG == 'N') {
+                BPRTATH.TXIF_CNT += 1;
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_FLG = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_MOV_FLG;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].EFF_DT = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_EFF_DT;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].EXP_DT = WS_OPER_TATH_TXT.WS_OPER_TATH_INFO[WS_I-1].WS_OPER_TATH_EXP_DT;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_STS = '0';
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_EFF_DT = 0;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_EXP_DT = 0;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_EFF_TM = 0;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_EXP_TM = 0;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_TLR = " ";
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                BPRTATH.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+            }
+        }
+    }
+    public void B024_01_COPY_AUTH_TATH() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRTATH);
+        IBS.init(SCCGWA, BPCRTATH);
+        BPRTATH.KEY.ASS_TYP = BPCSCPRI.ASS_TYP;
+        BPRTATH.KEY.ASS_ID = BPCSCPRI.TO_ASS_ID;
+        BPRTATH.KEY.ATH_TYP = '1';
+        BPCRTATH.INFO.FUNC = 'A';
+        BPRTATH.TXIF_CNT = WS_AUTH_TATH_TXT.WS_AUTH_TATH_CNT;
+        for (WS_I = 1; WS_I <= WS_AUTH_TATH_TXT.WS_AUTH_TATH_CNT; WS_I += 1) {
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_IN_FLG;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_SYS_MMO;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TX_CD;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_FLG = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_MOV_FLG;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EFF_DT = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_EFF_DT;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EXP_DT = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_EXP_DT;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_STS = '0';
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EFF_DT = 0;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EXP_DT = 0;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EFF_TM = 0;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EXP_TM = 0;
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_TLR = " ";
+            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        }
+        BPRTATH.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+        BPRTATH.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+    }
+    public void B024_02_ADD_AUTH_TATH() throws IOException,SQLException,Exception {
+        for (WS_I = 1; WS_I <= WS_AUTH_TATH_TXT.WS_AUTH_TATH_CNT; WS_I += 1) {
+            WS_TBL_TATH_FLAG = 'N';
+            for (WS_J = 1; WS_J <= BPRTATH.TXIF_CNT 
+                && WS_TBL_TATH_FLAG != 'Y'; WS_J += 1) {
+                if (WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_IN_FLG == BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].IN_FLG 
+                    && WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_SYS_MMO.equalsIgnoreCase(BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].SYS_MMO) 
+                    && WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TX_CD.equalsIgnoreCase(BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].TX_CD)) {
+                    WS_TBL_TATH_FLAG = 'Y';
+                    if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS == '0'
+                        || BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS == '2') {
+                        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE 
+                            || BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EXP_DT <= SCCGWA.COMM_AREA.AC_DATE) {
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_FLG = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_MOV_FLG;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EFF_DT = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_EFF_DT;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EXP_DT = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_EXP_DT;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                            BPRTATH.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                        }
+                    } else if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS == '1') {
+                        if ((BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_DT > SCCGWA.COMM_AREA.AC_DATE 
+                            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+                            && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_TM > SCCGWA.COMM_AREA.TR_TIME)) 
+                            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_DT < SCCGWA.COMM_AREA.AC_DATE 
+                            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+                            && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_TM < SCCGWA.COMM_AREA.TR_TIME))) {
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_FLG = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_MOV_FLG;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EFF_DT = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_EFF_DT;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EXP_DT = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_EXP_DT;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS = '0';
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_DT = 0;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_DT = 0;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_TM = 0;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_TM = 0;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_TLR = " ";
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                            BPRTATH.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                        }
+                    } else if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS == '3') {
+                        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE 
+                            || BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EXP_DT <= SCCGWA.COMM_AREA.AC_DATE) {
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EFF_DT = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_EFF_DT;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EXP_DT = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_EXP_DT;
+                            BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                            BPRTATH.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                            BPRTATH.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                        } else {
+                            if ((BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_DT < SCCGWA.COMM_AREA.AC_DATE 
+                                || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+                                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_TM < SCCGWA.COMM_AREA.TR_TIME)) 
+                                || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_DT > SCCGWA.COMM_AREA.AC_DATE 
+                                || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+                                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_TM > SCCGWA.COMM_AREA.TR_TIME))) {
+                                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS = '2';
+                                BPRTATH.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                                BPRTATH.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+                            }
+                        }
+                    }
+                }
+            }
+            if (WS_TBL_TATH_FLAG == 'N') {
+                BPRTATH.TXIF_CNT += 1;
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_FLG = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_MOV_FLG;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].EFF_DT = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_EFF_DT;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].EXP_DT = WS_AUTH_TATH_TXT.WS_AUTH_TATH_INFO[WS_I-1].WS_AUTH_TATH_EXP_DT;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_STS = '0';
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_EFF_DT = 0;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_EXP_DT = 0;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_EFF_TM = 0;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_EXP_TM = 0;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[BPRTATH.TXIF_CNT-1].MOV_TLR = " ";
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+                BPRTATH.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+            }
+        }
+    }
+    public void B030_DATA_OUTPUT() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCOCPRI);
+        IBS.init(SCCGWA, SCCFMT);
+        BPCOCPRI.ASS_TYP = BPCSCPRI.ASS_TYP;
+        BPCOCPRI.PRIV_TYP = BPCSCPRI.PRIV_TYP;
+        BPCOCPRI.FROM_ASS_ID = BPCSCPRI.FROM_ASS_ID;
+        BPCOCPRI.TO_ASS_ID = BPCSCPRI.TO_ASS_ID;
+        BPCOCPRI.UPD_DT = SCCGWA.COMM_AREA.AC_DATE;
+        BPCOCPRI.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+        SCCFMT.FMTID = K_OUTPUT_FMT;
+        SCCFMT.DATA_PTR = BPCOCPRI;
+        SCCFMT.DATA_LEN = 78;
+        IBS.FMT(SCCGWA, SCCFMT);
+    }
+    public void S000_CALL_BPZFTLRQ() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-F-TLR-INF-QUERY  ", BPCFTLRQ);
+        if (BPCFTLRQ.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCFTLRQ.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZPQORG() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-P-INQ-ORG        ", BPCPQORG);
+        if (BPCPQORG.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCPQORG.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZFOTRO() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-F-OTS-ROL-CHK    ", BPCFOTRO);
+        if (BPCFOTRO.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCFOTRO.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZFOTTA() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-F-OTS-TATH-CHK   ", BPCFOTTA);
+        if (BPCFOTTA.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCFOTTA.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZRGRPL() throws IOException,SQLException,Exception {
+        BPCRGRPL.INFO.POINTER = BPRGRPL;
+        BPCRGRPL.INFO.LEN = 52;
+        CEP.TRC(SCCGWA, BPRGRPL.BLOB_ROLE_TXT.trim().length());
+        IBS.CALLCPN(SCCGWA, "BP-R-MGM-GRPL       ", BPCRGRPL);
+        if (BPCRGRPL.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCRGRPL.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZRTATH() throws IOException,SQLException,Exception {
+        BPCRTATH.INFO.POINTER = BPRTATH;
+        BPCRTATH.INFO.LEN = 52;
+        CEP.TRC(SCCGWA, BPRTATH.BLOB_TXIF_TXT.trim().length());
+        IBS.CALLCPN(SCCGWA, "BP-R-MGM-TATH       ", BPCRTATH);
+        if (BPCRTATH.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCRTATH.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZPNHIS() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-REC-NHIS         ", BPCPNHIS);
+        if (BPCPNHIS.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCPNHIS.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void B_MPAG() throws IOException,SQLException,Exception {
+    if (!SCCGWA.COMM_AREA.BSP_FLG.equalsIgnoreCase("BSP") && !SCCGWA.COMM_AREA.CHNL.equalsIgnoreCase("BAT")) { //FROM #IFDEF ONL
+        JIBS_tmp_str[9] = "SCZMPAG";
+        Class<?>clazz = Class.forName(JIBS_tmp_str[9].trim());
+        Object obj = clazz.newInstance();
+        Method m = clazz.getDeclaredMethod("MP",new Class[]{SCCGWA.getClass(), SCCMPAG.getClass()});
+        m.invoke(obj, SCCGWA, SCCMPAG);
+        if (SCCGWA.COMM_AREA.EXCP_FLG == 'Y') {
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    } else { //FROM #ELSE
+    } //FROM #ENDIF
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        pgmRtn = true;
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

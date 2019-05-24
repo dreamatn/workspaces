@@ -1,0 +1,6 @@
+package com.hisun.DD;
+
+public class DDCSCINM {
+    public DDCSCINM_INPUT_DATA INPUT_DATA = new DDCSCINM_INPUT_DATA();
+    public DDCSCINM_OUTPUT_DATA OUTPUT_DATA = new DDCSCINM_OUTPUT_DATA();
+}

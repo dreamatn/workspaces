@@ -1,0 +1,46 @@
+package com.hisun.TD;
+
+public class TDCPWHT {
+    public String ACO_AC = " ";
+    public short PART_SEQ_NO = 0;
+    public int TRADE_DATE = 0;
+    public long JRNNO = 0;
+    public double PRIN_AMT = 0;
+    public char INT_SEL = ' ';
+    public double RATE = 0;
+    public double INT_AMT = 0;
+    public double INT_AMT_PY = 0;
+    public double INT_AMT_BK = 0;
+    public double DRW_BUD_INT = 0;
+    public double INT_AMT_TX = 0;
+    public String FEE_CCY = " ";
+    public double PNLT_FEE = 0;
+    public double PNLT_TAX = 0;
+    public int LAST_HDRW_DATE = 0;
+    public char LAST_HDRW_FLG = ' ';
+    public String IREV_REMARK = " ";
+    public TDCPWHT_REDEFINES19 REDEFINES19 = new TDCPWHT_REDEFINES19();
+    public double BEFAMT = 0;
+    public char INOUT = ' ';
+    public char STL_MTH = ' ';
+    public String STL_AC = " ";
+    public int STL_AC_SEQ = 0;
+    public String REMMIT_BK = " ";
+    public String REMMIT_NM = " ";
+    public char INT_INOUT = ' ';
+    public char STL_INT_MTH = ' ';
+    public String STL_INT_AC = " ";
+    public int STL_INT_AC_SEQ = 0;
+    public String INT_REMMIT_BK = " ";
+    public String INT_REMMIT_NM = " ";
+    public char TX_TYPE = ' ';
+    public int CAN_TRADE_DT = 0;
+    public long CAN_JRNNO = 0;
+    public int OWNER_BK = 0;
+    public String CRT_TLR = " ";
+    public int CRT_DATE = 0;
+    public String UPD_TLT = " ";
+    public int UPD_DATE = 0;
+    public int UPD_TIME = 0;
+    public String TS = " ";
+}

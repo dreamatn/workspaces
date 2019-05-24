@@ -1,0 +1,40 @@
+package com.hisun.CI;
+
+public class CICUMSG_MSG {
+    public String FILLER15 = "SYS-NO=";
+    public CICUMSG_SYS_NO SYS_NO = new CICUMSG_SYS_NO();
+    public String FILLER20 = "|&YEAR=";
+    public short YEAR = 0;
+    public String FILLER22 = "|&MONTH=";
+    public short MONTH = 0;
+    public String FILLER24 = "|&DAY=";
+    public short DAY = 0;
+    public String FILLER26 = "|&YEAR2=";
+    public short YEAR2 = 0;
+    public String FILLER28 = "|&MONTH2=";
+    public short MONTH2 = 0;
+    public String FILLER30 = "|&DAY2=";
+    public short DAY2 = 0;
+    public String FILLER32 = "|&MMO=";
+    public String MMO = " ";
+    public String FILLER34 = "|&CCY=";
+    public String CCY = " ";
+    public String FILLER36 = "|&AMT=";
+    public double AMT = 0;
+    public String FILLER38 = "|&TERM=";
+    public String TERM = " ";
+    public String FILLER40 = "|&TEL-NO=";
+    public String TEL_NO = " ";
+    public String FILLER42 = "|&AC=";
+    public String AC = " ";
+    public String FILLER44 = "|&RATE=";
+    public double RATE = 0;
+    public String FILLER46 = "|&ACL4=";
+    public String ACL4 = " ";
+    public String FILLER48 = "|&HOUR=";
+    public short HOUR = 0;
+    public String FILLER50 = "|&MINUTE=";
+    public short MINUTE = 0;
+    public String FILLER52 = "|&SECOND=";
+    public short SECOND = 0;
+}

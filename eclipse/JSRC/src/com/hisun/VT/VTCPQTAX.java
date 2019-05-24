@@ -1,0 +1,7 @@
+package com.hisun.VT;
+
+public class VTCPQTAX {
+    public VTCPQTAX_RC RC = new VTCPQTAX_RC();
+    public VTCPQTAX_INPUT_DATA INPUT_DATA = new VTCPQTAX_INPUT_DATA();
+    public VTCPQTAX_OUTPUT_DATA OUTPUT_DATA = new VTCPQTAX_OUTPUT_DATA();
+}

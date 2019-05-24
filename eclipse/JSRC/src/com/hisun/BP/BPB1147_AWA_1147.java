@@ -1,0 +1,60 @@
+package com.hisun.BP;
+
+public class BPB1147_AWA_1147 {
+    public String FAV_CD = " ";
+    public short FAV_CD_NO = 0;
+    public String DESC = " ";
+    public short DESC_NO = 0;
+    public String FAV_TYP = " ";
+    public short FAV_TYP_NO = 0;
+    public int FST_DATE = 0;
+    public short FST_DATE_NO = 0;
+    public int FED_DATE = 0;
+    public short FED_DATE_NO = 0;
+    public short FAV_PRED = 0;
+    public short FAV_PRED_NO = 0;
+    public double FMAX_AMT = 0;
+    public short FMAX_AMT_NO = 0;
+    public double FMAX_PCT = 0;
+    public short FMAX_PCT_NO = 0;
+    public char COL_FLG = ' ';
+    public short COL_FLG_NO = 0;
+    public String COL_CPN = " ";
+    public short COL_CPN_NO = 0;
+    public char CAL_MTH = ' ';
+    public short CAL_MTH_NO = 0;
+    public char COM_CYC = ' ';
+    public short COM_CYC_NO = 0;
+    public short CYC_NUM = 0;
+    public short CYC_NUM_NO = 0;
+    public char COL_TYP = ' ';
+    public short COL_TYP_NO = 0;
+    public char SPL_FLG = ' ';
+    public short SPL_FLG_NO = 0;
+    public BPB1147_FEE_INF1[] FEE_INF1 = new BPB1147_FEE_INF1[10];
+    public BPB1147_FEE_INF2[] FEE_INF2 = new BPB1147_FEE_INF2[10];
+    public BPB1147_FEE_INF3[] FEE_INF3 = new BPB1147_FEE_INF3[10];
+    public BPB1147_FEE_INF4[] FEE_INF4 = new BPB1147_FEE_INF4[10];
+    public BPB1147_FEE_INF5[] FEE_INF5 = new BPB1147_FEE_INF5[10];
+    public BPB1147_FEE_INF6[] FEE_INF6 = new BPB1147_FEE_INF6[10];
+    public BPB1147_FEE_INF7[] FEE_INF7 = new BPB1147_FEE_INF7[10];
+    public BPB1147_FEE_INF8[] FEE_INF8 = new BPB1147_FEE_INF8[10];
+    public BPB1147_FEE_INF9[] FEE_INF9 = new BPB1147_FEE_INF9[10];
+    public BPB1147_FEE_IN10[] FEE_IN10 = new BPB1147_FEE_IN10[10];
+    public char ADJ_TYP = ' ';
+    public short ADJ_TYP_NO = 0;
+    public String DIF_VAL = " ";
+    public short DIF_VAL_NO = 0;
+    public BPB1147_AWA_1147() {
+        for (int i=0;i<10;i++) FEE_INF1[i] = new BPB1147_FEE_INF1();
+        for (int i=0;i<10;i++) FEE_INF2[i] = new BPB1147_FEE_INF2();
+        for (int i=0;i<10;i++) FEE_INF3[i] = new BPB1147_FEE_INF3();
+        for (int i=0;i<10;i++) FEE_INF4[i] = new BPB1147_FEE_INF4();
+        for (int i=0;i<10;i++) FEE_INF5[i] = new BPB1147_FEE_INF5();
+        for (int i=0;i<10;i++) FEE_INF6[i] = new BPB1147_FEE_INF6();
+        for (int i=0;i<10;i++) FEE_INF7[i] = new BPB1147_FEE_INF7();
+        for (int i=0;i<10;i++) FEE_INF8[i] = new BPB1147_FEE_INF8();
+        for (int i=0;i<10;i++) FEE_INF9[i] = new BPB1147_FEE_INF9();
+        for (int i=0;i<10;i++) FEE_IN10[i] = new BPB1147_FEE_IN10();
+    }
+}

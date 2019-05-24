@@ -1,0 +1,46 @@
+package com.hisun.DD;
+
+public class DDZSDREG_WS_OUTPUT_INF {
+    String WS_AC = " ";
+    String WS_AC_CNM = " ";
+    char DDZSDREG_FILLER5 = 0X02;
+    String WS_CI_OIC = " ";
+    String WS_CCY = " ";
+    char WS_CCY_TYPE = ' ';
+    int WS_DATE = 0;
+    long WS_JRNNO = 0;
+    char WS_STS = ' ';
+    double WS_CURR_BAL = 0;
+    char DDZSDREG_FILLER13 = 0X01;
+    double WS_BAL = 0;
+    double WS_INT = 0;
+    double WS_INT_BAL = 0;
+    char WS_FLG = ' ';
+    int WS_OPN_DT = 0;
+    int WS_BR = 0;
+    int WS_W_DT = 0;
+    int WS_W_BR = 0;
+    String WS_W_TLR = " ";
+    int WS_D_DT = 0;
+    int WS_D_BR = 0;
+    String WS_D_TLR = " ";
+    int WS_T_DT = 0;
+    int WS_T_BR = 0;
+    String WS_T_TLR = " ";
+    int WS_P_DT = 0;
+    int WS_P_BR = 0;
+    String WS_P_TLR = " ";
+    int WS_N_DT = 0;
+    int WS_N_BR = 0;
+    String WS_N_TLR = " ";
+    char WS_NTF_FLG = ' ';
+    int WS_NTF_DT = 0;
+    short WS_NTF_NUM = 0;
+    String WS_ITM_NO = " ";
+    int WS_SEQ = 0;
+    char WS_FLG1 = ' ';
+    char WS_FLG2 = ' ';
+    char WS_RCD_STS = ' ';
+    String WS_REMARKS = " ";
+    char DDZSDREG_FILLER44 = 0X02;
+}

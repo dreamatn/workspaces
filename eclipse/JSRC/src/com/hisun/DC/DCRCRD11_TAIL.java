@@ -1,0 +1,8 @@
+package com.hisun.DC;
+
+public class DCRCRD11_TAIL {
+    public char T_FLG = ' ';
+    public long T_CNT = 0;
+    public String T_AMT = " ";
+    public String FILLER118 = "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ";
+}

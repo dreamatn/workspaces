@@ -1,0 +1,396 @@
+package com.hisun.BP;
+
+import com.hisun.SC.*;
+
+import java.lang.reflect.Method;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class BPZSMFEE {
+    String JIBS_tmp_str[] = new String[10];
+    boolean pgmRtn = false;
+    String WS_ERR_MSG = " ";
+    BPZSMFEE_WS_FEEO_STD WS_FEEO_STD = new BPZSMFEE_WS_FEEO_STD();
+    BPZSMFEE_WS_FEEO_FAV WS_FEEO_FAV = new BPZSMFEE_WS_FEEO_FAV();
+    char WS_TBL_BANK_FLAG = ' ';
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCFMT SCCFMT = new SCCFMT();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCMPAG SCCMPAG = new SCCMPAG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    BPCOFBAS BPCOUBAS = new BPCOFBAS();
+    BPCOFCOM BPCOUCOM = new BPCOFCOM();
+    BPCOFSTD BPCOUSTD = new BPCOFSTD();
+    BPCOFEEO BPCOFEEO = new BPCOFEEO();
+    SCCGWA SCCGWA;
+    BPCOMFEE BPCOMFEE;
+    public void MP(SCCGWA SCCGWA, BPCOMFEE BPCOMFEE) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.BPCOMFEE = BPCOMFEE;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        if (pgmRtn) return;
+        B000_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "BPZSMFEE return!");
+        Z_RET();
+        if (pgmRtn) return;
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, BPCOMFEE.FUNC);
+        if (BPCOMFEE.FUNC != 'A') {
+            B010_QUERY_BAS_PROCESS();
+            if (pgmRtn) return;
+            if (BPCOMFEE.FUNC != 'F') {
+                B020_BROWSE_STD_PROCESS();
+                if (pgmRtn) return;
+            } else {
+                B030_BROWSE_FAV_PROCESS();
+                if (pgmRtn) return;
+            }
+        } else {
+            T000_OUTPUT_BAS_INFOA();
+            if (pgmRtn) return;
+        }
+    }
+    public void B010_QUERY_BAS_PROCESS() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, BPCOMFEE.FEE_CODE);
+        IBS.init(SCCGWA, BPCOUBAS);
+        BPCOUBAS.FUNC = 'I';
+        BPCOUBAS.KEY.FEE_CODE = BPCOMFEE.FEE_CODE;
+        CEP.TRC(SCCGWA, BPCOUBAS.KEY.FEE_CODE);
+        S000_CALL_BPZFUBAS();
+        if (pgmRtn) return;
+        if (BPCOMFEE.FUNC != 'F') {
+            T000_OUTPUT_BAS_INFO();
+            if (pgmRtn) return;
+        }
+    }
+    public void B020_BROWSE_STD_PROCESS() throws IOException,SQLException,Exception {
+        SCCMPAG.TITL = " ";
+        SCCMPAG.SUBT_ROW_CNT = 0;
+        SCCMPAG.MAX_COL_NO = 212;
+        SCCMPAG.SCR_ROW_CNT = 0;
+        SCCMPAG.SCR_COL_CNT = 0;
+        IBS.init(SCCGWA, BPCOUSTD);
+        BPCOUSTD.KEY.FEE_CODE = BPCOUBAS.KEY.FEE_CODE;
+        BPCOUSTD.FUNC = 'B';
+        BPCOUSTD.OPT = 'S';
+        S000_CALL_BPZFUSTD();
+        if (pgmRtn) return;
+        while (BPCOUSTD.RETURN_INFOR != 'N' 
+            && SCCMPAG.FUNC != 'E') {
+            BPCOUSTD.OPT = 'R';
+            CEP.TRC(SCCGWA, BPCOUSTD.KEY.FEE_CODE);
+            CEP.TRC(SCCGWA, BPCOUBAS.KEY.FEE_CODE);
+            S000_CALL_BPZFUSTD();
+            if (pgmRtn) return;
+            CEP.TRC(SCCGWA, BPCOUSTD.RETURN_INFOR);
+            CEP.TRC(SCCGWA, BPCOUSTD.KEY.FEE_CODE);
+            CEP.TRC(SCCGWA, BPCOUBAS.KEY.FEE_CODE);
+            if (BPCOUSTD.RETURN_INFOR != 'N' 
+                && BPCOUSTD.KEY.FEE_CODE.equalsIgnoreCase(BPCOUBAS.KEY.FEE_CODE)) {
+                WS_FEEO_STD.WS_STD_FEE_CD = BPCOMFEE.FEE_CODE;
+                WS_FEEO_STD.WS_STD_FEE_DESC = BPCOUBAS.VAL.FEE_DESC;
+                WS_FEEO_STD.WS_STD_REG_CODE = BPCOUSTD.KEY.REG_CODE;
+                WS_FEEO_STD.WS_STD_CHN_NO = BPCOUSTD.KEY.CHN_NO;
+                WS_FEEO_STD.WS_STD_FREE_FMT = BPCOUSTD.KEY.FREE_FMT;
+                WS_FEEO_STD.WS_STD_REF_CCY = BPCOUSTD.KEY.REF_CCY;
+                WS_FEEO_STD.WS_STD_START_AMT = BPCOUSTD.VAL.START_AMT;
+                WS_FEEO_STD.WS_STD_FIX_AMT = BPCOUSTD.VAL.FIX_AMT;
+                WS_FEEO_STD.WS_STD_FEE_CCY = BPCOUSTD.VAL.FEE_CCY;
+                WS_FEEO_STD.WS_STD_MIN_AMT = BPCOUSTD.VAL.MIN_AMT;
+                WS_FEEO_STD.WS_STD_MAX_AMT = BPCOUSTD.VAL.MAX_AMT;
+                CEP.TRC(SCCGWA, WS_FEEO_STD.WS_STD_FEE_CD);
+                CEP.TRC(SCCGWA, WS_FEEO_STD.WS_STD_FEE_DESC);
+                CEP.TRC(SCCGWA, WS_FEEO_STD.WS_STD_REG_CODE);
+                CEP.TRC(SCCGWA, WS_FEEO_STD.WS_STD_CHN_NO);
+                CEP.TRC(SCCGWA, WS_FEEO_STD.WS_STD_FREE_FMT);
+                CEP.TRC(SCCGWA, WS_FEEO_STD.WS_STD_REF_CCY);
+                CEP.TRC(SCCGWA, WS_FEEO_STD.WS_STD_START_AMT);
+                CEP.TRC(SCCGWA, WS_FEEO_STD.WS_STD_FIX_AMT);
+                CEP.TRC(SCCGWA, WS_FEEO_STD.WS_STD_FEE_CCY);
+                CEP.TRC(SCCGWA, WS_FEEO_STD.WS_STD_MIN_AMT);
+                CEP.TRC(SCCGWA, WS_FEEO_STD.WS_STD_MAX_AMT);
+                R000_OUTPUT_STD_INFO();
+                if (pgmRtn) return;
+            } else {
+                BPCOUSTD.RETURN_INFOR = 'N';
+                CEP.TRC(SCCGWA, BPCOUSTD.RETURN_INFOR);
+            }
+        }
+        BPCOUSTD.OPT = 'E';
+        S000_CALL_BPZFUSTD();
+        if (pgmRtn) return;
+    }
+    public void B030_BROWSE_FAV_PROCESS() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, SCCMPAG);
+        SCCMPAG.FUNC = 'S';
+        SCCMPAG.TITL = " ";
+        SCCMPAG.SUBT_ROW_CNT = 0;
+        SCCMPAG.MAX_COL_NO = 141;
+        SCCMPAG.SCR_ROW_CNT = 0;
+        SCCMPAG.SCR_COL_CNT = 0;
+        B_MPAG();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, BPCOUCOM);
+        BPCOUCOM.KEY.FEE_CODE = BPCOUBAS.KEY.FEE_CODE;
+        BPCOUCOM.FUNC = 'B';
+        BPCOUCOM.OPT = 'S';
+        CEP.TRC(SCCGWA, BPCOUBAS.KEY.FEE_CODE);
+        S000_CALL_BPZFUCOM();
+        if (pgmRtn) return;
+        while (BPCOUCOM.FOUND_FLG != 'N' 
+            && SCCMPAG.FUNC != 'E') {
+            BPCOUCOM.OPT = 'N';
+            S000_CALL_BPZFUCOM();
+            if (pgmRtn) return;
+            CEP.TRC(SCCGWA, BPCOUCOM.FOUND_FLG);
+            CEP.TRC(SCCGWA, BPCOUCOM.KEY.FEE_CODE);
+            if (BPCOUCOM.KEY.FEE_CODE.equalsIgnoreCase(BPCOUBAS.KEY.FEE_CODE) 
+                && BPCOUCOM.FOUND_FLG != 'N') {
+                WS_FEEO_FAV.WS_FAV_FEE_CODE = BPCOMFEE.FEE_CODE;
+                WS_FEEO_FAV.WS_FAV_DESC = BPCOUBAS.VAL.FEE_DESC;
+                WS_FEEO_FAV.WS_FAV_REG_CODE = BPCOUCOM.KEY.REG_CODE;
+                WS_FEEO_FAV.WS_FAV_CHN_NO = BPCOUCOM.KEY.CHN_NO;
+                WS_FEEO_FAV.WS_FAV_FREE_FMT = BPCOUCOM.KEY.FREE_FMT;
+                CEP.TRC(SCCGWA, WS_FEEO_FAV.WS_FAV_FEE_CODE);
+                CEP.TRC(SCCGWA, WS_FEEO_FAV.WS_FAV_DESC);
+                CEP.TRC(SCCGWA, WS_FEEO_FAV.WS_FAV_REG_CODE);
+                CEP.TRC(SCCGWA, WS_FEEO_FAV.WS_FAV_CHN_NO);
+                CEP.TRC(SCCGWA, WS_FEEO_FAV.WS_FAV_FREE_FMT);
+                R000_OUTPUT_FAV_INFO();
+                if (pgmRtn) return;
+            } else {
+                BPCOUCOM.FOUND_FLG = 'N';
+                CEP.TRC(SCCGWA, BPCOUCOM.FOUND_FLG);
+            }
+        }
+        BPCOUCOM.OPT = 'E';
+        S000_CALL_BPZFUCOM();
+        if (pgmRtn) return;
+    }
+    public void T000_OUTPUT_BAS_INFOA() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, SCCMPAG);
+        SCCMPAG.FUNC = 'S';
+        SCCMPAG.TITL = " ";
+        SCCMPAG.SUBT_ROW_CNT = 0;
+        SCCMPAG.MAX_COL_NO = 238;
+        SCCMPAG.SCR_ROW_CNT = 0;
+        SCCMPAG.SCR_COL_CNT = 0;
+        B_MPAG();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, BPCOFEEO);
+        BPCOMFEE.FEE_CODE = " ";
+        BPCOFEEO.FMT_CODE = '0X03';
+        BPCOFEEO.BAS.FEE_CODE = BPCOMFEE.FEE_CODE;
+        BPCOFEEO.BAS.FEE_FUNC = BPCOMFEE.FUNC;
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_FUNC);
+        IBS.init(SCCGWA, SCCMPAG);
+        SCCMPAG.FUNC = 'D';
+        SCCMPAG.DATA_PTR = IBS.CLS2CPY(SCCGWA, BPCOFEEO);
+        SCCMPAG.DATA_LEN = 238;
+        B_MPAG();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "OUTPUT BPCOFEEO");
+    }
+    public void T000_OUTPUT_BAS_INFO() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, SCCMPAG);
+        SCCMPAG.FUNC = 'S';
+        SCCMPAG.TITL = " ";
+        SCCMPAG.SUBT_ROW_CNT = 0;
+        SCCMPAG.MAX_COL_NO = 238;
+        SCCMPAG.SCR_ROW_CNT = 0;
+        SCCMPAG.SCR_COL_CNT = 0;
+        B_MPAG();
+        if (pgmRtn) return;
+        R000_TRANS_FBAS_OUTPUT();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, SCCFMT);
+        SCCFMT.FMTID = "BP069";
+        SCCFMT.DATA_PTR = BPCOFEEO;
+        SCCFMT.DATA_LEN = 238;
+        IBS.FMT(SCCGWA, SCCFMT);
+        CEP.TRC(SCCGWA, "OUTPUT BPCOFEEO");
+    }
+    public void R000_OUTPUT_STD_INFO() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, WS_FEEO_STD);
+        IBS.init(SCCGWA, SCCMPAG);
+        SCCMPAG.FUNC = 'D';
+        SCCMPAG.DATA_PTR = IBS.CLS2CPY(SCCGWA, WS_FEEO_STD);
+        SCCMPAG.DATA_LEN = 212;
+        B_MPAG();
+        if (pgmRtn) return;
+    }
+    public void R000_OUTPUT_FAV_INFO() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, WS_FEEO_FAV);
+        IBS.init(SCCGWA, SCCMPAG);
+        SCCMPAG.FUNC = 'D';
+        SCCMPAG.DATA_PTR = IBS.CLS2CPY(SCCGWA, WS_FEEO_FAV);
+        SCCMPAG.DATA_LEN = 141;
+        B_MPAG();
+        if (pgmRtn) return;
+    }
+    public void R000_TRANS_FBAS_OUTPUT() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCOFEEO);
+        BPCOFEEO.FMT_CODE = '0X03';
+        BPCOFEEO.BAS.FEE_CODE = BPCOMFEE.FEE_CODE;
+        CEP.TRC(SCCGWA, BPCOMFEE.FUNC);
+        BPCOFEEO.BAS.FEE_FUNC = BPCOMFEE.FUNC;
+        BPCOFEEO.BAS.FEE_DESC = BPCOUBAS.VAL.FEE_DESC;
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_DESC);
+        BPCOFEEO.BAS.AREA_TYPE = BPCOUBAS.VAL.AREA_TYPE;
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.AREA_TYPE);
+        BPCOFEEO.BAS.FEE_UPD_FLG = BPCOUBAS.VAL.FEE_UPD_FLG;
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_UPD_FLG);
+        BPCOFEEO.BAS.GL_MASTERNO1 = BPCOUBAS.VAL.GL_MASTERNO1;
+        BPCOFEEO.BAS.GL_MASTERNO2 = BPCOUBAS.VAL.GL_MASTERNO2;
+        BPCOFEEO.BAS.GL_MASTERNO3 = BPCOUBAS.VAL.GL_MASTERNO3;
+        BPCOFEEO.BAS.GL_MASTERNO4 = BPCOUBAS.VAL.GL_MASTERNO4;
+        BPCOFEEO.BAS.RATE_GROUP = BPCOUBAS.VAL.RATE_GROUP;
+        BPCOFEEO.BAS.FEE_EXG_TYP = BPCOUBAS.VAL.FEE_EXG_TYP;
+        BPCOFEEO.BAS.FEE_OWN_FLG = BPCOUBAS.VAL.FEE_OWN_FLG;
+        BPCOFEEO.BAS.TRN_BR_PCT = BPCOUBAS.VAL.TRN_BR_PCT;
+        BPCOFEEO.BAS.AC_BR1_PCT = BPCOUBAS.VAL.AC_BR1_PCT;
+        BPCOFEEO.BAS.AC_BR2_PCT = BPCOUBAS.VAL.AC_BR2_PCT;
+        BPCOFEEO.BAS.FEE_TX_MMO = BPCOUBAS.VAL.FEE_TX_MMO;
+        BPCOFEEO.BAS.FEE_CHG_TYPE = BPCOUBAS.VAL.FEE_CHG_TYPE;
+        BPCOFEEO.BAS.FEE_GTH_METH = BPCOUBAS.VAL.FEE_GTH_METH;
+        BPCOFEEO.BAS.FEE_CYC_METH = BPCOUBAS.VAL.FEE_CYC_METH;
+        BPCOFEEO.BAS.FEE_DIS_METH = BPCOUBAS.VAL.FEE_DIS_METH;
+        BPCOFEEO.BAS.FEE_AMOT_FLG = BPCOUBAS.VAL.FEE_AMOT_FLG;
+        BPCOFEEO.BAS.AMOT_CODE = BPCOUBAS.VAL.AMOT_CODE;
+        BPCOFEEO.BAS.ACCRUAL_FLG = BPCOUBAS.VAL.ACCRUAL_FLG;
+        BPCOFEEO.BAS.ACCRUAL_CYC = BPCOUBAS.VAL.ACCRUAL_CYC;
+        BPCOFEEO.BAS.ACCRUAL_TIMES = BPCOUBAS.VAL.ACCRUAL_TIMES;
+        BPCOFEEO.BAS.ACCRUAL_DAY = BPCOUBAS.VAL.ACCRUAL_DAY;
+        BPCOFEEO.BAS.DEBT_METH = BPCOUBAS.VAL.DEBT_METH;
+        BPCOFEEO.BAS.RECH_METH = BPCOUBAS.VAL.RECH_METH;
+        BPCOFEEO.BAS.MAX_RECH_CNT = BPCOUBAS.VAL.MAX_RECH_CNT;
+        BPCOFEEO.BAS.ADV_FLG = BPCOUBAS.VAL.ADV_FLG;
+        BPCOFEEO.BAS.FEE_STR_DATE = BPCOUBAS.VAL.FEE_EFF_DATE;
+        BPCOFEEO.BAS.FEE_END_DATE = BPCOUBAS.VAL.FEE_EXP_DATE;
+        BPCOFEEO.BAS.FEE_FEE_TYPE = BPCOUBAS.VAL.FEE_TYPE;
+        BPCOFEEO.BAS.FEE_UP_AMT = BPCOUBAS.VAL.UP_AMT;
+        BPCOFEEO.BAS.FEE_DWN_AMT = BPCOUBAS.VAL.DWN_AMT;
+        BPCOFEEO.BAS.FEE_UP_PCT = BPCOUBAS.VAL.UP_PCT;
+        BPCOFEEO.BAS.FEE_DWN_PCT = BPCOUBAS.VAL.DWN_PCT;
+        BPCOFEEO.BAS.FEE_REB_FLG = BPCOUBAS.VAL.FEE_REB_FLG;
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_FUNC);
+        if (BPCOUBAS.VAL.REB_CODE.trim().length() == 0) {
+            BPCOFEEO.BAS.REB_CODE = "00000";
+        } else {
+            BPCOFEEO.BAS.REB_CODE = BPCOUBAS.VAL.REB_CODE;
+        }
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_FUNC);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_CODE);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_DESC);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_FEE_TYPE);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_UP_AMT);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_DWN_AMT);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_UP_PCT);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_DWN_PCT);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_STR_DATE);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_END_DATE);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.AREA_TYPE);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_UPD_FLG);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.GL_MASTERNO1);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.GL_MASTERNO2);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.GL_MASTERNO3);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.GL_MASTERNO4);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_OWN_FLG);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_TX_MMO);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_CHG_TYPE);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.TRN_BR_PCT);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.AC_BR1_PCT);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.AC_BR2_PCT);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_GTH_METH);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_CYC_METH);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_DIS_METH);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_AMOT_FLG);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.AMOT_CODE);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.FEE_REB_FLG);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.REB_CODE);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.ACCRUAL_FLG);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.ACCRUAL_CYC);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.ACCRUAL_TIMES);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.ACCRUAL_DAY);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.DEBT_METH);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.RECH_METH);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.MAX_RECH_CNT);
+        CEP.TRC(SCCGWA, BPCOFEEO.BAS.ADV_FLG);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_DESC);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.AREA_TYPE);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_UPD_FLG);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.GL_MASTERNO1);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.GL_MASTERNO2);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.GL_MASTERNO3);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.GL_MASTERNO4);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_EXG_TYP);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_OWN_FLG);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.TRN_BR_PCT);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.AC_BR1_PCT);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.AC_BR2_PCT);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_TX_MMO);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_CHG_TYPE);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_GTH_METH);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_CYC_METH);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_DIS_METH);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_AMOT_FLG);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.AMOT_CODE);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.ACCRUAL_FLG);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.ACCRUAL_CYC);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.ACCRUAL_TIMES);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.ACCRUAL_DAY);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.DEBT_METH);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.RECH_METH);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.MAX_RECH_CNT);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.ADV_FLG);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_EFF_DATE);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_EXP_DATE);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_TYPE);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.UP_AMT);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.DWN_AMT);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.UP_PCT);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.DWN_PCT);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.FEE_REB_FLG);
+        CEP.TRC(SCCGWA, BPCOUBAS.VAL.REB_CODE);
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void S000_CALL_BPZFUBAS() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-F-U-MAINTAIN-FBAS", BPCOUBAS);
+    }
+    public void S000_CALL_BPZFUCOM() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-F-U-MAINTAIN-FCOM", BPCOUCOM);
+    }
+    public void S000_CALL_BPZFUSTD() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-F-U-MAINTAIN-FSTD", BPCOUSTD);
+    }
+    public void B_MPAG() throws IOException,SQLException,Exception {
+    if (!SCCGWA.COMM_AREA.BSP_FLG.equalsIgnoreCase("BSP") && !SCCGWA.COMM_AREA.CHNL.equalsIgnoreCase("BAT")) { //FROM #IFDEF ONL
+        JIBS_tmp_str[9] = "SCZMPAG";
+        Class<?>clazz = Class.forName(JIBS_tmp_str[9].trim());
+        Object obj = clazz.newInstance();
+        Method m = clazz.getDeclaredMethod("MP",new Class[]{SCCGWA.getClass(), SCCMPAG.getClass()});
+        m.invoke(obj, SCCGWA, SCCMPAG);
+        if (SCCGWA.COMM_AREA.EXCP_FLG == 'Y') {
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    } else { //FROM #ELSE
+    } //FROM #ENDIF
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        pgmRtn = true;
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

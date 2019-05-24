@@ -1,0 +1,47 @@
+package com.hisun.DD;
+
+public class DDZSDDTD_WS_LIST {
+    String WS_LIST_AC = " ";
+    String WS_LIST_AC_CNM = " ";
+    char DDZSDDTD_FILLER7 = 0X02;
+    String WS_LIST_CCY = " ";
+    char WS_LIST_CCY_TYPE = ' ';
+    int WS_LIST_PROL_DT = 0;
+    String WS_LIST_PROL_NO = " ";
+    double WS_LIST_PROL_AMT = 0;
+    char DDZSDDTD_FILLER13 = 0X01;
+    double WS_LIST_PROL_BAL = 0;
+    char DDZSDDTD_FILLER15 = 0X01;
+    String WS_LIST_TENOR = " ";
+    int WS_LIST_VAL_DATE = 0;
+    int WS_LIST_MAT_DATE = 0;
+    char WS_LIST_PROL_STS = ' ';
+    String WS_LIST_CON_NO = " ";
+    String WS_LIST_REMARKS = " ";
+    char DDZSDDTD_FILLER22 = 0X02;
+    double WS_LIST_RATE = 0;
+    char DDZSDDTD_FILLER24 = 0X01;
+    double WS_LIST_BRK_RATE = 0;
+    char DDZSDDTD_FILLER26 = 0X01;
+    String WS_LIST_RATE_TYP = " ";
+    String WS_LIST_RAT_TERM = " ";
+    char WS_LIST_FLOAT_TP = ' ';
+    double WS_LIST_F_SPRD = 0;
+    char DDZSDDTD_FILLER31 = 0X01;
+    double WS_LIST_F_PCNT = 0;
+    char DDZSDDTD_FILLER33 = 0X01;
+    double WS_LIST_PMT_RATE = 0;
+    char DDZSDDTD_FILLER35 = 0X01;
+    String WS_LIST_B_RAT_TP = " ";
+    String WS_LIST_B_RAT_TM = " ";
+    char WS_LIST_BF_TYPE = ' ';
+    double WS_LIST_BF_SPRD = 0;
+    char DDZSDDTD_FILLER40 = 0X01;
+    double WS_LIST_BF_PCNT = 0;
+    char DDZSDDTD_FILLER42 = 0X01;
+    double WS_LIST_BP_RATE = 0;
+    char DDZSDDTD_FILLER44 = 0X01;
+    int WS_LIST_PART_DATE = 0;
+    int WS_LIST_CLO_DATE = 0;
+    long WS_LIST_JR_NNO = 0;
+}

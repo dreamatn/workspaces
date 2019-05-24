@@ -1,0 +1,388 @@
+package com.hisun.BP;
+
+import com.hisun.SC.*;
+import com.hisun.CI.*;
+import com.hisun.DD.*;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class BPZFFCON {
+    int JIBS_tmp_int;
+    boolean pgmRtn = false;
+    String K_PGM_NAME = "BPZFFCON";
+    String CPN_F_U_CAL_FEE = "BP-F-U-CAL-FEE      ";
+    String CPN_U_DIY_CHECK = "BP-P-AMO-CHK";
+    String CPN_F_COM_FEE_INFO = "BP-F-T-FEE-INFO";
+    String CPN_S_CI_DATA = "CI-INQ-ACCU";
+    String CPN_EXG_CURRENCY = "BP-EX";
+    String WS_ERR_MSG = " ";
+    short WS_CNT1 = 0;
+    BPZFFCON_WS_CMZ_DATA WS_CMZ_DATA = new BPZFFCON_WS_CMZ_DATA();
+    BPZFFCON_WS_FEE_INFO WS_FEE_INFO = new BPZFFCON_WS_FEE_INFO();
+    char WS_AC_FLAG = ' ';
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    BPCUIFAV BPCUIFAV = new BPCUIFAV();
+    BPCPQCMZ BPCPQCMZ = new BPCPQCMZ();
+    CICACCU CICACCU = new CICACCU();
+    BPRFBAS BPRFBAS = new BPRFBAS();
+    BPCTFBAS BPCTFBAS = new BPCTFBAS();
+    BPCFX BPCFX = new BPCFX();
+    DDCIMMST DDCIMMST = new DDCIMMST();
+    CICQACRI CICQACRI = new CICQACRI();
+    BPCPQPRD BPCPQPRD = new BPCPQPRD();
+    SCCGWA SCCGWA;
+    BPCGCFEE BPCGCFEE;
+    BPCGPFEE BPCGPFEE;
+    BPCFFCON BPCFFCON;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    public void MP(SCCGWA SCCGWA, BPCFFCON BPCFFCON) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.BPCFFCON = BPCFFCON;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        if (pgmRtn) return;
+        B000_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "BPZFFCON return!");
+        Z_RET();
+        if (pgmRtn) return;
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        BPCGCFEE = new BPCGCFEE();
+        IBS.init(SCCGWA, BPCGCFEE);
+        IBS.CPY2CLS(SCCGWA, GWA_BP_AREA.FEE_AREA.FEE_DATA_PTR, BPCGCFEE);
+        BPCGPFEE = (BPCGPFEE) GWA_BP_AREA.FEE_AREA.FEE_PARM_PTR;
+        BPCFFCON.RC.RC_MMO = SCCGWA.COMM_AREA.AP_MMO;
+        BPCFFCON.RC.RC_CODE = 0;
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_CNT);
+        CEP.TRC(SCCGWA, BPCFFCON.FEE_INFO.FEE_CNT);
+        if (BPCFFCON.FEE_INFO.FEE_CNT == 0) {
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        if (BPCFFCON.FEE_INFO.FEE_CNT + BPCGCFEE.FEE_DATA.FEE_CNT > 20) {
+            CEP.ERR(SCCGWA, BPCMSG_ERROR_MSG.BP_FEE_OVER_MAX_CNT);
+        }
+        BPCGCFEE.FEE_DATA.EXP_CODE = BPCFFCON.FEE_INFO.DER_CODE;
+        BPCGCFEE.FEE_DATA.ACCOUNT_BR = BPCFFCON.FEE_INFO.ACCOUNT_BR;
+        BPCGCFEE.FEE_DATA.EX_RATE = BPCFFCON.FEE_INFO.EX_RATE;
+        BPCGCFEE.FEE_DATA.TICKET_NO = BPCFFCON.FEE_INFO.TICKET_NO;
+        BPCGCFEE.FEE_DATA.REMARK = BPCFFCON.FEE_INFO.REMARK;
+        BPCGCFEE.FEE_DATA.VAT_AMT = BPCFFCON.FEE_INFO.VAT_AMT;
+        for (WS_CNT1 = 1; WS_CNT1 <= BPCFFCON.FEE_INFO.FEE_CNT 
+            && SCCGWA.COMM_AREA.FEE_DATA_IND != 'Y'; WS_CNT1 += 1) {
+            CEP.TRC(SCCGWA, "ENTER PERFORM ");
+            CEP.TRC(SCCGWA, WS_CNT1);
+            CEP.TRC(SCCGWA, BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_CODE);
+            if (BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_CODE.trim().length() > 0) {
+                CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_CNT);
+                BPCGCFEE.FEE_DATA.FEE_CNT += 1;
+                CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_CNT);
+                CEP.TRC(SCCGWA, BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC);
+                if (BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC.trim().length() > 0) {
+                    IBS.init(SCCGWA, CICQACRI);
+                    CICQACRI.FUNC = 'A';
+                    CICQACRI.DATA.AGR_NO = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC;
+                    S000_CALL_CIZQACRI();
+                    if (pgmRtn) return;
+                    CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_INFO[WS_CNT1-1].PROD_CD);
+                }
+                CEP.TRC(SCCGWA, BPCFFCON.FEE_INFO.PROD_CODE1);
+                if (BPCFFCON.FEE_INFO.PROD_CODE1.trim().length() > 0) {
+                    IBS.init(SCCGWA, BPCPQPRD);
+                    CEP.TRC(SCCGWA, BPCFFCON.FEE_INFO.PROD_CODE1);
+                    BPCPQPRD.PRDT_CODE = BPCFFCON.FEE_INFO.PROD_CODE1;
+                    S000_CALL_BPZPQPRD();
+                    if (pgmRtn) return;
+                    BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].PROD_CD = BPCFFCON.FEE_INFO.PROD_CODE1;
+                } else {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_FEE_PD_CD_MUST;
+                    S000_ERR_MSG_PROC();
+                    if (pgmRtn) return;
+                }
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].CHG_FLG = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_FLG;
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].FEE_CODE = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_CODE;
+                WS_FEE_INFO.WS_FEE_CODE = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_CODE;
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].FEE_CCY = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_CCY;
+                WS_FEE_INFO.WS_FEE_CCY = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_CCY;
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].FEE_BAS = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_BAS;
+                WS_FEE_INFO.WS_FEE_BAS = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_BAS;
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].FEE_AMT = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_AMT;
+                WS_FEE_INFO.WS_FEE_AMT = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_AMT;
+                CEP.TRC(SCCGWA, WS_CNT1);
+                CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].FEE_AMT);
+                CEP.TRC(SCCGWA, "AABBCC");
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].CHG_AC_TY = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC_TY;
+                WS_FEE_INFO.WS_CHG_AC_TY = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC_TY;
+                CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].FEE_BAS);
+                CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_CNT);
+                CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].CHG_FLG);
+                CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].CHG_AC_TY);
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].CHG_AC = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC;
+                WS_FEE_INFO.WS_CHG_AC = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC;
+                if (BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC_TY == '4' 
+                    || BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC_TY == '5') {
+                    BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].CHG_AC = BPCGPFEE.TX_DATA3.CARD_PSBK_NO;
+                }
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].CHG_CCY = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_CCY;
+                WS_FEE_INFO.WS_CHG_CCY = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_CCY;
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].CHG_BAS = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_BAS;
+                WS_FEE_INFO.WS_CHG_BAS = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_BAS;
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].CHG_AMT = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AMT;
+                WS_FEE_INFO.WS_CHG_AMT = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AMT;
+                if (BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].DIFF_FLG == 'Y') {
+                    IBS.init(SCCGWA, BPCUIFAV);
+                    BPCUIFAV.INPUT_AREA.FUNC_CODE = "41";
+                    BPCUIFAV.INPUT_AREA.FEE_CODE = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_CODE;
+                    BPCUIFAV.INPUT_AREA.BASIC_FEE = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].ADJ_AMT;
+                    BPCUIFAV.INPUT_AREA.TX_AC = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC;
+                    BPCUIFAV.INPUT_AREA.FAV_CCY = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_CCY;
+                    S000_CALL_BPZUIFAV();
+                    if (pgmRtn) return;
+                    BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].ADJ_AMT = BPCUIFAV.OUTPUT_AREA.FEE_AMT;
+                    WS_FEE_INFO.WS_ADJ_AMT = BPCUIFAV.OUTPUT_AREA.FEE_AMT;
+                    BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].ADJ_AMT = BPCUIFAV.OUTPUT_AREA.FEE_AMT;
+                    BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AMT = BPCUIFAV.OUTPUT_AREA.FEE_AMT;
+                } else {
+                    BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].ADJ_AMT = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].ADJ_AMT;
+                    WS_FEE_INFO.WS_ADJ_AMT = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].ADJ_AMT;
+                }
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].DER_AMT = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].DER_AMT;
+                WS_FEE_INFO.WS_DER_AMT = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].DER_AMT;
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].DER_AUTH = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].DER_AUH;
+                WS_FEE_INFO.WS_DER_AUTH = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].DER_AUH;
+                BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].RGN_NO = "" + BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].TO_ACCT_CEN;
+                JIBS_tmp_int = BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].RGN_NO.length();
+                for (int i=0;i<6-JIBS_tmp_int;i++) BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].RGN_NO = "0" + BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].RGN_NO;
+                CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].CHG_AC);
+                CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].CHG_CCY);
+                CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].ADJ_AMT);
+                CEP.TRC(SCCGWA, BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].NARRATIVE);
+                if (SCCGWA.COMM_AREA.TR_BANK.equalsIgnoreCase("043")) {
+                    if (BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].AMO_FLG == 'Y') {
+                        BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].AMO_FLG = '1';
+                    } else {
+                        BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].AMO_FLG = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].AMO_FLG;
+                    }
+                    BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].AMO_STDT = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].AMO_STDT;
+                    CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].AMO_STDT);
+                    BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].AMO_EDDT = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].AMO_EDDT;
+                    CEP.TRC(SCCGWA, BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].AMO_EDDT);
+                    CEP.TRC(SCCGWA, BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].REF_NO);
+                    BPCGCFEE.FEE_DATA.FEE_INFO[BPCGCFEE.FEE_DATA.FEE_CNT-1].REF_NO = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].REF_NO;
+                }
+                if ((BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AMT != BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].ADJ_AMT) 
+                    && BPCFFCON.FEE_INFO.DER_CODE.trim().length() == 0) {
+                    CEP.ERR(SCCGWA, BPCMSG_ERROR_MSG.BP_FDER_MUST_INPUT);
+                }
+            }
+        }
+    }
+    public void S000_CALL_BPZUIFAV() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, CPN_F_U_CAL_FEE, BPCUIFAV);
+        if (BPCUIFAV.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCUIFAV.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_CIZQACRI() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "CI-INQ-ACR-INF", CICQACRI);
+        CEP.TRC(SCCGWA, CICQACRI.RC);
+        if (CICQACRI.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, CICQACRI.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void B050_50_FEE_CMZ_INFO_CN() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCPQCMZ);
+        IBS.init(SCCGWA, CICACCU);
+        IBS.init(SCCGWA, WS_CMZ_DATA);
+        BPCPQCMZ.FEE_CODE = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_CODE;
+        BPCPQCMZ.INQ_DT = SCCGWA.COMM_AREA.AC_DATE;
+        CEP.TRC(SCCGWA, BPCGPFEE.TX_DATA3.CARD_PSBK_NO);
+        CEP.TRC(SCCGWA, BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC_TY);
+        if (BPCGPFEE.TX_DATA3.CARD_PSBK_NO.trim().length() > 0 
+            && BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC_TY == '4') {
+            CICACCU.DATA.AGR_NO = BPCGPFEE.TX_DATA3.CARD_PSBK_NO;
+        } else {
+            CICACCU.DATA.AGR_NO = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC;
+        }
+        BPCPQCMZ.CMZ_CARD = BPCGPFEE.TX_DATA3.CARD_PSBK_NO;
+        BPCPQCMZ.CMZ_AC = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC;
+        if (CICACCU.DATA.AGR_NO.trim().length() > 0) {
+            S000_CALL_CIZACCU();
+            if (pgmRtn) return;
+            BPCPQCMZ.CI_NO = CICACCU.DATA.CI_NO;
+            WS_CMZ_DATA.WS_CI_NO = CICACCU.DATA.CI_NO;
+        }
+        CEP.TRC(SCCGWA, BPCPQCMZ.CI_NO);
+        if (BPCPQCMZ.CI_NO.trim().length() > 0) {
+            S000_CALL_BPZPQCMZ();
+            if (pgmRtn) return;
+            CEP.TRC(SCCGWA, BPCPQCMZ.DATE_FLG);
+            CEP.TRC(SCCGWA, BPCPQCMZ.CCY_RULE);
+            CEP.TRC(SCCGWA, BPCPQCMZ.CMZ_CCY);
+            CEP.TRC(SCCGWA, BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_CCY);
+            if (BPCPQCMZ.DATE_FLG == 'Y' 
+                && BPCPQCMZ.CCY_RULE == '0' 
+                && !BPCPQCMZ.CMZ_CCY.equalsIgnoreCase(BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_CCY)) {
+                BPCPQCMZ.DATE_FLG = 'N';
+            }
+            CEP.TRC(SCCGWA, BPCPQCMZ.DATE_FLG);
+            CEP.TRC(SCCGWA, BPCPQCMZ.RC.RC_CODE);
+            CEP.TRC(SCCGWA, BPCPQCMZ.DATE_FLG);
+            CEP.TRC(SCCGWA, BPCPQCMZ.CMZ_FLG1);
+            if (BPCPQCMZ.RC.RC_CODE == 0 
+                && BPCPQCMZ.DATE_FLG == 'Y' 
+                && BPCPQCMZ.CMZ_FLG1 == '1') {
+                S000_CMZ_CCY_FOR_AMT();
+                if (pgmRtn) return;
+            }
+        }
+    }
+    public void S000_CMZ_CCY_FOR_AMT() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, BPCPQCMZ.CCY_RULE);
+        CEP.TRC(SCCGWA, BPCPQCMZ.CMZ_AMT);
+        CEP.TRC(SCCGWA, BPCPQCMZ.CMZ_CCY);
+        CEP.TRC(SCCGWA, BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_CCY);
+        if (BPCPQCMZ.CCY_RULE == '0' 
+            && BPCPQCMZ.CMZ_CCY.equalsIgnoreCase(BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_CCY)) {
+            WS_CMZ_DATA.WS_CMZ_EFF_FLG = 'Y';
+            WS_CMZ_DATA.WS_CMZ_AMT = BPCPQCMZ.CMZ_AMT;
+        }
+        if (BPCPQCMZ.CCY_RULE == '1') {
+            if (BPCPQCMZ.CMZ_CCY.equalsIgnoreCase(BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_CCY) 
+                || BPCPQCMZ.CMZ_AMT == 0) {
+                WS_CMZ_DATA.WS_CMZ_EFF_FLG = 'Y';
+                WS_CMZ_DATA.WS_CMZ_AMT = BPCPQCMZ.CMZ_AMT;
+            } else {
+                B050_GET_FEE_BASIC_INFO_CN();
+                if (pgmRtn) return;
+                WS_CMZ_DATA.WS_CMZ_EFF_FLG = 'Y';
+                IBS.init(SCCGWA, WS_CMZ_DATA.WS_EX_TEMP);
+                WS_CMZ_DATA.WS_EX_TEMP.WS_EX_FEE_CCY = BPCPQCMZ.CMZ_CCY;
+                WS_CMZ_DATA.WS_EX_TEMP.WS_EX_CHG_CCY = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_CCY;
+                WS_CMZ_DATA.WS_EX_TEMP.WS_TX_AMT = BPCPQCMZ.CMZ_AMT;
+                WS_CMZ_DATA.WS_EX_TEMP.WS_CMZ_EX_FLG = 'Y';
+                R000_TRANS_BPCEX_IN();
+                if (pgmRtn) return;
+                WS_CMZ_DATA.WS_CMZ_AMT = WS_CMZ_DATA.WS_EX_TEMP.WS_TX_AMT;
+            }
+        }
+        CEP.TRC(SCCGWA, WS_CMZ_DATA.WS_CMZ_AMT);
+    }
+    public void B050_GET_FEE_BASIC_INFO_CN() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRFBAS);
+        IBS.init(SCCGWA, BPCTFBAS);
+        BPCTFBAS.INFO.POINTER = BPRFBAS;
+        BPCTFBAS.INFO.REC_LEN = 312;
+        BPRFBAS.KEY.FEE_CODE = BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_CODE;
+        BPCTFBAS.INFO.FUNC = 'Q';
+        CEP.TRC(SCCGWA, BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].FEE_CODE);
+        CEP.TRC(SCCGWA, BPRFBAS.KEY.FEE_CODE);
+        S000_CALL_BPZTFBAS();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, BPRFBAS.FEE_NO);
+    }
+    public void R000_TRANS_BPCEX_IN() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCFX);
+        BPCFX.FUNC = '3';
+        BPCFX.EXR_TYPE = BPRFBAS.RATE_GROUP;
+        BPCFX.BR = SCCGWA.COMM_AREA.BR_DP.TR_BRANCH;
+        BPCFX.CI_NO = WS_CMZ_DATA.WS_CI_NO;
+        CEP.TRC(SCCGWA, BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC_TY);
+        if (BPCFFCON.FEE_INFO.FEE_INFO1[WS_CNT1-1].CHG_AC_TY == '1') {
+            BPCFX.B_CASH_FLG = 'Y';
+        } else {
+            BPCFX.B_CASH_FLG = 'N';
+        }
+        CEP.TRC(SCCGWA, BPRFBAS.CHG_TYPE);
+        CEP.TRC(SCCGWA, WS_CMZ_DATA.WS_EX_TEMP.WS_CMZ_EX_FLG);
+        if (BPRFBAS.CHG_TYPE == '1' 
+            && WS_CMZ_DATA.WS_EX_TEMP.WS_CMZ_EX_FLG == 'Y') {
+            BPCFX.BUY_AMT = WS_CMZ_DATA.WS_EX_TEMP.WS_TX_AMT;
+            BPCFX.BUY_CCY = WS_CMZ_DATA.WS_EX_TEMP.WS_EX_FEE_CCY;
+            BPCFX.SELL_CCY = WS_CMZ_DATA.WS_EX_TEMP.WS_EX_CHG_CCY;
+            S000_CALL_BPZSFX();
+            if (pgmRtn) return;
+            CEP.TRC(SCCGWA, BPCFX.SELL_AMT);
+            WS_CMZ_DATA.WS_EX_TEMP.WS_TX_AMT = BPCFX.SELL_AMT;
+        } else {
+            BPCFX.SELL_AMT = WS_CMZ_DATA.WS_EX_TEMP.WS_TX_AMT;
+            BPCFX.SELL_CCY = WS_CMZ_DATA.WS_EX_TEMP.WS_EX_FEE_CCY;
+            BPCFX.BUY_CCY = WS_CMZ_DATA.WS_EX_TEMP.WS_EX_CHG_CCY;
+            S000_CALL_BPZSFX();
+            if (pgmRtn) return;
+            CEP.TRC(SCCGWA, BPCFX.BUY_AMT);
+            WS_CMZ_DATA.WS_EX_TEMP.WS_TX_AMT = BPCFX.BUY_AMT;
+        }
+        CEP.TRC(SCCGWA, WS_CMZ_DATA.WS_EX_TEMP.WS_TX_AMT);
+    }
+    public void S000_CALL_BPZPQCMZ() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, SCCCALL);
+        SCCCALL.CPN_NAME = CPN_U_DIY_CHECK;
+        SCCCALL.COMMAREA_PTR = BPCPQCMZ;
+        SCCCALL.ERRHDL_FLG = 'Y';
+        IBS.CALL(SCCGWA, SCCCALL);
+    }
+    public void S000_CALL_CIZACCU() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, SCCCALL);
+        SCCCALL.CPN_NAME = CPN_S_CI_DATA;
+        SCCCALL.COMMAREA_PTR = CICACCU;
+        SCCCALL.ERRHDL_FLG = 'Y';
+        IBS.CALL(SCCGWA, SCCCALL);
+    }
+    public void S000_CALL_BPZSFX() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-FX", BPCFX);
+        if (BPCFX.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCFX.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_DDZIMMST() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "DD-I-NFIN-M-MST", DDCIMMST);
+        CEP.TRC(SCCGWA, DDCIMMST.RC.RC_CODE);
+    }
+    public void S000_CALL_BPZTFBAS() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, CPN_F_COM_FEE_INFO, BPCTFBAS);
+    }
+    public void S000_CALL_BPZPQPRD() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, "TYJ713");
+        CEP.TRC(SCCGWA, BPCPQPRD.PRDT_CODE);
+        IBS.CALLCPN(SCCGWA, "BP-P-QUERY-PRDT-INFO", BPCPQPRD);
+        CEP.TRC(SCCGWA, BPCPQPRD.RC.RC_CODE);
+        if (BPCPQPRD.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCPQPRD.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+    if (SCCGWA.COMM_AREA.BSP_FLG.equalsIgnoreCase("BSP") || SCCGWA.COMM_AREA.CHNL.equalsIgnoreCase("BAT")) { //FROM #IFDEF BAT
+        if (BPCFFCON.RC.RC_CODE != 0) {
+            CEP.TRC(SCCGWA, " BPCFFCON = ");
+            CEP.TRC(SCCGWA, BPCFFCON);
+        }
+    } //FROM #ENDIF
+        pgmRtn = true;
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

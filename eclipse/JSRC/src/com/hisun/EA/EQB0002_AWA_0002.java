@@ -1,0 +1,44 @@
+package com.hisun.EQ;
+
+public class EQB0002_AWA_0002 {
+    String EQ_BKID = " ";
+    short EQ_BKID_NO = 0;
+    String EQ_AC = " ";
+    short EQ_AC_NO = 0;
+    char DICP_FLG = ' ';
+    short DICP_FLG_NO = 0;
+    int DICP_DT = 0;
+    short DICP_DT_NO = 0;
+    char REC_STS = ' ';
+    short REC_STS_NO = 0;
+    int PROC_DT = 0;
+    short PROC_DT_NO = 0;
+    int REQ_DT = 0;
+    short REQ_DT_NO = 0;
+    double EX_CL_PT = 0;
+    short EX_CL_PT_NO = 0;
+    double CO_CL_PT = 0;
+    short CO_CL_PT_NO = 0;
+    double IN_CL_PT = 0;
+    short IN_CL_PT_NO = 0;
+    char CPN_TYP = ' ';
+    short CPN_TYP_NO = 0;
+    double O_CL_PT = 0;
+    short O_CL_PT_NO = 0;
+    double DICP_FNT = 0;
+    short DICP_FNT_NO = 0;
+    double DICP_FMT = 0;
+    short DICP_FMT_NO = 0;
+    double DICP_SNT = 0;
+    short DICP_SNT_NO = 0;
+    double DICP_SMT = 0;
+    short DICP_SMT_NO = 0;
+    int A_TXN_DT = 0;
+    short A_TXN_DT_NO = 0;
+    String REMARK = " ";
+    short REMARK_NO = 0;
+    int DT_OLD = 0;
+    short DT_OLD_NO = 0;
+    char FH_FLG = ' ';
+    short FH_FLG_NO = 0;
+}

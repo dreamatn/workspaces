@@ -1,0 +1,41 @@
+package com.hisun.CI;
+
+public class CIRCOMP {
+    public CIRCOMP_KEY KEY = new CIRCOMP_KEY();
+    public String CI_NO = " ";
+    public char SET_MEAL_TYP = ' ';
+    public char SPE_APP_FLG = ' ';
+    public char EFF_FLG = ' ';
+    public int EFF_DT = 0;
+    public int EXP_DT = 0;
+    public String SIGN_AC1 = " ";
+    public String SIGN_AC2 = " ";
+    public String SIGN_AC3 = " ";
+    public String SIGN_AC4 = " ";
+    public String SIGN_AC5 = " ";
+    public String SER_STS = " ";
+    public String COMP_CODE = " ";
+    public double MON_AMT = 0;
+    public int MON_PEOP_NUM = 0;
+    public double CUM_CPAY_AMT = 0;
+    public int CUM_CPEOP_NUM = 0;
+    public int CUM_CPAY_SUM = 0;
+    public char CPA_MON_FLG = ' ';
+    public int LAST_UPD_DT = 0;
+    public int BAT_CDT = 0;
+    public String BAT_CRES = " ";
+    public String REL_NM = " ";
+    public String OCCUP = " ";
+    public String ADR_NM = " ";
+    public String POS_CODE = " ";
+    public String FAX = " ";
+    public String TEL = " ";
+    public String FDK = " ";
+    public String CRT_TLR = " ";
+    public int CRT_DT = 0;
+    public int CRT_BR = 0;
+    public String UPD_TLR = " ";
+    public int UPD_BR = 0;
+    public int UPD_DT = 0;
+    public String TS = " ";
+}

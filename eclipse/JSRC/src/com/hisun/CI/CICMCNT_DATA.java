@@ -1,0 +1,6 @@
+package com.hisun.CI;
+
+public class CICMCNT_DATA {
+    public CICMCNT_SINGLE_DATA SINGLE_DATA = new CICMCNT_SINGLE_DATA();
+    public CICMCNT_MULTI_DATA MULTI_DATA = new CICMCNT_MULTI_DATA();
+}

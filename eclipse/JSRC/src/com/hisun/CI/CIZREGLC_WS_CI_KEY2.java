@@ -1,0 +1,9 @@
+package com.hisun.CI;
+
+public class CIZREGLC_WS_CI_KEY2 {
+    String WS_CI_KEY_INFO1 = " ";
+    CIZREGLC_WS_CI_KEY_DTL1 WS_CI_KEY_DTL1 = new CIZREGLC_WS_CI_KEY_DTL1();
+    CIZREGLC_WS_CI_KEY_DTINF1 WS_CI_KEY_DTINF1 = new CIZREGLC_WS_CI_KEY_DTINF1();
+    short WS_CI_KEY_BEGSEQ1 = 0;
+    short WS_CI_KEY_KEYSEQ1 = 0;
+}

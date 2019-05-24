@@ -1,0 +1,8 @@
+package com.hisun.DD;
+
+public class DDCIQPSB {
+    public DDCIQPSB_RC RC = new DDCIQPSB_RC();
+    public DDCIQPSB_INPUT_INFO INPUT_INFO = new DDCIQPSB_INPUT_INFO();
+    public DDCIQPSB_OTHER_INFO OTHER_INFO = new DDCIQPSB_OTHER_INFO();
+    public DDCIQPSB_UPT_BAL_INFO UPT_BAL_INFO = new DDCIQPSB_UPT_BAL_INFO();
+}

@@ -1,0 +1,6 @@
+package com.hisun.DC;
+
+public class DCZPCDCK_WS_PW_SPCBINDL {
+    DCZPCDCK_PW_SPCBINDL_FN5 PW_SPCBINDL_FN5 = new DCZPCDCK_PW_SPCBINDL_FN5();
+    short PW_SPCBINDL_N6 = 0;
+}

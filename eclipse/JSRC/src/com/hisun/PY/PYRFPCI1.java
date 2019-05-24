@@ -1,0 +1,52 @@
+package com.hisun.PY;
+
+import com.hisun.IB.FPCI1_KEY;
+
+public class PYRFPCI1 {
+    FPCI1_KEY KEY = new FPCI1_KEY();
+    char TX_TYP = ' ';
+    char STS = ' ';
+    char PAY_FLG = ' ';
+    String PAY_AC = " ";
+    String PAY_CNM = " ";
+    String PAY_MAC = " ";
+    String PAY_ACNM = " ";
+    String PAY_IDTYP = " ";
+    String PAY_IDNO = " ";
+    String AGT_ID_TYP = " ";
+    String AGT_ID_NO = " ";
+    String REV_NO = " ";
+    int PAY_BR = 0;
+    String CLT_AC = " ";
+    String CLT_CNM = " ";
+    int CLT_BR = 0;
+    String CCY = " ";
+    double TX_AMT = 0;
+    int BV_DT = 0;
+    String BV_CODE = " ";
+    String BV_NO = " ";
+    char F_TYP = ' ';
+    String VCHRF_NO = " ";
+    String F_TXCD = " ";
+    String CLT_CNTY = " ";
+    String TX_TLR = " ";
+    String AUH_TLR = " ";
+    String PAY_REMK = " ";
+    char CR_FLAG = ' ';
+    int CR_DT = 0;
+    long CR_JRNNO = 0;
+    String CR_TLR = " ";
+    String IN_AC = " ";
+    String IN_CNM = " ";
+    String IN_REMK = " ";
+    String CLT_REMK = " ";
+    int BTX_DT = 0;
+    long BTX_JRNNO = 0;
+    String BILL_NO = " ";
+    int P_CNT = 0;
+    int CRT_DATE = 0;
+    String CRT_TLR = " ";
+    int UPDTBL_DATE = 0;
+    String UPDTBL_TLR = " ";
+    String TS = " ";
+}

@@ -1,0 +1,8 @@
+package com.hisun.BP;
+
+public class BPZFCSTS_WS_TSTS_FLD {
+    short WS_FLD_NO = 0;
+    char WS_TX_CLASS = ' ';
+    BPZFCSTS_WS_REJ_CODE_COM WS_REJ_CODE_COM = new BPZFCSTS_WS_REJ_CODE_COM();
+    BPZFCSTS_WS_REJ_CODE_SYS WS_REJ_CODE_SYS = new BPZFCSTS_WS_REJ_CODE_SYS();
+}

@@ -1,0 +1,241 @@
+package com.hisun.DD;
+
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.lang.reflect.Method;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class DDOT8880 {
+    String JIBS_tmp_str[] = new String[10];
+    boolean pgmRtn = false;
+    String WS_MSGID = " ";
+    short WS_FLD_NO = 0;
+    DDCMSG_ERROR_MSG DDCMSG_ERROR_MSG = new DDCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCFMT SCCFMT = new SCCFMT();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMPAG SCCMPAG = new SCCMPAG();
+    DDCSMREG DDCSMREG = new DDCSMREG();
+    DDRMST DDRMST = new DDRMST();
+    SCCGWA SCCGWA;
+    DDB8880_AWA_8880 DDB8880_AWA_8880;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        if (pgmRtn) return;
+        B000_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "DDOT8880 return!");
+        Z_RET();
+        if (pgmRtn) return;
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "DDB8880_AWA_8880>");
+        DDB8880_AWA_8880 = (DDB8880_AWA_8880) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B100_CHECK_INPUT();
+        if (pgmRtn) return;
+        B300_TRANS_DATA();
+        if (pgmRtn) return;
+    }
+    public void B100_CHECK_INPUT() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, DDB8880_AWA_8880.FUNC);
+        CEP.TRC(SCCGWA, DDB8880_AWA_8880.REP_NO);
+        CEP.TRC(SCCGWA, DDB8880_AWA_8880.REP_TYP);
+        CEP.TRC(SCCGWA, DDB8880_AWA_8880.BASE_FLG);
+        CEP.TRC(SCCGWA, DDB8880_AWA_8880.REP_FLG);
+        CEP.TRC(SCCGWA, DDB8880_AWA_8880.MAN_FLG);
+        if (DDB8880_AWA_8880.FUNC == ' ') {
+            WS_MSGID = DDCMSG_ERROR_MSG.DD_FUNC_M_INPUT;
+            S000_ERR_MSG_PROC_CONTINUE();
+            if (pgmRtn) return;
+        }
+        if (DDB8880_AWA_8880.FUNC != 'B' 
+            && DDB8880_AWA_8880.FUNC != 'I' 
+            && DDB8880_AWA_8880.FUNC != 'A' 
+            && DDB8880_AWA_8880.FUNC != 'M' 
+            && DDB8880_AWA_8880.FUNC != 'D') {
+            WS_MSGID = DDCMSG_ERROR_MSG.DD_FUNC_INVALID;
+            if (DDB8880_AWA_8880.FUNC == ' ') WS_FLD_NO = 0;
+            else WS_FLD_NO = Short.parseShort(""+DDB8880_AWA_8880.FUNC);
+            S000_ERR_MSG_PROC_CONTINUE();
+            if (pgmRtn) return;
+        }
+        if ((DDB8880_AWA_8880.FUNC == 'I' 
+            || DDB8880_AWA_8880.FUNC == 'M' 
+            || DDB8880_AWA_8880.FUNC == 'D') 
+            && DDB8880_AWA_8880.REP_NO.trim().length() == 0) {
+            WS_MSGID = DDCMSG_ERROR_MSG.DD_REP_NO_M_INPUT;
+            if (DDB8880_AWA_8880.REP_NO.trim().length() == 0) WS_FLD_NO = 0;
+            else WS_FLD_NO = Short.parseShort(DDB8880_AWA_8880.REP_NO);
+            S000_ERR_MSG_PROC_CONTINUE();
+            if (pgmRtn) return;
+        }
+        if ((DDB8880_AWA_8880.FUNC == 'A' 
+            || DDB8880_AWA_8880.FUNC == 'M' 
+            || DDB8880_AWA_8880.FUNC == 'D') 
+            && (DDB8880_AWA_8880.BASE_FLG == ' ' 
+            || DDB8880_AWA_8880.REP_FLG == ' ' 
+            || DDB8880_AWA_8880.MAN_FLG == ' ')) {
+            WS_MSGID = DDCMSG_ERROR_MSG.DD_TABLE_FLG_M_INPUT;
+            if (DDB8880_AWA_8880.BASE_FLG == ' ') WS_FLD_NO = 0;
+            else WS_FLD_NO = Short.parseShort(""+DDB8880_AWA_8880.BASE_FLG);
+            S000_ERR_MSG_PROC_CONTINUE();
+            if (pgmRtn) return;
+        }
+        WS_MSGID = DDCMSG_ERROR_MSG.DD_INPUT_DATA_ERR;
+        S000_ERR_MSG_PROC_LAST();
+        if (pgmRtn) return;
+    }
+    public void B300_TRANS_DATA() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, DDCSMREG);
+        DDCSMREG.FUNC = DDB8880_AWA_8880.FUNC;
+        DDCSMREG.REP_NO = DDB8880_AWA_8880.REP_NO;
+        DDCSMREG.REP_TYP = DDB8880_AWA_8880.REP_TYP;
+        DDCSMREG.OPR_TYP = DDB8880_AWA_8880.OPR_TYP;
+        DDCSMREG.OPR_RSN = DDB8880_AWA_8880.OPR_RSN;
+        DDCSMREG.BASE_FLG = DDB8880_AWA_8880.BASE_FLG;
+        DDCSMREG.REP_FLG = DDB8880_AWA_8880.REP_FLG;
+        DDCSMREG.MAN_FLG = DDB8880_AWA_8880.MAN_FLG;
+        DDCSMREG.JRN_NO = DDB8880_AWA_8880.JRN_NO;
+        DDCSMREG.TR_AC = DDB8880_AWA_8880.TR_AC;
+        DDCSMREG.CI_TYP = DDB8880_AWA_8880.CI_TYP;
+        DDCSMREG.CI_ID_NO = DDB8880_AWA_8880.CI_ID_NO;
+        DDCSMREG.ORG_CD = DDB8880_AWA_8880.ORG_CD;
+        DDCSMREG.CI_NM = DDB8880_AWA_8880.CI_NM;
+        DDCSMREG.TO_CI_NM = DDB8880_AWA_8880.TO_CI_NM;
+        DDCSMREG.CCY = DDB8880_AWA_8880.CCY;
+        DDCSMREG.TR_AMT = DDB8880_AWA_8880.TR_AMT;
+        DDCSMREG.EX_RATE = DDB8880_AWA_8880.EX_RATE;
+        DDCSMREG.EX_AMT = DDB8880_AWA_8880.EX_AMT;
+        DDCSMREG.CHN_ACNO = DDB8880_AWA_8880.CHN_ACNO;
+        DDCSMREG.CASH_AMT = DDB8880_AWA_8880.CASH_AMT;
+        DDCSMREG.FOR_ACNO = DDB8880_AWA_8880.FOR_ACNO;
+        DDCSMREG.OTH_AMT = DDB8880_AWA_8880.OTH_AMT;
+        DDCSMREG.OTH_ACNO = DDB8880_AWA_8880.OTH_ACNO;
+        DDCSMREG.PAY_MTH = DDB8880_AWA_8880.PAY_MTH;
+        DDCSMREG.CN_F_CCY = DDB8880_AWA_8880.CN_F_CCY;
+        DDCSMREG.CN_F_AMT = DDB8880_AWA_8880.CN_F_AMT;
+        DDCSMREG.FO_F_CCY = DDB8880_AWA_8880.FO_F_CCY;
+        DDCSMREG.FO_F_AMT = DDB8880_AWA_8880.FO_F_AMT;
+        DDCSMREG.CNTY_CD = DDB8880_AWA_8880.CNTY_CD;
+        DDCSMREG.PAY_TYP = DDB8880_AWA_8880.PAY_TYP;
+        DDCSMREG.TX_CODE1 = DDB8880_AWA_8880.TX_CODE1;
+        DDCSMREG.AMT1 = DDB8880_AWA_8880.AMT1;
+        DDCSMREG.REMARKS1 = DDB8880_AWA_8880.REMARKS1;
+        DDCSMREG.TX_CODE2 = DDB8880_AWA_8880.TX_CODE2;
+        DDCSMREG.AMT2 = DDB8880_AWA_8880.AMT2;
+        DDCSMREG.REMARKS2 = DDB8880_AWA_8880.REMARKS2;
+        DDCSMREG.REF_FLG = DDB8880_AWA_8880.REF_FLG;
+        DDCSMREG.REF_NO = DDB8880_AWA_8880.REF_NO;
+        DDCSMREG.PAY_ATTR = DDB8880_AWA_8880.PAY_ATTR;
+        DDCSMREG.REF_CKNO = DDB8880_AWA_8880.REF_CKNO;
+        DDCSMREG.CHK_AMT = DDB8880_AWA_8880.CHK_AMT;
+        DDCSMREG.IMP_DATE = DDB8880_AWA_8880.IMP_DATE;
+        DDCSMREG.CONTR_NO = DDB8880_AWA_8880.CONTR_NO;
+        DDCSMREG.INV_NO = DDB8880_AWA_8880.INV_NO;
+        DDCSMREG.CUSM_CD = DDB8880_AWA_8880.CUSM_CD;
+        DDCSMREG.CUSM_NO = DDB8880_AWA_8880.CUSM_NO;
+        DDCSMREG.CUSM_CCY = DDB8880_AWA_8880.CUSM_CCY;
+        DDCSMREG.CUSM_AMT = DDB8880_AWA_8880.CUSM_AMT;
+        DDCSMREG.OFF_AMT = DDB8880_AWA_8880.OFF_AMT;
+        DDCSMREG.CUSM_CNM = DDB8880_AWA_8880.CUSM_CNM;
+        DDCSMREG.CUSM_TEL = DDB8880_AWA_8880.CUSM_TEL;
+        DDCSMREG.CUSM_DT = DDB8880_AWA_8880.CUSM_DT;
+        CEP.TRC(SCCGWA, DDCSMREG.FUNC);
+        CEP.TRC(SCCGWA, DDCSMREG.REP_NO);
+        CEP.TRC(SCCGWA, DDCSMREG.REP_TYP);
+        CEP.TRC(SCCGWA, DDCSMREG.OPR_TYP);
+        CEP.TRC(SCCGWA, DDCSMREG.OPR_RSN);
+        CEP.TRC(SCCGWA, DDCSMREG.BASE_FLG);
+        CEP.TRC(SCCGWA, DDCSMREG.REP_FLG);
+        CEP.TRC(SCCGWA, DDCSMREG.MAN_FLG);
+        CEP.TRC(SCCGWA, DDCSMREG.JRN_NO);
+        CEP.TRC(SCCGWA, DDCSMREG.TR_AC);
+        CEP.TRC(SCCGWA, DDCSMREG.CI_TYP);
+        CEP.TRC(SCCGWA, DDCSMREG.CI_ID_NO);
+        CEP.TRC(SCCGWA, DDCSMREG.ORG_CD);
+        CEP.TRC(SCCGWA, DDCSMREG.CI_NM);
+        CEP.TRC(SCCGWA, DDCSMREG.TO_CI_NM);
+        CEP.TRC(SCCGWA, DDCSMREG.CCY);
+        CEP.TRC(SCCGWA, DDCSMREG.TR_AMT);
+        CEP.TRC(SCCGWA, DDCSMREG.EX_RATE);
+        CEP.TRC(SCCGWA, DDCSMREG.EX_AMT);
+        CEP.TRC(SCCGWA, DDCSMREG.CHN_ACNO);
+        CEP.TRC(SCCGWA, DDCSMREG.CASH_AMT);
+        CEP.TRC(SCCGWA, DDCSMREG.FOR_ACNO);
+        CEP.TRC(SCCGWA, DDCSMREG.OTH_AMT);
+        CEP.TRC(SCCGWA, DDCSMREG.OTH_ACNO);
+        CEP.TRC(SCCGWA, DDCSMREG.PAY_MTH);
+        CEP.TRC(SCCGWA, DDCSMREG.CN_F_CCY);
+        CEP.TRC(SCCGWA, DDCSMREG.CN_F_AMT);
+        CEP.TRC(SCCGWA, DDCSMREG.FO_F_CCY);
+        CEP.TRC(SCCGWA, DDCSMREG.FO_F_AMT);
+        CEP.TRC(SCCGWA, DDCSMREG.CNTY_CD);
+        CEP.TRC(SCCGWA, DDCSMREG.PAY_TYP);
+        CEP.TRC(SCCGWA, DDCSMREG.TX_CODE1);
+        CEP.TRC(SCCGWA, DDCSMREG.AMT1);
+        CEP.TRC(SCCGWA, DDCSMREG.REMARKS1);
+        CEP.TRC(SCCGWA, DDCSMREG.TX_CODE2);
+        CEP.TRC(SCCGWA, DDCSMREG.AMT2);
+        CEP.TRC(SCCGWA, DDCSMREG.REMARKS2);
+        CEP.TRC(SCCGWA, DDCSMREG.REF_FLG);
+        CEP.TRC(SCCGWA, DDCSMREG.REF_NO);
+        CEP.TRC(SCCGWA, DDCSMREG.PAY_ATTR);
+        CEP.TRC(SCCGWA, DDCSMREG.REF_CKNO);
+        CEP.TRC(SCCGWA, DDCSMREG.CHK_AMT);
+        CEP.TRC(SCCGWA, DDCSMREG.IMP_DATE);
+        CEP.TRC(SCCGWA, DDCSMREG.CONTR_NO);
+        CEP.TRC(SCCGWA, DDCSMREG.INV_NO);
+        CEP.TRC(SCCGWA, DDCSMREG.CUSM_CD);
+        CEP.TRC(SCCGWA, DDCSMREG.CUSM_NO);
+        CEP.TRC(SCCGWA, DDCSMREG.CUSM_CCY);
+        CEP.TRC(SCCGWA, DDCSMREG.CUSM_AMT);
+        CEP.TRC(SCCGWA, DDCSMREG.OFF_AMT);
+        CEP.TRC(SCCGWA, DDCSMREG.CUSM_CNM);
+        CEP.TRC(SCCGWA, DDCSMREG.CUSM_TEL);
+        CEP.TRC(SCCGWA, DDCSMREG.CUSM_DT);
+        S000_CALL_DDZSMREG();
+        if (pgmRtn) return;
+    }
+    public void S000_CALL_DDZSMREG() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "DD-SVR-MOD-REG", DDCSMREG);
+    }
+    public void S000_ERR_MSG_PROC_CONTINUE() throws IOException,SQLException,Exception {
+        CEP.ERRC(SCCGWA, WS_MSGID, WS_FLD_NO);
+    }
+    public void S000_ERR_MSG_PROC_LAST() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_MSGID, WS_FLD_NO);
+    }
+    public void B_MPAG() throws IOException,SQLException,Exception {
+    if (!SCCGWA.COMM_AREA.BSP_FLG.equalsIgnoreCase("BSP") && !SCCGWA.COMM_AREA.CHNL.equalsIgnoreCase("BAT")) { //FROM #IFDEF ONL
+        JIBS_tmp_str[9] = "SCZMPAG";
+        Class<?>clazz = Class.forName(JIBS_tmp_str[9].trim());
+        Object obj = clazz.newInstance();
+        Method m = clazz.getDeclaredMethod("MP",new Class[]{SCCGWA.getClass(), SCCMPAG.getClass()});
+        m.invoke(obj, SCCGWA, SCCMPAG);
+        if (SCCGWA.COMM_AREA.EXCP_FLG == 'Y') {
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    } else { //FROM #ELSE
+    } //FROM #ENDIF
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        pgmRtn = true;
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

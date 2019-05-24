@@ -1,0 +1,6 @@
+package com.hisun.DD;
+
+public class DDZUSIGN_WS_STR_CHQ_NO {
+    String WS_STR_CHQ_X = " ";
+    int WS_STR_CHQ_NO_9 = 0;
+}

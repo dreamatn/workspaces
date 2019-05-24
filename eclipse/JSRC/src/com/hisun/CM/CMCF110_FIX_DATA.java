@@ -1,0 +1,40 @@
+package com.hisun.CM;
+
+public class CMCF110_FIX_DATA {
+    public char AC_TYPE1 = ' ';
+    public String AC1 = " ";
+    public String ACNO1 = " ";
+    public String NAME1 = " ";
+    public char FILLER6 = 0X02;
+    public String CCY1 = " ";
+    public double AMT1 = 0;
+    public char AC_TYPE2 = ' ';
+    public String AC2 = " ";
+    public String ACNO2 = " ";
+    public String NAME2 = " ";
+    public char FILLER13 = 0X02;
+    public String CCY2 = " ";
+    public double AMT2 = 0;
+    public double EX_RATE = 0;
+    public char FILLER17 = 0X01;
+    public int AC1_BR = 0;
+    public int AC1_FH = 0;
+    public double AC1_BAL = 0;
+    public char FILLER21 = 0X01;
+    public double AC1_AVABAL = 0;
+    public char FILLER23 = 0X01;
+    public int AC2_BR = 0;
+    public int AC2_FH = 0;
+    public double AC2_BAL = 0;
+    public char FILLER27 = 0X01;
+    public double AC2_AVABAL = 0;
+    public char FILLER29 = 0X01;
+    public int VAL_DT = 0;
+    public int AC1_BBR = 0;
+    public int AC2_BBR = 0;
+    public int AC1_DBR = 0;
+    public int AC2_DBR = 0;
+    public String HLD_REF = " ";
+    public String AC1_RVS_NO = " ";
+    public String AC2_RVS_NO = " ";
+}

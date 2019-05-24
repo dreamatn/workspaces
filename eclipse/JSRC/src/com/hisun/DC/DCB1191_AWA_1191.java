@@ -1,0 +1,42 @@
+package com.hisun.DC;
+
+public class DCB1191_AWA_1191 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String CARD_NO = " ";
+    public short CARD_NO_NO = 0;
+    public String PRIM_NO = " ";
+    public short PRIM_NO_NO = 0;
+    public char REGN_TYP = ' ';
+    public short REGN_TYP_NO = 0;
+    public String CHNL_NO = " ";
+    public short CHNL_NO_NO = 0;
+    public String TXN_TYPE = " ";
+    public short TXN_TYPE_NO = 0;
+    public String LMT_CCY = " ";
+    public short LMT_CCY_NO = 0;
+    public double TXN_LMT = 0;
+    public short TXN_LMT_NO = 0;
+    public double DLY_LMT = 0;
+    public short DLY_LMT_NO = 0;
+    public int DLY_LMTV = 0;
+    public short DLY_LMTV_NO = 0;
+    public double MLY_LMT = 0;
+    public short MLY_LMT_NO = 0;
+    public int MLY_LMTV = 0;
+    public short MLY_LMTV_NO = 0;
+    public double SYY_LMT = 0;
+    public short SYY_LMT_NO = 0;
+    public double YLY_LMT = 0;
+    public short YLY_LMT_NO = 0;
+    public double SE_LMT = 0;
+    public short SE_LMT_NO = 0;
+    public int CRT_DATE = 0;
+    public short CRT_DATE_NO = 0;
+    public int CRT_TIME = 0;
+    public short CRT_TIME_NO = 0;
+    public int END_DATE = 0;
+    public short END_DATE_NO = 0;
+    public int END_TIME = 0;
+    public short END_TIME_NO = 0;
+}

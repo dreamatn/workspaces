@@ -1,0 +1,8 @@
+package com.hisun.TD;
+
+public class TDCUQINF {
+    public TDCUQINF_RC RC = new TDCUQINF_RC();
+    public TDCUQINF_INPUT_DATA INPUT_DATA = new TDCUQINF_INPUT_DATA();
+    public TDCUQINF_OUTPUT_DATA OUTPUT_DATA = new TDCUQINF_OUTPUT_DATA();
+    public TDCUQINF_RATE_DATA RATE_DATA = new TDCUQINF_RATE_DATA();
+}

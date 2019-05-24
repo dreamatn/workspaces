@@ -1,0 +1,62 @@
+package com.hisun.LN;
+
+public class LNB4000_AWA_4000 {
+    public String CTA_NO = " ";
+    public short CTA_NO_NO = 0;
+    public int BR = 0;
+    public short BR_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String CI_CNM = " ";
+    public short CI_CNM_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public String PROD_DE = " ";
+    public short PROD_DE_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public double LON_PRIN = 0;
+    public short LON_PRIN_NO = 0;
+    public double LON_BAL = 0;
+    public short LON_BAL_NO = 0;
+    public int TR_VALDT = 0;
+    public short TR_VALDT_NO = 0;
+    public String APT_REF = " ";
+    public short APT_REF_NO = 0;
+    public double TOT_AMT = 0;
+    public short TOT_AMT_NO = 0;
+    public double TOT_PRIN = 0;
+    public short TOT_PRIN_NO = 0;
+    public double TOT_INT = 0;
+    public short TOT_INT_NO = 0;
+    public double TOT_PLC = 0;
+    public short TOT_PLC_NO = 0;
+    public double TOT_ILC = 0;
+    public short TOT_ILC_NO = 0;
+    public double HRG_AMT = 0;
+    public short HRG_AMT_NO = 0;
+    public double SUN_AMT = 0;
+    public short SUN_AMT_NO = 0;
+    public char CUR_TRM = ' ';
+    public short CUR_TRM_NO = 0;
+    public char CLN_CUT = ' ';
+    public short CLN_CUT_NO = 0;
+    public char SUBS_FLG = ' ';
+    public short SUBS_FLG_NO = 0;
+    public char PER_SYS = ' ';
+    public short PER_SYS_NO = 0;
+    public double PY_O_INT = 0;
+    public short PY_O_INT_NO = 0;
+    public String MMO = " ";
+    public short MMO_NO = 0;
+    public char MLT_STL = ' ';
+    public short MLT_STL_NO = 0;
+    public char WHD_RUL = ' ';
+    public short WHD_RUL_NO = 0;
+    public LNB4000_MULT_AC[] MULT_AC = new LNB4000_MULT_AC[5];
+    public LNB4000_PART_INF[] PART_INF = new LNB4000_PART_INF[10];
+    public LNB4000_AWA_4000() {
+        for (int i=0;i<5;i++) MULT_AC[i] = new LNB4000_MULT_AC();
+        for (int i=0;i<10;i++) PART_INF[i] = new LNB4000_PART_INF();
+    }
+}

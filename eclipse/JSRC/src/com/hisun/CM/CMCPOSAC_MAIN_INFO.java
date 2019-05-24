@@ -1,0 +1,6 @@
+package com.hisun.CM;
+
+public class CMCPOSAC_MAIN_INFO {
+    public CMCPOSAC_INPUT_DATA INPUT_DATA = new CMCPOSAC_INPUT_DATA();
+    public CMCPOSAC_RESULT_DATA RESULT_DATA = new CMCPOSAC_RESULT_DATA();
+}

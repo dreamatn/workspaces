@@ -1,0 +1,60 @@
+package com.hisun.LN;
+
+public class LNCUPRP {
+    public LNCUPRP_RC RC = new LNCUPRP_RC();
+    public LNCUPRP_COMM_DATA COMM_DATA = new LNCUPRP_COMM_DATA();
+    public LNCUPRP_B_AMTS B_AMTS = new LNCUPRP_B_AMTS();
+    public LNCUPRP_ACAMT[] ACAMT = new LNCUPRP_ACAMT[5];
+    public double PROJ_INT = 0;
+    public short S_TERM = 0;
+    public char N_RATE_TYP = ' ';
+    public double N_RATE = 0;
+    public char O_RATE_TYP = ' ';
+    public double O_RATE = 0;
+    public char L_RATE_FLG = ' ';
+    public char L_RATE_TYP = ' ';
+    public double L_RATE = 0;
+    public char METH = ' ';
+    public String RPSP_NO = " ";
+    public char RAT_MTH = ' ';
+    public char INT_F_UN = ' ';
+    public short INT_F_PD = 0;
+    public short FLT_IPER = 0;
+    public char FLT_ADJF = ' ';
+    public char FT_FLG = ' ';
+    public int FT_DAY = 0;
+    public int FT_F_DAY = 0;
+    public char FLT_MTH = ' ';
+    public String RATE_TYP = " ";
+    public String RATE_PD = " ";
+    public double RATE_VAR = 0;
+    public double RATE_PCT = 0;
+    public double RATE_INT = 0;
+    public double INT_RATE = 0;
+    public char PEN_RRAT = ' ';
+    public char PEN_TYP = ' ';
+    public String PEN_RATT = " ";
+    public String PEN_RATC = " ";
+    public double PEN_SPR = 0;
+    public double PEN_PCT = 0;
+    public double PEN_IRAT = 0;
+    public char INT_MTH = ' ';
+    public char CPND_USE = ' ';
+    public char CPND_RTY = ' ';
+    public char CPND_TYP = ' ';
+    public String CPNDRATT = " ";
+    public String CPNDRATC = " ";
+    public double CPND_SPR = 0;
+    public double CPND_PCT = 0;
+    public double CPNDRATE = 0;
+    public char ABUS_RAT = ' ';
+    public char ABUS_TYP = ' ';
+    public String ABUSRATT = " ";
+    public String ABUSRATC = " ";
+    public double ABUSSPR = 0;
+    public double ABUSPCT = 0;
+    public double ABUSIRAT = 0;
+    public LNCUPRP() {
+        for (int i=0;i<5;i++) ACAMT[i] = new LNCUPRP_ACAMT();
+    }
+}

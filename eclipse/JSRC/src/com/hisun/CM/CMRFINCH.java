@@ -1,0 +1,40 @@
+package com.hisun.CM;
+
+public class CMRFINCH {
+    public CMRFINCH_KEY KEY = new CMRFINCH_KEY();
+    public String VCH_NO = " ";
+    public String REQ_SYS_JRN = " ";
+    public String REQ_CHNL_JRN = " ";
+    public char CANCEL_FLG = ' ';
+    public char STS = ' ';
+    public String CARD_NO = " ";
+    public String AC_NO = " ";
+    public String AC_NAME = " ";
+    public String TX_MMO = " ";
+    public String AC_CCY = " ";
+    public String ID_TYP = " ";
+    public String ID_NO = " ";
+    public int TR_TIME = 0;
+    public String BV_CD = " ";
+    public String BV_NO = " ";
+    public char DC_FLG = ' ';
+    public char CT_FLG = ' ';
+    public String TR_CCY = " ";
+    public double TR_AMT = 0;
+    public double AVL_BAL = 0;
+    public String OPP_AC = " ";
+    public String OPP_CARD_NO = " ";
+    public String OPP_NAME = " ";
+    public int OPP_BR = 0;
+    public String TR_RMK = " ";
+    public int TR_BR = 0;
+    public String TR_SITE = " ";
+    public String TR_BR_SITE = " ";
+    public String TR_BR_TEL = " ";
+    public String TR_BR_NAME = " ";
+    public String TR_TLR = " ";
+    public String AUH_TLR = " ";
+    public String TR_CODE = " ";
+    public String REMARK = " ";
+    public String TS = " ";
+}

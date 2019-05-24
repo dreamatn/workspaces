@@ -1,0 +1,44 @@
+package com.hisun.DD;
+
+public class DDCSDRTY {
+    public String AC = " ";
+    public String CCY = " ";
+    public char CCY_TYPE = ' ';
+    public double TX_AMT = 0;
+    public char CLEAR_FLG = ' ';
+    public int VAL_DATE = 0;
+    public String PAY_PSWD = " ";
+    public String ID_TYPE = " ";
+    public String ID_NO = " ";
+    public String PSBK_NO = " ";
+    public String CARD_NO = " ";
+    public char CHQ_TYPE = ' ';
+    public String CHQ_NO = " ";
+    public int CHQ_ISS_DATE = 0;
+    public String OTHER_AC = " ";
+    public String OTHER_CCY = " ";
+    public double OTHER_AMT = 0;
+    public char TX_TYPE = ' ';
+    public String NARRATIVE = " ";
+    public String TX_MMO = " ";
+    public String TX_REF = " ";
+    public String REMARKS = " ";
+    public char CHK_PSW_FLG = ' ';
+    public char BANK_DR_FLG = ' ';
+    public char GD_WITHDR_FLG = ' ';
+    public char TX_BAL_FLG = ' ';
+    public String HLD_NO = " ";
+    public char PAY_TYPE = ' ';
+    public short PAY_SIGN_NO = 0;
+    public char BV_TYP = ' ';
+    public char CHK_PSW = ' ';
+    public String TRK_DATE2 = " ";
+    public String TRK_DATE3 = " ";
+    public String PSWD = " ";
+    public String RLT_AC = " ";
+    public String RLT_AC_NAME = " ";
+    public String RLT_BANK = " ";
+    public String RLT_REF_NO = " ";
+    public String RLT_CCY = " ";
+    public char HLD_ENT_PAY = ' ';
+}

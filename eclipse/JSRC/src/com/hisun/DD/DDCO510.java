@@ -1,0 +1,42 @@
+package com.hisun.DD;
+
+public class DDCO510 {
+    public char BV_TYP = ' ';
+    public String CARD_NO = " ";
+    public String AC_NO = " ";
+    public String CHN_NM = " ";
+    public char FILLER5 = 0X02;
+    public String ENG_NM = " ";
+    public char FILLER7 = 0X02;
+    public String PSBK_NO = " ";
+    public String CCY = " ";
+    public char CCY_TYPE = ' ';
+    public char PAY_MTH = ' ';
+    public double BAL = 0;
+    public char FILLER13 = 0X01;
+    public double INT = 0;
+    public char FILLER15 = 0X01;
+    public double INT_TAX = 0;
+    public char FILLER17 = 0X01;
+    public double TOT_BAL = 0;
+    public char FILLER19 = 0X01;
+    public String MMO = " ";
+    public char TRF_FLG = ' ';
+    public char TO_BVTYP = ' ';
+    public String TO_CARD = " ";
+    public String TO_AC = " ";
+    public String NARRATIVE = " ";
+    public char FILLER26 = 0X02;
+    public String REMARK = " ";
+    public char FILLER28 = 0X02;
+    public String RVS_NO = " ";
+    public char AC_TYPE = ' ';
+    public String RLT_AC = " ";
+    public String RLT_AC_NAME = " ";
+    public char FILLER33 = 0X02;
+    public String RLT_BANK = " ";
+    public String RLT_REF_NO = " ";
+    public String RLT_CCY = " ";
+    public String ID_TYPE = " ";
+    public String ID_NO = " ";
+}

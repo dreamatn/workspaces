@@ -1,0 +1,40 @@
+package com.hisun.TD;
+
+public class TDC005 {
+    public String AC_NO = " ";
+    public int AC_SEQ = 0;
+    public int STR_DATE = 0;
+    public int END_DATE = 0;
+    public char RATE_SEL = ' ';
+    public double BASE_RATE = 0;
+    public char FILLER7 = ' ';
+    public String RATE_TYPE = " ";
+    public String TENOR = " ";
+    public double PRD_SPRD = 0;
+    public char FILLER11 = ' ';
+    public double DIS_SPRD = 0;
+    public char FILLER13 = ' ';
+    public double CON_SPRD = 0;
+    public char FILLER15 = ' ';
+    public double CON_RATE = 0;
+    public char FILLER17 = ' ';
+    public double INT_AMT = 0;
+    public double ACCR_AMT = 0;
+    public double MIN_RATE = 0;
+    public char FILLER21 = ' ';
+    public double MAX_RATE = 0;
+    public char FILLER23 = ' ';
+    public String REMARK = " ";
+    public char FILLER25 = 0X02;
+    public double SPT = 0;
+    public char FILLER27 = ' ';
+    public double SINT = 0;
+    public char FILLER29 = ' ';
+    public char FLOW = ' ';
+    public String CRT_TLR = " ";
+    public int CRT_DATE = 0;
+    public String UPDTBL_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public char ERLY_TYP = ' ';
+    public char DOCU_FLG = ' ';
+}

@@ -1,0 +1,48 @@
+package com.hisun.LN;
+
+public class LNB2800_AWA_2800 {
+    public int BOOK_BR = 0;
+    public short BOOK_BR_NO = 0;
+    public String CONT_NO = " ";
+    public short CONT_NO_NO = 0;
+    public int VAL_DT = 0;
+    public short VAL_DT_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String CI_CNM = " ";
+    public short CI_CNM_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public double LN_PRIN = 0;
+    public short LN_PRIN_NO = 0;
+    public double LN_BAL = 0;
+    public short LN_BAL_NO = 0;
+    public double PAY_PRIN = 0;
+    public short PAY_PRIN_NO = 0;
+    public char INT_MODE = ' ';
+    public short INT_MODE_NO = 0;
+    public double PAY_INT = 0;
+    public short PAY_INT_NO = 0;
+    public double PC_RATE = 0;
+    public short PC_RATE_NO = 0;
+    public double PC_AMT = 0;
+    public short PC_AMT_NO = 0;
+    public double PAY_AMT = 0;
+    public short PAY_AMT_NO = 0;
+    public double HRG_AMT = 0;
+    public short HRG_AMT_NO = 0;
+    public char ADJ_FLG = ' ';
+    public short ADJ_FLG_NO = 0;
+    public short PRE_PERD = 0;
+    public short PRE_PERD_NO = 0;
+    public char PRE_UNIT = ' ';
+    public short PRE_UNIT_NO = 0;
+    public String REMARK = " ";
+    public short REMARK_NO = 0;
+    public int PAGE_ROW = 0;
+    public short PAGE_ROW_NO = 0;
+    public int PAGE_NUM = 0;
+    public short PAGE_NUM_NO = 0;
+}

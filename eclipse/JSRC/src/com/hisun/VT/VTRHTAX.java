@@ -1,0 +1,42 @@
+package com.hisun.VT;
+
+public class VTRHTAX {
+    public VTRHTAX_KEY KEY = new VTRHTAX_KEY();
+    public String CHNL_NO = " ";
+    public String TR_CODE = " ";
+    public int TR_BR = 0;
+    public int BR = 0;
+    public String PROD_CD = " ";
+    public String ITM = " ";
+    public int AC_SEQ = 0;
+    public String CI_NO = " ";
+    public String CCY = " ";
+    public double YJ_OBAL = 0;
+    public double YJ_BAL = 0;
+    public double YJ_TAX_BAL = 0;
+    public double M_INCOME_OBAL = 0;
+    public double M_INCOME_BAL = 0;
+    public double M_TAX_BAL = 0;
+    public double SH_OBAL = 0;
+    public double SH_BAL = 0;
+    public double SH_TAX_BAL = 0;
+    public String CODE = " ";
+    public char VAT_TYPE = ' ';
+    public short RT = 0;
+    public double EX_RAT = 0;
+    public String BILL_NO = " ";
+    public char BILL_FLG = ' ';
+    public char TAX_FLG = ' ';
+    public char TAX_TYPE = ' ';
+    public char FREE_TYPE = ' ';
+    public char BILL_LIM = ' ';
+    public String SPC_TR_FLG = " ";
+    public int EC_DATE = 0;
+    public String EC_SET_NO = " ";
+    public int EC_SET_SEQ = 0;
+    public int TR_DATE = 0;
+    public String TR_SET_NO = " ";
+    public int UPD_DATE = 0;
+    public String UPD_TLR = " ";
+    public String TS = " ";
+}

@@ -1,0 +1,43 @@
+package com.hisun.CI;
+
+public class CICOTACR_DATA {
+    public String AC_TYP = " ";
+    public String AC_NO = " ";
+    public String REL_TYP = " ";
+    public String REL_AC_NO = " ";
+    public String PROD_CD = " ";
+    public String CDESC = " ";
+    public char FILLER8 = 0X02;
+    public String CNTRCT_TYP = " ";
+    public String FRM_APP = " ";
+    public char STS = ' ';
+    public String CCY = " ";
+    public char CR_FLG = ' ';
+    public int OPN_BR = 0;
+    public int OPEN_DT = 0;
+    public String CI_NO = " ";
+    public char CI_TYPE = ' ';
+    public String ID_TYPE = " ";
+    public String ID_NO = " ";
+    public char FILLER20 = 0X02;
+    public String CI_NM = " ";
+    public char FILLER22 = 0X02;
+    public String AC_CNM = " ";
+    public char FILLER24 = 0X02;
+    public double ACAC_BAL = 0;
+    public char FILLER26 = 0X01;
+    public double HOLD_AMT = 0;
+    public char FILLER28 = 0X01;
+    public double LAST_BAL = 0;
+    public char FILLER30 = 0X01;
+    public double USABLE_BAL = 0;
+    public char FILLER32 = 0X01;
+    public String ACAC_STSW = " ";
+    public String TERM = " ";
+    public int START_DATE = 0;
+    public int EXP_DATE = 0;
+    public char DEF_FLG = ' ';
+    public int AGR_SEQ = 0;
+    public String BV_NO = " ";
+    public String AID = " ";
+}

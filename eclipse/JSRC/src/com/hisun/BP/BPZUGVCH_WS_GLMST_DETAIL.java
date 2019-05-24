@@ -1,0 +1,5 @@
+package com.hisun.BP;
+
+public class BPZUGVCH_WS_GLMST_DETAIL {
+    BPZUGVCH_WS_GLMST_ITM WS_GLMST_ITM = new BPZUGVCH_WS_GLMST_ITM();
+}

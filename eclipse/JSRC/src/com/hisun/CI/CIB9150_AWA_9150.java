@@ -1,0 +1,68 @@
+package com.hisun.CI;
+
+public class CIB9150_AWA_9150 {
+    public String CI_NM = " ";
+    public short CI_NM_NO = 0;
+    public String ID_TYPE = " ";
+    public short ID_TYPE_NO = 0;
+    public String ID_NO = " ";
+    public short ID_NO_NO = 0;
+    public int ID_EXPDT = 0;
+    public short ID_EXPDT_NO = 0;
+    public String ID_RMK = " ";
+    public short ID_RMK_NO = 0;
+    public String SUB_TYP = " ";
+    public short SUB_TYP_NO = 0;
+    public char RESIDENT = ' ';
+    public short RESIDENT_NO = 0;
+    public char SEX = ' ';
+    public short SEX_NO = 0;
+    public int BIRTH_DT = 0;
+    public short BIRTH_DT_NO = 0;
+    public String REG_CNTY = " ";
+    public short REG_CNTY_NO = 0;
+    public String NATION = " ";
+    public short NATION_NO = 0;
+    public String OCCUP = " ";
+    public short OCCUP_NO = 0;
+    public char VER_FLG = ' ';
+    public short VER_FLG_NO = 0;
+    public char SID_FLG = ' ';
+    public short SID_FLG_NO = 0;
+    public char PL_FLG = ' ';
+    public short PL_FLG_NO = 0;
+    public double PER_INC = 0;
+    public short PER_INC_NO = 0;
+    public char ORGIN_TP = ' ';
+    public short ORGIN_TP_NO = 0;
+    public String ORGIN1 = " ";
+    public short ORGIN1_NO = 0;
+    public String ORGIN2 = " ";
+    public short ORGIN2_NO = 0;
+    public int OPEN_BR = 0;
+    public short OPEN_BR_NO = 0;
+    public CIB9150_ADR_AREA[] ADR_AREA = new CIB9150_ADR_AREA[2];
+    public CIB9150_CNT_AREA[] CNT_AREA = new CIB9150_CNT_AREA[2];
+    public String TAX_BANK = " ";
+    public short TAX_BANK_NO = 0;
+    public String TAX_ACNO = " ";
+    public short TAX_ACNO_NO = 0;
+    public char TAX_TYPE = ' ';
+    public short TAX_TYPE_NO = 0;
+    public String TAX_DSNO = " ";
+    public short TAX_DSNO_NO = 0;
+    public String CRS_TYPE = " ";
+    public short CRS_TYPE_NO = 0;
+    public String CRS_DESC = " ";
+    public short CRS_DESC_NO = 0;
+    public int PROOF_DT = 0;
+    public short PROOF_DT_NO = 0;
+    public char PROOF_CH = ' ';
+    public short PROOF_CH_NO = 0;
+    public CIB9150_CRS_AREA[] CRS_AREA = new CIB9150_CRS_AREA[25];
+    public CIB9150_AWA_9150() {
+        for (int i=0;i<2;i++) ADR_AREA[i] = new CIB9150_ADR_AREA();
+        for (int i=0;i<2;i++) CNT_AREA[i] = new CIB9150_CNT_AREA();
+        for (int i=0;i<25;i++) CRS_AREA[i] = new CIB9150_CRS_AREA();
+    }
+}

@@ -1,0 +1,40 @@
+package com.hisun.CM;
+
+public class CMCS1200_AC_DATA {
+    public char DC_FLG = ' ';
+    public String TR_CTL = " ";
+    public String CHK_CTL = " ";
+    public char AC_TYP = ' ';
+    public String CUS_AC = " ";
+    public int AC_SEQ = 0;
+    public String CCY_AC = " ";
+    public char CCY_TYP = ' ';
+    public String CREV_NO = " ";
+    public String HLD_NO = " ";
+    public double TXN_AMT = 0;
+    public String AC_NM = " ";
+    public String ID_TYP = " ";
+    public String ID_NO = " ";
+    public String TRK2_DAT = " ";
+    public String TRK3_DAT = " ";
+    public String PSW = " ";
+    public String BV_CODE = " ";
+    public String BV_NO = " ";
+    public String CHQ_TYP = " ";
+    public int SIGN_DT = 0;
+    public String CHQ_NO = " ";
+    public String PAY_PSW = " ";
+    public String RMK_CD = " ";
+    public String CTA_NO = " ";
+    public String REF_NO = " ";
+    public String OPP_AC = " ";
+    public String OPP_ACNM = " ";
+    public String OPP_BKNM = " ";
+    public String OPP_BKNO = " ";
+    public String PAL_INAC = " ";
+    public String INT_INAC = " ";
+    public String ERR_PRAC = " ";
+    public double HLD_AMT = 0;
+    public String INR_CINO = " ";
+    public String INR_PROD = " ";
+}

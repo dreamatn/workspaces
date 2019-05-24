@@ -1,0 +1,137 @@
+package com.hisun.BP;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import com.hisun.SC.*;
+
+public class BPZPQBAI {
+    String JIBS_tmp_str[] = new String[10];
+    boolean pgmRtn = false;
+    String CPN_PARM_MAINTAIN = "BP-PARM-MAINTAIN    ";
+    BPZPQBAI_WS_TEMP_BANK WS_TEMP_BANK = new BPZPQBAI_WS_TEMP_BANK();
+    char WS_TBL_BANK_FLAG = ' ';
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    BPRPBKAI BPRPBKAI = new BPRPBKAI();
+    BPCPRMM BPCPRMM = new BPCPRMM();
+    BPRPRMT BPRPRMT = new BPRPRMT();
+    SCCGWA SCCGWA;
+    BPCPQBAI BPCPQBAI;
+    public void MP(SCCGWA SCCGWA, BPCPQBAI BPCPQBAI) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.BPCPQBAI = BPCPQBAI;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        if (pgmRtn) return;
+        B000_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "BPZPQBAI return!");
+        Z_RET();
+        if (pgmRtn) return;
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B010_CHECK_INPUT_DATA();
+        if (pgmRtn) return;
+        B020_GET_BANK_INFO();
+        if (pgmRtn) return;
+        B030_OUTPUT_INFO();
+        if (pgmRtn) return;
+    }
+    public void B010_CHECK_INPUT_DATA() throws IOException,SQLException,Exception {
+        if (BPCPQBAI.DATA_INFO.BNK.equalsIgnoreCase("0")) {
+            IBS.CPY2CLS(SCCGWA, BPCMSG_ERROR_MSG.BP_INPUT_ERROR, BPCPQBAI.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        BPCPQBAI.DATA_INFO.BNK = SCCGWA.COMM_AREA.TR_BANK;
+    }
+    public void B020_GET_BANK_INFO() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRPBKAI);
+        IBS.init(SCCGWA, BPCPRMM);
+        BPRPBKAI.KEY.CD = BPCPQBAI.DATA_INFO.BNK;
+        BPCPRMM.EFF_DT = BPCPQBAI.DATA_INFO.EFF_DT;
+        CEP.TRC(SCCGWA, BPCPQBAI.DATA_INFO.BNK);
+        BPCPRMM.FUNC = '3';
+        BPRPBKAI.KEY.TYP = "BKAI ";
+        //BPRPBKAI.DATA_LEN = 86;
+        BPCPRMM.DAT_PTR = BPRPBKAI;
+        S000_CALL_SCZPRMM();
+        if (pgmRtn) return;
+        JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, BPCPRMM.RC);
+        if (JIBS_tmp_str[0].equalsIgnoreCase(BPCMSG_ERROR_MSG.BP_PARM_NOTFND)) {
+            IBS.CPY2CLS(SCCGWA, BPCMSG_ERROR_MSG.BP_BANK_NOTFND, BPCPQBAI.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, BPRPBKAI);
+    }
+    public void B030_OUTPUT_INFO() throws IOException,SQLException,Exception {
+        IBS.CPY2CLS(SCCGWA, BPRPBKAI.KEY.CD, WS_TEMP_BANK);
+        BPCPQBAI.DATA_INFO.BNK = WS_TEMP_BANK.WS_BANK_CODE;
+        BPCPQBAI.DATA_INFO.BNK = SCCGWA.COMM_AREA.TR_BANK;
+        BPCPQBAI.DATA_INFO.CLR_MTH = BPRPBKAI.DATA_TXT.CLR_MTH;
+        BPCPQBAI.DATA_INFO.CLR_AC = BPRPBKAI.DATA_TXT.CLR_AC;
+        BPCPQBAI.DATA_INFO.CCY_FLG = BPRPBKAI.DATA_TXT.CCY_FLG;
+        BPCPQBAI.DATA_INFO.LOC_CCY2 = BPRPBKAI.DATA_TXT.LOC_CCY2;
+        BPCPQBAI.DATA_INFO.ONL_PVCH = BPRPBKAI.DATA_TXT.ONL_PVCH;
+        BPCPQBAI.DATA_INFO.ONL_GVCH = BPRPBKAI.DATA_TXT.ONL_GVCH;
+        BPCPQBAI.DATA_INFO.EOY_MMDD = BPRPBKAI.DATA_TXT.EOY_MMDD;
+        BPCPQBAI.DATA_INFO.GL_MEG = BPRPBKAI.DATA_TXT.GL_MEG;
+        BPCPQBAI.DATA_INFO.GL_SET = BPRPBKAI.DATA_TXT.GL_SET;
+        if (BPRPBKAI.DATA_TXT.IN_ITM.trim().length() == 0) BPCPQBAI.DATA_INFO.IN_ITM = 0;
+        else BPCPQBAI.DATA_INFO.IN_ITM = Long.parseLong(BPRPBKAI.DATA_TXT.IN_ITM);
+        if (BPRPBKAI.DATA_TXT.OUT_ITM.trim().length() == 0) BPCPQBAI.DATA_INFO.OUT_ITM = 0;
+        else BPCPQBAI.DATA_INFO.OUT_ITM = Long.parseLong(BPRPBKAI.DATA_TXT.OUT_ITM);
+        if (BPRPBKAI.DATA_TXT.RES_ITM.trim().length() == 0) BPCPQBAI.DATA_INFO.RES_ITM = 0;
+        else BPCPQBAI.DATA_INFO.RES_ITM = Long.parseLong(BPRPBKAI.DATA_TXT.RES_ITM);
+        if (BPRPBKAI.DATA_TXT.UNIT_ITM.trim().length() == 0) BPCPQBAI.DATA_INFO.UNIT_ITM = 0;
+        else BPCPQBAI.DATA_INFO.UNIT_ITM = Long.parseLong(BPRPBKAI.DATA_TXT.UNIT_ITM);
+        BPCPQBAI.DATA_INFO.BACK_DT = BPRPBKAI.DATA_TXT.BACK_DT;
+        BPCPQBAI.DATA_INFO.FORWARD_DT = BPRPBKAI.DATA_TXT.FORWARD_DT;
+        BPCPQBAI.DATA_INFO.CLOSE_DT = BPRPBKAI.DATA_TXT.CLOSE_DT;
+        BPCPQBAI.DATA_INFO.CYC_FLG = BPRPBKAI.DATA_TXT.CYC_FLG;
+        BPCPQBAI.DATA_INFO.RT_UP_FLG = BPRPBKAI.DATA_TXT.RT_UP_FLG;
+        BPCPQBAI.DATA_INFO.ACCR_CYCLE = BPRPBKAI.DATA_TXT.ACCR_CYCLE;
+        BPCPQBAI.DATA_INFO.ACCR_CNT = BPRPBKAI.DATA_TXT.ACCR_CNT;
+        BPCPQBAI.DATA_INFO.ACCR_DAY = BPRPBKAI.DATA_TXT.ACCR_DAY;
+        BPCPQBAI.DATA_INFO.YEAR_END_MTH = BPRPBKAI.DATA_TXT.YEAR_END_MTH;
+        CEP.TRC(SCCGWA, BPRPBKAI.KEY.CD);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.CLR_MTH);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.CLR_AC);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.CCY_FLG);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.LOC_CCY2);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.ONL_PVCH);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.ONL_GVCH);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.EOY_MMDD);
+        CEP.TRC(SCCGWA, BPCPQBAI.DATA_INFO.ACCR_CYCLE);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.GL_MEG);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.GL_SET);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.BACK_DT);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.FORWARD_DT);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.CLOSE_DT);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.CYC_FLG);
+        CEP.TRC(SCCGWA, BPRPBKAI.DATA_TXT.RT_UP_FLG);
+    }
+    public void S000_CALL_SCZPRMM() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, CPN_PARM_MAINTAIN, BPCPRMM);
+        CEP.TRC(SCCGWA, BPCPRMM.RC);
+        CEP.TRC(SCCGWA, BPCPRMM.RC.RC_RTNCODE);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.MSG_PROC_AREA);
+    if (SCCGWA.COMM_AREA.BSP_FLG.equalsIgnoreCase("BSP") || SCCGWA.COMM_AREA.CHNL.equalsIgnoreCase("BAT")) { //FROM #IFDEF BAT
+        if (BPCPQBAI.RC.RC_CODE != 0) {
+            CEP.TRC(SCCGWA, " BPCPQBAI = ");
+            CEP.TRC(SCCGWA, BPCPQBAI);
+        }
+    } //FROM #ENDIF
+        pgmRtn = true;
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

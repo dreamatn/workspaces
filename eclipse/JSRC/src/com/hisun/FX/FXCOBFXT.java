@@ -1,0 +1,44 @@
+package com.hisun.FX;
+
+public class FXCOBFXT {
+    public String TIK_NO = " ";
+    public int ORDER_BR = 0;
+    public char STATUS = ' ';
+    public String CI_NO = " ";
+    public String TRA_AC = " ";
+    public String CI_CNM = " ";
+    public char FILLER7 = 0X02;
+    public String CI_ENM = " ";
+    public char FILLER9 = 0X02;
+    public String CNTY_CD = " ";
+    public char CNTY_FLG = ' ';
+    public String PROD_CD = " ";
+    public String PROD_NM = " ";
+    public char FILLER14 = 0X02;
+    public char B_S_FLG = ' ';
+    public char B_CS_FLG = ' ';
+    public String BUY_CCY = " ";
+    public double BUY_AMT = 0;
+    public char S_CS_FLG = ' ';
+    public String SELL_CCY = " ";
+    public double SELL_AMT = 0;
+    public String EX_CODE = " ";
+    public String EX_GROUP = " ";
+    public double SYS_RATE = 0;
+    public char FILLER25 = 0X01;
+    public double PRE_RATE = 0;
+    public char FILLER27 = 0X01;
+    public double SPREAD = 0;
+    public char FILLER29 = 0X01;
+    public double EX_RATE = 0;
+    public char FILLER31 = 0X01;
+    public int VALUE_DT = 0;
+    public int OPT_END_DT = 0;
+    public short BEFF_TM = 0;
+    public String RMK = " ";
+    public char FILLER36 = 0X02;
+    public String CRT_TLR = " ";
+    public int CRE_DT = 0;
+    public String UPD_TLR = " ";
+    public String SUP1 = " ";
+}

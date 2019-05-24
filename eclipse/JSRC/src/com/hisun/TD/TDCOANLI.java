@@ -1,0 +1,10 @@
+package com.hisun.TD;
+
+public class TDCOANLI {
+    public TDCOANLI_KEY KEY = new TDCOANLI_KEY();
+    public double TOT_BAL = 0;
+    public double AGN_BAL = 0;
+    public String UPD_TLT = " ";
+    public int UPD_DATE = 0;
+    public int UPD_TIME = 0;
+}

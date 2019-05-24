@@ -1,0 +1,87 @@
+package com.hisun.CI;
+
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class CIOT5353 {
+    short WS_I = 0;
+    CICMSG_ERROR_MSG CICMSG_ERROR_MSG = new CICMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCFMT SCCFMT = new SCCFMT();
+    SCCMSG SCCMSG = new SCCMSG();
+    CICSMNC CICSMNC = new CICSMNC();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    CIB5353_AWA_5353 CIB5353_AWA_5353;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "CIOT5353 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "CIB5353_AWA_5353>");
+        CIB5353_AWA_5353 = (CIB5353_AWA_5353) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        IBS.init(SCCGWA, CICSMNC);
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B010_CHECK_INPUT_DATA();
+        B020_OPEN_NOS_CUST();
+    }
+    public void B010_CHECK_INPUT_DATA() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, CIB5353_AWA_5353.ID_TYPE);
+        CEP.TRC(SCCGWA, CIB5353_AWA_5353.ID_NO);
+        CEP.TRC(SCCGWA, CIB5353_AWA_5353.CI_NM);
+    }
+    public void B020_OPEN_NOS_CUST() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, CICSMNC);
+        CICSMNC.DATA.CI_NO = CIB5353_AWA_5353.CI_NO;
+        CICSMNC.DATA.CI_TYP = CIB5353_AWA_5353.CI_TYP;
+        CICSMNC.DATA.CI_ATTR = CIB5353_AWA_5353.CI_ATTR;
+        CICSMNC.DATA.CI_NM = CIB5353_AWA_5353.CI_NM;
+        CICSMNC.DATA.CI_ENM = CIB5353_AWA_5353.CI_ENM;
+        CICSMNC.DATA.ID_TYPE = CIB5353_AWA_5353.ID_TYPE;
+        CICSMNC.DATA.ID_NO = CIB5353_AWA_5353.ID_NO;
+        CICSMNC.DATA.ID_RMK = CIB5353_AWA_5353.ID_RMK;
+        CICSMNC.DATA.ID_RGN = CIB5353_AWA_5353.ID_RGN;
+        CICSMNC.DATA.ID_EXPDT = CIB5353_AWA_5353.ID_EXPDT;
+        CICSMNC.DATA.ORG_TYPE = CIB5353_AWA_5353.ORG_TYPE;
+        CICSMNC.DATA.FIN_TYPE = CIB5353_AWA_5353.FIN_TYPE;
+        CICSMNC.DATA.INDUS1 = CIB5353_AWA_5353.INDUS1;
+        CICSMNC.DATA.INDUS2 = CIB5353_AWA_5353.INDUS2;
+        CICSMNC.DATA.REG_AMT = CIB5353_AWA_5353.REG_AMT;
+        CICSMNC.DATA.REG_CCY = CIB5353_AWA_5353.REG_CCY;
+        CICSMNC.DATA.CAP_AMT = CIB5353_AWA_5353.CAP_AMT;
+        CICSMNC.DATA.CAP_CCY = CIB5353_AWA_5353.CAP_CCY;
+        CICSMNC.DATA.OIC_NO = CIB5353_AWA_5353.OIC_NO;
+        CICSMNC.DATA.COR_NO = CIB5353_AWA_5353.COR_NO;
+        CICSMNC.DATA.M_COR_NO = CIB5353_AWA_5353.M_COR_NO;
+        CICSMNC.DATA.STK_NO = CIB5353_AWA_5353.STK_NO;
+        CICSMNC.DATA.OWN_STR = CIB5353_AWA_5353.OWN_STR;
+        CICSMNC.DATA.RESP_CD = CIB5353_AWA_5353.RESP_CD;
+        CICSMNC.DATA.SUB_DP = CIB5353_AWA_5353.SUB_DP;
+        CICSMNC.DATA.SUB_TYP = CIB5353_AWA_5353.SUB_TYP;
+        S000_CALL_CIZSMNC();
+    }
+    public void S000_CALL_CIZSMNC() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "CI-M-NOS-INF", CICSMNC);
+        if (CICSMNC.RC.RC_CODE != 0) {
+            CEP.ERR(SCCGWA, CICSMNC.RC);
+        }
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

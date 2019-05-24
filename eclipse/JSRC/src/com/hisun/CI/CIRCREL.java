@@ -1,0 +1,41 @@
+package com.hisun.CI;
+
+public class CIRCREL {
+    public CIRCREL_KEY KEY = new CIRCREL_KEY();
+    public char PAY_CARD_FLG = ' ';
+    public int CUM_PAY_SUM = 0;
+    public int PAY_UPD_FDAT = 0;
+    public int PAY_UPD_LDAT = 0;
+    public double CUM_PAY_AMT = 0;
+    public String TEL_NO = " ";
+    public String STATUS = " ";
+    public String REL_RES = " ";
+    public char PREF_SER1 = ' ';
+    public String PREF_RES1 = " ";
+    public char PREF_SER2 = ' ';
+    public String PREF_RES2 = " ";
+    public char PREF_SER3 = ' ';
+    public String PREF_RES3 = " ";
+    public char PREF_SER4 = ' ';
+    public String PREF_RES4 = " ";
+    public char PREF_SER5 = ' ';
+    public String PREF_RES5 = " ";
+    public char PREF_SER6 = ' ';
+    public String PREF_RES6 = " ";
+    public char PREF_SER7 = ' ';
+    public String PREF_RES7 = " ";
+    public char PREF_SER8 = ' ';
+    public String PREF_RES8 = " ";
+    public char PREF_SER9 = ' ';
+    public String PREF_RES9 = " ";
+    public int BAT_DT = 0;
+    public char BAT_RES = ' ';
+    public String FDK = " ";
+    public String CRT_TLR = " ";
+    public int CRT_DT = 0;
+    public int CRT_BR = 0;
+    public String UPD_TLR = " ";
+    public int UPD_BR = 0;
+    public int UPD_DT = 0;
+    public String TS = " ";
+}

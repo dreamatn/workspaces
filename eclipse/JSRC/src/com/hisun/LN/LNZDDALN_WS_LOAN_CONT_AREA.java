@@ -1,0 +1,7 @@
+package com.hisun.LN;
+
+public class LNZDDALN_WS_LOAN_CONT_AREA {
+    short WS_LOAN_CONT_AREA_LEN1 = 0;
+    String WS_LOAN_CONT_AREA_TEXT1 = " ";
+    LNZDDALN_REDEFINES35 REDEFINES35 = new LNZDDALN_REDEFINES35();
+}

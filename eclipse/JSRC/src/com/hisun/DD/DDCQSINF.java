@@ -1,0 +1,8 @@
+package com.hisun.DD;
+
+public class DDCQSINF {
+    public char FILE_FLG = ' ';
+    public DDCQSINF_DETAIL_REC DETAIL_REC = new DDCQSINF_DETAIL_REC();
+    public DDCQSINF_HEADER_REC HEADER_REC = new DDCQSINF_HEADER_REC();
+    public DDCQSINF_TRAILER_REC TRAILER_REC = new DDCQSINF_TRAILER_REC();
+}

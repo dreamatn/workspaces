@@ -1,0 +1,7 @@
+package com.hisun.BP;
+
+public class BPCGFEEP {
+    public BPCGFEEP_TITLE_DATA TITLE_DATA = new BPCGFEEP_TITLE_DATA();
+    public BPCGFEEP_CI_DATA CI_DATA = new BPCGFEEP_CI_DATA();
+    public BPCGFEEP_FEE_DATA FEE_DATA = new BPCGFEEP_FEE_DATA();
+}

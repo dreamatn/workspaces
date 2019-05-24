@@ -1,0 +1,61 @@
+package com.hisun.LN;
+
+public class LNCHCMMT {
+    public String CNTR_NO = " ";
+    public String FATHER_CNTR = " ";
+    public String CNTR_NAME = " ";
+    public String STATUS = " ";
+    public char CI_ATTR = ' ';
+    public String CI_NO = " ";
+    public String CI_SNAME = " ";
+    public String CITY_CD = " ";
+    public String OIC = " ";
+    public int BOOK_BR = 0;
+    public int DOM_BR = 0;
+    public long LMT_NO = 0;
+    public String BANK_PORT = " ";
+    public String PROD_CD = " ";
+    public char REVOLVING_FLG = ' ';
+    public String CCY = " ";
+    public double AMT = 0;
+    public int VALUE_DATE = 0;
+    public double UNAVL_AMT = 0;
+    public int UNAVL_SDATE = 0;
+    public int UNAVL_EDATE = 0;
+    public double EXG_BUFFER = 0;
+    public double EXG_RATE = 0;
+    public char DRAWN_CCY_TYP = ' ';
+    public LNCHCMMT_AVAIL_CCY_DATA[] AVAIL_CCY_DATA = new LNCHCMMT_AVAIL_CCY_DATA[9];
+    public char MATURITY_TYPE = ' ';
+    public int START_DATE = 0;
+    public int EXPIRY_DATE = 0;
+    public int AVAIL_SDATE = 0;
+    public int AVAIL_EDATE = 0;
+    public char LAST_DAY_FLG = ' ';
+    public char HOLIDAY_METHOD = ' ';
+    public char HOLIDAY_OVERRIDE = ' ';
+    public LNCHCMMT_CNTY[] CNTY = new LNCHCMMT_CNTY[5];
+    public char PART_ROLE = ' ';
+    public char SUB_TYPE = ' ';
+    public char LEAD_FLG = ' ';
+    public char COLL_FLG = ' ';
+    public char UNDERWRT_FLG = ' ';
+    public long UNDERWRT_NO = 0;
+    public int PRIORITY_NOTICE = 0;
+    public double MIN_DRAWN_AMT = 0;
+    public double MAX_DRAWN_AMT = 0;
+    public String AGENT = " ";
+    public double GLOBAL_AMT = 0;
+    public double MIN_INT_RATE = 0;
+    public double MAX_INT_RATE = 0;
+    public int SIGN_DATE = 0;
+    public String REMARK1 = " ";
+    public String REMARK2 = " ";
+    public String REMARK3 = " ";
+    public String REMARK4 = " ";
+    public String REMARK5 = " ";
+    public LNCHCMMT() {
+        for (int i=0;i<9;i++) AVAIL_CCY_DATA[i] = new LNCHCMMT_AVAIL_CCY_DATA();
+        for (int i=0;i<5;i++) CNTY[i] = new LNCHCMMT_CNTY();
+    }
+}

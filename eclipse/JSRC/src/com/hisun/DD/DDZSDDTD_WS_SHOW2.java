@@ -1,0 +1,43 @@
+package com.hisun.DD;
+
+public class DDZSDDTD_WS_SHOW2 {
+    String WS_SHOW2_AC = " ";
+    String WS_SHOW2_REF_NO = " ";
+    String WS_SHOW2_AC_CNM = " ";
+    char DDZSDDTD_FILLER52 = 0X02;
+    String WS_SHOW2_AC_ENM = " ";
+    char DDZSDDTD_FILLER54 = 0X02;
+    String WS_SHOW2_CCY = " ";
+    char WS_SHOW2_CCY_TYPE = ' ';
+    double WS_SHOW2_PROL_AMT = 0;
+    char DDZSDDTD_FILLER58 = 0X01;
+    String WS_SHOW2_TENOR = " ";
+    int WS_SHOW2_VAL_DATE = 0;
+    int WS_SHOW2_MAT_DATE = 0;
+    String WS_SHOW2_RATE_TYP = " ";
+    String WS_SHOW2_RAT_TERM = " ";
+    char WS_SHOW2_FLOAT_TP = ' ';
+    double WS_SHOW2_F_SPRD = 0;
+    char DDZSDDTD_FILLER66 = 0X01;
+    double WS_SHOW2_F_PCNT = 0;
+    char DDZSDDTD_FILLER68 = 0X01;
+    double WS_SHOW2_PMT_RATE = 0;
+    char DDZSDDTD_FILLER70 = 0X01;
+    double WS_SHOW2_RATE = 0;
+    char DDZSDDTD_FILLER72 = 0X01;
+    String WS_SHOW2_B_RAT_TP = " ";
+    String WS_SHOW2_B_RAT_TM = " ";
+    char WS_SHOW2_BF_TYPE = ' ';
+    double WS_SHOW2_BF_SPRD = 0;
+    char DDZSDDTD_FILLER77 = 0X01;
+    double WS_SHOW2_BF_PCNT = 0;
+    char DDZSDDTD_FILLER79 = 0X01;
+    double WS_SHOW2_BP_RATE = 0;
+    char DDZSDDTD_FILLER81 = 0X01;
+    double WS_SHOW2_BRK_RATE = 0;
+    char DDZSDDTD_FILLER83 = 0X01;
+    char WS_SHOW2_DH_FLG = ' ';
+    String WS_SHOW2_CALR_STD = " ";
+    String WS_SHOW2_REMARKS = " ";
+    char DDZSDDTD_FILLER87 = 0X02;
+}

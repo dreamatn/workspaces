@@ -1,0 +1,66 @@
+package com.hisun.LN;
+
+public class LNB5110_AWA_5110 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public char LVL_FLG = ' ';
+    public short LVL_FLG_NO = 0;
+    public String CTA_NO = " ";
+    public short CTA_NO_NO = 0;
+    public String CTA_NAM = " ";
+    public short CTA_NAM_NO = 0;
+    public String CI_CNM = " ";
+    public short CI_CNM_NO = 0;
+    public double CTA_AMT = 0;
+    public short CTA_AMT_NO = 0;
+    public String CTA_CCY = " ";
+    public short CTA_CCY_NO = 0;
+    public char CI_ATTR = ' ';
+    public short CI_ATTR_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public char CTA_ATTR = ' ';
+    public short CTA_ATTR_NO = 0;
+    public String PTCP_NAM = " ";
+    public short PTCP_NAM_NO = 0;
+    public String PTCP_CN = " ";
+    public short PTCP_CN_NO = 0;
+    public String PTCP_CT = " ";
+    public short PTCP_CT_NO = 0;
+    public char REL_TYP = ' ';
+    public short REL_TYP_NO = 0;
+    public char OREL_TYP = ' ';
+    public short OREL_TYP_NO = 0;
+    public double PTCP_PCT = 0;
+    public short PTCP_PCT_NO = 0;
+    public double PTCP_AMT = 0;
+    public short PTCP_AMT_NO = 0;
+    public char TAX_CHA = ' ';
+    public short TAX_CHA_NO = 0;
+    public double TAX_RAT = 0;
+    public short TAX_RAT_NO = 0;
+    public double INT_ACC = 0;
+    public short INT_ACC_NO = 0;
+    public double INT_GU = 0;
+    public short INT_GU_NO = 0;
+    public char LOC_BFLG = ' ';
+    public short LOC_BFLG_NO = 0;
+    public char ADJ_BFLG = ' ';
+    public short ADJ_BFLG_NO = 0;
+    public LNB5110_ADDR_E[] ADDR_E = new LNB5110_ADDR_E[6];
+    public LNB5110_ADDR_L[] ADDR_L = new LNB5110_ADDR_L[6];
+    public String POS_CN = " ";
+    public short POS_CN_NO = 0;
+    public String POS_AREA = " ";
+    public short POS_AREA_NO = 0;
+    public String CNTY_NAM = " ";
+    public short CNTY_NAM_NO = 0;
+    public String CNTY_LOC = " ";
+    public short CNTY_LOC_NO = 0;
+    public LNB5110_RELATION[] RELATION = new LNB5110_RELATION[10];
+    public LNB5110_AWA_5110() {
+        for (int i=0;i<6;i++) ADDR_E[i] = new LNB5110_ADDR_E();
+        for (int i=0;i<6;i++) ADDR_L[i] = new LNB5110_ADDR_L();
+        for (int i=0;i<10;i++) RELATION[i] = new LNB5110_RELATION();
+    }
+}

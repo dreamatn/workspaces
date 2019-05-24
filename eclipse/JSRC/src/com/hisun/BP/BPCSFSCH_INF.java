@@ -1,0 +1,68 @@
+package com.hisun.BP;
+
+public class BPCSFSCH_INF {
+    public String CTRT_DESC = " ";
+    public String CI_NO = " ";
+    public String AB_NAME = " ";
+    public String CTRT_TYPE = " ";
+    public String FEE_TYPE = " ";
+    public int BOOK_CENTRE = 0;
+    public String PRD_TYPE = " ";
+    public int START_DATE = 0;
+    public int MATURITY_DATE = 0;
+    public char UCT_FLG = ' ';
+    public char SETTLE_FREQ = ' ';
+    public short FREQ_COUNT = 0;
+    public int FIRST_CHG_DATE = 0;
+    public char HOLI_OVER = ' ';
+    public String CAL_CODE1 = " ";
+    public char HOLI_METHOD = ' ';
+    public String CAL_CODE2 = " ";
+    public char PAY_IND = ' ';
+    public char CASHFLOW_IND = ' ';
+    public String BANK_PORTF = " ";
+    public char ACCRUAL_TYPE = ' ';
+    public char PRICE_METHOD = ' ';
+    public String TXN_CCY = " ";
+    public double TXN_AMT = 0;
+    public char REL_CTRT_SRC = ' ';
+    public String REL_CTRT_NO = " ";
+    public String REL_CT_TYPE = " ";
+    public long REL_COL_NO = 0;
+    public long REL_LMT_NO = 0;
+    public double FIR_DSCT = 0;
+    public short PROMPT_DAYS = 0;
+    public short AMT_TYPE = 0;
+    public String REL_PD_TYPE = " ";
+    public double MULTI = 0;
+    public String INT_BAS = " ";
+    public char AGGR_TYPE = ' ';
+    public String REF_CCY = " ";
+    public char REF_METHOD = ' ';
+    public String FEE_CCY = " ";
+    public BPCSFSCH_DATE[] DATE = new BPCSFSCH_DATE[5];
+    public char AUTO_CHG_FLAG = ' ';
+    public String CHARGE_CCY = " ";
+    public double CHARGE_AMT = 0;
+    public char CHARGE_METHOD = ' ';
+    public String CHARGE_AC = " ";
+    public String NOSTRO_CD = " ";
+    public String CHQ_NO = " ";
+    public int GL_MASTER1 = 0;
+    public int GL_MASTER2 = 0;
+    public int GL_MASTER3 = 0;
+    public int GL_MASTER4 = 0;
+    public BPCSFSCH_DATE1[] DATE1 = new BPCSFSCH_DATE1[5];
+    public char FEE_STATUS = ' ';
+    public String REMARK = " ";
+    public double FCHG_MIN_AMT = 0;
+    public String CHG_CCY_REAL = " ";
+    public String CP_NO = " ";
+    public int SALE_DT = 0;
+    public char CCY_TYPE = ' ';
+    public String CREV_NO = " ";
+    public BPCSFSCH_INF() {
+        for (int i=0;i<5;i++) DATE[i] = new BPCSFSCH_DATE();
+        for (int i=0;i<5;i++) DATE1[i] = new BPCSFSCH_DATE1();
+    }
+}

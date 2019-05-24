@@ -1,0 +1,42 @@
+package com.hisun.BP;
+
+public class BPB1127_AWA_1127 {
+    public String AMORT_CD = " ";
+    public short AMORT_CD_NO = 0;
+    public String AMO_DESC = " ";
+    public short AMO_DESC_NO = 0;
+    public int EFF_DATE = 0;
+    public short EFF_DATE_NO = 0;
+    public int EXP_DATE = 0;
+    public short EXP_DATE_NO = 0;
+    public char AMO_MTH = ' ';
+    public short AMO_MTH_NO = 0;
+    public String AMO_TMS = " ";
+    public short AMO_TMS_NO = 0;
+    public char AMO_CYCL = ' ';
+    public short AMO_CYCL_NO = 0;
+    public String AMO_CNT = " ";
+    public short AMO_CNT_NO = 0;
+    public short AMO_DATE = 0;
+    public short AMO_DATE_NO = 0;
+    public String AMO_CCY = " ";
+    public short AMO_CCY_NO = 0;
+    public double MIN_AMT = 0;
+    public short MIN_AMT_NO = 0;
+    public double MAX_AMT = 0;
+    public short MAX_AMT_NO = 0;
+    public char BACK_FLG = ' ';
+    public short BACK_FLG_NO = 0;
+    public int LAST_DAT = 0;
+    public short LAST_DAT_NO = 0;
+    public String LAST_TEL = " ";
+    public short LAST_TEL_NO = 0;
+    public String SUP_TEL1 = " ";
+    public short SUP_TEL1_NO = 0;
+    public String SUP_TEL2 = " ";
+    public short SUP_TEL2_NO = 0;
+    public String TS = " ";
+    public short TS_NO = 0;
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+}

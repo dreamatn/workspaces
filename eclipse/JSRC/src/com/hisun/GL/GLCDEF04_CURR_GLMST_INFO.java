@@ -1,0 +1,5 @@
+package com.hisun.GL;
+
+public class GLCDEF04_CURR_GLMST_INFO {
+    public GLCDEF04_CURR_GLMST_ITM CURR_GLMST_ITM = new GLCDEF04_CURR_GLMST_ITM();
+}

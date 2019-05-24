@@ -1,0 +1,48 @@
+package com.hisun.AI;
+
+public class AICX101_2 {
+    public char TMP_IND = ' ';
+    public int TMP_NO = 0;
+    public String TMP_NM = " ";
+    public char FILLER6 = 0X02;
+    public AICX101_GRP_NO GRP_NO = new AICX101_GRP_NO();
+    public short ENTRY = 0;
+    public String GL_BOOK = " ";
+    public int VAL_DT = 0;
+    public char ENTRTYP = ' ';
+    public int BR = 0;
+    public String CUR = " ";
+    public String ITM = " ";
+    public String ITM_NM = " ";
+    public char FILLER18 = 0X02;
+    public double L_BAL = 0;
+    public char FILLER20 = 0X01;
+    public double V_BAL = 0;
+    public char FILLER22 = 0X01;
+    public String AC = " ";
+    public String AC_NAME = " ";
+    public char FILLER25 = 0X02;
+    public String CI_NO = " ";
+    public String CI_ENMS = " ";
+    public char FILLER28 = 0X02;
+    public char ACTCODE = ' ';
+    public char RED_FLG = ' ';
+    public double AMT = 0;
+    public char FILLER32 = 0X01;
+    public String REV_NO = " ";
+    public String NARR = " ";
+    public String DESC = " ";
+    public char FILLER36 = 0X02;
+    public String REF_NO = " ";
+    public String PROD_CD = " ";
+    public char ENTRSTS = ' ';
+    public int AC_SEQ = 0;
+    public char RVS_FLG = ' ';
+    public char RVS_TYP = ' ';
+    public String PORT_CD = " ";
+    public String RES_CENT = " ";
+    public String LINE = " ";
+    public String INT_DEALINGS = " ";
+    public char RESERVE = ' ';
+    public int RVS_EXP = 0;
+}

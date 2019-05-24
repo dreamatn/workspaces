@@ -1,0 +1,36 @@
+package com.hisun.AI;
+
+public class AICRP16 {
+    public String CI_NM = " ";
+    public String REQ_REF = " ";
+    public String CHNL_REF = " ";
+    public String RVS_NO = " ";
+    public int RVS_SEQ = 0;
+    public String AC = " ";
+    public String BOOK_FLG = " ";
+    public int BR = 0;
+    public String ITM = " ";
+    public int SEQ = 0;
+    public String CCY = " ";
+    public int TX_DT = 0;
+    public int VAL_DT = 0;
+    public double AMT = 0;
+    public char STS = ' ';
+    public String CI_NO = " ";
+    public String THEIR_AC = " ";
+    public String PAY_MAN = " ";
+    public int PAY_BR = 0;
+    public String PARY_BKNM = " ";
+    public String PART = " ";
+    public String TR_CODE = " ";
+    public int TR_BR = 0;
+    public String TR_TELLER = " ";
+    public String SET_NO = " ";
+    public short SET_SEQ = 0;
+    public String APP = " ";
+    public String CHNL_NO = " ";
+    public String TX_SUP_TLR = " ";
+    public String LAST_UPDATE_TLR = " ";
+    public int UPDATBL_DATE = 0;
+    public String TS = " ";
+}

@@ -1,0 +1,44 @@
+package com.hisun.BP;
+
+public class BPB6230_AWA_6230 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String CNTY_CD = " ";
+    public short CNTY_CD_NO = 0;
+    public String CITY_CD = " ";
+    public short CITY_CD_NO = 0;
+    public int WND_DATE = 0;
+    public short WND_DATE_NO = 0;
+    public int EFF_DT = 0;
+    public short EFF_DT_NO = 0;
+    public short WND_NO1 = 0;
+    public short WND_NO1_NO = 0;
+    public char WND_OPT1 = ' ';
+    public short WND_OPT1_NO = 0;
+    public short WND_NO2 = 0;
+    public short WND_NO2_NO = 0;
+    public char WND_OPT2 = ' ';
+    public short WND_OPT2_NO = 0;
+    public short WND_NO3 = 0;
+    public short WND_NO3_NO = 0;
+    public char WND_OPT3 = ' ';
+    public short WND_OPT3_NO = 0;
+    public short WND_NO4 = 0;
+    public short WND_NO4_NO = 0;
+    public char WND_OPT4 = ' ';
+    public short WND_OPT4_NO = 0;
+    public short WND_NO5 = 0;
+    public short WND_NO5_NO = 0;
+    public char WND_OPT5 = ' ';
+    public short WND_OPT5_NO = 0;
+    public short WND_NO6 = 0;
+    public short WND_NO6_NO = 0;
+    public char WND_OPT6 = ' ';
+    public short WND_OPT6_NO = 0;
+    public short WND_NO7 = 0;
+    public short WND_NO7_NO = 0;
+    public char WND_OPT7 = ' ';
+    public short WND_OPT7_NO = 0;
+    public String CAL_CD = " ";
+    public short CAL_CD_NO = 0;
+}

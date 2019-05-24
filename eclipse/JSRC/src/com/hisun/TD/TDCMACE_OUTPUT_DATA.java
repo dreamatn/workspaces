@@ -1,0 +1,37 @@
+package com.hisun.TD;
+
+public class TDCMACE_OUTPUT_DATA {
+    public TDCMACE_RC_MSG RC_MSG = new TDCMACE_RC_MSG();
+    public String OIMAE_AC = " ";
+    public char OIMAE_AC_STS = ' ';
+    public String OIMAE_AC_STSW = " ";
+    public String OIMAE_PROD_CD = " ";
+    public String OIMAE_CCY = " ";
+    public String OIMAE_BV_CD = " ";
+    public String OIMAE_BV_NO = " ";
+    public String OIMAE_BV_STSW = " ";
+    public char OIMAE_DRAW_MTH = ' ';
+    public char OIMAE_CR_FLG = ' ';
+    public char OIMAE_DR_FLG = ' ';
+    public String OIMAE_AC_BK = " ";
+    public int OIMAE_AC_BR = 0;
+    public String OIMAE_OPEN_TLR = " ";
+    public int OIMAE_OPEN_DATE = 0;
+    public String OIMAE_ID_TYPE = " ";
+    public String OIMAE_ID_NO = " ";
+    public String OIMAE_CI_NO = " ";
+    public String OIMAE_CI_CNM = " ";
+    public String OIMAE_AC_CNM = " ";
+    public String OIMAE_AC_ENM = " ";
+    public char OIMAE_HLD_TYP1 = ' ';
+    public char OIMAE_HLD_TYP2 = ' ';
+    public int OIMAE_OPEN_BR = 0;
+    public String OIMAE_FRG_IND = " ";
+    public String REF_TYP = " ";
+    public char INT_METH = ' ';
+    public String OIC_NO = " ";
+    public String RESP_CD = " ";
+    public String SUB_DP = " ";
+    public char CI_TYP = ' ';
+    public String REL_AC_NO = " ";
+}

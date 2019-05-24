@@ -1,0 +1,44 @@
+package com.hisun.AI;
+
+public class AIB8530_AWA_8530 {
+    public String BOOK_FLG = " ";
+    public short BOOK_FLG_NO = 0;
+    public int BR_START = 0;
+    public short BR_START_NO = 0;
+    public int BR_END = 0;
+    public short BR_END_NO = 0;
+    public String ITM_NO = " ";
+    public short ITM_NO_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public String AC_CNAME = " ";
+    public short AC_CNAME_NO = 0;
+    public double LDDBAL = 0;
+    public short LDDBAL_NO = 0;
+    public double LDCBAL = 0;
+    public short LDCBAL_NO = 0;
+    public double CDDBAL = 0;
+    public short CDDBAL_NO = 0;
+    public double CDCBAL = 0;
+    public short CDCBAL_NO = 0;
+    public double CDDRAMT = 0;
+    public short CDDRAMT_NO = 0;
+    public double CDCRAMT = 0;
+    public short CDCRAMT_NO = 0;
+    public int CDNODR = 0;
+    public short CDNODR_NO = 0;
+    public int CDNOCR = 0;
+    public short CDNOCR_NO = 0;
+    public int AC_DATE = 0;
+    public short AC_DATE_NO = 0;
+    public int MAX_SEQ = 0;
+    public short MAX_SEQ_NO = 0;
+    public String TS = " ";
+    public short TS_NO = 0;
+    public int BR = 0;
+    public short BR_NO = 0;
+    public int DT = 0;
+    public short DT_NO = 0;
+    public String STA_CD = " ";
+    public short STA_CD_NO = 0;
+}

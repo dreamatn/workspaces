@@ -1,0 +1,48 @@
+package com.hisun.LN;
+
+public class LNRPAYSQ {
+    public LNRPAYSQ_KEY KEY = new LNRPAYSQ_KEY();
+    public int EXP_DATE = 0;
+    public String DESC = " ";
+    public String CDESC = " ";
+    public char REPY_MTH = ' ';
+    public short P_FLG1 = 0;
+    public short I_FLG1 = 0;
+    public short O_FLG1 = 0;
+    public short L_FLG1 = 0;
+    public short F_FLG1 = 0;
+    public char FUL_PAY_FLG1 = ' ';
+    public char CRS_PAY_FLG1 = ' ';
+    public short P_FLG2 = 0;
+    public short I_FLG2 = 0;
+    public short O_FLG2 = 0;
+    public short L_FLG2 = 0;
+    public short F_FLG2 = 0;
+    public char FUL_PAY_FLG2 = ' ';
+    public char CRS_PAY_FLG2 = ' ';
+    public short P_FLG3 = 0;
+    public short I_FLG3 = 0;
+    public short O_FLG3 = 0;
+    public short L_FLG3 = 0;
+    public short F_FLG3 = 0;
+    public char FUL_PAY_FLG3 = ' ';
+    public char CRS_PAY_FLG3 = ' ';
+    public short P_FLG4 = 0;
+    public short I_FLG4 = 0;
+    public short O_FLG4 = 0;
+    public short L_FLG4 = 0;
+    public short F_FLG4 = 0;
+    public char FUL_PAY_FLG4 = ' ';
+    public char CRS_PAY_FLG4 = ' ';
+    public short P_FLG5 = 0;
+    public short I_FLG5 = 0;
+    public short O_FLG5 = 0;
+    public short L_FLG5 = 0;
+    public short F_FLG5 = 0;
+    public char FUL_PAY_FLG5 = ' ';
+    public char CRS_PAY_FLG5 = ' ';
+    public int UPD_DATE = 0;
+    public int UPD_BR = 0;
+    public String UPD_TLR = " ";
+    public String TS = " ";
+}

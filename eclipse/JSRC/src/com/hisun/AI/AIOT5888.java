@@ -1,0 +1,95 @@
+package com.hisun.AI;
+
+import com.hisun.BP.*;
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class AIOT5888 {
+    String WS_ERR_MSG = " ";
+    short WS_FLD_NO = 0;
+    AICMSG_ERROR_MSG AICMSG_ERROR_MSG = new AICMSG_ERROR_MSG();
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    AICUCPRD AICUCPRD = new AICUCPRD();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    AIB5888_AWA_5888 AIB5888_AWA_5888;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "AIOT5888 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "AIB5888_AWA_5888>");
+        AIB5888_AWA_5888 = (AIB5888_AWA_5888) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B010_CHECK_INPUT();
+        B020_BRW_REC_PROC();
+    }
+    public void B010_CHECK_INPUT() throws IOException,SQLException,Exception {
+    }
+    public void B020_BRW_REC_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, AICUCPRD);
+        AICUCPRD.AP_MMO = AIB5888_AWA_5888.AP_MMO;
+        AICUCPRD.DEAL_FLG = AIB5888_AWA_5888.DEAL_FLG;
+        AICUCPRD.AC_DATE = AIB5888_AWA_5888.AC_DATE;
+        AICUCPRD.CI_NO = AIB5888_AWA_5888.CI_NO;
+        AICUCPRD.AC = AIB5888_AWA_5888.AC_NO;
+        AICUCPRD.NEW_PROD_CD = AIB5888_AWA_5888.N_PROD;
+        AICUCPRD.NEW_CI_TYP = AIB5888_AWA_5888.N_CI_TYP;
+        AICUCPRD.NEW_FIN_TYP = AIB5888_AWA_5888.N_FIN;
+        AICUCPRD.NEW_AC_TYP = AIB5888_AWA_5888.N_AC_TYP;
+        AICUCPRD.NEW_PROP_TYP = AIB5888_AWA_5888.N_PROP;
+        AICUCPRD.NEW_TERM_CD = AIB5888_AWA_5888.N_TERM;
+        AICUCPRD.NEW_LOAN_TYPE = AIB5888_AWA_5888.N_LOAN;
+        AICUCPRD.NEW_WE_FLG = AIB5888_AWA_5888.N_WE_FLG;
+        AICUCPRD.NEW_DUTY_FREE = AIB5888_AWA_5888.N_DUTY;
+        AICUCPRD.OLD_PROD_CD = AIB5888_AWA_5888.O_PROD;
+        AICUCPRD.OLD_CI_TYP = AIB5888_AWA_5888.O_CI_TYP;
+        AICUCPRD.OLD_FIN_TYP = AIB5888_AWA_5888.O_FIN;
+        AICUCPRD.OLD_AC_TYP = AIB5888_AWA_5888.O_AC_TYP;
+        AICUCPRD.OLD_PROP_TYP = AIB5888_AWA_5888.O_PROP;
+        AICUCPRD.OLD_TERM_CD = AIB5888_AWA_5888.O_TERM;
+        AICUCPRD.OLD_LOAN_TYPE = AIB5888_AWA_5888.O_LOAN;
+        AICUCPRD.OLD_WE_FLG = AIB5888_AWA_5888.O_WE_FLG;
+        AICUCPRD.OLD_DUTY_FREE = AIB5888_AWA_5888.O_DUTY;
+        AICUCPRD.OLD_GLMST = AIB5888_AWA_5888.O_GLMST;
+        AICUCPRD.STS = AIB5888_AWA_5888.STS;
+        AICUCPRD.ACAC_SEQ = AIB5888_AWA_5888.ACAC_SEQ;
+        CEP.TRC(SCCGWA, AIB5888_AWA_5888.DEAL_FLG);
+        CEP.TRC(SCCGWA, AIB5888_AWA_5888.AC_DATE);
+        CEP.TRC(SCCGWA, AIB5888_AWA_5888.CI_NO);
+        CEP.TRC(SCCGWA, AIB5888_AWA_5888.AC_NO);
+        CEP.TRC(SCCGWA, AIB5888_AWA_5888.ACAC_SEQ);
+        CEP.TRC(SCCGWA, AIB5888_AWA_5888.N_PROD);
+        CEP.TRC(SCCGWA, AIB5888_AWA_5888.O_PROD);
+        S00_CALL_AIZUCPRD();
+    }
+    public void S00_CALL_AIZUCPRD() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "AI-P-UPD-CPRD", AICUCPRD);
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void S000_ERR_MSG_PROC_CONTINUE() throws IOException,SQLException,Exception {
+        CEP.ERRC(SCCGWA, WS_ERR_MSG, WS_FLD_NO);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

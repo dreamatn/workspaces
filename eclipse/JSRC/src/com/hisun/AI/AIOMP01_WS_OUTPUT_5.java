@@ -1,0 +1,44 @@
+package com.hisun.AI;
+
+public class AIOMP01_WS_OUTPUT_5 {
+    String WS_OUT_5_TLT_ID = " ";
+    int WS_OUT_5_ISS_DATE = 0;
+    int WS_OUT_5_GRPNO = 0;
+    short WS_OUT_5_ENTNO = 0;
+    char WS_OUT_5_ENTR_STS = ' ';
+    int WS_OUT_5_VAL_DT = 0;
+    char WS_OUT_5_AUTH_LEVEL = ' ';
+    String WS_OUT_5_GL_BOOK = " ";
+    int WS_OUT_5_BR = 0;
+    char WS_OUT_5_ENTR_TYP = ' ';
+    String WS_OUT_5_ITM_NO = " ";
+    String WS_OUT_5_AC = " ";
+    char WS_OUT_5_ACT = ' ';
+    char WS_OUT_5_RED_FLG = ' ';
+    String WS_OUT_5_CUR = " ";
+    double WS_OUT_5_AMT = 0;
+    char AIOMP01_FILLER396 = 0X01;
+    String WS_OUT_5_REV_NO = " ";
+    String WS_OUT_5_NARR = " ";
+    String WS_OUT_5_DESC = " ";
+    char AIOMP01_FILLER400 = 0X02;
+    String WS_OUT_5_REF = " ";
+    String WS_OUT_5_PROD_CD = " ";
+    int WS_OUT_5_AC_SEQ = 0;
+    String WS_OUT_5_AC_NM = " ";
+    char AIOMP01_FILLER405 = 0X02;
+    String WS_OUT_5_CI_NO = " ";
+    String WS_OUT_5_CI_NM = " ";
+    char AIOMP01_FILLER408 = 0X02;
+    char WS_OUT_5_RVS_FLG = ' ';
+    char WS_OUT_5_RVS_TYP = ' ';
+    String WS_OUT_5_ITM_NM = " ";
+    char AIOMP01_FILLER412 = 0X02;
+    long WS_OUT_5_SET_NO = 0;
+    String WS_OUT_5_AUTH_TLR = " ";
+    String WS_OUT_5_RES_CENT = " ";
+    String WS_OUT_5_LINE = " ";
+    String WS_OUT_5_INT_DEALINGS = " ";
+    char WS_OUT_5_RESERVE = ' ';
+    int WS_OUT_5_RVS_EXP = 0;
+}

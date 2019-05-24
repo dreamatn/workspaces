@@ -1,0 +1,67 @@
+package com.hisun.LN;
+
+public class LNCSCMMT {
+    public char FUNC = ' ';
+    public int PAGE_ROW = 0;
+    public int PAGE_NUM = 0;
+    public String CNTR_NO = " ";
+    public String CNTR_NAME = " ";
+    public char CNTR_TYP = ' ';
+    public char STS = ' ';
+    public char NEW_STS = ' ';
+    public String STATUS = " ";
+    public String FATHER_CNTR = " ";
+    public String CI_NO = " ";
+    public String CI_SNAME = " ";
+    public String CI_CNAME = " ";
+    public String REL_FACT = " ";
+    public int SG_DT = 0;
+    public int BOOK_BR = 0;
+    public int DOM_BR = 0;
+    public String PROD_CD = " ";
+    public int GM_BR = 0;
+    public char REVOLVING_FLG = ' ';
+    public String CCY = " ";
+    public double AMT = 0;
+    public double USED_AMT = 0;
+    public double ACCU_USED_AMT = 0;
+    public double AVAILABLE_AMT = 0;
+    public double UDW_AMT = 0;
+    public double EXG_RATE = 0;
+    public int AVAIL_SDATE = 0;
+    public int AVAIL_EDATE = 0;
+    public char HOLIDAY_METHOD = ' ';
+    public char HOLIDAY_OVERRIDE = ' ';
+    public LNCSCMMT_CNTY[] CNTY = new LNCSCMMT_CNTY[5];
+    public char PART_ROLE = ' ';
+    public String AGENT = " ";
+    public double GLOBAL_AMT = 0;
+    public int SIGN_DATE = 0;
+    public String REMARK1 = " ";
+    public String REMARK2 = " ";
+    public String REMARK3 = " ";
+    public String REMARK4 = " ";
+    public String REMARK5 = " ";
+    public int CREATE_DT = 0;
+    public String CREATE_TLR = " ";
+    public int UPD_DT = 0;
+    public String UPD_TLR = " ";
+    public String AUTH1 = " ";
+    public String AUTH2 = " ";
+    public double LAL_AMT = 0;
+    public int CHG_LAL_DT = 0;
+    public String PAPER_NO = " ";
+    public String PROD_NM = " ";
+    public char CMMT_FLG = ' ';
+    public char REV_CMMT = ' ';
+    public char CNTR_TP = ' ';
+    public double OPEN_AMT = 0;
+    public String AC_TYP = " ";
+    public String DD_AC = " ";
+    public String DD_NM = " ";
+    public double C_AMT = 0;
+    public String LMT_SYS = " ";
+    public LNCSCMMT() {
+        for (int i=0;i<5;i++) CNTY[i] = new LNCSCMMT_CNTY();
+    }
+}

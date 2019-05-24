@@ -1,0 +1,44 @@
+package com.hisun.TD;
+
+public class TDB6800_AWA_6800 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String PROVD_NO = " ";
+    public short PROVD_NO_NO = 0;
+    public String PROVD_NM = " ";
+    public short PROVD_NM_NO = 0;
+    public String PRD_NO = " ";
+    public short PRD_NO_NO = 0;
+    public String PRD_NM = " ";
+    public short PRD_NM_NO = 0;
+    public double SIN_BAL = 0;
+    public short SIN_BAL_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public String TERM = " ";
+    public short TERM_NO = 0;
+    public double SIN_PRIC = 0;
+    public short SIN_PRIC_NO = 0;
+    public double OLD_PRIC = 0;
+    public short OLD_PRIC_NO = 0;
+    public double INT_AMT = 0;
+    public short INT_AMT_NO = 0;
+    public double DIS_RT = 0;
+    public short DIS_RT_NO = 0;
+    public double DIS_INT = 0;
+    public short DIS_INT_NO = 0;
+    public double INT_RATE = 0;
+    public short INT_RATE_NO = 0;
+    public double SALE_FEE = 0;
+    public short SALE_FEE_NO = 0;
+    public String REV_AC = " ";
+    public short REV_AC_NO = 0;
+    public char VAL_FLG = ' ';
+    public short VAL_FLG_NO = 0;
+    public int VAL_DT = 0;
+    public short VAL_DT_NO = 0;
+    public int END_DT = 0;
+    public short END_DT_NO = 0;
+    public String REMARK = " ";
+    public short REMARK_NO = 0;
+}

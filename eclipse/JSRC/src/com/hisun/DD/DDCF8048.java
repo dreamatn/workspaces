@@ -1,0 +1,43 @@
+package com.hisun.DD;
+
+public class DDCF8048 {
+    public String AC = " ";
+    public char PD_TYPE = ' ';
+    public double DEP_T_ACCU_INT = 0;
+    public char FILLER4 = 0X01;
+    public double OD_T_ACCU_TAX = 0;
+    public char FILLER6 = 0X01;
+    public double DEP_ACCU_INT = 0;
+    public char FILLER8 = 0X01;
+    public double DEP_SPC_INT = 0;
+    public char FILLER10 = 0X01;
+    public double OD_ACCU_TAX = 0;
+    public char FILLER12 = 0X01;
+    public char TIR_TYPE = ' ';
+    public char AGSP_FLG = ' ';
+    public double DEP_TOT1 = 0;
+    public char FILLER16 = 0X01;
+    public double TIR_AMT1 = 0;
+    public double TIR_RATE1 = 0;
+    public char FILLER19 = 0X01;
+    public double DEP_TOT2 = 0;
+    public char FILLER21 = 0X01;
+    public double TIR_AMT2 = 0;
+    public double TIR_RATE2 = 0;
+    public char FILLER24 = 0X01;
+    public double DEP_TOT3 = 0;
+    public char FILLER26 = 0X01;
+    public double TIR_AMT3 = 0;
+    public double TIR_RATE3 = 0;
+    public char FILLER29 = 0X01;
+    public double DEP_TOT4 = 0;
+    public char FILLER31 = 0X01;
+    public double TIR_AMT4 = 0;
+    public double TIR_RATE4 = 0;
+    public char FILLER34 = 0X01;
+    public double DEP_TOT5 = 0;
+    public char FILLER36 = 0X01;
+    public double TIR_AMT5 = 0;
+    public double TIR_RATE5 = 0;
+    public char FILLER39 = 0X01;
+}

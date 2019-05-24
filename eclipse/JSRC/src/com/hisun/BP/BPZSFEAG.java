@@ -1,0 +1,58 @@
+package com.hisun.BP;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import com.hisun.CI.CICMSG_ERROR_MSG;
+import com.hisun.SC.SCCCALL;
+import com.hisun.SC.SCCCKDT;
+import com.hisun.SC.SCCCLDT;
+import com.hisun.SC.SCCCTLM_MSG;
+import com.hisun.SC.SCCEXCP;
+import com.hisun.SC.SCCFMT;
+import com.hisun.SC.SCCMPAG;
+import com.hisun.SC.SCCMSG;
+
+public class BPZSFEAG {
+    boolean pgmRtn = false;
+    String K_OUTPUT_FMT = "BP201";
+    String K_HIS_COPYBOOK = "BPRFEAG";
+    String K_HIS_REMARK = "TXN INFOMATION MAINTAIN";
+    String CPN_REC_NHIS = "BP-REC-NHIS         ";
+    String CPN_R_FCLT = "BP-F-S-FEE-COLLECT";
+    String PGM_SCSSCLDT = "SCSSCLDT";
+    String PGM_SCSSCKDT = "SCSSCKDT";
+    String K_TBL_FEAG = "BPTFEAG";
+    String WK_PRDT_CINO = "            ";
+    int K_MAX_ROW = 99;
+    String WS_ERR_MSG = " ";
+    char WS_CLT_TYPE = ' ';
+    char WS_SGN_TYPE = ' ';
+    char WS_HOLI_MTH = ' ';
+    char WS_CAL_CYC = ' ';
+    short WS_PERD_CNT = 0;
+    int WS_FCHG_DATE = 0;
+    int WS_TEMP_DT = 0;
+    BPZSFEAG_REDEFINES13 REDEFINES13 = new BPZSFEAG_REDEFINES13();
+    int WS_TEMP_DT2 = 0;
+    BPZSFEAG_REDEFINES18 REDEFINES18 = new BPZSFEAG_REDEFINES18();
+    int WS_NEXT_WORK_DAY = 0;
+    int WS_LAST_WORK_DAY = 0;
+    int WS_CNT = 0;
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    CICMSG_ERROR_MSG CICMSG_ERROR_MSG = new CICMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCFMT SCCFMT = new SCCFMT();
+    SCCMPAG SCCMPAG = new SCCMPAG();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCCTLM_MSG SCCCTLM_MSG = new SCCCTLM_MSG();
+    BPRFEAG BPRFEAG = new BPRFEAG();
+    BPRFEAG BPROFEAG = new BPRFEAG();
+    BPC201 BPC201 = new BPC201();
+    BPCOFEAG BPCOFEAG = new BPCOFEAG();
+    SCCCLDT SCCCLDT = new SCCCLDT();
+    SCCCKDT SCCCKDT = new SCCCKDT();
+    BPCOCLWD BPCOCLWD = new BPCOCLWD();
+    BPCPFPDT BPCPFPDT = new BPCPFPDT();
+    BPCPNHIS BPCPNHIS = new BPCPNHIS();

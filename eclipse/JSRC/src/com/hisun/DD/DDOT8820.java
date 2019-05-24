@@ -1,0 +1,102 @@
+package com.hisun.DD;
+
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class DDOT8820 {
+    short WS_FLD_NO = 0;
+    String WS_ERR_MSG = " ";
+    DDCMSG_ERROR_MSG DDCMSG_ERROR_MSG = new DDCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    DDCSFRTZ DDCSFRTZ = new DDCSFRTZ();
+    SCCGWA SCCGWA;
+    DDB8820_AWA_8820 DDB8820_AWA_8820;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROCESS();
+        B000_MAIN_PROCESS();
+        CEP.TRC(SCCGWA, "DDOT8820 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROCESS() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "DDB8820_AWA_8820>");
+        DDB8820_AWA_8820 = (DDB8820_AWA_8820) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+    }
+    public void B000_MAIN_PROCESS() throws IOException,SQLException,Exception {
+        B010_CHECK_INPUT_DATA();
+        B030_TRANS_DATA_PROC();
+    }
+    public void B010_CHECK_INPUT_DATA() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.FUNC);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.CUS_AC);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.CCY);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.CCY_TYP);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.PROL_NO);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.STRDT);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.EXPDT);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.BAL_AMT);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.AC);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.PROD_CD);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.CNTR_TYP);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.CI_TYP);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.FIN_TYP);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.AC_TYP);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.PROP_TYP);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.TERM_CD);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.LOAN_TYP);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.WE_FLG);
+        CEP.TRC(SCCGWA, DDB8820_AWA_8820.DT_FREE);
+        if (DDB8820_AWA_8820.FUNC == '1'
+            || DDB8820_AWA_8820.FUNC == '2'
+            || DDB8820_AWA_8820.FUNC == '3'
+            || DDB8820_AWA_8820.FUNC == '4'
+            || DDB8820_AWA_8820.FUNC == '5') {
+        } else {
+            WS_ERR_MSG = DDCMSG_ERROR_MSG.DD_FUNC_INVALID;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void B030_TRANS_DATA_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, DDCSFRTZ);
+        DDCSFRTZ.FUNC = DDB8820_AWA_8820.FUNC;
+        DDCSFRTZ.CUS_AC = DDB8820_AWA_8820.CUS_AC;
+        DDCSFRTZ.CCY = DDB8820_AWA_8820.CCY;
+        DDCSFRTZ.CCY_TYP = DDB8820_AWA_8820.CCY_TYP;
+        DDCSFRTZ.PROL_NO = DDB8820_AWA_8820.PROL_NO;
+        DDCSFRTZ.STRDT = DDB8820_AWA_8820.STRDT;
+        DDCSFRTZ.EXPDT = DDB8820_AWA_8820.EXPDT;
+        DDCSFRTZ.BAL_AMT = DDB8820_AWA_8820.BAL_AMT;
+        DDCSFRTZ.AC = DDB8820_AWA_8820.AC;
+        DDCSFRTZ.PROD_CD = DDB8820_AWA_8820.PROD_CD;
+        DDCSFRTZ.CNTR_TYP = DDB8820_AWA_8820.CNTR_TYP;
+        DDCSFRTZ.CI_TYP = DDB8820_AWA_8820.CI_TYP;
+        DDCSFRTZ.FIN_TYP = DDB8820_AWA_8820.FIN_TYP;
+        DDCSFRTZ.AC_TYP = DDB8820_AWA_8820.AC_TYP;
+        DDCSFRTZ.PROP_TYP = DDB8820_AWA_8820.PROP_TYP;
+        DDCSFRTZ.TERM_CD = DDB8820_AWA_8820.TERM_CD;
+        DDCSFRTZ.LOAN_TYP = DDB8820_AWA_8820.LOAN_TYP;
+        DDCSFRTZ.WE_FLG = DDB8820_AWA_8820.WE_FLG;
+        DDCSFRTZ.DT_FREE = DDB8820_AWA_8820.DT_FREE;
+        S000_CALL_DDZSFRTZ();
+    }
+    public void S000_CALL_DDZSFRTZ() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "DD-SVR-DDZSFRTZ", DDCSFRTZ);
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

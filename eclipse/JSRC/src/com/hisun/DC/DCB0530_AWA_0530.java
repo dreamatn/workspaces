@@ -1,0 +1,46 @@
+package com.hisun.DC;
+
+public class DCB0530_AWA_0530 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public char SOLD_RGN = ' ';
+    public short SOLD_RGN_NO = 0;
+    public String CHNL_NO = " ";
+    public short CHNL_NO_NO = 0;
+    public String TXN_TYPE = " ";
+    public short TXN_TYPE_NO = 0;
+    public String LMT_CCY = " ";
+    public short LMT_CCY_NO = 0;
+    public char AC_CLASS = ' ';
+    public short AC_CLASS_NO = 0;
+    public double TXN_LMT = 0;
+    public short TXN_LMT_NO = 0;
+    public double DLY_LMT = 0;
+    public short DLY_LMT_NO = 0;
+    public int LMT_VOL = 0;
+    public short LMT_VOL_NO = 0;
+    public double MLY_LMT = 0;
+    public short MLY_LMT_NO = 0;
+    public int MLY_VOL = 0;
+    public short MLY_VOL_NO = 0;
+    public double SYY_LMT = 0;
+    public short SYY_LMT_NO = 0;
+    public double YLY_LMT = 0;
+    public short YLY_LMT_NO = 0;
+    public double SE_LMT = 0;
+    public short SE_LMT_NO = 0;
+    public int START_DT = 0;
+    public short START_DT_NO = 0;
+    public int START_TM = 0;
+    public short START_TM_NO = 0;
+    public int END_DT = 0;
+    public short END_DT_NO = 0;
+    public int END_TM = 0;
+    public short END_TM_NO = 0;
+    public int UPD_DT = 0;
+    public short UPD_DT_NO = 0;
+    public String UPD_TLR = " ";
+    public short UPD_TLR_NO = 0;
+}

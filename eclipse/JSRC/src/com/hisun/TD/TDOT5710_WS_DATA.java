@@ -1,0 +1,46 @@
+package com.hisun.TD;
+
+public class TDOT5710_WS_DATA {
+    String WS_ACO_AC = " ";
+    int WS_SETT_DATE = 0;
+    long WS_JRNNO = 0;
+    int WS_TXN_BR = 0;
+    int WS_BOOK_BR = 0;
+    String WS_SETT_CCY = " ";
+    double WS_SETT_BAL = 0;
+    double WS_RAT_INT = 0;
+    char TDOT5710_FILLER22 = 0X01;
+    double WS_TAX_RAT = 0;
+    char TDOT5710_FILLER24 = 0X01;
+    int WS_STR_DATE = 0;
+    int WS_END_DATE = 0;
+    char WS_STATUS = ' ';
+    char WS_SETT_STATE = ' ';
+    double WS_INT_AMT = 0;
+    char TDOT5710_FILLER30 = 0X01;
+    double WS_TAX_AMT = 0;
+    char TDOT5710_FILLER32 = 0X01;
+    double WS_SETT_AMT = 0;
+    char TDOT5710_FILLER34 = 0X01;
+    double WS_DRW_BUD_INT = 0;
+    char TDOT5710_FILLER36 = 0X01;
+    int WS_REC_INT_DT = 0;
+    double WS_COM_BAL = 0;
+    double WS_COM_ACCU = 0;
+    char WS_INOUT = ' ';
+    char WS_STL_MTH = ' ';
+    String WS_PAY_AC = " ";
+    int WS_PAY_AC_SEQ = 0;
+    String WS_REMMIT_BK = " ";
+    String WS_REMMIT_NM = " ";
+    char TDOT5710_FILLER46 = 0X02;
+    String WS_AI_ACNO = " ";
+    String WS_REV_NO = " ";
+    String WS_CRT_TLR = " ";
+    int WS_CRT_DATE = 0;
+    int WS_OWNER_BK = 0;
+    String WS_UPD_TLT = " ";
+    int WS_UPD_DATE = 0;
+    int WS_UPD_TIME = 0;
+    String WS_TS = " ";
+}

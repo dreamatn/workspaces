@@ -1,0 +1,7 @@
+package com.hisun.AI;
+
+public class AICPQBAL {
+    public AICPQBAL_RC RC = new AICPQBAL_RC();
+    public AICPQBAL_INPUT_DATA INPUT_DATA = new AICPQBAL_INPUT_DATA();
+    public AICPQBAL_OUTPUT_DATA OUTPUT_DATA = new AICPQBAL_OUTPUT_DATA();
+}

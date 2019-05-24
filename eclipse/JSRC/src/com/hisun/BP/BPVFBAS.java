@@ -1,0 +1,44 @@
+package com.hisun.BP;
+
+public class BPVFBAS {
+    public BPVFBAS_KEY KEY = new BPVFBAS_KEY();
+    public short FEE_NO = 0;
+    public String FEE_DESC = " ";
+    public String FEE_TYPE = " ";
+    public double UP_AMT = 0;
+    public double DWN_AMT = 0;
+    public double UP_PCT = 0;
+    public double DWN_PCT = 0;
+    public String REG_TYPE = " ";
+    public char UPD_FLG = ' ';
+    public char EXG_FLG = ' ';
+    public char EXG_TYP = ' ';
+    public char FEE_ATTA = ' ';
+    public double TX_BR_PER = 0;
+    public double AC_BR_PER = 0;
+    public double AC2_BR_PER = 0;
+    public String TX_MMO = " ";
+    public char CHG_TYPE = ' ';
+    public char CHG_METHOD = ' ';
+    public char CYC_METHOD = ' ';
+    public char DIS_METHOD = ' ';
+    public char AMO_FLG = ' ';
+    public String AMO_CODE = " ";
+    public char REB_FLG = ' ';
+    public String REB_CODE = " ";
+    public char CAL_FLG = ' ';
+    public char CAL_CYCLE = ' ';
+    public short PERIDO_CNT = 0;
+    public short CAL_DATE = 0;
+    public char DEBT_METHOD = ' ';
+    public char RECH_METHOD = ' ';
+    public String MAX_RECH_CNT = " ";
+    public char ADVICE_FLG = ' ';
+    public int EFF_DATE = 0;
+    public int EXP_DATE = 0;
+    public int LAST_DATE = 0;
+    public String LAST_TELL = " ";
+    public String SUP_TEL1 = " ";
+    public String SUP_TEL2 = " ";
+    public String TS = " ";
+}

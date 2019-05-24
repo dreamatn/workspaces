@@ -1,0 +1,42 @@
+package com.hisun.PY;
+
+public class PYRCLCT {
+    public PYRCLCT_KEY KEY = new PYRCLCT_KEY();
+    public int ACPT_BR = 0;
+    public char BUSI_TYP = ' ';
+    public String PRD_CD = " ";
+    public char BUSI_STS = ' ';
+    public int ACPT_DATE = 0;
+    public int EXP_DATE = 0;
+    public char COL_WAY = ' ';
+    public char PAY_WAY = ' ';
+    public char COL_KIND = ' ';
+    public String BILL_TYPE = " ";
+    public String BILL_NO = " ";
+    public String CON_NAME = " ";
+    public String CON_NO = " ";
+    public short ATCH_NUM = 0;
+    public String CCY = " ";
+    public double COL_AMT = 0;
+    public double PAID_AMT = 0;
+    public String REJ_RSN = " ";
+    public long REC_BANK_NO = 0;
+    public String REC_BANK_NAME = " ";
+    public String REC_ACC_NO = " ";
+    public String REC_ACC_NAME = " ";
+    public long PAY_BANK_NO = 0;
+    public String PAY_BANK_NAME = " ";
+    public String PAY_ACC_NO = " ";
+    public String PAY_ACC_NAME = " ";
+    public long ACPT_JRN_NO = 0;
+    public String ACPT_TLR = " ";
+    public int CLS_BR = 0;
+    public long CLS_JNR_NO = 0;
+    public String CLS_TLR = " ";
+    public int CLS_DATE = 0;
+    public int CRT_DATE = 0;
+    public String CRT_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public String UPDTBL_TLR = " ";
+    public String TS = " ";
+}

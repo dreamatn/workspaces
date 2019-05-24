@@ -1,0 +1,44 @@
+package com.hisun.TD;
+
+public class TDRBSPRV {
+    public TDRBSPRV_KEY KEY = new TDRBSPRV_KEY();
+    public String CI_NO = " ";
+    public String PRD_CD = " ";
+    public String CCY = " ";
+    public int FINAL_MT_DATE = 0;
+    public double PRIN = 0;
+    public double INT_AMT = 0;
+    public char ROLL_INST = ' ';
+    public double INC_AMT = 0;
+    public double DEC_AMT = 0;
+    public short NEW_SER_NO = 0;
+    public double NEW_PRIN = 0;
+    public int NEW_VAL_DATE = 0;
+    public String NEW_TENOR = " ";
+    public int NEW_MT_DATE = 0;
+    public char NEW_RATE_SEL = ' ';
+    public double NEW_CON_RATE = 0;
+    public double NEW_INT_AMT = 0;
+    public short NEW_IS_FRQ = 0;
+    public short NEW_IS_DAY = 0;
+    public char NEW_MT_INST = ' ';
+    public char INOUT = ' ';
+    public char STL_MTH = ' ';
+    public String STL_AC = " ";
+    public int STL_AC_SEQ = 0;
+    public String REMMIT_BK = " ";
+    public String REMMIT_NM = " ";
+    public char INT_INOUT = ' ';
+    public char STL_INT_MTH = ' ';
+    public String STL_INT_AC = " ";
+    public int STL_INT_AC_SEQ = 0;
+    public String INT_REMMIT_BK = " ";
+    public String INT_REMMIT_NM = " ";
+    public int OWNER_BK = 0;
+    public String CRT_TLR = " ";
+    public int CRT_DATE = 0;
+    public String UPD_TLT = " ";
+    public int UPD_DATE = 0;
+    public int UPD_TIME = 0;
+    public String TS = " ";
+}

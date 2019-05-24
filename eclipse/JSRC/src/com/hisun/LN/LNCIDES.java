@@ -1,0 +1,8 @@
+package com.hisun.LN;
+
+public class LNCIDES {
+    public LNCIDES_IPLN_AREA IPLN_AREA = new LNCIDES_IPLN_AREA();
+    public LNCIDES_IPLN_ADDI IPLN_ADDI = new LNCIDES_IPLN_ADDI();
+    public LNCIDES_SORT_AREA SORT_AREA = new LNCIDES_SORT_AREA();
+    public LNCIDES_SORT_ADDI SORT_ADDI = new LNCIDES_SORT_ADDI();
+}

@@ -1,0 +1,40 @@
+package com.hisun.CI;
+
+public class CICOCUI_DATA {
+    public String CI_NO = " ";
+    public String ID_TYPE = " ";
+    public String ID_NO = " ";
+    public int EXP_DT = 0;
+    public String CI_NM = " ";
+    public String CI_ENM = " ";
+    public char CI_TYP = ' ';
+    public char CI_ATTR = ' ';
+    public String STSW = " ";
+    public int OPEN_DT = 0;
+    public int OWNER_BK = 0;
+    public int CLOSE_DT = 0;
+    public String OPEN_CHNL = " ";
+    public String SUB_TYP = " ";
+    public String ORG_TYPE = " ";
+    public String FIN_TYPE = " ";
+    public char FTA_FLG = ' ';
+    public char EP_FLG = ' ';
+    public String SVR_LVL = " ";
+    public String TAX_BANK = " ";
+    public String TAX_AC_NO = " ";
+    public char TAX_TYPE = ' ';
+    public String TAX_DIST_NO = " ";
+    public char RESIDENT = ' ';
+    public char SEX = ' ';
+    public int BIRTH_DT = 0;
+    public String NATION = " ";
+    public String REG_CNTY = " ";
+    public String INTEL_TYPE = " ";
+    public String INDUS1 = " ";
+    public char SID_FLG = ' ';
+    public String TEL_NO = " ";
+    public String PB_AP_NO = " ";
+    public String OIC_NO = " ";
+    public String RESP_CD = " ";
+    public String SUB_DP = " ";
+}

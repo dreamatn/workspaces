@@ -1,0 +1,9 @@
+package com.hisun.DC;
+
+public class DCZIACCT_WS_PARM {
+    DCZIACCT_WS_PARM_KEY WS_PARM_KEY = new DCZIACCT_WS_PARM_KEY();
+    String WS_PARM_DESC = " ";
+    String WS_PARM_CDESC = " ";
+    int WS_PARM_DATA_LEN = 0;
+    DCZIACCT_WS_PARM_DATA_TXT WS_PARM_DATA_TXT = new DCZIACCT_WS_PARM_DATA_TXT();
+}

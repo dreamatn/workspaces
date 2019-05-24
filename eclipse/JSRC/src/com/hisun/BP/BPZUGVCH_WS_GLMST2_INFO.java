@@ -1,0 +1,9 @@
+package com.hisun.BP;
+
+public class BPZUGVCH_WS_GLMST2_INFO {
+    BPZUGVCH_WS_MST2_BASIC WS_MST2_BASIC = new BPZUGVCH_WS_MST2_BASIC();
+    BPZUGVCH_WS_MST2_REL_ITMS[] WS_MST2_REL_ITMS = new BPZUGVCH_WS_MST2_REL_ITMS[60];
+    public BPZUGVCH_WS_GLMST2_INFO() {
+        for (int i=0;i<60;i++) WS_MST2_REL_ITMS[i] = new BPZUGVCH_WS_MST2_REL_ITMS();
+    }
+}

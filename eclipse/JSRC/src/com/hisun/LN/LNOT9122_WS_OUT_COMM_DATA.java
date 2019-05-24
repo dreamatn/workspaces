@@ -1,0 +1,41 @@
+package com.hisun.LN;
+
+public class LNOT9122_WS_OUT_COMM_DATA {
+    String WS_OUT_CONT_NO = " ";
+    String WS_OUT_PAPER_NO = " ";
+    String WS_OUT_PAPER_DS = " ";
+    char LNOT9122_FILLER8 = 0X02;
+    short WS_OUT_DRAW_NO = 0;
+    int WS_OUT_BOOK_BR = 0;
+    int WS_OUT_DOMI_BR = 0;
+    String WS_OUT_CI_NO = " ";
+    String WS_OUT_CI_CNM = " ";
+    char LNOT9122_FILLER14 = 0X02;
+    String WS_OUT_PROD_TYP = " ";
+    String WS_OUT_PROD_NM = " ";
+    char LNOT9122_FILLER17 = 0X02;
+    String WS_OUT_CCY = " ";
+    double WS_OUT_CONT_AMT = 0;
+    int WS_OUT_START_DT = 0;
+    int WS_OUT_MATU_DT = 0;
+    String WS_OUT_GUA_SEQ = " ";
+    char WS_OUT_GUARDUAP = ' ';
+    char WS_OUT_GUARPSEQ = ' ';
+    int WS_OUT_GRA_DAYA = 0;
+    char WS_OUT_GRA_PDFL = ' ';
+    char WS_OUT_GRA_OI_T = ' ';
+    char WS_OUT_GRA_LI_T = ' ';
+    double WS_OUT_PRE_RATE = 0;
+    char LNOT9122_FILLER30 = 0X01;
+    short WS_OUT_OLC_PERD = 0;
+    char WS_OUT_OLC_PERU = ' ';
+    char WS_OUT_AUAL_TYP = ' ';
+    String WS_OUT_INT_D_BA = " ";
+    String WS_OUT_REMARK1 = " ";
+    char LNOT9122_FILLER36 = 0X02;
+    char K_ERROR = 'E';
+    String K_HIS_REMARKS = "DANZHENG MODIFY";
+    String K_PROD_CD = "DANZHENG";
+    String K_HIS_CPB_NM1 = "DANZHENG";
+    String K_HIS_RMKS = "DANZHENG MODIFY";
+}

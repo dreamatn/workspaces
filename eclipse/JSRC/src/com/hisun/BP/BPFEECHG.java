@@ -1,0 +1,9 @@
+package com.hisun.BP;
+
+public class BPFEECHG {
+    public char REC_FLG = ' ';
+    public String CONTENT = " ";
+    public BPFEECHG_REDEFINES6 REDEFINES6 = new BPFEECHG_REDEFINES6();
+    public BPFEECHG_REDEFINES10 REDEFINES10 = new BPFEECHG_REDEFINES10();
+    public BPFEECHG_REDEFINES24 REDEFINES24 = new BPFEECHG_REDEFINES24();
+}

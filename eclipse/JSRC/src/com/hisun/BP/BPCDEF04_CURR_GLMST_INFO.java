@@ -1,0 +1,5 @@
+package com.hisun.BP;
+
+public class BPCDEF04_CURR_GLMST_INFO {
+    public BPCDEF04_CURR_GLMST_ITM CURR_GLMST_ITM = new BPCDEF04_CURR_GLMST_ITM();
+}

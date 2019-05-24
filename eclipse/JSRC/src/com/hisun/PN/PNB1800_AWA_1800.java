@@ -1,0 +1,44 @@
+package com.hisun.PN;
+
+public class PNB1800_AWA_1800 {
+    public String BILL_KND = " ";
+    public short BILL_KND_NO = 0;
+    public String BILL_NO = " ";
+    public short BILL_NO_NO = 0;
+    public int ISS_DATE = 0;
+    public short ISS_DATE_NO = 0;
+    public int CLR_DATE = 0;
+    public short CLR_DATE_NO = 0;
+    public char ENCR_FLG = ' ';
+    public short ENCR_FLG_NO = 0;
+    public String ENCRY_NO = " ";
+    public short ENCRY_NO_NO = 0;
+    public double AMT = 0;
+    public short AMT_NO = 0;
+    public double STL_AMT = 0;
+    public short STL_AMT_NO = 0;
+    public String CR_AC = " ";
+    public short CR_AC_NO = 0;
+    public String CR_NM = " ";
+    public short CR_NM_NO = 0;
+    public String CR_CODE = " ";
+    public short CR_CODE_NO = 0;
+    public String APP_AC = " ";
+    public short APP_AC_NO = 0;
+    public int WT_BR = 0;
+    public short WT_BR_NO = 0;
+    public String PAYEE_NM = " ";
+    public short PAYEE_NM_NO = 0;
+    public char ACCK_FLG = ' ';
+    public short ACCK_FLG_NO = 0;
+    public String CR_BK_NO = " ";
+    public short CR_BK_NO_NO = 0;
+    public String CR_BK_NM = " ";
+    public short CR_BK_NM_NO = 0;
+    public String CR_OTHAC = " ";
+    public short CR_OTHAC_NO = 0;
+    public String CR_AC_NM = " ";
+    public short CR_AC_NM_NO = 0;
+    public String SMR = " ";
+    public short SMR_NO = 0;
+}

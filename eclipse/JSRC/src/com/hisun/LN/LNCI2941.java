@@ -1,0 +1,61 @@
+package com.hisun.LN;
+
+public class LNCI2941 {
+    public String CONT_NO = " ";
+    public String DRAW_NO = " ";
+    public String PAPER_NO = " ";
+    public int BOOK_BR = 0;
+    public int DOMI_BR = 0;
+    public String CI_NO = " ";
+    public String CI_CNAME = " ";
+    public String PROD_CD = " ";
+    public String PROD_NM = " ";
+    public String VCH_FLG = " ";
+    public int VAL_DT = 0;
+    public int STR_DT = 0;
+    public int MAT_DT = 0;
+    public String CCY = " ";
+    public double PRIN = 0;
+    public double BAL = 0;
+    public double C_PRIN = 0;
+    public double EX_RATE = 0;
+    public double EQU_AMT = 0;
+    public char GAUR_TY = ' ';
+    public char FINA_FLG = ' ';
+    public char IS_AREA = ' ';
+    public char CLM_FLG = ' ';
+    public double CLM_AMT = 0;
+    public char P_AC_TY = ' ';
+    public String PAY_AC = " ";
+    public String P_AC_NM = " ";
+    public double AVL_AMT = 0;
+    public double P_BY_S = 0;
+    public String M_NO = " ";
+    public LNCI2941_M_AC_INF[] M_AC_INF = new LNCI2941_M_AC_INF[10];
+    public double P_BY_M = 0;
+    public double P_BY_A = 0;
+    public String A_CTA = " ";
+    public String BEN_NAM = " ";
+    public String BEN_AC = " ";
+    public String B_AC_NM = " ";
+    public String F_BEN_NM = " ";
+    public int F_BEN_BK = 0;
+    public char F_AC_TY = ' ';
+    public String F_BEN_AC = " ";
+    public char F_AC_FLG = ' ';
+    public String MIB_SEQ = " ";
+    public String LC_NO = " ";
+    public String PEN_RATT = " ";
+    public double PEN_IRAT = 0;
+    public char SYN_N = ' ';
+    public String L_RATT = " ";
+    public double L_IRAT = 0;
+    public String RMK1 = " ";
+    public LNCI2941_FEE_INFO[] FEE_INFO = new LNCI2941_FEE_INFO[5];
+    public String FEE_ACT = " ";
+    public String FEE_AC = " ";
+    public LNCI2941() {
+        for (int i=0;i<10;i++) M_AC_INF[i] = new LNCI2941_M_AC_INF();
+        for (int i=0;i<5;i++) FEE_INFO[i] = new LNCI2941_FEE_INFO();
+    }
+}

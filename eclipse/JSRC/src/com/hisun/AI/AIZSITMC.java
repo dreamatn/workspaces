@@ -1,0 +1,110 @@
+package com.hisun.AI;
+
+import com.hisun.SC.*;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class AIZSITMC {
+    String WS_ERR_MSG = " ";
+    AICMSG_ERROR_MSG AICMSG_ERROR_MSG = new AICMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCMPAG SCCMPAG = new SCCMPAG();
+    SCCFMT SCCFMT = new SCCFMT();
+    AICUITMC AICUITMC = new AICUITMC();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    AICSITMC AICSITMC;
+    public void MP(SCCGWA SCCGWA, AICSITMC AICSITMC) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.AICSITMC = AICSITMC;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "AIZSITMC return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, AICSITMC.FUNC);
+        if (AICSITMC.FUNC == 'A') {
+            S010_CHECK_INPUT();
+            B010_ITMC_ADD_PROC();
+        } else if (AICSITMC.FUNC == 'I') {
+            B020_ITMC_INQ_PROC();
+        } else {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "INVALID FUNC(" + AICSITMC.FUNC + ")";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+        CEP.TRC(SCCGWA, AICSITMC.FUNC);
+    }
+    public void S010_CHECK_INPUT() throws IOException,SQLException,Exception {
+        if (AICSITMC.DATA_AREA.KEY.BRANCH_ITM_NO.trim().length() == 0 
+            || AICSITMC.DATA_AREA.KEY.TRUNK_ITM_FLG == ' ') {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.MUST_INPUT;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void B010_ITMC_ADD_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, AICUITMC);
+        AICUITMC.FUNC = 'A';
+        R000_MOVE_UITMC_DATA_PROC();
+        S000_CALL_AIZUITMC();
+    }
+    public void B020_ITMC_INQ_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, AICUITMC);
+        AICUITMC.FUNC = 'I';
+        R000_MOVE_UITMC_DATA_PROC();
+        S000_CALL_AIZUITMC();
+        R000_MOVE_UITMC_BACK_PROC();
+    }
+    public void R000_MOVE_UITMC_DATA_PROC() throws IOException,SQLException,Exception {
+        AICUITMC.DATA_AREA.KEY.BRANCH_ITM_NO = AICSITMC.DATA_AREA.KEY.BRANCH_ITM_NO;
+        AICUITMC.DATA_AREA.KEY.TRUNK_ITM_FLG = AICSITMC.DATA_AREA.KEY.TRUNK_ITM_FLG;
+        AICUITMC.DATA_AREA.TRUNK_ITM_NO = AICSITMC.DATA_AREA.TRUNK_ITM_NO;
+        AICUITMC.DATA_AREA.ITM_CD = AICSITMC.DATA_AREA.ITM_CD;
+        AICUITMC.DATA_AREA.INOFF = AICSITMC.DATA_AREA.INOFF;
+        AICUITMC.DATA_AREA.TRUNK_CHS_NM = AICSITMC.DATA_AREA.TRUNK_CHS_NM;
+        AICUITMC.DATA_AREA.UPDTBL_DATE = AICSITMC.DATA_AREA.UPDTBL_DATE;
+        AICUITMC.DATA_AREA.LAST_UPDATE_TLR = AICSITMC.DATA_AREA.LAST_UPDATE_TLR;
+        CEP.TRC(SCCGWA, AICSITMC.DATA_AREA.KEY.BRANCH_ITM_NO);
+        CEP.TRC(SCCGWA, AICSITMC.DATA_AREA.KEY.TRUNK_ITM_FLG);
+        CEP.TRC(SCCGWA, AICSITMC.DATA_AREA.TRUNK_ITM_NO);
+        CEP.TRC(SCCGWA, AICSITMC.DATA_AREA.ITM_CD);
+        CEP.TRC(SCCGWA, AICSITMC.DATA_AREA.INOFF);
+        CEP.TRC(SCCGWA, AICSITMC.DATA_AREA.TRUNK_CHS_NM);
+    }
+    public void R000_MOVE_UITMC_BACK_PROC() throws IOException,SQLException,Exception {
+        AICSITMC.DATA_AREA.KEY.BRANCH_ITM_NO = AICUITMC.DATA_AREA.KEY.BRANCH_ITM_NO;
+        AICSITMC.DATA_AREA.KEY.TRUNK_ITM_FLG = AICUITMC.DATA_AREA.KEY.TRUNK_ITM_FLG;
+        AICSITMC.DATA_AREA.TRUNK_ITM_NO = AICUITMC.DATA_AREA.TRUNK_ITM_NO;
+        AICSITMC.DATA_AREA.ITM_CD = AICUITMC.DATA_AREA.ITM_CD;
+        AICSITMC.DATA_AREA.INOFF = AICUITMC.DATA_AREA.INOFF;
+        AICSITMC.DATA_AREA.TRUNK_CHS_NM = AICUITMC.DATA_AREA.TRUNK_CHS_NM;
+        CEP.TRC(SCCGWA, AICSITMC.DATA_AREA.KEY.BRANCH_ITM_NO);
+        CEP.TRC(SCCGWA, AICSITMC.DATA_AREA.KEY.TRUNK_ITM_FLG);
+        CEP.TRC(SCCGWA, AICSITMC.DATA_AREA.TRUNK_ITM_NO);
+        CEP.TRC(SCCGWA, AICSITMC.DATA_AREA.ITM_CD);
+        CEP.TRC(SCCGWA, AICSITMC.DATA_AREA.INOFF);
+        CEP.TRC(SCCGWA, AICSITMC.DATA_AREA.TRUNK_CHS_NM);
+    }
+    public void S000_CALL_AIZUITMC() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "AI-ITMC-U001", AICUITMC);
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

@@ -1,0 +1,179 @@
+package com.hisun.LN;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import com.hisun.SC.SCCCALL;
+import com.hisun.SC.SCCEXCP;
+import com.hisun.SC.SCCGWA;
+
+public class LNZSWLMD {
+    boolean pgmRtn = false;
+    String K_AC_TYPE = "13";
+    String K_HIS_REMARKS = "ACCRUAL DRAWDOWN CONTRACT CHANGE";
+    String K_CPY_LNCHWLMD = "LNCHWLMD";
+    char WS_CCY_ID = ' ';
+    int WS_I = 0;
+    int WS_LEN = 0;
+    char WS_UPDATE_FLG = ' ';
+    char WS_FOUND_FLG = ' ';
+    LNCMSG_ERROR_MSG LNCMSG_ERROR_MSG = new LNCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    LNCSWLMD LNCSLMDB = new LNCSWLMD();
+    LNRLOAN LNRLOAN = new LNRLOAN();
+    LNRCONT LNRCONT = new LNRCONT();
+    LNCRCONT LNCRCONT = new LNCRCONT();
+    LNCRLOAN LNCRLOAN = new LNCRLOAN();
+    LNCSLNMP LNCSLNMP = new LNCSLNMP();
+    LNCIPART LNCIPART = new LNCIPART();
+    SCCGWA SCCGWA;
+    LNCSWLMD LNCSWLMD;
+    public void MP(SCCGWA SCCGWA, LNCSWLMD LNCSWLMD) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.LNCSWLMD = LNCSWLMD;
+        CEP.TRC(SCCGWA);
+        A00_INIT_PROC();
+        if (pgmRtn) return;
+        B00_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "LNZSWLMD return!");
+        Z_RET();
+        if (pgmRtn) return;
+        JIBS_RETURN();
+    }
+    public void A00_INIT_PROC() throws IOException,SQLException,Exception {
+        LNCSWLMD.RC.RC_APP = "LN";
+        LNCSWLMD.RC.RC_RTNCODE = 0;
+        CEP.TRC(SCCGWA, LNCSWLMD.COMM_DATA.FACILITY_NO);
+        CEP.TRC(SCCGWA, LNCSWLMD.COMM_DATA.TRCHCMMT_NO);
+        CEP.TRC(SCCGWA, LNCSWLMD.COMM_DATA.CTA_NO);
+        CEP.TRC(SCCGWA, LNCSWLMD.COMM_DATA.DOMI_BR);
+        CEP.TRC(SCCGWA, LNCSWLMD.COMM_DATA.BAL);
+    }
+    public void B00_MAIN_PROC() throws IOException,SQLException,Exception {
+        B000_CHECK();
+        if (pgmRtn) return;
+        B000_MAIN_PROC();
+        if (pgmRtn) return;
+    }
+    public void B000_CHECK() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, LNCSWLMD.COMM_DATA.VAL_DT);
+        CEP.TRC(SCCGWA, LNCSWLMD.COMM_DATA.DUE_DT);
+        if (LNCSWLMD.COMM_DATA.DUE_DT != 0 
+            && LNCSWLMD.COMM_DATA.DUE_DT <= LNCSWLMD.COMM_DATA.VAL_DT) {
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_VALDT_GRT_DUEDT, LNCSWLMD.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        if (LNCSWLMD.COMM_DATA.INT_PER_END < LNCSWLMD.COMM_DATA.VAL_DT 
+            || LNCSWLMD.COMM_DATA.INT_PER_END > LNCSWLMD.COMM_DATA.DUE_DT) {
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_IPED_NOT_IN_DUED, LNCSWLMD.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        IBS.init(SCCGWA, LNCIPART.DATA);
+        IBS.init(SCCGWA, LNCIPART.RC);
+        LNCIPART.DATA.FUNC = 'P';
+        LNCIPART.DATA.LEVEL = 'C';
+        LNCIPART.DATA.CONTRACT_NO = LNCSWLMD.COMM_DATA.TRCHCMMT_NO;
+        S000_CALL_LNZIPART();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, LNCIPART.DATA.IS_SYN);
+        if (LNCIPART.DATA.IS_SYN != 'N') {
+            if (LNCSWLMD.COMM_DATA.DISB_REF == 0) {
+                IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_DISB_REF_M_INPUT, LNCSWLMD.RC);
+                Z_RET();
+                if (pgmRtn) return;
+            }
+        } else {
+            if (LNCSWLMD.COMM_DATA.DISB_REF != 0) {
+                IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_NOT_ALLOW_INPUT, LNCSWLMD.RC);
+                Z_RET();
+                if (pgmRtn) return;
+            }
+        }
+        R000_GET_LOAN_INFO_PROC();
+        if (pgmRtn) return;
+        R000_GET_CONT_INFO_PROC();
+        if (pgmRtn) return;
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B100_MODIFY_LOAN_PROC();
+        if (pgmRtn) return;
+        if (LNCSWLMD.COMM_DATA.DISB_REF != 0) {
+            B200_LOAN_MDPART_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void B100_MODIFY_LOAN_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCSLMDB);
+        IBS.CLONE(SCCGWA, LNCSWLMD, LNCSLMDB);
+        S000_CALL_LNZSLMDB();
+        if (pgmRtn) return;
+        IBS.CLONE(SCCGWA, LNCSLMDB, LNCSWLMD);
+    }
+    public void B200_LOAN_MDPART_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCSLNMP);
+        LNCSLNMP.COMM_DATA.CCY = LNCSWLMD.COMM_DATA.CCY;
+        LNCSLNMP.COMM_DATA.PRINCIPAL = LNCSWLMD.COMM_DATA.PRINICIPAL;
+        LNCSLNMP.COMM_DATA.EQU = LNCSWLMD.COMM_DATA.EQU;
+        LNCSLNMP.COMM_DATA.FACILITY_NO = LNCSWLMD.COMM_DATA.FACILITY_NO;
+        LNCSLNMP.COMM_DATA.TRCHCMMT_NO = LNCSWLMD.COMM_DATA.TRCHCMMT_NO;
+        LNCSLNMP.COMM_DATA.CONTRACT_NO = LNCSWLMD.COMM_DATA.CTA_NO;
+        LNCSLNMP.COMM_DATA.PROD_CD = LNCSWLMD.COMM_DATA.PROD_CD;
+        LNCSLNMP.COMM_DATA.VAL_DT = LNCSWLMD.COMM_DATA.VAL_DT;
+        LNCSLNMP.COMM_DATA.DUE_DT = LNCSWLMD.COMM_DATA.DUE_DT;
+        LNCSLNMP.COMM_DATA.VAL_DT_FRM = LNRCONT.START_DATE;
+        LNCSLNMP.COMM_DATA.DUE_DT_FRM = LNRCONT.MAT_DATE;
+        LNCSLNMP.COMM_DATA.INT_PER_STRT = LNCSWLMD.COMM_DATA.INT_PER_STRT;
+        LNCSLNMP.COMM_DATA.INT_PER_END = LNCSWLMD.COMM_DATA.INT_PER_END;
+        LNCSLNMP.COMM_DATA.DISB_REF = LNCSWLMD.COMM_DATA.DISB_REF;
+        LNCSLNMP.COMM_DATA.EXCH_RATE = LNCSWLMD.COMM_DATA.EXCH_RATE;
+        LNCSLNMP.COMM_DATA.ALL_IN_RATE = LNCSWLMD.COMM_DATA.ALL_IN_RATE;
+        LNCSLNMP.COMM_DATA.PENALTY_RATE = LNCSWLMD.COMM_DATA.EFF_RAT;
+        LNCSLNMP.COMM_DATA.STATUS = LNCSWLMD.COMM_DATA.STATUS;
+        S000_CALL_LNZSLNMP();
+        if (pgmRtn) return;
+        LNCSWLMD.COMM_DATA.CCY = LNCSLNMP.COMM_DATA.CCY;
+        LNCSWLMD.COMM_DATA.PRINICIPAL = LNCSLNMP.COMM_DATA.PRINCIPAL;
+        LNCSWLMD.COMM_DATA.EQU = LNCSLNMP.COMM_DATA.EQU;
+        LNCSWLMD.COMM_DATA.FACILITY_NO = LNCSLNMP.COMM_DATA.FACILITY_NO;
+        LNCSWLMD.COMM_DATA.TRCHCMMT_NO = LNCSLNMP.COMM_DATA.TRCHCMMT_NO;
+        LNCSWLMD.COMM_DATA.CTA_NO = LNCSLNMP.COMM_DATA.CONTRACT_NO;
+        LNCSWLMD.COMM_DATA.PROD_CD = LNCSLNMP.COMM_DATA.PROD_CD;
+        LNCSWLMD.COMM_DATA.VAL_DT = LNCSLNMP.COMM_DATA.VAL_DT;
+        LNCSWLMD.COMM_DATA.DUE_DT = LNCSLNMP.COMM_DATA.DUE_DT;
+        LNCSWLMD.COMM_DATA.INT_PER_STRT = LNCSLNMP.COMM_DATA.INT_PER_STRT;
+        LNCSWLMD.COMM_DATA.INT_PER_END = LNCSLNMP.COMM_DATA.INT_PER_END;
+        LNCSWLMD.COMM_DATA.DISB_REF = LNCSLNMP.COMM_DATA.DISB_REF;
+        LNCSWLMD.COMM_DATA.STATUS = LNCSLNMP.COMM_DATA.STATUS;
+        LNCSWLMD.COMM_DATA.EXCH_RATE = LNCSLNMP.COMM_DATA.EXCH_RATE;
+        LNCSWLMD.COMM_DATA.ALL_IN_RATE = LNCSLNMP.COMM_DATA.ALL_IN_RATE;
+        LNCSWLMD.COMM_DATA.EFF_RAT = LNCSLNMP.COMM_DATA.PENALTY_RATE;
+    }
+    public void R000_GET_LOAN_INFO_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNRLOAN);
+        IBS.init(SCCGWA, LNCRLOAN);
+        LNRLOAN.KEY.CONTRACT_NO = LNCSWLMD.COMM_DATA.CTA_NO;
+        LNCRLOAN.FUNC = 'I';
+        CEP.TRC(SCCGWA, LNRLOAN.KEY);
+        LNCRLOAN.REC_PTR = LNRLOAN;
+        LNCRLOAN.REC_LEN = 217;
+        S000_CALL_LNZRLOAN();
+        if (pgmRtn) return;
+    }
+    public void R000_GET_CONT_INFO_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNRCONT);
+        IBS.init(SCCGWA, LNCRCONT);
+        LNRCONT.KEY.CONTRACT_NO = LNCSWLMD.COMM_DATA.CTA_NO;
+        LNCRCONT.FUNC = 'I';
+        CEP.TRC(SCCGWA, LNRCONT.KEY);
+        LNCRCONT.REC_PTR = LNRCONT;
+        LNCRCONT.REC_LEN = 416;
+        S000_CALL_LNZRCONT();
+        if (pgmRtn) return;
+    }
+    public void S000_CALL_LNZSLMDB() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "LN-SVR-LOAN-MDBORS", LNCSLMDB);
+        if (LNCSLMDB.RC.RC_RTNCODE != 0) {

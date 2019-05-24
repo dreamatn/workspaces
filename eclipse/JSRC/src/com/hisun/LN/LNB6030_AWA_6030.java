@@ -1,0 +1,44 @@
+package com.hisun.LN;
+
+public class LNB6030_AWA_6030 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String CTA_NO = " ";
+    public short CTA_NO_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String CI_ENMS = " ";
+    public short CI_ENMS_NO = 0;
+    public String CITY_CD = " ";
+    public short CITY_CD_NO = 0;
+    public String CI_ENM = " ";
+    public short CI_ENM_NO = 0;
+    public String CI_CNM = " ";
+    public short CI_CNM_NO = 0;
+    public double PRIN = 0;
+    public short PRIN_NO = 0;
+    public double OSBAL = 0;
+    public short OSBAL_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public char STS = ' ';
+    public short STS_NO = 0;
+    public char PAY_TYP = ' ';
+    public short PAY_TYP_NO = 0;
+    public short PAY_TERM = 0;
+    public short PAY_TERM_NO = 0;
+    public int VAL_DT = 0;
+    public short VAL_DT_NO = 0;
+    public int DUE_DT = 0;
+    public short DUE_DT_NO = 0;
+    public double INT = 0;
+    public short INT_NO = 0;
+    public double ADJ_AMT = 0;
+    public short ADJ_AMT_NO = 0;
+    public double ADJ_AMTS = 0;
+    public short ADJ_AMTS_NO = 0;
+    public String RSN = " ";
+    public short RSN_NO = 0;
+    public short SEQ = 0;
+    public short SEQ_NO = 0;
+}

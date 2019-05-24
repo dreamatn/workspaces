@@ -1,0 +1,48 @@
+package com.hisun.CI;
+
+public class CIB5702_AWA_5702 {
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String AGT_NO = " ";
+    public short AGT_NO_NO = 0;
+    public String AGT_TYP = " ";
+    public short AGT_TYP_NO = 0;
+    public char ENTY_TYP = ' ';
+    public short ENTY_TYP_NO = 0;
+    public String ENTY_NO = " ";
+    public short ENTY_NO_NO = 0;
+    public String FRM_APP = " ";
+    public short FRM_APP_NO = 0;
+    public char AGT_LVL = ' ';
+    public short AGT_LVL_NO = 0;
+    public int EFF_DATE = 0;
+    public short EFF_DATE_NO = 0;
+    public int EXP_DATE = 0;
+    public short EXP_DATE_NO = 0;
+    public int SGN_DATE = 0;
+    public short SGN_DATE_NO = 0;
+    public char AGT_STS = ' ';
+    public short AGT_STS_NO = 0;
+    public String ORG_NO = " ";
+    public short ORG_NO_NO = 0;
+    public String SGN_CHNL = " ";
+    public short SGN_CHNL_NO = 0;
+    public String REMARK = " ";
+    public short REMARK_NO = 0;
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String SVR_CD = " ";
+    public short SVR_CD_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public double CAMT = 0;
+    public short CAMT_NO = 0;
+    public double DAMT = 0;
+    public short DAMT_NO = 0;
+    public String PSN_DAT = " ";
+    public short PSN_DAT_NO = 0;
+    public String TEL_NO = " ";
+    public short TEL_NO_NO = 0;
+    public String SGN_DAT = " ";
+    public short SGN_DAT_NO = 0;
+}

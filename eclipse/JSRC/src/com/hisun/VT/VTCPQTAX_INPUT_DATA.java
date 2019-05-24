@@ -1,0 +1,41 @@
+package com.hisun.VT;
+
+public class VTCPQTAX_INPUT_DATA {
+    public int TR_DATE = 0;
+    public long JRNNO = 0;
+    public String SET_NO = " ";
+    public int SET_SEQ = 0;
+    public String CHNL_NO = " ";
+    public int TR_BR = 0;
+    public String TX_CODE = " ";
+    public int BR = 0;
+    public String CNTR_TYPE = " ";
+    public String AC = " ";
+    public char CI_TYPE = ' ';
+    public String ORG_TYPE = " ";
+    public char TERM_FLG = ' ';
+    public char BUSINE_FLG = ' ';
+    public char GUAR_FIN_FLG = ' ';
+    public String TR_TYPE = " ";
+    public char DY_STYLE = ' ';
+    public char BILL_FLG = ' ';
+    public String PROD_CD = " ";
+    public String PROD_CD_REL = " ";
+    public String ITM = " ";
+    public int AC_SEQ = 0;
+    public String CI_NO = " ";
+    public String CCY = " ";
+    public double YJ_AMT = 0;
+    public double SH_AMT = 0;
+    public double MEMO_AMT = 0;
+    public double YJN_AMT = 0;
+    public double SHN_AMT = 0;
+    public double MEMON_AMT = 0;
+    public double POST_AMT = 0;
+    public int EC_DATE = 0;
+    public long EC_JRNNO = 0;
+    public char INQ_TAX_FLG = ' ';
+    public char SPC_FLG = ' ';
+    public char MERGE_FLG = ' ';
+    public String FLR = " ";
+}

@@ -1,0 +1,45 @@
+package com.hisun.VT;
+
+public class VTCPQTAX_WS_TX_INQUIRY {
+    int TRT_DT = 0;
+    String JRN_NO = " ";
+    short JRN_SEQ = 0;
+    String CHG_AC = " ";
+    String CARD_NO = " ";
+    String TX_CI = " ";
+    char CHG_AC_TY = ' ';
+    char FEE_SRC = ' ';
+    String FEE_CODE = " ";
+    String PRD_CD = " ";
+    String CCY = " ";
+    char CCY_TYPE = ' ';
+    int SALE_DATE = 0;
+    int CHG_BR = 0;
+    double CHG_AMT = 0;
+    char FILLER106 = 0X01;
+    short ACC_RECH_CNT = 0;
+    double CUR_OWE_AMT = 0;
+    char FILLER109 = 0X01;
+    double ACC_CHG_AMT = 0;
+    char FILLER111 = 0X01;
+    String CMMT_NO = " ";
+    String BSNS_NO = " ";
+    char AMO_FLG = ' ';
+    int AMO_SDT = 0;
+    int AMO_EDT = 0;
+    char PRC_STS = ' ';
+    char CHG_STS = ' ';
+    String TRT_CHNL = " ";
+    int TRT_BR = 0;
+    String SRC_TR_CD = " ";
+    String SRC_TR_NAME = " ";
+    String REMARK = " ";
+    char FILLER124 = 0X02;
+    int CREATE_DATE = 0;
+    int CREATE_TIME = 0;
+    int UPDATE_DATE = 0;
+    String CREATE_TELL = " ";
+    String LAST_TELL = " ";
+    String SUP_TEL1 = " ";
+    String SUP_TEL2 = " ";
+}

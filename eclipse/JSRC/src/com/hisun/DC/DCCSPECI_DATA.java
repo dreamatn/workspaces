@@ -1,0 +1,41 @@
+package com.hisun.DC;
+
+public class DCCSPECI_DATA {
+    public String CI_NO = " ";
+    public String CARD_PROD_CD = " ";
+    public String CARD_BIN = " ";
+    public long CARD_SEG1 = 0;
+    public char CARD_SEL_MTH = ' ';
+    public long CARD_SEQ = 0;
+    public String CARD_MODU = " ";
+    public int FIN_AC_BR = 0;
+    public int SOC_SEC_AC_BR = 0;
+    public String CI_TYPE = " ";
+    public String CI_NAME = " ";
+    public String VALID_IDTYP = " ";
+    public String VALID_IDNO = " ";
+    public String SOC_SEC_CARD_NO = " ";
+    public char SEX = ' ';
+    public int BIRTH_DATE = 0;
+    public String NATIONALITY = " ";
+    public int CER_EXPIRE_DATE = 0;
+    public String CONTACT_TEL_SRC = " ";
+    public String CONTACT_TEL = " ";
+    public String FIX_TEL_SRC = " ";
+    public String FIX_TEL = " ";
+    public String OCCUPATION = " ";
+    public String COMMU_ADDR_SRC = " ";
+    public String COMMU_ADDR = " ";
+    public char ENV_FLG = ' ';
+    public String EMBOSS_NAME = " ";
+    public String AGENT_NAME = " ";
+    public String AGENT_IDTYP = " ";
+    public String AGENT_IDNO = " ";
+    public String AGENT_CONTACT_TEL = " ";
+    public String ORIG_FIN_CARD_NO = " ";
+    public String ORIG_SOC_SEC_CARD_NO = " ";
+    public String MADE_CARD_FLG = " ";
+    public String MADE_CARD_MERCH_CD = " ";
+    public String TLR_NO = " ";
+    public String REMARK = " ";
+}

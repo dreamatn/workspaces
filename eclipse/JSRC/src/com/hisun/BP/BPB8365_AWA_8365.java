@@ -1,0 +1,48 @@
+package com.hisun.BP;
+
+public class BPB8365_AWA_8365 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String CHNL = " ";
+    public short CHNL_NO = 0;
+    public String EXR_TYPE = " ";
+    public short EXR_TYPE_NO = 0;
+    public int BR = 0;
+    public short BR_NO = 0;
+    public String PRD_CD = " ";
+    public short PRD_CD_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String BUY_CCY = " ";
+    public short BUY_CCY_NO = 0;
+    public double BUY_AMT = 0;
+    public short BUY_AMT_NO = 0;
+    public char B_CASH = ' ';
+    public short B_CASH_NO = 0;
+    public String SELL_CCY = " ";
+    public short SELL_CCY_NO = 0;
+    public double SELL_AMT = 0;
+    public short SELL_AMT_NO = 0;
+    public char S_CASH = ' ';
+    public short S_CASH_NO = 0;
+    public String EXR_CODE = " ";
+    public short EXR_CODE_NO = 0;
+    public int UNT = 0;
+    public short UNT_NO = 0;
+    public double TRN_RATE = 0;
+    public short TRN_RATE_NO = 0;
+    public double SYS_RATE = 0;
+    public short SYS_RATE_NO = 0;
+    public double PRE_RATE = 0;
+    public short PRE_RATE_NO = 0;
+    public double CUS_RATE = 0;
+    public short CUS_RATE_NO = 0;
+    public double COS_RATE = 0;
+    public short COS_RATE_NO = 0;
+    public double SP = 0;
+    public short SP_NO = 0;
+    public int EFF_DATE = 0;
+    public short EFF_DATE_NO = 0;
+    public int EFF_TIME = 0;
+    public short EFF_TIME_NO = 0;
+}

@@ -1,0 +1,6 @@
+package com.hisun.BP;
+
+public class BPCOQPCD_OUTPUT_DATA {
+    public BPCOQPCD_CODE_INFO CODE_INFO = new BPCOQPCD_CODE_INFO();
+    public BPCOQPCD_TYPE_INFO TYPE_INFO = new BPCOQPCD_TYPE_INFO();
+}

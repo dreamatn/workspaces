@@ -1,0 +1,7 @@
+package com.hisun.LN;
+
+public class LNCIGETR {
+    public LNCIGETR_RC RC = new LNCIGETR_RC();
+    public LNCIGETR_INPUT_INFO INPUT_INFO = new LNCIGETR_INPUT_INFO();
+    public LNCIGETR_OUTPOUT_INFO OUTPOUT_INFO = new LNCIGETR_OUTPOUT_INFO();
+}

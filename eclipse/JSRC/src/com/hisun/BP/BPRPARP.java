@@ -1,0 +1,44 @@
+package com.hisun.BP;
+
+public class BPRPARP {
+    public BPRPARP_KEY KEY = new BPRPARP_KEY();
+    public String NAME = " ";
+    public String CNAME = " ";
+    public char DSTORE = ' ';
+    public char NSTORE = ' ';
+    public char SDESC = ' ';
+    public char CHK = ' ';
+    public char ENA = ' ';
+    public char STS = ' ';
+    public char ATTR = ' ';
+    public String CLASS = " ";
+    public char DM_TYPE = ' ';
+    public char MANT = ' ';
+    public char USE_LVL = ' ';
+    public char STORE = ' ';
+    public char DOWN_FLAG = ' ';
+    public String HISYEAR = " ";
+    public char DEL_FLG = ' ';
+    public char DUP_DATE_FLG = ' ';
+    public char PARM_VIEW1 = ' ';
+    public char PARM_VIEW2 = ' ';
+    public char PARM_VIEW3 = ' ';
+    public char PARM_VIEW4 = ' ';
+    public char PARM_VIEW5 = ' ';
+    public char PARM_VIEW6 = ' ';
+    public char PARM_VIEW7 = ' ';
+    public char PARM_VIEW8 = ' ';
+    public char PARM_VIEW9 = ' ';
+    public String TXN_ID = " ";
+    public String INQ_TXN = " ";
+    public String NXT_TXN = " ";
+    public String COPYBOOK = " ";
+    public String CHK_CPNT = " ";
+    public String MAINTAIN_CPNT = " ";
+    public short LEN = 0;
+    public String STSW = " ";
+    public String RMK = " ";
+    public String BEF_RMK = " ";
+    public String AFT_RMK = " ";
+    public String TS = " ";
+}

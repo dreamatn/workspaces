@@ -1,0 +1,46 @@
+package com.hisun.TD;
+
+public class TDB5726_AWA_5726 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String AC = " ";
+    public short AC_NO = 0;
+    public int AC_SEQ = 0;
+    public short AC_SEQ_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public String TERM = " ";
+    public short TERM_NO = 0;
+    public double TXN_AMT = 0;
+    public short TXN_AMT_NO = 0;
+    public double BAL = 0;
+    public short BAL_NO = 0;
+    public int VAL_DATE = 0;
+    public short VAL_DATE_NO = 0;
+    public int EXP_DATE = 0;
+    public short EXP_DATE_NO = 0;
+    public int TXN_DATE = 0;
+    public short TXN_DATE_NO = 0;
+    public short CALL_NO = 0;
+    public short CALL_NO_NO = 0;
+    public short NOR_NUM = 0;
+    public short NOR_NUM_NO = 0;
+    public short LOS_NUM = 0;
+    public short LOS_NUM_NO = 0;
+    public short LOS_DNUM = 0;
+    public short LOS_DNUM_NO = 0;
+    public int LST_DATE = 0;
+    public short LST_DATE_NO = 0;
+    public char EDU_FLG = ' ';
+    public short EDU_FLG_NO = 0;
+    public short CD_PERD = 0;
+    public short CD_PERD_NO = 0;
+    public double CD_AMT = 0;
+    public short CD_AMT_NO = 0;
+    public double RAT = 0;
+    public short RAT_NO = 0;
+    public char CAL_TYPE = ' ';
+    public short CAL_TYPE_NO = 0;
+}

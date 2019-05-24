@@ -1,0 +1,41 @@
+package com.hisun.DC;
+
+public class DCCODDCT_OUTPUT_DATA {
+    public String O_HLD_NO = " ";
+    public String O_AC = " ";
+    public int O_AC_SEQ = 0;
+    public String O_CCY = " ";
+    public char O_CCY_TYPE = ' ';
+    public char O_HLD_TYP = ' ';
+    public double O_BEF_AMT = 0;
+    public char FILLER9 = 0X01;
+    public double O_TAMT = 0;
+    public char FILLER11 = 0X01;
+    public char O_RHLD_TYP = ' ';
+    public double O_REM_AMT = 0;
+    public char FILLER14 = 0X01;
+    public String O_CHG_NO = " ";
+    public char FILLER16 = 0X02;
+    public String O_RSN = " ";
+    public char FILLER18 = 0X02;
+    public char O_ST_MTH = ' ';
+    public String O_CR_AC = " ";
+    public String O_RMK = " ";
+    public char FILLER22 = 0X02;
+    public int O_CHG_BR = 0;
+    public String O_LAW_NM1 = " ";
+    public char FILLER25 = 0X02;
+    public String O_LAW_NO1 = " ";
+    public char FILLER27 = 0X02;
+    public String O_LAW_NM2 = " ";
+    public char FILLER29 = 0X02;
+    public String O_LAW_NO2 = " ";
+    public char FILLER31 = 0X02;
+    public String O_RVS_NO = " ";
+    public String O_NARRATIVE = " ";
+    public char FILLER34 = 0X02;
+    public double O_CURR_BAL = 0;
+    public char FILLER36 = 0X01;
+    public double O_AVA_BAL = 0;
+    public char FILLER38 = 0X01;
+}

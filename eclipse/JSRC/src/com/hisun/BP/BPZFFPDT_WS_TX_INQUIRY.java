@@ -1,0 +1,45 @@
+package com.hisun.BP;
+
+public class BPZFFPDT_WS_TX_INQUIRY {
+    int WSI_TRT_DT = 0;
+    String WSI_JRN_NO = " ";
+    short WSI_JRN_SEQ = 0;
+    String WSI_CHG_AC = " ";
+    String WSI_CARD_NO = " ";
+    String WSI_TX_CI = " ";
+    char WSI_CHG_AC_TY = ' ';
+    char WSI_FEE_SRC = ' ';
+    String WSI_FEE_CODE = " ";
+    String WSI_PRD_CD = " ";
+    String WSI_CCY = " ";
+    char WSI_CCY_TYPE = ' ';
+    int WSI_SALE_DATE = 0;
+    int WSI_CHG_BR = 0;
+    double WSI_CHG_AMT = 0;
+    char BPZFFPDT_FILLER52 = 0X01;
+    short WSI_ACC_RECH_CNT = 0;
+    double WSI_CUR_OWE_AMT = 0;
+    char BPZFFPDT_FILLER55 = 0X01;
+    double WSI_ACC_CHG_AMT = 0;
+    char BPZFFPDT_FILLER57 = 0X01;
+    String WSI_CMMT_NO = " ";
+    String WSI_BSNS_NO = " ";
+    char WSI_AMO_FLG = ' ';
+    int WSI_AMO_SDT = 0;
+    int WSI_AMO_EDT = 0;
+    char WSI_PRC_STS = ' ';
+    char WSI_CHG_STS = ' ';
+    String WSI_TRT_CHNL = " ";
+    int WSI_TRT_BR = 0;
+    String WSI_SRC_TR_CD = " ";
+    String WSI_SRC_TR_NAME = " ";
+    String WSI_REMARK = " ";
+    char BPZFFPDT_FILLER70 = 0X02;
+    int WSI_CREATE_DATE = 0;
+    int WSI_CREATE_TIME = 0;
+    int WSI_UPDATE_DATE = 0;
+    String WSI_CREATE_TELL = " ";
+    String WSI_LAST_TELL = " ";
+    String WSI_SUP_TEL1 = " ";
+    String WSI_SUP_TEL2 = " ";
+}

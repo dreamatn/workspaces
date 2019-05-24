@@ -1,0 +1,8 @@
+package com.hisun.DD;
+
+public class DDCQGRBL_TRAILER {
+    public char TRA_FLG = ' ';
+    public long TOT_CNT = 0;
+    public String TOT_AMT = " ";
+    public String FILLER21 = " ";
+}

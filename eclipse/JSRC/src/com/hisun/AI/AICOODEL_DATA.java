@@ -1,0 +1,44 @@
+package com.hisun.AI;
+
+public class AICOODEL_DATA {
+    public String TRN_TYPE = " ";
+    public String NARR_CD = " ";
+    public String TRN_DESC1 = " ";
+    public String TRN_DESC2 = " ";
+    public String TRN_DESC3 = " ";
+    public String TRN_DESC4 = " ";
+    public String TRN_DESC5 = " ";
+    public String TRN_DESC6 = " ";
+    public char ENTRY_TYPE = ' ';
+    public String AC = " ";
+    public String ITM_NO1 = " ";
+    public String ITM_NO2 = " ";
+    public String ITM_NO3 = " ";
+    public String ITM_NO4 = " ";
+    public String ITM_NO5 = " ";
+    public int VALUE_DATE = 0;
+    public char ACTION_CODE = ' ';
+    public String CUR = " ";
+    public double AMOUNT = 0;
+    public String PORTFO_CD = " ";
+    public int BCH = 0;
+    public double EXG_RATE = 0;
+    public String EXG_CCY = " ";
+    public double EXG_AMT = 0;
+    public String CIFNO = " ";
+    public String CN_NO = " ";
+    public String CN_TYPE = " ";
+    public String PROD_TYPE = " ";
+    public String REF_NO = " ";
+    public String TLT_ID = " ";
+    public String ANS_CD1 = " ";
+    public String ANS_CD2 = " ";
+    public String ANS_CD3 = " ";
+    public String ANS_CD4 = " ";
+    public String ANS_CD5 = " ";
+    public String ANS_CD6 = " ";
+    public String ANS_CD7 = " ";
+    public String ANS_CD8 = " ";
+    public String ANS_CD9 = " ";
+    public String ANS_CD10 = " ";
+}

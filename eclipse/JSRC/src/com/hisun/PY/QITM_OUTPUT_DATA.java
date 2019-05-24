@@ -1,0 +1,44 @@
+package com.hisun.PY;
+
+public class QITM_OUTPUT_DATA {
+    String ENG_NM = " ";
+    String CHS_NM = " ";
+    String TYPE = " ";
+    char CATE = ' ';
+    char MIB_FLG = ' ';
+    char ITM_LVL = ' ';
+    char RED_FLG = ' ';
+    String UP_ITM = " ";
+    char POST_TYPE = ' ';
+    char AUTO_GEN = ' ';
+    char LOW_LVL_FLG = ' ';
+    char FX_REVAL_FLG = ' ';
+    char SL_FLG = ' ';
+    int GLMST = 0;
+    String ANS_CD1 = " ";
+    String ANS_CD2 = " ";
+    String ANS_CD3 = " ";
+    String ANS_CD4 = " ";
+    String ANS_CD5 = " ";
+    String ANS_CD6 = " ";
+    String ANS_CD7 = " ";
+    String ANS_CD8 = " ";
+    String ANS_CD9 = " ";
+    String ANS_CD10 = " ";
+    String LOOKUP_CD = " ";
+    short SENS_LVL = 0;
+    char BAL_ZERO_FLG = ' ';
+    char BAL_SIGN_FLG = ' ';
+    char AUTO_MATCH_FLG = ' ';
+    char AUTH_LVL = ' ';
+    char STS = ' ';
+    int OPEN_DATE = 0;
+    int EFF_DATE = 0;
+    int REOPEN_DATE = 0;
+    int UPD_DATE = 0;
+    int DEL_DATE = 0;
+    int EXP_DATE = 0;
+    char RESET_FLG = ' ';
+    char ODE_FLG = ' ';
+    char COMP_ZERO_FLG = ' ';
+}

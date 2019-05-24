@@ -1,0 +1,43 @@
+package com.hisun.AI;
+
+public class AIZSRVS_WS_GRVS_OUT_DATA {
+    String WS_G_O_RVS_NO = " ";
+    int WS_G_O_RVS_SEQ = 0;
+    String WS_G_O_AC = " ";
+    String WS_G_O_CCY = " ";
+    char WS_G_O_STS = ' ';
+    int WS_G_O_TX_DT = 0;
+    int WS_G_O_JYRQ = 0;
+    double WS_G_O_AMT = 0;
+    char AIZSRVS_FILLER50 = 0X01;
+    String WS_G_O_CI_NO = " ";
+    String WS_G_O_TR_CODE = " ";
+    String WS_G_O_TR_TELLER = " ";
+    int WS_G_O_TR_BR = 0;
+    String WS_G_O_SET_NO = " ";
+    short WS_G_O_SET_SEQ = 0;
+    String WS_G_O_APP = " ";
+    String WS_G_O_CHNL_NO = " ";
+    String WS_G_O_TX_SUP_TLR = " ";
+    String WS_G_O_PART = " ";
+    char AIZSRVS_FILLER61 = 0X02;
+    String WS_G_O_CPLX = " ";
+    String WS_G_O_CPMX = " ";
+    char WS_G_O_GZLB = ' ';
+    String WS_G_O_GZKM = " ";
+    int WS_G_O_SXH1 = 0;
+    char WS_G_O_GZZL = ' ';
+    String WS_G_O_HZFM = " ";
+    int WS_G_O_HSJG = 0;
+    char WS_G_O_JDBZ = ' ';
+    int WS_G_O_KMZH = 0;
+    int WS_G_O_QXRQ = 0;
+    String WS_G_O_SJLX = " ";
+    String WS_G_O_YWBH = " ";
+    int WS_G_O_JYJG = 0;
+    String WS_G_O_THEIR_AC = " ";
+    String WS_G_O_PAY_MAN = " ";
+    char AIZSRVS_FILLER78 = 0X02;
+    int WS_G_O_PAY_BR = 0;
+    String WS_G_O_BILL_NO = " ";
+}

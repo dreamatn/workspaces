@@ -1,0 +1,7 @@
+package com.hisun.BP;
+
+public class BPCTCALF {
+    public BPCTCALF_RC RC = new BPCTCALF_RC();
+    public BPCTCALF_INPUT_AREA INPUT_AREA = new BPCTCALF_INPUT_AREA();
+    public BPCTCALF_OUTPUT_AREA OUTPUT_AREA = new BPCTCALF_OUTPUT_AREA();
+}

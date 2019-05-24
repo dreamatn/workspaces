@@ -1,0 +1,134 @@
+package com.hisun.BP;
+
+import com.hisun.SC.*;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class BPZPEBAS {
+    String JIBS_tmp_str[] = new String[10];
+    boolean pgmRtn = false;
+    BPZPEBAS_WS_VARIABLES WS_VARIABLES = new BPZPEBAS_WS_VARIABLES();
+    BPZPEBAS_WS_COND_FLG WS_COND_FLG = new BPZPEBAS_WS_COND_FLG();
+    BPCMSG_ERROR_MSG ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    BPCOVABS BPCOVABS = new BPCOVABS();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA SC_AREA;
+    SCCGBPA_BP_AREA BP_AREA;
+    BPCPEBAS BPCPEBAS;
+    BPREWA BPREWA;
+    public void MP(SCCGWA SCCGWA, BPCPEBAS BPCPEBAS) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.BPCPEBAS = BPCPEBAS;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        if (pgmRtn) return;
+        B000_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "BPZPEBAS return!");
+        Z_RET();
+        if (pgmRtn) return;
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        BPREWA = (BPREWA) BP_AREA.EWA_AREA.EWA_AREA_PTR;
+        BPCPEBAS.RC.RC_MMO = "BP";
+        BPCPEBAS.RC.RC_CODE = 0;
+        IBS.init(SCCGWA, WS_COND_FLG);
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B010_CHECK_INPUT_DATA();
+        if (pgmRtn) return;
+        B020_WRITE_EWA_BASIC_DATA();
+        if (pgmRtn) return;
+        B030_WRITE_VWA_BASIC_DATA();
+        if (pgmRtn) return;
+    }
+    public void B010_CHECK_INPUT_DATA() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.CASE_NO);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.TR_TYPE);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.ODE_FLG);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.CNTR_INFO.CNTR_TYPE_ORG[1-1]);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.CNTR_INFO.CNTR_TYPE_ORG[2-1]);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.CNTR_INFO.CNTR_TYPE_ORG[3-1]);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.CNTR_INFO.CNTR_TYPE_ORG[4-1]);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.CNTR_INFO.CNTR_TYPE_ORG[5-1]);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.CNTR_INFO.CNTR_TYPE_ORG[6-1]);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.ODE_FLG);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.OTHSYS_KEY);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.OTH_TR_DATE);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.OTHSYS_ID);
+        CEP.TRC(SCCGWA, BPCPEBAS.DATA.CHNL);
+    }
+    public void B020_WRITE_EWA_BASIC_DATA() throws IOException,SQLException,Exception {
+        if (BP_AREA.EWA_AREA.EWA_MAX_CNT <= 0) {
+            IBS.CPY2CLS(SCCGWA, ERROR_MSG.BP_NOT_ALLO_MAX_CNT, BPCPEBAS.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, BPCPEBAS.DATA.CNTR_INFO);
+        IBS.CPY2CLS(SCCGWA, JIBS_tmp_str[0], BPREWA.BASIC_AREA.CNTR_INFO);
+        CEP.TRC(SCCGWA, BPREWA.BASIC_AREA.CNTR_INFO);
+        BPREWA.BASIC_AREA.CASE_NO = BPCPEBAS.DATA.CASE_NO;
+        CEP.TRC(SCCGWA, BPREWA.BASIC_AREA.CASE_NO);
+        BPREWA.BASIC_AREA.ODE_GRP_NO = BPCPEBAS.DATA.ODE_GRP_NO;
+        CEP.TRC(SCCGWA, BPREWA.BASIC_AREA.ODE_GRP_NO);
+        BPREWA.BASIC_AREA.OTHSYS_KEY = BPCPEBAS.DATA.OTHSYS_KEY;
+        BPREWA.BASIC_AREA.CHNL = BPCPEBAS.DATA.CHNL;
+        BPREWA.BASIC_AREA.OTH_TR_DATE = BPCPEBAS.DATA.OTH_TR_DATE;
+        BPREWA.BASIC_AREA.OTHSYS_ID = BPCPEBAS.DATA.OTHSYS_ID;
+        CEP.TRC(SCCGWA, BPREWA.BASIC_AREA.OTHSYS_KEY);
+        BPREWA.BASIC_AREA.INTF_MODE = BPCPEBAS.DATA.INTF_MODE;
+        CEP.TRC(SCCGWA, BPREWA.BASIC_AREA.INTF_MODE);
+        BPREWA.BASIC_AREA.BASIC_FLR = BPCPEBAS.DATA.BASIC_FLR;
+        IBS.CPY2CLS(SCCGWA, BPREWA.BASIC_AREA.BASIC_FLR, BPREWA.BASIC_AREA.REDEFINES17);
+        CEP.TRC(SCCGWA, BPREWA.BASIC_AREA.BASIC_FLR);
+        BPREWA.BASIC_AREA.TR_TYPE = BPCPEBAS.DATA.TR_TYPE;
+        CEP.TRC(SCCGWA, BPREWA.BASIC_AREA.TR_TYPE);
+        BPREWA.BASIC_AREA.ODE_FLG = BPCPEBAS.DATA.ODE_FLG;
+        CEP.TRC(SCCGWA, BPREWA.BASIC_AREA.ODE_FLG);
+    }
+    public void B030_WRITE_VWA_BASIC_DATA() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCOVABS);
+        BPCOVABS.CASE_NO = BPCPEBAS.DATA.CASE_NO;
+        BPCOVABS.TR_TYPE = BPCPEBAS.DATA.TR_TYPE;
+        BPCOVABS.ODE_FLG = BPCPEBAS.DATA.ODE_FLG;
+        BPCOVABS.ODE_GRP_NO = BPCPEBAS.DATA.ODE_GRP_NO;
+        BPCOVABS.OTHSYS_KEY = BPCPEBAS.DATA.OTHSYS_KEY;
+        BPCOVABS.CHNL = BPCPEBAS.DATA.CHNL;
+        BPCOVABS.OTH_TR_DATE = BPCPEBAS.DATA.OTH_TR_DATE;
+        BPCOVABS.OTHSYS_ID = BPCPEBAS.DATA.OTHSYS_ID;
+        JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, BPCPEBAS.DATA.CNTR_INFO);
+        IBS.CPY2CLS(SCCGWA, JIBS_tmp_str[0], BPCOVABS.CNTR_INFO);
+        BPCOVABS.INTF_MODE = BPCPEBAS.DATA.INTF_MODE;
+        BPCOVABS.BASIC_FLR = BPCPEBAS.DATA.BASIC_FLR;
+        IBS.CPY2CLS(SCCGWA, BPCOVABS.BASIC_FLR, BPCOVABS.REDEFINES19);
+        S000_CALL_BPZPVABS();
+        if (pgmRtn) return;
+    }
+    public void S000_CALL_BPZPVABS() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-P-VWA-BASIC-ADD", BPCOVABS);
+        if (BPCOVABS.RC.RC_CODE != 0) {
+            JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, BPCOVABS.RC);
+            IBS.CPY2CLS(SCCGWA, JIBS_tmp_str[0], BPCPEBAS.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+    if (SCCGWA.COMM_AREA.BSP_FLG.equalsIgnoreCase("BSP") || SCCGWA.COMM_AREA.CHNL.equalsIgnoreCase("BAT")) { //FROM #IFDEF BAT
+        if (BPCPEBAS.RC.RC_CODE != 0) {
+            CEP.TRC(SCCGWA, " BPCPEBAS = ");
+            CEP.TRC(SCCGWA, BPCPEBAS);
+        }
+    } //FROM #ENDIF
+        pgmRtn = true;
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

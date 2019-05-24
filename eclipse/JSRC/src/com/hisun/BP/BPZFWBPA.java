@@ -1,0 +1,76 @@
+package com.hisun.BP;
+
+import com.hisun.SC.*;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class BPZFWBPA {
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    BPCFWBPA BPCFWBPA;
+    public void MP(SCCGWA SCCGWA, BPCFWBPA BPCFWBPA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.BPCFWBPA = BPCFWBPA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "BPZFWBPA return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, "BEFORE-SET-GBPA");
+        CEP.TRC(SCCGWA, GWA_BP_AREA.CANCEL_AREA.CAN_AC_DATE);
+        CEP.TRC(SCCGWA, GWA_BP_AREA.CANCEL_AREA.CAN_JRN_NO);
+        CEP.TRC(SCCGWA, GWA_BP_AREA.CANCEL_AREA.CAN_TR);
+        CEP.TRC(SCCGWA, GWA_BP_AREA.CANCEL_AREA.CAN_VCH_NO);
+        CEP.TRC(SCCGWA, GWA_BP_AREA.CANCEL_AREA.CAN_STM_IND);
+        CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.REVERSAL_IND);
+        CEP.TRC(SCCGWA, BPCFWBPA.DATA.CAN_AC_DATE);
+        CEP.TRC(SCCGWA, BPCFWBPA.DATA.CAN_JRN_NO);
+        CEP.TRC(SCCGWA, BPCFWBPA.DATA.CAN_TR);
+        CEP.TRC(SCCGWA, BPCFWBPA.DATA.CAN_VCH_NO);
+        CEP.TRC(SCCGWA, BPCFWBPA.DATA.CAN_STM_IND);
+        CEP.TRC(SCCGWA, BPCFWBPA.DATA.REVERSAL_IND);
+        B010_CHECK_INPUT_DATA();
+        B020_WRITE_SCCGBPA_PROC();
+        CEP.TRC(SCCGWA, "AFTER-SET-GBPA");
+        CEP.TRC(SCCGWA, GWA_BP_AREA.CANCEL_AREA.CAN_AC_DATE);
+        CEP.TRC(SCCGWA, GWA_BP_AREA.CANCEL_AREA.CAN_JRN_NO);
+        CEP.TRC(SCCGWA, GWA_BP_AREA.CANCEL_AREA.CAN_TR);
+        CEP.TRC(SCCGWA, GWA_BP_AREA.CANCEL_AREA.CAN_VCH_NO);
+        CEP.TRC(SCCGWA, GWA_BP_AREA.CANCEL_AREA.CAN_STM_IND);
+        CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.REVERSAL_IND);
+    }
+    public void B010_CHECK_INPUT_DATA() throws IOException,SQLException,Exception {
+    }
+    public void B020_WRITE_SCCGBPA_PROC() throws IOException,SQLException,Exception {
+        GWA_BP_AREA.CANCEL_AREA.CAN_AC_DATE = BPCFWBPA.DATA.CAN_AC_DATE;
+        GWA_BP_AREA.CANCEL_AREA.CAN_JRN_NO = BPCFWBPA.DATA.CAN_JRN_NO;
+        GWA_BP_AREA.CANCEL_AREA.CAN_TR = BPCFWBPA.DATA.CAN_TR;
+        GWA_BP_AREA.CANCEL_AREA.CAN_VCH_NO = BPCFWBPA.DATA.CAN_VCH_NO;
+        GWA_BP_AREA.CANCEL_AREA.CAN_STM_IND = BPCFWBPA.DATA.CAN_STM_IND;
+        if (BPCFWBPA.DATA.REVERSAL_IND == 'Y') {
+            SCCGWA.COMM_AREA.REVERSAL_IND = 'Y';
+        }
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+    if (SCCGWA.COMM_AREA.BSP_FLG.equalsIgnoreCase("BSP") || SCCGWA.COMM_AREA.CHNL.equalsIgnoreCase("BAT")) { //FROM #IFDEF BAT
+        if (BPCFWBPA.RC.RC_CODE != 0) {
+            CEP.TRC(SCCGWA, " BPCFWBPA = ");
+            CEP.TRC(SCCGWA, BPCFWBPA);
+        }
+    } //FROM #ENDIF
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

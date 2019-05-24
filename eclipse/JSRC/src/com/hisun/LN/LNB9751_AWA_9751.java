@@ -1,0 +1,42 @@
+package com.hisun.LN;
+
+public class LNB9751_AWA_9751 {
+    public String CTA_NO = " ";
+    public short CTA_NO_NO = 0;
+    public int BR = 0;
+    public short BR_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String CI_CNM = " ";
+    public short CI_CNM_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public String PROD_NM = " ";
+    public short PROD_NM_NO = 0;
+    public String DRWD_MTH = " ";
+    public short DRWD_MTH_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public double LOAN_BAL = 0;
+    public short LOAN_BAL_NO = 0;
+    public char LOAN_STS = ' ';
+    public short LOAN_STS_NO = 0;
+    public int TRAN_DT = 0;
+    public short TRAN_DT_NO = 0;
+    public int PACK_DT = 0;
+    public short PACK_DT_NO = 0;
+    public double P_BAL = 0;
+    public short P_BAL_NO = 0;
+    public double P_N_INT = 0;
+    public short P_N_INT_NO = 0;
+    public double P_O_INT = 0;
+    public short P_O_INT_NO = 0;
+    public double P_L_INT = 0;
+    public short P_L_INT_NO = 0;
+    public char PRIN_MOD = ' ';
+    public short PRIN_MOD_NO = 0;
+    public char INT_MOD = ' ';
+    public short INT_MOD_NO = 0;
+    public int BTH_PK = 0;
+    public short BTH_PK_NO = 0;
+}

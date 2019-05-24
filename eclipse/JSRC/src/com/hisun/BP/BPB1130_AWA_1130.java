@@ -1,0 +1,64 @@
+package com.hisun.BP;
+
+public class BPB1130_AWA_1130 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String REB_CD = " ";
+    public short REB_CD_NO = 0;
+    public String REB_DESC = " ";
+    public short REB_DESC_NO = 0;
+    public char REB_CLFY = ' ';
+    public short REB_CLFY_NO = 0;
+    public char REB_SRC = ' ';
+    public short REB_SRC_NO = 0;
+    public char CAL_PERD = ' ';
+    public short CAL_PERD_NO = 0;
+    public short CAL_CNT = 0;
+    public short CAL_CNT_NO = 0;
+    public char SRC_MSTD = ' ';
+    public short SRC_MSTD_NO = 0;
+    public char REB_MTH = ' ';
+    public short REB_MTH_NO = 0;
+    public char AGGR_TYP = ' ';
+    public short AGGR_TYP_NO = 0;
+    public double MAX_REB = 0;
+    public short MAX_REB_NO = 0;
+    public char REB_CYC = ' ';
+    public short REB_CYC_NO = 0;
+    public short REB_CNT = 0;
+    public short REB_CNT_NO = 0;
+    public short REB_DATE = 0;
+    public short REB_DATE_NO = 0;
+    public char REB_CON = ' ';
+    public short REB_CON_NO = 0;
+    public String REF_CCY = " ";
+    public short REF_CCY_NO = 0;
+    public double STR_AMT = 0;
+    public short STR_AMT_NO = 0;
+    public short STR_CNT = 0;
+    public short STR_CNT_NO = 0;
+    public String REB_CCY = " ";
+    public short REB_CCY_NO = 0;
+    public String REB_MMO = " ";
+    public short REB_MMO_NO = 0;
+    public String REB_CPNT = " ";
+    public short REB_CPNT_NO = 0;
+    public BPB1130_REB_INFO[] REB_INFO = new BPB1130_REB_INFO[5];
+    public int EFF_DATE = 0;
+    public short EFF_DATE_NO = 0;
+    public int EXP_DATE = 0;
+    public short EXP_DATE_NO = 0;
+    public int LST_DATE = 0;
+    public short LST_DATE_NO = 0;
+    public String LST_TELL = " ";
+    public short LST_TELL_NO = 0;
+    public String SUP_TEL1 = " ";
+    public short SUP_TEL1_NO = 0;
+    public String SUP_TEL2 = " ";
+    public short SUP_TEL2_NO = 0;
+    public String TS = " ";
+    public short TS_NO = 0;
+    public BPB1130_AWA_1130() {
+        for (int i=0;i<5;i++) REB_INFO[i] = new BPB1130_REB_INFO();
+    }
+}

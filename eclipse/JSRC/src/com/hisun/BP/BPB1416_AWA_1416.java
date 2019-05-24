@@ -1,0 +1,40 @@
+package com.hisun.BP;
+
+public class BPB1416_AWA_1416 {
+    public String PARP_TYP = " ";
+    public short PARP_TYP_NO = 0;
+    public String PARP_NAM = " ";
+    public short PARP_NAM_NO = 0;
+    public char DSTORE = ' ';
+    public short DSTORE_NO = 0;
+    public char SDESC = ' ';
+    public short SDESC_NO = 0;
+    public char PARP_CHK = ' ';
+    public short PARP_CHK_NO = 0;
+    public char PARP_ENA = ' ';
+    public short PARP_ENA_NO = 0;
+    public char PARP_ATR = ' ';
+    public short PARP_ATR_NO = 0;
+    public char PARP_CLA = ' ';
+    public short PARP_CLA_NO = 0;
+    public char PARP_SUB = ' ';
+    public short PARP_SUB_NO = 0;
+    public char DM_TYPE = ' ';
+    public short DM_TYPE_NO = 0;
+    public char PARP_LVL = ' ';
+    public short PARP_LVL_NO = 0;
+    public char DOWN_FLG = ' ';
+    public short DOWN_FLG_NO = 0;
+    public String TXN_ID = " ";
+    public short TXN_ID_NO = 0;
+    public String CHK_CPNT = " ";
+    public short CHK_CPNT_NO = 0;
+    public short PARP_LEN = 0;
+    public short PARP_LEN_NO = 0;
+    public char HISATR = ' ';
+    public short HISATR_NO = 0;
+    public short HISYEAR = 0;
+    public short HISYEAR_NO = 0;
+    public String STSW = " ";
+    public short STSW_NO = 0;
+}

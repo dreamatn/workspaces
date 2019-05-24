@@ -1,0 +1,8 @@
+package com.hisun.TD;
+
+public class TDCACCHK {
+    public char REC_TYPE = ' ';
+    public TDCACCHK_DETAIL_REC DETAIL_REC = new TDCACCHK_DETAIL_REC();
+    public TDCACCHK_HEADER_REC HEADER_REC = new TDCACCHK_HEADER_REC();
+    public TDCACCHK_TRAILER_REC TRAILER_REC = new TDCACCHK_TRAILER_REC();
+}

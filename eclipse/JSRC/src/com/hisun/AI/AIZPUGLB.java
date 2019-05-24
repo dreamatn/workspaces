@@ -1,0 +1,81 @@
+package com.hisun.AI;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import com.hisun.BP.BPCMSG_ERROR_MSG;
+import com.hisun.BP.BPCOVABS;
+import com.hisun.BP.BPCOVAWR;
+import com.hisun.BP.BPCOVHWR;
+import com.hisun.BP.BPCPGDIN;
+import com.hisun.BP.BPCPQBNK_DATA_INFO;
+import com.hisun.BP.BPCQBKPM;
+import com.hisun.BP.BPCTVCHT;
+import com.hisun.BP.BPRANS;
+import com.hisun.BP.BPRFHIST;
+import com.hisun.BP.BPRVCHT;
+import com.hisun.BP.BPRVWA;
+import com.hisun.SC.SCCCALL;
+import com.hisun.SC.SCCEXCP;
+import com.hisun.SC.SCCGBPA_BP_AREA;
+import com.hisun.SC.SCCGSCA_SC_AREA;
+import com.hisun.SC.SCCGWA;
+import com.hisun.SC.SCCMSG;
+
+public class AIZPUGLB {
+    boolean pgmRtn = false;
+    int K_OCCURS_SET_MAX = 400;
+    String WS_ERR_MSG = " ";
+    String WS_ERR_INFO = " ";
+    int WS_I = 0;
+    char WS_FST_FLG = ' ';
+    char WS_AITITAD_FND_FLG = ' ';
+    AICMSG_ERROR_MSG AICMSG_ERROR_MSG = new AICMSG_ERROR_MSG();
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    BPRVWA BPRVWX = new BPRVWA();
+    BPRANS BPRANX = new BPRANS();
+    AICITMA AICITMX = new AICITMA();
+    BPRVCHT BPRVCHT = new BPRVCHT();
+    BPCTVCHT BPCTVCHT = new BPCTVCHT();
+    BPCOVABS BPCOVABS = new BPCOVABS();
+    BPCOVAWR BPCOVAWR = new BPCOVAWR();
+    AICPQITM AICPQITM = new AICPQITM();
+    AICOGLPO AICOGLPO = new AICOGLPO();
+    AICOVLOG AICOVLOG = new AICOVLOG();
+    BPCOVHWR BPCOVHWR = new BPCOVHWR();
+    BPRVWA BPRVWY = new BPRVWA();
+    BPRANS BPRANY = new BPRANS();
+    AICITMA AICITMY = new AICITMA();
+    BPCPGDIN BPCPGDIN = new BPCPGDIN();
+    AICITAD1 AICITAD1 = new AICITAD1();
+    BPCQBKPM BPCQBKPM = new BPCQBKPM();
+    BPRFHIST BPRFHIST = new BPRFHIST();
+    AICOUMIB AICOUMIB = new AICOUMIB();
+    AIRITAD AIRITAD = new AIRITAD();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    BPCPQBNK_DATA_INFO BPCRBANK;
+    AICOUGLB AICOUGLB;
+    public void MP(SCCGWA SCCGWA, AICOUGLB AICOUGLB) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.AICOUGLB = AICOUGLB;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        if (pgmRtn) return;
+        B000_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "AIZPUGLB return!");
+        Z_RET();
+        if (pgmRtn) return;
+        JIBS_RETURN();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        BPCRBANK = (BPCPQBNK_DATA_INFO) SCCGWA.COMM_AREA.BANK_AREA_PTR;
+        IBS.init(SCCGWA, BPRVWX.BASIC_AREA);
+        BPRVWX.BASIC_AREA.CNT = 0;

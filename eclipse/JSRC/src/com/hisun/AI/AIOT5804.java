@@ -1,0 +1,219 @@
+package com.hisun.AI;
+
+import com.hisun.BP.*;
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class AIOT5804 {
+    int JIBS_tmp_int;
+    String CPN_S_MIB_MAIN = "AI-S-MAIN-MIB  ";
+    String WS_ERR_MSG = " ";
+    short WS_FLD_NO = 0;
+    AICMSG_ERROR_MSG AICMSG_ERROR_MSG = new AICMSG_ERROR_MSG();
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    AIRCMIB AIRCMIB = new AIRCMIB();
+    AICRCMIB AICRCMIB = new AICRCMIB();
+    AICSMIB AICSMIB = new AICSMIB();
+    AICPCMIB AICPCMIB = new AICPCMIB();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    AIB5800_AWA_5800 AIB5800_AWA_5800;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "AIOT5804 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "AIB5800_AWA_5800>");
+        AIB5800_AWA_5800 = (AIB5800_AWA_5800) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B010_CHECK_INPUT();
+        B020_REACTIVE_PROC();
+    }
+    public void B010_CHECK_INPUT() throws IOException,SQLException,Exception {
+        if (AIB5800_AWA_5800.GL_BOOK.trim().length() == 0 
+            || AIB5800_AWA_5800.BR == 0 
+            || AIB5800_AWA_5800.ITM.trim().length() == 0 
+            || AIB5800_AWA_5800.SEQ == 0 
+            || AIB5800_AWA_5800.CCY.trim().length() == 0) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.MUST_INPUT;
+            S000_ERR_MSG_PROC();
+        }
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.AC_EXPDT);
+        CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.AC_DATE);
+        if (AIB5800_AWA_5800.AC_EXPDT <= SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_EXPDT_GT_ACDT;
+            S000_ERR_MSG_PROC();
+        }
+        IBS.init(SCCGWA, AIRCMIB);
+        IBS.init(SCCGWA, AICPCMIB);
+        AIRCMIB.KEY.GL_BOOK = AIB5800_AWA_5800.GL_BOOK;
+        AIRCMIB.KEY.BR = AIB5800_AWA_5800.BR;
+        AIRCMIB.KEY.ITM = AIB5800_AWA_5800.ITM;
+        AIRCMIB.KEY.SEQ = AIB5800_AWA_5800.SEQ;
+        CEP.TRC(SCCGWA, AIRCMIB);
+        S000_CALL_AIZPCMIB();
+        if (AICPCMIB.RETURN_INFO == 'F' 
+            && AIRCMIB.KEY.BR != 999999 
+            && AIRCMIB.STS != 'N') {
+            IBS.init(SCCGWA, AICPCMIB);
+            IBS.init(SCCGWA, AIRCMIB);
+            AIRCMIB.KEY.GL_BOOK = AIB5800_AWA_5800.GL_BOOK;
+            AIRCMIB.KEY.BR = 999999;
+            AIRCMIB.KEY.ITM = AIB5800_AWA_5800.ITM;
+            AIRCMIB.KEY.SEQ = AIB5800_AWA_5800.SEQ;
+            S000_CALL_AIZPCMIB();
+            if (AICPCMIB.RETURN_INFO == 'N') {
+                IBS.init(SCCGWA, AICPCMIB);
+                IBS.init(SCCGWA, AIRCMIB);
+                AIRCMIB.KEY.GL_BOOK = AIB5800_AWA_5800.GL_BOOK;
+                AIRCMIB.KEY.BR = AIB5800_AWA_5800.BR;
+                AIRCMIB.KEY.ITM = AIB5800_AWA_5800.ITM;
+                AIRCMIB.KEY.SEQ = AIB5800_AWA_5800.SEQ;
+                S000_CALL_AIZPCMIB();
+            }
+        }
+        CEP.TRC(SCCGWA, "11111");
+        if (AICPCMIB.RETURN_INFO == 'N') {
+            CEP.TRC(SCCGWA, "22222");
+            IBS.init(SCCGWA, AIRCMIB);
+            IBS.init(SCCGWA, AICPCMIB);
+            AIRCMIB.KEY.GL_BOOK = AIB5800_AWA_5800.GL_BOOK;
+            AIRCMIB.KEY.BR = AIB5800_AWA_5800.BR;
+            AIRCMIB.KEY.ITM = AIB5800_AWA_5800.ITM;
+            AIRCMIB.KEY.SEQ = 999999;
+            S000_CALL_AIZPCMIB();
+            CEP.TRC(SCCGWA, AIRCMIB.KEY.SEQ);
+            if (AICPCMIB.RETURN_INFO == 'N') {
+                WS_ERR_MSG = AICMSG_ERROR_MSG.AI_READ_AITCMIB_NOTFND;
+                S000_ERR_MSG_PROC();
+            }
+        } else {
+            if (AIRCMIB.STS != 'N' 
+                && AIRCMIB.STS != 'H') {
+                WS_ERR_MSG = AICMSG_ERROR_MSG.AI_CMIB_STS_NOT_NORHLD;
+                S000_ERR_MSG_PROC();
+            }
+            if (AIB5800_AWA_5800.AC_EXPDT > AIRCMIB.AC_EXP) {
+                WS_ERR_MSG = AICMSG_ERROR_MSG.AI_EXP_GL_CMIB;
+                S000_ERR_MSG_PROC();
+            }
+        }
+    }
+    public void B020_REACTIVE_PROC() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.GL_BOOK);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.BR);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.ITM);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.SEQ);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.CCY);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.ITM_NM);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.AC_TYP);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.CCY_RNG);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.DC_CTL);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.BAL_OD);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.DTL_FLG);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.SUS_TYP);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.SW_TYP);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.SUS_TRM);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.SUS_UNIT);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.AC_EXPDT);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.ALW_AI);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.DIR);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.ONL_UPD);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.CARD_FLG);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.HOT_FLG);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.DR_LMT);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.CR_LMT);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.CHK_FLG);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.APP);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.APP1);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.APP2);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.APP3);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.APP4);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.STS);
+        CEP.TRC(SCCGWA, AIB5800_AWA_5800.ADDR);
+        IBS.init(SCCGWA, AICSMIB);
+        AICSMIB.FUNC = 'R';
+        AICSMIB.GL_BOOK = AIB5800_AWA_5800.GL_BOOK;
+        AICSMIB.BR = AIB5800_AWA_5800.BR;
+        AICSMIB.ITM_NO = AIB5800_AWA_5800.ITM;
+        AICSMIB.SEQ = AIB5800_AWA_5800.SEQ;
+        AICSMIB.CCY = AIB5800_AWA_5800.CCY;
+        AICSMIB.NAME = AIB5800_AWA_5800.ITM_NM;
+        AICSMIB.AC_TYP = AIB5800_AWA_5800.AC_TYP;
+        AICSMIB.CCY_LMT = AIB5800_AWA_5800.CCY_RNG;
+        AICSMIB.BAL_DIR = AIB5800_AWA_5800.DC_CTL;
+        AICSMIB.BAL_RFLG = AIB5800_AWA_5800.BAL_OD;
+        AICSMIB.DTL_FLG = AIB5800_AWA_5800.DTL_FLG;
+        AICSMIB.RVS_TYP = AIB5800_AWA_5800.SUS_TYP;
+        AICSMIB.RVS_KND = AIB5800_AWA_5800.SW_TYP;
+        AICSMIB.RVS_EXP = AIB5800_AWA_5800.SUS_TRM;
+        AICSMIB.RVS_UNIT = AIB5800_AWA_5800.SUS_UNIT;
+        AICSMIB.AC_EXP = AIB5800_AWA_5800.AC_EXPDT;
+        AICSMIB.MANUAL_FLG = AIB5800_AWA_5800.ALW_AI;
+        AICSMIB.AMT_DIR = AIB5800_AWA_5800.DIR;
+        AICSMIB.ONL_FLG = AIB5800_AWA_5800.ONL_UPD;
+        AICSMIB.CARD_FLG = AIB5800_AWA_5800.CARD_FLG;
+        AICSMIB.HOT_FLG = AIB5800_AWA_5800.HOT_FLG;
+        AICSMIB.DRLT_BAL = AIB5800_AWA_5800.DR_LMT;
+        AICSMIB.CRLT_BAL = AIB5800_AWA_5800.CR_LMT;
+        AICSMIB.CHK_FLG = AIB5800_AWA_5800.CHK_FLG;
+        AICSMIB.APP = AIB5800_AWA_5800.APP;
+        AICSMIB.APP1 = AIB5800_AWA_5800.APP1;
+        AICSMIB.APP2 = AIB5800_AWA_5800.APP2;
+        AICSMIB.APP3 = AIB5800_AWA_5800.APP3;
+        AICSMIB.APP4 = AIB5800_AWA_5800.APP4;
+        AICSMIB.STS = AIB5800_AWA_5800.STS;
+        AICSMIB.ADDR = AIB5800_AWA_5800.ADDR;
+        S000_CALL_AIZSMIB();
+    }
+    public void S000_CALL_AIZSMIB() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, CPN_S_MIB_MAIN, AICSMIB);
+        if (AICSMIB.RC.RC_CODE != 0) {
+            WS_ERR_MSG = "" + AICSMIB.RC.RC_CODE;
+            JIBS_tmp_int = WS_ERR_MSG.length();
+            for (int i=0;i<4-JIBS_tmp_int;i++) WS_ERR_MSG = "0" + WS_ERR_MSG;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_CALL_AIZRCMIB() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "AI-R-MAIN-CMIB", AICRCMIB);
+        CEP.TRC(SCCGWA, AICRCMIB.RC.RC_CODE);
+        if (AICRCMIB.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, AICRCMIB.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_CALL_AIZPCMIB() throws IOException,SQLException,Exception {
+        AICPCMIB.POINTER = AIRCMIB;
+        AICPCMIB.REC_LEN = 407;
+        IBS.CALLCPN(SCCGWA, "AI-P-GET-CMIB", AICPCMIB);
+        CEP.TRC(SCCGWA, AICPCMIB.RC.RC_CODE);
+        CEP.TRC(SCCGWA, AICPCMIB.RETURN_INFO);
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void S000_ERR_MSG_PROC_CONTINUE() throws IOException,SQLException,Exception {
+        CEP.ERRC(SCCGWA, WS_ERR_MSG, WS_FLD_NO);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

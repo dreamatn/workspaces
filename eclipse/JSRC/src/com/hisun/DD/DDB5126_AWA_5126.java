@@ -1,0 +1,46 @@
+package com.hisun.DD;
+
+public class DDB5126_AWA_5126 {
+    public char B_DD_OPT = ' ';
+    public short B_DD_OPT_NO = 0;
+    public String B_DD_AC = " ";
+    public short B_DD_AC_NO = 0;
+    public String B_DD_CCY = " ";
+    public short B_DD_CCY_NO = 0;
+    public char B_DD_FLG = ' ';
+    public short B_DD_FLG_NO = 0;
+    public String B_CI_NO = " ";
+    public short B_CI_NO_NO = 0;
+    public String B_CI_CNM = " ";
+    public short B_CI_CNM_NO = 0;
+    public String B_CI_ENM = " ";
+    public short B_CI_ENM_NO = 0;
+    public double B_BAL_S = 0;
+    public short B_BAL_S_NO = 0;
+    public int B_STR_DT = 0;
+    public short B_STR_DT_NO = 0;
+    public String B_RATETY = " ";
+    public short B_RATETY_NO = 0;
+    public String B_TERM = " ";
+    public short B_TERM_NO = 0;
+    public double B_INTRAT = 0;
+    public short B_INTRAT_NO = 0;
+    public char B_TYP = ' ';
+    public short B_TYP_NO = 0;
+    public double B_RATEOF = 0;
+    public short B_RATEOF_NO = 0;
+    public double B_PCTS = 0;
+    public short B_PCTS_NO = 0;
+    public double B_CXRAT = 0;
+    public short B_CXRAT_NO = 0;
+    public int B_CRTDT = 0;
+    public short B_CRTDT_NO = 0;
+    public int B_VSTRDT = 0;
+    public short B_VSTRDT_NO = 0;
+    public int B_ENDDT = 0;
+    public short B_ENDDT_NO = 0;
+    public int B_RCVDT = 0;
+    public short B_RCVDT_NO = 0;
+    public String B_PROL_N = " ";
+    public short B_PROL_N_NO = 0;
+}

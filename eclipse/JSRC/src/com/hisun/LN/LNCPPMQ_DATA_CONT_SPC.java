@@ -1,0 +1,44 @@
+package com.hisun.LN;
+
+public class LNCPPMQ_DATA_CONT_SPC {
+    public char CONT_PAY_MTH = ' ';
+    public char CONT_BPAY_MTH = ' ';
+    public char CONT_INST_MTH = ' ';
+    public short CONT_CAL_PERD = 0;
+    public char CONT_CAL_UNIT = ' ';
+    public char COMT_BCAL_PERD = ' ';
+    public short CONT_OCAL_PERD = 0;
+    public char CONT_OCAL_UNIT = ' ';
+    public char CONT_FST_PAY_FLG = ' ';
+    public short CONT_PAYP_PERD = 0;
+    public char CONT_PAYP_UNIT = ' ';
+    public char COMT_BPAYP_PERD = ' ';
+    public short CONT_P_GRACE_TERM = 0;
+    public char CONT_PAY_DD_TYPE = ' ';
+    public short CONT_PAY_DD_LTERM = 0;
+    public char CONT_ORAT_SAME = ' ';
+    public short CONT_PAY_DAY = 0;
+    public int CONT_PRIN_DOG = 0;
+    public char CONT_DOG_PSTD_FLG = ' ';
+    public char CONT_PRIN_DOG_MTH = ' ';
+    public char CONT_INT_DOG_MTH = ' ';
+    public char CONT_RCMP_INT = ' ';
+    public char CONT_DUE_AUTO_FLG = ' ';
+    public char CONT_ACCRUAL_TYPE = ' ';
+    public String CONT_INT_DBAS_STD = " ";
+    public char CONT_SPEC_LN_FLG = ' ';
+    public String CONT_GDA_APREF = " ";
+    public char CONT_GDA_AUTO_DB = ' ';
+    public char CONT_GDA_DB_SEQ = ' ';
+    public char CONT_CHG_DB_FLG = ' ';
+    public double CONT_HAND_CHG_RATE = 0;
+    public double CONT_HAND_CHG_OPCT = 0;
+    public double CONT_TAX_RATE = 0;
+    public double CONT_ACCT_MGT_RATE = 0;
+    public double CONT_PREP_CHG_RATE = 0;
+    public char CONT_TRUST_PAY_FLG = ' ';
+    public char CONT_GRACE_TYP = ' ';
+    public String CONT_PAY_SEQ = " ";
+    public char CONT_PAY_TRANS_FLG = ' ';
+    public char CONT_TRANS_FREQ = ' ';
+}

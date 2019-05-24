@@ -1,0 +1,371 @@
+package com.hisun.BP;
+
+import com.hisun.SC.*;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class BPZTFSTD {
+    DBParm BPTFSTD_RD;
+    brParm BPTFSTD_BR = new brParm();
+    boolean pgmRtn = false;
+    char WS_TBL_FARM_FLAG = ' ';
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    BPRFSTD BPRFSTD = new BPRFSTD();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    BPCTFSTD BPCTFSTD;
+    BPVFEXP BPVVSTD;
+    public void MP(SCCGWA SCCGWA, BPCTFSTD BPCTFSTD) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.BPCTFSTD = BPCTFSTD;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        if (pgmRtn) return;
+        B000_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "BPZTFSTD return!");
+        Z_RET();
+        if (pgmRtn) return;
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        BPVVSTD = (BPVFEXP) BPCTFSTD.INFO.POINTER;
+        IBS.init(SCCGWA, BPCTFSTD.RC);
+        CEP.TRC(SCCGWA, BPCTFSTD.INFO.REC_LEN);
+        CEP.TRC(SCCGWA, BPVVSTD);
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, BPCTFSTD.INFO.FUNC);
+        R000_TRANS_DATA_TO_BPRFSTD();
+        if (pgmRtn) return;
+        if (BPCTFSTD.INFO.FUNC == '0') {
+            B010_CREATE_RECORD_PROC();
+            if (pgmRtn) return;
+        } else if (BPCTFSTD.INFO.FUNC == '4') {
+            B020_READUPD_RECORD_PROC();
+            if (pgmRtn) return;
+        } else if (BPCTFSTD.INFO.FUNC == '3') {
+            B030_QUERY_RECORD_PROC();
+            if (pgmRtn) return;
+        } else if (BPCTFSTD.INFO.FUNC == '1') {
+            B040_UPDATE_RECORD_PROC();
+            if (pgmRtn) return;
+        } else if (BPCTFSTD.INFO.FUNC == '2') {
+            B050_DELETE_RECORD_PROC();
+            if (pgmRtn) return;
+        } else if (BPCTFSTD.INFO.FUNC == '5') {
+            B060_BROWSE_RECORD_PROC();
+            if (pgmRtn) return;
+        } else {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "INVALID FUNC(" + BPCTFSTD.INFO.FUNC + ")";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+        R000_TRANS_DATA_TO_BPVFSTD();
+        if (pgmRtn) return;
+    }
+    public void B010_CREATE_RECORD_PROC() throws IOException,SQLException,Exception {
+        T000_WRITE_BPTFSTD();
+        if (pgmRtn) return;
+    }
+    public void B020_READUPD_RECORD_PROC() throws IOException,SQLException,Exception {
+        T000_READ_BPTFSTD_UPD();
+        if (pgmRtn) return;
+        if (WS_TBL_FARM_FLAG == 'D') {
+            IBS.CPY2CLS(SCCGWA, BPCMSG_ERROR_MSG.BP_FARM_NOTFND, BPCTFSTD.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void B030_QUERY_RECORD_PROC() throws IOException,SQLException,Exception {
+        T000_READ_BPTFSTD();
+        if (pgmRtn) return;
+    }
+    public void B040_UPDATE_RECORD_PROC() throws IOException,SQLException,Exception {
+        T000_REWRITE_BPTFSTD();
+        if (pgmRtn) return;
+    }
+    public void B050_DELETE_RECORD_PROC() throws IOException,SQLException,Exception {
+        T000_DELETE_BPTFSTD();
+        if (pgmRtn) return;
+    }
+    public void B060_BROWSE_RECORD_PROC() throws IOException,SQLException,Exception {
+        if (BPCTFSTD.INFO.OPT == '0') {
+            T000_STARTBR_BPTFSTD();
+            if (pgmRtn) return;
+        } else if (BPCTFSTD.INFO.OPT == '1') {
+            T000_READNEXT_BPTFSTD();
+            if (pgmRtn) return;
+        } else if (BPCTFSTD.INFO.OPT == '2') {
+            T000_ENDBR_BPTFSTD();
+            if (pgmRtn) return;
+        } else {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "INVALID OPT (" + BPCTFSTD.INFO.OPT + ")";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void R000_TRANS_DATA_TO_BPRFSTD() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRFSTD);
+        BPRFSTD.KEY.FEE_CODE = BPVVSTD.KEY.FEE_CODE;
+        BPRFSTD.KEY.REG_CODE = BPVVSTD.KEY.REG_CODE;
+        BPRFSTD.KEY.CHN_NO = BPVVSTD.KEY.CHN_NO;
+        BPRFSTD.KEY.FREE_FMT = BPVVSTD.KEY.FREE_FMT;
+        BPRFSTD.KEY.REF_CCY = BPVVSTD.KEY.REF_CCY;
+        BPRFSTD.EFF_DATE = BPVVSTD.DATE.EFF_DATE;
+        BPRFSTD.EXP_DATE = BPVVSTD.DATE.EXP_DATE;
+        BPRFSTD.START_AMT = BPVVSTD.VAL.START_AMT;
+        BPRFSTD.FIX_AMT = BPVVSTD.VAL.FIX_AMT;
+        BPRFSTD.FEE_CCY = BPVVSTD.VAL.FEE_CCY;
+        BPRFSTD.MIN_AMT = BPVVSTD.VAL.MIN_AMT;
+        BPRFSTD.MAX_AMT = BPVVSTD.VAL.MAX_AMT;
+        BPRFSTD.CAL_TYPE = BPVVSTD.VAL.CAL_TYPE;
+        BPRFSTD.CAL_SOURCE = BPVVSTD.VAL.CAL_SOURCE;
+        BPRFSTD.CAL_CYC = BPVVSTD.VAL.CAL_CYC;
+        BPRFSTD.CYC_NUM = BPVVSTD.VAL.CYC_NUM;
+        BPRFSTD.AGR_TYPE = BPVVSTD.VAL.AGR_TYPE;
+        BPRFSTD.PRICE_MTH = BPVVSTD.VAL.PRICE_MTH;
+        BPRFSTD.AGGR_TYPE = BPVVSTD.VAL.AGGR_TYPE;
+        BPRFSTD.UP_AMT_1 = BPVVSTD.VAL.FEE_DATA[1-1].UP_AMT;
+        BPRFSTD.UP_CNT_1 = BPVVSTD.VAL.FEE_DATA[1-1].UP_CNT;
+        BPRFSTD.AGG_MTH_1 = BPVVSTD.VAL.FEE_DATA[1-1].AGG_MTH;
+        BPRFSTD.FEE_AMT_1 = BPVVSTD.VAL.FEE_DATA[1-1].FEE_AMT;
+        BPRFSTD.FEE_PER_1 = BPVVSTD.VAL.FEE_DATA[1-1].FEE_PER;
+        BPRFSTD.UP_AMT_2 = BPVVSTD.VAL.FEE_DATA[2-1].UP_AMT;
+        BPRFSTD.UP_CNT_2 = BPVVSTD.VAL.FEE_DATA[2-1].UP_CNT;
+        BPRFSTD.AGG_MTH_2 = BPVVSTD.VAL.FEE_DATA[2-1].AGG_MTH;
+        BPRFSTD.FEE_AMT_2 = BPVVSTD.VAL.FEE_DATA[2-1].FEE_AMT;
+        BPRFSTD.FEE_PER_2 = BPVVSTD.VAL.FEE_DATA[2-1].FEE_PER;
+        BPRFSTD.UP_AMT_3 = BPVVSTD.VAL.FEE_DATA[3-1].UP_AMT;
+        BPRFSTD.UP_CNT_3 = BPVVSTD.VAL.FEE_DATA[3-1].UP_CNT;
+        BPRFSTD.AGG_MTH_3 = BPVVSTD.VAL.FEE_DATA[3-1].AGG_MTH;
+        BPRFSTD.FEE_AMT_3 = BPVVSTD.VAL.FEE_DATA[3-1].FEE_AMT;
+        BPRFSTD.FEE_PER_3 = BPVVSTD.VAL.FEE_DATA[3-1].FEE_PER;
+        BPRFSTD.UP_AMT_4 = BPVVSTD.VAL.FEE_DATA[4-1].UP_AMT;
+        BPRFSTD.UP_CNT_4 = BPVVSTD.VAL.FEE_DATA[4-1].UP_CNT;
+        BPRFSTD.AGG_MTH_4 = BPVVSTD.VAL.FEE_DATA[4-1].AGG_MTH;
+        BPRFSTD.FEE_AMT_4 = BPVVSTD.VAL.FEE_DATA[4-1].FEE_AMT;
+        BPRFSTD.FEE_PER_4 = BPVVSTD.VAL.FEE_DATA[4-1].FEE_PER;
+        BPRFSTD.UP_AMT_5 = BPVVSTD.VAL.FEE_DATA[5-1].UP_AMT;
+        BPRFSTD.UP_CNT_5 = BPVVSTD.VAL.FEE_DATA[5-1].UP_CNT;
+        BPRFSTD.AGG_MTH_5 = BPVVSTD.VAL.FEE_DATA[5-1].AGG_MTH;
+        BPRFSTD.FEE_AMT_5 = BPVVSTD.VAL.FEE_DATA[5-1].FEE_AMT;
+        BPRFSTD.FEE_PER_5 = BPVVSTD.VAL.FEE_DATA[5-1].FEE_PER;
+        BPRFSTD.UP_AMT_6 = BPVVSTD.VAL.FEE_DATA[6-1].UP_AMT;
+        BPRFSTD.UP_CNT_6 = BPVVSTD.VAL.FEE_DATA[6-1].UP_CNT;
+        BPRFSTD.AGG_MTH_6 = BPVVSTD.VAL.FEE_DATA[6-1].AGG_MTH;
+        BPRFSTD.FEE_AMT_6 = BPVVSTD.VAL.FEE_DATA[6-1].FEE_AMT;
+        BPRFSTD.FEE_PER_6 = BPVVSTD.VAL.FEE_DATA[6-1].FEE_PER;
+        BPRFSTD.UP_AMT_7 = BPVVSTD.VAL.FEE_DATA[7-1].UP_AMT;
+        BPRFSTD.UP_CNT_7 = BPVVSTD.VAL.FEE_DATA[7-1].UP_CNT;
+        BPRFSTD.AGG_MTH_7 = BPVVSTD.VAL.FEE_DATA[7-1].AGG_MTH;
+        BPRFSTD.FEE_AMT_7 = BPVVSTD.VAL.FEE_DATA[7-1].FEE_AMT;
+        BPRFSTD.FEE_PER_7 = BPVVSTD.VAL.FEE_DATA[7-1].FEE_PER;
+        BPRFSTD.UP_AMT_8 = BPVVSTD.VAL.FEE_DATA[8-1].UP_AMT;
+        BPRFSTD.UP_CNT_8 = BPVVSTD.VAL.FEE_DATA[8-1].UP_CNT;
+        BPRFSTD.AGG_MTH_8 = BPVVSTD.VAL.FEE_DATA[8-1].AGG_MTH;
+        BPRFSTD.FEE_AMT_8 = BPVVSTD.VAL.FEE_DATA[8-1].FEE_AMT;
+        BPRFSTD.FEE_PER_8 = BPVVSTD.VAL.FEE_DATA[8-1].FEE_PER;
+        BPRFSTD.UP_AMT_9 = BPVVSTD.VAL.FEE_DATA[9-1].UP_AMT;
+        BPRFSTD.UP_CNT_9 = BPVVSTD.VAL.FEE_DATA[9-1].UP_CNT;
+        BPRFSTD.AGG_MTH_9 = BPVVSTD.VAL.FEE_DATA[9-1].AGG_MTH;
+        BPRFSTD.FEE_AMT_9 = BPVVSTD.VAL.FEE_DATA[9-1].FEE_AMT;
+        BPRFSTD.FEE_PER_9 = BPVVSTD.VAL.FEE_DATA[9-1].FEE_PER;
+        BPRFSTD.UP_AMT_10 = BPVVSTD.VAL.FEE_DATA[10-1].UP_AMT;
+        BPRFSTD.UP_CNT_10 = BPVVSTD.VAL.FEE_DATA[10-1].UP_CNT;
+        BPRFSTD.AGG_MTH_10 = BPVVSTD.VAL.FEE_DATA[10-1].AGG_MTH;
+        BPRFSTD.FEE_AMT_10 = BPVVSTD.VAL.FEE_DATA[10-1].FEE_AMT;
+        BPRFSTD.FEE_PER_10 = BPVVSTD.VAL.FEE_DATA[10-1].FEE_PER;
+    }
+    public void R000_TRANS_DATA_TO_BPVFSTD() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPVVSTD);
+        BPVVSTD.KEY.FEE_CODE = BPRFSTD.KEY.FEE_CODE;
+        BPVVSTD.KEY.REG_CODE = BPRFSTD.KEY.REG_CODE;
+        BPVVSTD.KEY.CHN_NO = BPRFSTD.KEY.CHN_NO;
+        BPVVSTD.KEY.FREE_FMT = BPRFSTD.KEY.FREE_FMT;
+        BPVVSTD.KEY.REF_CCY = BPRFSTD.KEY.REF_CCY;
+        BPVVSTD.DATE.EFF_DATE = BPRFSTD.EFF_DATE;
+        BPVVSTD.DATE.EXP_DATE = BPRFSTD.EXP_DATE;
+        BPVVSTD.VAL.START_AMT = BPRFSTD.START_AMT;
+        BPVVSTD.VAL.FIX_AMT = BPRFSTD.FIX_AMT;
+        BPVVSTD.VAL.FEE_CCY = BPRFSTD.FEE_CCY;
+        BPVVSTD.VAL.MIN_AMT = BPRFSTD.MIN_AMT;
+        BPVVSTD.VAL.MAX_AMT = BPRFSTD.MAX_AMT;
+        BPVVSTD.VAL.CAL_TYPE = BPRFSTD.CAL_TYPE;
+        BPVVSTD.VAL.CAL_SOURCE = BPRFSTD.CAL_SOURCE;
+        BPVVSTD.VAL.CAL_CYC = BPRFSTD.CAL_CYC;
+        BPVVSTD.VAL.CYC_NUM = BPRFSTD.CYC_NUM;
+        BPVVSTD.VAL.AGR_TYPE = BPRFSTD.AGR_TYPE;
+        BPVVSTD.VAL.PRICE_MTH = BPRFSTD.PRICE_MTH;
+        BPVVSTD.VAL.AGGR_TYPE = BPRFSTD.AGGR_TYPE;
+        BPVVSTD.VAL.FEE_DATA[1-1].UP_AMT = BPRFSTD.UP_AMT_1;
+        BPVVSTD.VAL.FEE_DATA[1-1].UP_CNT = BPRFSTD.UP_CNT_1;
+        BPVVSTD.VAL.FEE_DATA[1-1].AGG_MTH = BPRFSTD.AGG_MTH_1;
+        BPVVSTD.VAL.FEE_DATA[1-1].FEE_AMT = BPRFSTD.FEE_AMT_1;
+        BPVVSTD.VAL.FEE_DATA[1-1].FEE_PER = BPRFSTD.FEE_PER_1;
+        BPVVSTD.VAL.FEE_DATA[2-1].UP_AMT = BPRFSTD.UP_AMT_2;
+        BPVVSTD.VAL.FEE_DATA[2-1].UP_CNT = BPRFSTD.UP_CNT_2;
+        BPVVSTD.VAL.FEE_DATA[2-1].AGG_MTH = BPRFSTD.AGG_MTH_2;
+        BPVVSTD.VAL.FEE_DATA[2-1].FEE_AMT = BPRFSTD.FEE_AMT_2;
+        BPVVSTD.VAL.FEE_DATA[2-1].FEE_PER = BPRFSTD.FEE_PER_2;
+        BPVVSTD.VAL.FEE_DATA[3-1].UP_AMT = BPRFSTD.UP_AMT_3;
+        BPVVSTD.VAL.FEE_DATA[3-1].UP_CNT = BPRFSTD.UP_CNT_3;
+        BPVVSTD.VAL.FEE_DATA[3-1].AGG_MTH = BPRFSTD.AGG_MTH_3;
+        BPVVSTD.VAL.FEE_DATA[3-1].FEE_AMT = BPRFSTD.FEE_AMT_3;
+        BPVVSTD.VAL.FEE_DATA[3-1].FEE_PER = BPRFSTD.FEE_PER_3;
+        BPVVSTD.VAL.FEE_DATA[4-1].UP_AMT = BPRFSTD.UP_AMT_4;
+        BPVVSTD.VAL.FEE_DATA[4-1].UP_CNT = BPRFSTD.UP_CNT_4;
+        BPVVSTD.VAL.FEE_DATA[4-1].AGG_MTH = BPRFSTD.AGG_MTH_4;
+        BPVVSTD.VAL.FEE_DATA[4-1].FEE_AMT = BPRFSTD.FEE_AMT_4;
+        BPVVSTD.VAL.FEE_DATA[4-1].FEE_PER = BPRFSTD.FEE_PER_4;
+        BPVVSTD.VAL.FEE_DATA[5-1].UP_AMT = BPRFSTD.UP_AMT_5;
+        BPVVSTD.VAL.FEE_DATA[5-1].UP_CNT = BPRFSTD.UP_CNT_5;
+        BPVVSTD.VAL.FEE_DATA[5-1].AGG_MTH = BPRFSTD.AGG_MTH_5;
+        BPVVSTD.VAL.FEE_DATA[5-1].FEE_AMT = BPRFSTD.FEE_AMT_5;
+        BPVVSTD.VAL.FEE_DATA[5-1].FEE_PER = BPRFSTD.FEE_PER_5;
+        BPVVSTD.VAL.FEE_DATA[6-1].UP_AMT = BPRFSTD.UP_AMT_6;
+        BPVVSTD.VAL.FEE_DATA[6-1].UP_CNT = BPRFSTD.UP_CNT_6;
+        BPVVSTD.VAL.FEE_DATA[6-1].AGG_MTH = BPRFSTD.AGG_MTH_6;
+        BPVVSTD.VAL.FEE_DATA[6-1].FEE_AMT = BPRFSTD.FEE_AMT_6;
+        BPVVSTD.VAL.FEE_DATA[6-1].FEE_PER = BPRFSTD.FEE_PER_6;
+        BPVVSTD.VAL.FEE_DATA[7-1].UP_AMT = BPRFSTD.UP_AMT_7;
+        BPVVSTD.VAL.FEE_DATA[7-1].UP_CNT = BPRFSTD.UP_CNT_7;
+        BPVVSTD.VAL.FEE_DATA[7-1].AGG_MTH = BPRFSTD.AGG_MTH_7;
+        BPVVSTD.VAL.FEE_DATA[7-1].FEE_AMT = BPRFSTD.FEE_AMT_7;
+        BPVVSTD.VAL.FEE_DATA[7-1].FEE_PER = BPRFSTD.FEE_PER_7;
+        BPVVSTD.VAL.FEE_DATA[8-1].UP_AMT = BPRFSTD.UP_AMT_8;
+        BPVVSTD.VAL.FEE_DATA[8-1].UP_CNT = BPRFSTD.UP_CNT_8;
+        BPVVSTD.VAL.FEE_DATA[8-1].AGG_MTH = BPRFSTD.AGG_MTH_8;
+        BPVVSTD.VAL.FEE_DATA[8-1].FEE_AMT = BPRFSTD.FEE_AMT_8;
+        BPVVSTD.VAL.FEE_DATA[8-1].FEE_PER = BPRFSTD.FEE_PER_8;
+        BPVVSTD.VAL.FEE_DATA[9-1].UP_AMT = BPRFSTD.UP_AMT_9;
+        BPVVSTD.VAL.FEE_DATA[9-1].UP_CNT = BPRFSTD.UP_CNT_9;
+        BPVVSTD.VAL.FEE_DATA[9-1].AGG_MTH = BPRFSTD.AGG_MTH_9;
+        BPVVSTD.VAL.FEE_DATA[9-1].FEE_AMT = BPRFSTD.FEE_AMT_9;
+        BPVVSTD.VAL.FEE_DATA[9-1].FEE_PER = BPRFSTD.FEE_PER_9;
+        BPVVSTD.VAL.FEE_DATA[10-1].UP_AMT = BPRFSTD.UP_AMT_10;
+        BPVVSTD.VAL.FEE_DATA[10-1].UP_CNT = BPRFSTD.UP_CNT_10;
+        BPVVSTD.VAL.FEE_DATA[10-1].AGG_MTH = BPRFSTD.AGG_MTH_10;
+        BPVVSTD.VAL.FEE_DATA[10-1].FEE_AMT = BPRFSTD.FEE_AMT_10;
+        BPVVSTD.VAL.FEE_DATA[10-1].FEE_PER = BPRFSTD.FEE_PER_10;
+    }
+    public void T000_READ_BPTFSTD() throws IOException,SQLException,Exception {
+        BPTFSTD_RD = new DBParm();
+        BPTFSTD_RD.TableName = "BPTFSTD";
+        IBS.READ(SCCGWA, BPRFSTD, BPTFSTD_RD);
+        CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.DBIO_FLG);
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            BPCTFSTD.RETURN_INFO = 'F';
+        } else if (SCCGWA.COMM_AREA.DBIO_FLG == '2') {
+            BPCTFSTD.RETURN_INFO = 'D';
+        } else if (SCCGWA.COMM_AREA.DBIO_FLG == '1') {
+            BPCTFSTD.RETURN_INFO = 'N';
+        } else {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "INVALID FLG (" + SCCGWA.COMM_AREA.DBIO_FLG + ")";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void T000_STARTBR_BPTFSTD() throws IOException,SQLException,Exception {
+        BPTFSTD_BR.rp = new DBParm();
+        BPTFSTD_BR.rp.TableName = "BPTFSTD";
+        IBS.STARTBR(SCCGWA, BPRFSTD, BPTFSTD_BR);
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            BPCTFSTD.RETURN_INFO = 'F';
+        } else if (SCCGWA.COMM_AREA.DBIO_FLG == '1') {
+            BPCTFSTD.RETURN_INFO = 'N';
+        } else {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "INVALID FLG (" + SCCGWA.COMM_AREA.DBIO_FLG + ")";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void T000_READNEXT_BPTFSTD() throws IOException,SQLException,Exception {
+        IBS.READNEXT(SCCGWA, BPRFSTD, this, BPTFSTD_BR);
+        CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.DBIO_FLG);
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            BPCTFSTD.RETURN_INFO = 'F';
+        } else if (SCCGWA.COMM_AREA.DBIO_FLG == '1') {
+            BPCTFSTD.RETURN_INFO = 'N';
+        } else {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "INVALID FLG (" + SCCGWA.COMM_AREA.DBIO_FLG + ")";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void T000_ENDBR_BPTFSTD() throws IOException,SQLException,Exception {
+        IBS.ENDBR(SCCGWA, BPTFSTD_BR);
+    }
+    public void T000_WRITE_BPTFSTD() throws IOException,SQLException,Exception {
+        BPTFSTD_RD = new DBParm();
+        BPTFSTD_RD.TableName = "BPTFSTD";
+        BPTFSTD_RD.errhdl = true;
+        IBS.WRITE(SCCGWA, BPRFSTD, BPTFSTD_RD);
+        CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.DBIO_FLG);
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            BPCTFSTD.RETURN_INFO = 'F';
+        } else if (SCCGWA.COMM_AREA.DBIO_FLG == '2') {
+            BPCTFSTD.RETURN_INFO = 'D';
+        } else {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "INVALID FLG (" + SCCGWA.COMM_AREA.DBIO_FLG + ")";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void T000_READ_BPTFSTD_UPD() throws IOException,SQLException,Exception {
+        BPTFSTD_RD = new DBParm();
+        BPTFSTD_RD.TableName = "BPTFSTD";
+        BPTFSTD_RD.upd = true;
+        IBS.READ(SCCGWA, BPRFSTD, BPTFSTD_RD);
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            WS_TBL_FARM_FLAG = 'N';
+        } else if (SCCGWA.COMM_AREA.DBIO_FLG == '1') {
+            WS_TBL_FARM_FLAG = 'D';
+        } else {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "INVALID FLG (" + SCCGWA.COMM_AREA.DBIO_FLG + ")";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void T000_REWRITE_BPTFSTD() throws IOException,SQLException,Exception {
+        BPTFSTD_RD = new DBParm();
+        BPTFSTD_RD.TableName = "BPTFSTD";
+        IBS.REWRITE(SCCGWA, BPRFSTD, BPTFSTD_RD);
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            BPCTFSTD.RETURN_INFO = 'F';
+        } else if (SCCGWA.COMM_AREA.DBIO_FLG == '2') {
+            BPCTFSTD.RETURN_INFO = 'D';
+        } else {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "INVALID FLG (" + SCCGWA.COMM_AREA.DBIO_FLG + ")";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void T000_DELETE_BPTFSTD() throws IOException,SQLException,Exception {
+        BPTFSTD_RD = new DBParm();
+        BPTFSTD_RD.TableName = "BPTFSTD";
+        IBS.DELETE(SCCGWA, BPRFSTD, BPTFSTD_RD);
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            BPCTFSTD.RETURN_INFO = 'F';
+        } else if (SCCGWA.COMM_AREA.DBIO_FLG == '1') {
+            BPCTFSTD.RETURN_INFO = 'N';
+        } else {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "INVALID FLG (" + SCCGWA.COMM_AREA.DBIO_FLG + ")";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        pgmRtn = true;
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

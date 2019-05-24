@@ -1,0 +1,9 @@
+package com.hisun.BP;
+
+public class BPFEECHO {
+    public char REC_FLG = ' ';
+    public String CONTENT = " ";
+    public BPFEECHO_REDEFINES6 REDEFINES6 = new BPFEECHO_REDEFINES6();
+    public BPFEECHO_REDEFINES10 REDEFINES10 = new BPFEECHO_REDEFINES10();
+    public BPFEECHO_REDEFINES33 REDEFINES33 = new BPFEECHO_REDEFINES33();
+}

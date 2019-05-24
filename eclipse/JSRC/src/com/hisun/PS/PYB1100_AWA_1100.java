@@ -1,0 +1,40 @@
+package com.hisun.PY;
+
+public class PYB1100_AWA_1100 {
+    int PRD_CD = 0;
+    short PRD_CD_NO = 0;
+    String BLL_TYP = " ";
+    short BLL_TYP_NO = 0;
+    String BILL_NO = " ";
+    short BILL_NO_NO = 0;
+    short ATCH_NUM = 0;
+    short ATCH_NUM_NO = 0;
+    String COLL_CCY = " ";
+    short COLL_CCY_NO = 0;
+    double COLL_AMT = 0;
+    short COLL_AMT_NO = 0;
+    char COLL_WAY = ' ';
+    short COLL_WAY_NO = 0;
+    long BANK_NO = 0;
+    short BANK_NO_NO = 0;
+    String BNK_NAME = " ";
+    short BNK_NAME_NO = 0;
+    String ACC_NO = " ";
+    short ACC_NO_NO = 0;
+    String ACC_NAME = " ";
+    short ACC_NAME_NO = 0;
+    long PBANK_NO = 0;
+    short PBANK_NO_NO = 0;
+    String PBK_NAME = " ";
+    short PBK_NAME_NO = 0;
+    String P_ACC_NO = " ";
+    short P_ACC_NO_NO = 0;
+    String PAC_NAME = " ";
+    short PAC_NAME_NO = 0;
+    char FEE_FLG = ' ';
+    short FEE_FLG_NO = 0;
+    double FEE_AMT = 0;
+    short FEE_AMT_NO = 0;
+    String FE_AC_NO = " ";
+    short FE_AC_NO_NO = 0;
+}

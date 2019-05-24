@@ -1,0 +1,45 @@
+package com.hisun.DD;
+
+public class DDCHDREG {
+    public String AC = " ";
+    public String CCY = " ";
+    public char CCY_TYPE = ' ';
+    public int DATE = 0;
+    public long JRNNO = 0;
+    public char STS = ' ';
+    public double BAL = 0;
+    public double INT = 0;
+    public double INT_BAL = 0;
+    public char FLG = ' ';
+    public int OPN_DT = 0;
+    public int BR = 0;
+    public int W_DT = 0;
+    public int W_BR = 0;
+    public String W_TLR = " ";
+    public int D_DT = 0;
+    public int D_BR = 0;
+    public String D_TLR = " ";
+    public int T_DT = 0;
+    public int T_BR = 0;
+    public String T_TLR = " ";
+    public int P_DT = 0;
+    public int P_BR = 0;
+    public String P_TLR = " ";
+    public int N_DT = 0;
+    public int N_BR = 0;
+    public String N_TLR = " ";
+    public char NTF_FLG = ' ';
+    public int NTF_DT = 0;
+    public short NTF_NUM = 0;
+    public String ITM_NO = " ";
+    public int SEQ = 0;
+    public char FLG1 = ' ';
+    public char FLG2 = ' ';
+    public char RCD_STS = ' ';
+    public String REMARKS = " ";
+    public int CRT_DT = 0;
+    public String CRT_TLR = " ";
+    public int UPD_DT = 0;
+    public String UPD_TLR = " ";
+    public String TS = " ";
+}

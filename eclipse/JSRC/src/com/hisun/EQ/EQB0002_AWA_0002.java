@@ -1,0 +1,44 @@
+package com.hisun.EQ;
+
+public class EQB0002_AWA_0002 {
+    public String EQ_BKID = " ";
+    public short EQ_BKID_NO = 0;
+    public String EQ_AC = " ";
+    public short EQ_AC_NO = 0;
+    public char DICP_FLG = ' ';
+    public short DICP_FLG_NO = 0;
+    public int DICP_DT = 0;
+    public short DICP_DT_NO = 0;
+    public char REC_STS = ' ';
+    public short REC_STS_NO = 0;
+    public int PROC_DT = 0;
+    public short PROC_DT_NO = 0;
+    public int REQ_DT = 0;
+    public short REQ_DT_NO = 0;
+    public double EX_CL_PT = 0;
+    public short EX_CL_PT_NO = 0;
+    public double CO_CL_PT = 0;
+    public short CO_CL_PT_NO = 0;
+    public double IN_CL_PT = 0;
+    public short IN_CL_PT_NO = 0;
+    public char CPN_TYP = ' ';
+    public short CPN_TYP_NO = 0;
+    public double O_CL_PT = 0;
+    public short O_CL_PT_NO = 0;
+    public double DICP_FNT = 0;
+    public short DICP_FNT_NO = 0;
+    public double DICP_FMT = 0;
+    public short DICP_FMT_NO = 0;
+    public double DICP_SNT = 0;
+    public short DICP_SNT_NO = 0;
+    public double DICP_SMT = 0;
+    public short DICP_SMT_NO = 0;
+    public int A_TXN_DT = 0;
+    public short A_TXN_DT_NO = 0;
+    public String REMARK = " ";
+    public short REMARK_NO = 0;
+    public int DT_OLD = 0;
+    public short DT_OLD_NO = 0;
+    public char FH_FLG = ' ';
+    public short FH_FLG_NO = 0;
+}

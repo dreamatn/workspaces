@@ -1,0 +1,48 @@
+package com.hisun.CI;
+
+public class CICSMESS_OUPT_INFO {
+    public short OPT_FLAG_LENG = 0;
+    public long OPT_MESS_TYP = 0;
+    public String OPT_CHNL_CODE = " ";
+    public String OPT_SERIAL = " ";
+    public int OPT_TRANS_DT = 0;
+    public int OPT_TRANS_TIME = 0;
+    public char OPT_MESSTYP = ' ';
+    public String OPT_TRANS_ORG = " ";
+    public String OPT_SMSID = " ";
+    public String OPT_TEMPL_ID = " ";
+    public String OPT_MOBILE = " ";
+    public char OPT_ACTYPE = ' ';
+    public String OPT_AC_NO = " ";
+    public String OPT_AC_NO1 = " ";
+    public String OPT_AC_LAST_NO = " ";
+    public String OPT_AC_LAST_NO1 = " ";
+    public int OPT_AC_BK = 0;
+    public int OPT_SEND_BR = 0;
+    public String OPT_ORG_CCY = " ";
+    public double OPT_ORG_AMT = 0;
+    public String OPT_CCY = " ";
+    public double OPT_AMT = 0;
+    public String OPT_OTHCCY = " ";
+    public double OPT_OTHAMT = 0;
+    public double OPT_CRDAVCR = 0;
+    public double OPT_RMB_AMT = 0;
+    public String OPT_CARD_TYPE = " ";
+    public String OPT_NUM1 = " ";
+    public String OPT_NUM2 = " ";
+    public String OPT_NUM3 = " ";
+    public short OPT_RET_CODE = 0;
+    public String OPT_TRANS_NM = " ";
+    public char OPT_AMT_FLAG = ' ';
+    public char OPT_ID_TYPE = ' ';
+    public String OPT_ID_CARD = " ";
+    public String OPT_STORE_NM = " ";
+    public String OPT_AC_NM = " ";
+    public String OPT_REMARK = " ";
+    public String OPT_FLDBK1 = " ";
+    public String OPT_FLDBK2 = " ";
+    public String OPT_FLDBK3 = " ";
+    public String OPT_FLDBK4 = " ";
+    public String OPT_FLDBK5 = " ";
+    public String FILLER127 = " ";
+}

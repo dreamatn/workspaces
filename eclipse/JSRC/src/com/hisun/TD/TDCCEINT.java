@@ -1,0 +1,46 @@
+package com.hisun.TD;
+
+public class TDCCEINT {
+    public TDCCEINT_RC_MSG RC_MSG = new TDCCEINT_RC_MSG();
+    public char OPT = ' ';
+    public Object IRUL_PTR;
+    public char CI_TYP = ' ';
+    public String OPEN_BK = " ";
+    public String PRDAC_CD = " ";
+    public String PROD_CD = " ";
+    public String CCY = " ";
+    public String TERM = " ";
+    public double TXN_AMT = 0;
+    public int VAL_DATE = 0;
+    public int TXN_DATE = 0;
+    public short LOS_DNUM = 0;
+    public short CD_PERD = 0;
+    public double CD_AMT = 0;
+    public String IRAT_CD = " ";
+    public double SPRD_PNT = 0;
+    public double SPRD_PCT = 0;
+    public String AC_RUL_CD = " ";
+    public TDCCEINT_JU_RACD JU_RACD = new TDCCEINT_JU_RACD();
+    public String SRV_LVL = " ";
+    public String GRPS_NO = " ";
+    public double RAT = 0;
+    public int EXP_DATE = 0;
+    public int DAYS = 0;
+    public double INT = 0;
+    public double NACCU = 0;
+    public double SACCU = 0;
+    public double LACCU = 0;
+    public String CALR_STD = " ";
+    public double CUS_AUM = 0;
+    public String CUS_ISTRY = " ";
+    public String CHNL_NO = " ";
+    public String RGN_NO = " ";
+    public String CI_NO = " ";
+    public char CALD_FLG = ' ';
+    public int AC_BR = 0;
+    public double RAT_1 = 0;
+    public char XZ_FLG = ' ';
+    public TDCCEINT_INT_STSW INT_STSW = new TDCCEINT_INT_STSW();
+    public char RACD_FLG = ' ';
+    public double RAT_XS = 0;
+}

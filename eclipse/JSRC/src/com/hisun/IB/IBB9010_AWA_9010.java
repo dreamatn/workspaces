@@ -1,0 +1,46 @@
+package com.hisun.IB;
+
+public class IBB9010_AWA_9010 {
+    public char FCN = ' ';
+    public short FCN_NO = 0;
+    public String AC_NO = " ";
+    public short AC_NO_NO = 0;
+    public int SEQ_NO = 0;
+    public short SEQ_NO_NO = 0;
+    public int DATE = 0;
+    public short DATE_NO = 0;
+    public double ERATE = 0;
+    public short ERATE_NO = 0;
+    public double EADV_RAT = 0;
+    public short EADV_RAT_NO = 0;
+    public double EOVD_RAT = 0;
+    public short EOVD_RAT_NO = 0;
+    public double DRW_AMT = 0;
+    public short DRW_AMT_NO = 0;
+    public String NOS_CD = " ";
+    public short NOS_CD_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public int BR = 0;
+    public short BR_NO = 0;
+    public String CORP_ID = " ";
+    public short CORP_ID_NO = 0;
+    public String CORP_NME = " ";
+    public short CORP_NME_NO = 0;
+    public String CORRAC = " ";
+    public short CORRAC_NO = 0;
+    public char AC_ATTR = ' ';
+    public short AC_ATTR_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public int SETT_DT = 0;
+    public short SETT_DT_NO = 0;
+    public String CALR_STD = " ";
+    public short CALR_STD_NO = 0;
+    public int INT_DAYS = 0;
+    public short INT_DAYS_NO = 0;
+    public double OPEN_BAL = 0;
+    public short OPEN_BAL_NO = 0;
+    public double RATE = 0;
+    public short RATE_NO = 0;
+}

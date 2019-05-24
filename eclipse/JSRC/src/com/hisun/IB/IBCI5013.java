@@ -1,0 +1,41 @@
+package com.hisun.IB;
+
+public class IBCI5013 {
+    public char FCN = ' ';
+    public String CIFNO = " ";
+    public String NOS_CD = " ";
+    public String CCY = " ";
+    public String CUSTNME = " ";
+    public String PROD_CD = " ";
+    public int POST_CTR = 0;
+    public String OIC_NO = " ";
+    public String RESP_CD = " ";
+    public String SUB_DP = " ";
+    public char AC_ATTR = ' ';
+    public char FUD_ATTR = ' ';
+    public char SWR_FLG = ' ';
+    public String CORRAC = " ";
+    public String CORRBK = " ";
+    public int EFFDATE = 0;
+    public char PRV_FLAG = ' ';
+    public char RAT_FLAG = ' ';
+    public char RAT_MTH = ' ';
+    public String RAT_TYPE = " ";
+    public String RAT_TERM = " ";
+    public double RATE_PCT = 0;
+    public double SPREAD = 0;
+    public String CALR_STD = " ";
+    public double RATE = 0;
+    public short INTS_MM = 0;
+    public char INTS_CYC = ' ';
+    public short INTS_DD = 0;
+    public String OD_PAYAC = " ";
+    public double OD_RATE = 0;
+    public char OD_FLAG = ' ';
+    public char OD_R_FLG = ' ';
+    public char OD_S_CYC = ' ';
+    public String AUTH_TLR = " ";
+    public char AC_NATR = ' ';
+    public String AC_USE = " ";
+    public String RMK = " ";
+}

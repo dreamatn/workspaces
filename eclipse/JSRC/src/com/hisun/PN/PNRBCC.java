@@ -1,0 +1,44 @@
+package com.hisun.PN;
+
+public class PNRBCC {
+    public PNRBCC_KEY KEY = new PNRBCC_KEY();
+    public String PRD_CD = " ";
+    public char TRN_FLG = ' ';
+    public String CCY = " ";
+    public double AMT = 0;
+    public char STS = ' ';
+    public char LAST_STS = ' ';
+    public char PAY_TYPE = ' ';
+    public char C_T_FLG = ' ';
+    public char APB_TYPE = ' ';
+    public String APB_NO = " ";
+    public int APB_VALUE_DATE = 0;
+    public String APP_AC = " ";
+    public String APP_ACNM = " ";
+    public String PAYEE_AC = " ";
+    public String PAYEE_ACNM = " ";
+    public char FEE_FLG = ' ';
+    public String USG_RMK = " ";
+    public char STL_OPT = ' ';
+    public String STL_CHNL = " ";
+    public char STL_TYPE = ' ';
+    public String IN_AC = " ";
+    public String LHD_AC = " ";
+    public String LHD_ACNM = " ";
+    public char ODUE_FLG = ' ';
+    public long PAY_BK = 0;
+    public int ISS_BR = 0;
+    public String ISS_TLR = " ";
+    public int ISS_DT = 0;
+    public int DUE_DATE = 0;
+    public int CLR_BR = 0;
+    public String CLR_TLR = " ";
+    public int CLR_DATE = 0;
+    public int CHG_DATE = 0;
+    public String OLD_CCNO = " ";
+    public int CRT_DATE = 0;
+    public String CRT_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public String UPDTBL_TLR = " ";
+    public String TS = " ";
+}

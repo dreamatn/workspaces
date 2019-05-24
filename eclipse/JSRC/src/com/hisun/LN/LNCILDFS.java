@@ -1,0 +1,7 @@
+package com.hisun.LN;
+
+public class LNCILDFS {
+    public LNCILDFS_RC RC = new LNCILDFS_RC();
+    public LNCILDFS_INPUT_AREA INPUT_AREA = new LNCILDFS_INPUT_AREA();
+    public LNCILDFS_OUTPUT_AREA OUTPUT_AREA = new LNCILDFS_OUTPUT_AREA();
+}

@@ -1,0 +1,44 @@
+package com.hisun.BP;
+
+public class BPB3280_AWA_3280 {
+    public char PAY_TYP = ' ';
+    public short PAY_TYP_NO = 0;
+    public String AC = " ";
+    public short AC_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String CASH_CD = " ";
+    public short CASH_CD_NO = 0;
+    public String AC_NAME = " ";
+    public short AC_NAME_NO = 0;
+    public String AC_CCY = " ";
+    public short AC_CCY_NO = 0;
+    public String BV_CODE = " ";
+    public short BV_CODE_NO = 0;
+    public String BV_NAME = " ";
+    public short BV_NAME_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public double VALUE = 0;
+    public short VALUE_NO = 0;
+    public String HEAD_NO = " ";
+    public short HEAD_NO_NO = 0;
+    public String BEG_NO = " ";
+    public short BEG_NO_NO = 0;
+    public String END_NO = " ";
+    public short END_NO_NO = 0;
+    public int NUM = 0;
+    public short NUM_NO = 0;
+    public double AMT = 0;
+    public short AMT_NO = 0;
+    public String CHAR_CCY = " ";
+    public short CHAR_CCY_NO = 0;
+    public double CHAR_AMT = 0;
+    public short CHAR_AMT_NO = 0;
+    public String PAY_RSN = " ";
+    public short PAY_RSN_NO = 0;
+    public int TX_BR = 0;
+    public short TX_BR_NO = 0;
+    public String TX_TLR = " ";
+    public short TX_TLR_NO = 0;
+}

@@ -1,0 +1,6 @@
+package com.hisun.CI;
+
+public class CICOCACL_DETAIL {
+    public CICOCACL_INPUT_DATA INPUT_DATA = new CICOCACL_INPUT_DATA();
+    public CICOCACL_OUTPUT_DATA OUTPUT_DATA = new CICOCACL_OUTPUT_DATA();
+}

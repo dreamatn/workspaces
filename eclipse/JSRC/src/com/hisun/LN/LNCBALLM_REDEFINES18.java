@@ -1,0 +1,7 @@
+package com.hisun.LN;
+
+public class LNCBALLM_REDEFINES18 {
+    short LOAN_CONT_AREA_LEN1 = 0;
+    String LOAN_CONT_AREA_TEXT1 = " ";
+    LNCBALLM_REDEFINES21 REDEFINES21 = new LNCBALLM_REDEFINES21();
+}

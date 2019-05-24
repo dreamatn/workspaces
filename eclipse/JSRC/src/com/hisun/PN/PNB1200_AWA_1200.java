@@ -1,0 +1,44 @@
+package com.hisun.PN;
+
+public class PNB1200_AWA_1200 {
+    public String BILL_KND = " ";
+    public short BILL_KND_NO = 0;
+    public String BILL_NO = " ";
+    public short BILL_NO_NO = 0;
+    public String ENCRY_NO = " ";
+    public short ENCRY_NO_NO = 0;
+    public int ISS_DATE = 0;
+    public short ISS_DATE_NO = 0;
+    public double ISS_AMT = 0;
+    public short ISS_AMT_NO = 0;
+    public char CLR_CHNL = ' ';
+    public short CLR_CHNL_NO = 0;
+    public char STL_FLG = ' ';
+    public short STL_FLG_NO = 0;
+    public String LHD_AC = " ";
+    public short LHD_AC_NO = 0;
+    public String LHD_NM = " ";
+    public short LHD_NM_NO = 0;
+    public long CLR_BK = 0;
+    public short CLR_BK_NO = 0;
+    public String PRDMO_CD = " ";
+    public short PRDMO_CD_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public String EVENT_CD = " ";
+    public short EVENT_CD_NO = 0;
+    public String PRDGL_CD = " ";
+    public short PRDGL_CD_NO = 0;
+    public int ACCT_BR = 0;
+    public short ACCT_BR_NO = 0;
+    public String BCC_CINO = " ";
+    public short BCC_CINO_NO = 0;
+    public double BCC_AMT = 0;
+    public short BCC_AMT_NO = 0;
+    public double ISSAMT = 0;
+    public short ISSAMT_NO = 0;
+    public int ISS_DT = 0;
+    public short ISS_DT_NO = 0;
+    public String OLD_PAYE = " ";
+    public short OLD_PAYE_NO = 0;
+}

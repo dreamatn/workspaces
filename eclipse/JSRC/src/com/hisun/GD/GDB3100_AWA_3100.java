@@ -1,0 +1,48 @@
+package com.hisun.GD;
+
+public class GDB3100_AWA_3100 {
+    public String TXDD_AC = " ";
+    public short TXDD_AC_NO = 0;
+    public String TXCI_NM = " ";
+    public short TXCI_NM_NO = 0;
+    public int TXSEQ = 0;
+    public short TXSEQ_NO = 0;
+    public String TXCCY = " ";
+    public short TXCCY_NO = 0;
+    public char TXTYP = ' ';
+    public short TXTYP_NO = 0;
+    public char TXBUR_MT = ' ';
+    public short TXBUR_MT_NO = 0;
+    public String TXSYS_NO = " ";
+    public short TXSYS_NO_NO = 0;
+    public String TXRSEQ = " ";
+    public short TXRSEQ_NO = 0;
+    public String TXCTA_NO = " ";
+    public short TXCTA_NO_NO = 0;
+    public String TXREF_NO = " ";
+    public short TXREF_NO_NO = 0;
+    public String TXBSTYP = " ";
+    public short TXBSTYP_NO = 0;
+    public double TXRAMT = 0;
+    public short TXRAMT_NO = 0;
+    public double TXPN_AMT = 0;
+    public short TXPN_AMT_NO = 0;
+    public int TXDT = 0;
+    public short TXDT_NO = 0;
+    public char TXALLO_F = ' ';
+    public short TXALLO_F_NO = 0;
+    public int TXALLO_B = 0;
+    public short TXALLO_B_NO = 0;
+    public char TXBR_TYP = ' ';
+    public short TXBR_TYP_NO = 0;
+    public String TXFEE_CD = " ";
+    public short TXFEE_CD_NO = 0;
+    public String TXFAC_NO = " ";
+    public short TXFAC_NO_NO = 0;
+    public double TXFEE_AM = 0;
+    public short TXFEE_AM_NO = 0;
+    public String TXRMK = " ";
+    public short TXRMK_NO = 0;
+    public String TXHLD_NO = " ";
+    public short TXHLD_NO_NO = 0;
+}

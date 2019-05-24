@@ -1,0 +1,46 @@
+package com.hisun.DD;
+
+public class DDCBCLAC {
+    public char BV_TYP = ' ';
+    public String DR_CARD = " ";
+    public String AC_NO = " ";
+    public String PSBK_NO = " ";
+    public String CCY = " ";
+    public char CCY_TYPE = ' ';
+    public String DRW_PSW = " ";
+    public char TRF_FLG = ' ';
+    public String MMO = " ";
+    public char TO_BVTYP = ' ';
+    public String TO_CARD = " ";
+    public String TRF_AC = " ";
+    public String NARRATIVE = " ";
+    public String REMARK = " ";
+    public String LOSS_NO = " ";
+    public double FEE_AMT = 0;
+    public char CHK_PSW = ' ';
+    public String TRK2_DT = " ";
+    public String TRK3_DT = " ";
+    public String CARD_NO2 = " ";
+    public String CARD_PSW2 = " ";
+    public String TRK2_DAT2 = " ";
+    public String TRK3_DAT2 = " ";
+    public String CARD_NO3 = " ";
+    public String CARD_PSW3 = " ";
+    public String TRK2_DAT3 = " ";
+    public String TRK3_DAT3 = " ";
+    public String CARD_NO4 = " ";
+    public String CARD_PSW4 = " ";
+    public String TRK2_DAT4 = " ";
+    public String TRK3_DAT4 = " ";
+    public String CARD_NO5 = " ";
+    public String CARD_PSW5 = " ";
+    public String TRK2_DAT5 = " ";
+    public String TRK3_DAT5 = " ";
+    public char PAY_TYPE = ' ';
+    public String ID_TYP = " ";
+    public String ID_NO = " ";
+    public String RVS_NO = " ";
+    public char BAT_FLG = ' ';
+    public String CI_NM = " ";
+    public double BAL = 0;
+}

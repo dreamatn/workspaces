@@ -1,0 +1,47 @@
+package com.hisun.LN;
+
+public class LNOT6050_WS_OUT_PUT {
+    String WS_CTA_NO = " ";
+    String WS_CI_NO = " ";
+    String WS_CI_ENMS = " ";
+    String WS_CI_CNM = " ";
+    char LNOT6050_FILLER20 = 0X02;
+    double WS_PRIN = 0;
+    char LNOT6050_FILLER22 = 0X01;
+    double WS_OSBAL = 0;
+    char LNOT6050_FILLER24 = 0X01;
+    String WS_CCY = " ";
+    char WS_STS = ' ';
+    char WS_ADJ_PTYP = ' ';
+    short WS_ADJ_PTEM = 0;
+    int WS_ADJ_VDT = 0;
+    int WS_ADJ_DDT = 0;
+    double WS_ADJ_INT = 0;
+    char LNOT6050_FILLER32 = 0X01;
+    double WS_ADJ_AMT = 0;
+    char LNOT6050_FILLER34 = 0X01;
+    double WS_ADJ_AMTS = 0;
+    char LNOT6050_FILLER36 = 0X01;
+    String WS_ADJ_RSN = " ";
+    char LNOT6050_FILLER38 = 0X02;
+    char WS_PAY_TYP = ' ';
+    short WS_PAY_TERM = 0;
+    int WS_VAL_DT = 0;
+    int WS_DUE_DT = 0;
+    double WS_INT = 0;
+    char LNOT6050_FILLER44 = 0X01;
+    double WS_OVE_AMTS = 0;
+    char LNOT6050_FILLER46 = 0X01;
+    double WS_AMT = 0;
+    char LNOT6050_FILLER48 = 0X01;
+    double WS_TOT_INT = 0;
+    char LNOT6050_FILLER50 = 0X01;
+    double WS_LVE_AMTS = 0;
+    char LNOT6050_FILLER52 = 0X01;
+    double WS_T_L_INT = 0;
+    char LNOT6050_FILLER54 = 0X01;
+    double WS_A_L_AMT = 0;
+    char LNOT6050_FILLER56 = 0X01;
+    String WS_RSN = " ";
+    char LNOT6050_FILLER58 = 0X02;
+}

@@ -1,0 +1,24 @@
+package com.hisun.BP;
+
+public class BPZUBSEQ_WS_TIT1 {
+    String BPZUBSEQ_FILLER23 = "SEQ TYPE";
+    String BPZUBSEQ_FILLER24 = "  ";
+    String BPZUBSEQ_FILLER25 = "SEQ CODE";
+    String BPZUBSEQ_FILLER26 = "  ";
+    String BPZUBSEQ_FILLER27 = "USED POINTER";
+    String BPZUBSEQ_FILLER28 = "  ";
+    String BPZUBSEQ_FILLER29 = "CYCLE DATE";
+    String BPZUBSEQ_FILLER30 = "  ";
+    String BPZUBSEQ_FILLER31 = "SKIP FLAG";
+    String BPZUBSEQ_FILLER32 = "  ";
+    String BPZUBSEQ_FILLER33 = "OBLIGATE FLAG";
+    String BPZUBSEQ_FILLER34 = "  ";
+    String BPZUBSEQ_FILLER35 = "FIRST SEQ NUM";
+    String BPZUBSEQ_FILLER36 = "  ";
+    String BPZUBSEQ_FILLER37 = "MAX SEQ";
+    String BPZUBSEQ_FILLER38 = "  ";
+    String BPZUBSEQ_FILLER39 = "MAX FLAG";
+    String BPZUBSEQ_FILLER40 = "  ";
+    String BPZUBSEQ_FILLER41 = "WARNING SEQ";
+    String BPZUBSEQ_FILLER42 = "  ";
+}

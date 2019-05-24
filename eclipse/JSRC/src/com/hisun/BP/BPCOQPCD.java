@@ -1,0 +1,7 @@
+package com.hisun.BP;
+
+public class BPCOQPCD {
+    public BPCOQPCD_RC RC = new BPCOQPCD_RC();
+    public BPCOQPCD_INPUT_DATA INPUT_DATA = new BPCOQPCD_INPUT_DATA();
+    public BPCOQPCD_OUTPUT_DATA OUTPUT_DATA = new BPCOQPCD_OUTPUT_DATA();
+}

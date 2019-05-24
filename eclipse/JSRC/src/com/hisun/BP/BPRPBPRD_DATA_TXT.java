@@ -1,0 +1,42 @@
+package com.hisun.BP;
+
+public class BPRPBPRD_DATA_TXT {
+    public char TYPE = ' ';
+    public String BV_CNM = " ";
+    public String BV_ENM = " ";
+    public String BV_CNMS = " ";
+    public String BV_ENMS = " ";
+    public char BV_CFLG = ' ';
+    public char LEVEL = ' ';
+    public short HEAD_LENGTH = 0;
+    public short NO_LENGTH = 0;
+    public char USE_MODE = ' ';
+    public char USE_CTL = ' ';
+    public char CTL_FLG = ' ';
+    public char CNT_FLG = ' ';
+    public short CNT_UT = 0;
+    public String CCY = " ";
+    public char AC_TYP = ' ';
+    public char CUT_FLG = ' ';
+    public char OUT_FLG = ' ';
+    public double COST_PRICE = 0;
+    public double SER_CHARGE = 0;
+    public char SELL_FLG = ' ';
+    public short AUTO_REL_DAY = 0;
+    public char PP_FLG = ' ';
+    public String VAL_DAY = " ";
+    public int B_LMT = 0;
+    public int V_LMT = 0;
+    public int B_LMTUP = 0;
+    public int V_LMTUP = 0;
+    public char STS = ' ';
+    public int EFF_DT = 0;
+    public int EXP_DT = 0;
+    public int UPT_DT = 0;
+    public String UPT_TLR = " ";
+    public char BV_RANGE = ' ';
+    public short BOOK_ROW = 0;
+    public short PAGE_ROW = 0;
+    public char CHK_FLG = ' ';
+    public String BV_SRC = " ";
+}

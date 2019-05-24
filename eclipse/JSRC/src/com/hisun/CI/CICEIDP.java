@@ -1,0 +1,45 @@
+package com.hisun.CI;
+
+public class CICEIDP {
+    public String RGSTRTN_ID = " ";
+    public long SEQ_NO = 0;
+    public String PTY_ID = " ";
+    public String PTY_TP = " ";
+    public String RGSTRTN_NO = " ";
+    public String RGSTRTN_NO2 = " ";
+    public String RGSTRTN_NO3 = " ";
+    public String RGSTRTN_TP = " ";
+    public String RGSTRTN_NM = " ";
+    public String ACCT_REG_FLAG = " ";
+    public String CNTRY = " ";
+    public String ISSUE_ORG = " ";
+    public String ISSUE_ORG2 = " ";
+    public long ISSUE_DT = 0;
+    public long EXPRY_DT = 0;
+    public String GRADE = " ";
+    public String CHK_STS = " ";
+    public String RGSTRTN_DESC = " ";
+    public String RGSTRTN_NM_CHK_STS = " ";
+    public long CHK_DT = 0;
+    public String VLD_PERIOD = " ";
+    public String CALC_RGSTRTN_NO = " ";
+    public String CALC_RGSTRTN_NO2 = " ";
+    public String CALC_RGSTRTN_NO3 = " ";
+    public String CALC_RGSTRTN_TP = " ";
+    public String CALC_RGSTRTN_NM = " ";
+    public String CALC_RGSTRTN_MD5 = " ";
+    public long SYSTM_PRIRTY = 0;
+    public String SYSTM_HAS_TMSTMP = " ";
+    public String CRT_TM = " ";
+    public String UPD_TM = " ";
+    public String END_TM = " ";
+    public String ECIF_CRT_TM = " ";
+    public String ECIF_UPD_TM = " ";
+    public String CRT_EMPLYE_NO = " ";
+    public String UPD_EMPLYE_NO = " ";
+    public String CRT_SYSTM = " ";
+    public String UPD_SYSTM = " ";
+    public String CRT_CHNL = " ";
+    public String UPD_CHNL = " ";
+    public String PTY_NO = " ";
+}

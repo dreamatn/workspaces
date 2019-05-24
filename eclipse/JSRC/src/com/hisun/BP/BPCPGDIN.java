@@ -1,0 +1,7 @@
+package com.hisun.BP;
+
+public class BPCPGDIN {
+    public BPCPGDIN_RC RC = new BPCPGDIN_RC();
+    public BPCPGDIN_INPUT_DATA INPUT_DATA = new BPCPGDIN_INPUT_DATA();
+    public BPCPGDIN_OUTPUT_DATA OUTPUT_DATA = new BPCPGDIN_OUTPUT_DATA();
+}

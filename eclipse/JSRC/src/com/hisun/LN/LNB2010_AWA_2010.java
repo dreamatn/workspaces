@@ -1,0 +1,42 @@
+package com.hisun.LN;
+
+public class LNB2010_AWA_2010 {
+    public String CONT_NO = " ";
+    public short CONT_NO_NO = 0;
+    public int GRA_DAYA = 0;
+    public short GRA_DAYA_NO = 0;
+    public char GRA_PDFL = ' ';
+    public short GRA_PDFL_NO = 0;
+    public char P_GRA_MT = ' ';
+    public short P_GRA_MT_NO = 0;
+    public char C_GRA_MT = ' ';
+    public short C_GRA_MT_NO = 0;
+    public char AUAL_TYP = ' ';
+    public short AUAL_TYP_NO = 0;
+    public String INT_D_BA = " ";
+    public short INT_D_BA_NO = 0;
+    public String PSEQ_CD = " ";
+    public short PSEQ_CD_NO = 0;
+    public double HAND_CHR = 0;
+    public short HAND_CHR_NO = 0;
+    public double PREP_CHR = 0;
+    public short PREP_CHR_NO = 0;
+    public char HAND_MTH = ' ';
+    public short HAND_MTH_NO = 0;
+    public char HAND_CHM = ' ';
+    public short HAND_CHM_NO = 0;
+    public char GUARDUAP = ' ';
+    public short GUARDUAP_NO = 0;
+    public double HANDOPCT = 0;
+    public short HANDOPCT_NO = 0;
+    public char GUARPSEQ = ' ';
+    public short GUARPSEQ_NO = 0;
+    public char PFE_MTH = ' ';
+    public short PFE_MTH_NO = 0;
+    public double PERD_PEN = 0;
+    public short PERD_PEN_NO = 0;
+    public String REMARK1 = " ";
+    public short REMARK1_NO = 0;
+    public char BAT_FLG = ' ';
+    public short BAT_FLG_NO = 0;
+}

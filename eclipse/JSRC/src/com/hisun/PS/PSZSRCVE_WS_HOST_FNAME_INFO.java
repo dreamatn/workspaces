@@ -1,0 +1,6 @@
+package com.hisun.PS;
+
+public class PSZSRCVE_WS_HOST_FNAME_INFO {
+    String PSZSRCVE_FILLER19 = "MO=";
+    PSZSRCVE_WS_RTN_FILE WS_RTN_FILE = new PSZSRCVE_WS_RTN_FILE();
+}

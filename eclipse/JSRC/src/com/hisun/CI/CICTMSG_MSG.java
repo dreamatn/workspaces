@@ -1,0 +1,41 @@
+package com.hisun.CI;
+
+public class CICTMSG_MSG {
+    public String FILLER2 = "SYS-NO=";
+    public CICTMSG_SYS_NO SYS_NO = new CICTMSG_SYS_NO();
+    public String FILLER7 = "|&CHNL-NO=";
+    public String CHNL_NO = " ";
+    public String FILLER9 = "|&AC-NO=";
+    public String AC_NO = " ";
+    public String FILLER11 = "|&OUT-AC=";
+    public String OUT_AC = " ";
+    public String FILLER13 = "|&OUT-AC-NM=";
+    public String OUT_AC_NM = " ";
+    public String FILLER15 = "|&OUT-BKNM=";
+    public String OUT_BKNM = " ";
+    public String FILLER17 = "|&AMT=";
+    public double AMT = 0;
+    public String FILLER19 = "|&AC-DT=";
+    public int AC_DT = 0;
+    public String FILLER21 = "|&AC-TIME=";
+    public int AC_TIME = 0;
+    public String FILLER23 = "|&AC-AMT=";
+    public double AC_AMT = 0;
+    public String FILLER25 = "|&CCY=";
+    public String CCY = " ";
+    public String FILLER27 = "|&CR-FLG=";
+    public char CR_FLG = ' ';
+    public String FILLER29 = "|&CD-FLG=";
+    public char CD_FLG = ' ';
+    public String FILLER31 = "|&TX-MMO=";
+    public String TX_MMO = " ";
+    public String FILLER33 = "|&USER=";
+    public String USER = " ";
+    public String FILLER35 = "|&CT-FLG=";
+    public char CT_FLG = ' ';
+    public String FILLER37 = "|&CANCL-FLG=";
+    public char CANCL_FLG = ' ';
+    public String FILLER39 = "|&ADP-TYPE=";
+    public String ADP_TYPE = " ";
+    public String FILLER41 = "                                                                                                                                                                                                      ";
+}

@@ -1,0 +1,45 @@
+package com.hisun.CI;
+
+public class CICCUST_O_DATA {
+    public String O_CI_NO = " ";
+    public String O_ID_TYPE = " ";
+    public String O_ID_NO = " ";
+    public int O_EXP_DT = 0;
+    public String O_CI_NM = " ";
+    public String O_CI_ENM = " ";
+    public char O_CI_TYP = ' ';
+    public char O_CI_ATTR = ' ';
+    public String O_STSW = " ";
+    public int O_OPEN_DT = 0;
+    public int O_OWNER_BK = 0;
+    public int O_CLOSE_DT = 0;
+    public String O_OPEN_CHNL = " ";
+    public String O_SUB_TYP = " ";
+    public String O_ORG_TYPE = " ";
+    public String O_FIN_TYPE = " ";
+    public char O_FTA_FLG = ' ';
+    public char O_EP_FLG = ' ';
+    public String O_SVR_LVL = " ";
+    public String O_TAX_BANK = " ";
+    public String O_TAX_AC_NO = " ";
+    public char O_TAX_TYPE = ' ';
+    public String O_TAX_DIST_NO = " ";
+    public char O_RESIDENT = ' ';
+    public char O_SEX = ' ';
+    public int O_BIRTH_DT = 0;
+    public String O_NATION = " ";
+    public String O_REG_CNTY = " ";
+    public String O_INTEL_TYPE = " ";
+    public String O_INDUS1 = " ";
+    public char O_SID_FLG = ' ';
+    public String O_TEL_NO = " ";
+    public String O_PB_AP_NO = " ";
+    public String O_OIC_NO = " ";
+    public String O_RESP_CD = " ";
+    public String O_SUB_DP = " ";
+    public String O_HOLD_LVL = " ";
+    public String O_IDE_STSW = " ";
+    public String O_NRA_TAX_TYP = " ";
+    public char O_COL_IND_FLG = ' ';
+    public char O_SIZE = ' ';
+}

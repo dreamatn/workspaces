@@ -1,0 +1,44 @@
+package com.hisun.LN;
+
+public class LN420_OUT_INFO {
+    public char O_DEL_FLG = ' ';
+    public int O_TR_VALDT = 0;
+    public int O_TR_DTE = 0;
+    public long O_TR_JRNNO = 0;
+    public short O_TXN_TERM = 0;
+    public int O_DUE_DT = 0;
+    public double O_P_AMT = 0;
+    public double O_I_AMT = 0;
+    public double O_O_AMT = 0;
+    public double O_L_AMT = 0;
+    public double O_PC_AMT = 0;
+    public double O_F_AMT = 0;
+    public double O_OS_BAL = 0;
+    public String O_TR_CHNL = " ";
+    public int O_TR_BR = 0;
+    public char O_AC_FLG1 = ' ';
+    public String O_AC_TYP1 = " ";
+    public String O_PAY_AC1 = " ";
+    public String O_PAY_AC_NAM1 = " ";
+    public char FILLER40 = 0X02;
+    public char O_AC_FLG2 = ' ';
+    public String O_AC_TYP2 = " ";
+    public String O_PAY_AC2 = " ";
+    public String O_PAY_AC_NAM2 = " ";
+    public char FILLER45 = 0X02;
+    public char O_AC_FLG3 = ' ';
+    public String O_AC_TYP3 = " ";
+    public String O_PAY_AC3 = " ";
+    public String O_PAY_AC_NAM3 = " ";
+    public char FILLER50 = 0X02;
+    public char O_AC_FLG4 = ' ';
+    public String O_AC_TYP4 = " ";
+    public String O_PAY_AC4 = " ";
+    public String O_PAY_AC_NAM4 = " ";
+    public char FILLER55 = 0X02;
+    public char O_AC_FLG5 = ' ';
+    public String O_AC_TYP5 = " ";
+    public String O_PAY_AC5 = " ";
+    public String O_PAY_AC_NAM5 = " ";
+    public char FILLER60 = 0X02;
+}

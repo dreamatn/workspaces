@@ -1,0 +1,43 @@
+package com.hisun.LN;
+
+public class LNRCMMT {
+    public LNRCMMT_KEY KEY = new LNRCMMT_KEY();
+    public String CTA_NAME = " ";
+    public char CTA_STS = ' ';
+    public String STATUS = " ";
+    public int SIGN_DATE = 0;
+    public int FIRST_DD_DATE = 0;
+    public int BOOK_BR = 0;
+    public int DOMI_BR = 0;
+    public String PROD_CD = " ";
+    public String CTA_CCY = " ";
+    public double CTA_AMT = 0;
+    public double CTA_OPEN_AMT = 0;
+    public double USED_AMT = 0;
+    public double ACCU_USED_AMT = 0;
+    public double AVAIL_AMT = 0;
+    public int AVAIL_START_DATE = 0;
+    public int AVAIL_END_DATE = 0;
+    public char REVOLVING_FLAG = ' ';
+    public char REV_CMMT = ' ';
+    public String REF_CTY_CODE_INF = " ";
+    public String FATHER_CONTRACT = " ";
+    public double ORI_CTA_AMT = 0;
+    public double ORI_CTA_OPEN_AMT = 0;
+    public int CTA_AMT_CHG_DATE = 0;
+    public int RTIO_VAL_DATE = 0;
+    public short RTIO_VAL_DATE_NO = 0;
+    public String AGENT = " ";
+    public double GLOBAL_AMT = 0;
+    public String REMARK1 = " ";
+    public String REMARK2 = " ";
+    public String REMARK3 = " ";
+    public String REMARK4 = " ";
+    public String REMARK5 = " ";
+    public int CLOSE_DATE = 0;
+    public int CRT_DATE = 0;
+    public String CRT_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public String UPDTBL_TLR = " ";
+    public String TS = " ";
+}

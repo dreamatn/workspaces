@@ -1,0 +1,8 @@
+package com.hisun.LN;
+
+public class LNCRATH_KEY {
+    public String CONTRACT_NO = " ";
+    public int SUB_CTA_NO = 0;
+    public char RATE_TYP = ' ';
+    public int RAT_CHG_DT = 0;
+}

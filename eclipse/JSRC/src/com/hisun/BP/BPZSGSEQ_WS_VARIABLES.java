@@ -1,0 +1,8 @@
+package com.hisun.BP;
+
+import com.hisun.SC.SCCPCWA;
+
+public class BPZSGSEQ_WS_VARIABLES {
+    BPZSGSEQ_WS_TEMP_VARIABLE WS_TEMP_VARIABLE = new BPZSGSEQ_WS_TEMP_VARIABLE();
+    SCCPCWA SCCPCWA = new SCCPCWA();
+}

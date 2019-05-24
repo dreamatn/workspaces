@@ -1,0 +1,1454 @@
+package com.hisun.BP;
+
+import com.hisun.SC.*;
+import java.lang.reflect.Method;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class BPZSMPRI {
+    int JIBS_tmp_int;
+    String JIBS_tmp_str[] = new String[10];
+    boolean pgmRtn = false;
+    String CPN_R_GRPL = "BP-R-MGM-GRPL       ";
+    String CPN_R_TATH = "BP-R-MGM-TATH       ";
+    String CPN_R_TLR = "BP-F-TLR-INF-QUERY  ";
+    String CPN_R_TXIF = "BP-R-MGM-TXIF       ";
+    String CPN_R_GRP = "BP-R-MGM-GRP        ";
+    String CPN_F_ORG = "BP-P-INQ-ORG        ";
+    String CPN_F_TAT_CHK = "BP-F-OTS-TATH-CHK   ";
+    String CPN_F_ROL_CHK = "BP-F-OTS-ROL-CHK    ";
+    String K_OUTPUT_FMT = "BP507";
+    int K_MAX_ROW = 99;
+    int K_MAX_COL = 99;
+    int K_COL_CNT = 11;
+    int K_MAX_DATE = 99991231;
+    String K_HIS_REMARK = "PRIVILEGE TRANSFER MAINTAIN";
+    String K_HIS_COPYBOOK = "BPCPRIT ";
+    String CPN_REC_NHIS = "BP-REC-NHIS         ";
+    String WS_ERR_MSG = " ";
+    short WS_I = 0;
+    short WS_J = 0;
+    String WS_TLR = " ";
+    short WS_TLR_LENG = 0;
+    char WS_TBL_TATH_FLAG = ' ';
+    char WS_TBL_GRPL_FLAG = ' ';
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCFMT SCCFMT = new SCCFMT();
+    SCCMPAG SCCMPAG = new SCCMPAG();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    BPRGRPL BPRGRPL = new BPRGRPL();
+    BPRTATH BPRTATH = new BPRTATH();
+    BPRTXIF BPRTXIF = new BPRTXIF();
+    BPRGRP BPRGRP = new BPRGRP();
+    BPCPRIT BPCPRIT = new BPCPRIT();
+    BPCRGRPL BPCRGRPL = new BPCRGRPL();
+    BPCRTATH BPCRTATH = new BPCRTATH();
+    BPCRTATB BPCRTATB = new BPCRTATB();
+    BPCRGPLB BPCRGPLB = new BPCRGPLB();
+    BPCOPRI1 BPCOPRI1 = new BPCOPRI1();
+    BPCFTLRQ BPCFTLRQ = new BPCFTLRQ();
+    BPCRTXIF BPCRTXIF = new BPCRTXIF();
+    BPCRGRP BPCRGRP = new BPCRGRP();
+    BPCPQORG BPCPQORG = new BPCPQORG();
+    BPCFOTRO BPCFOTRO = new BPCFOTRO();
+    BPCFOTTA BPCFOTTA = new BPCFOTTA();
+    BPCPNHIS BPCPNHIS = new BPCPNHIS();
+    BPCSMGRL BPCSMGRL = new BPCSMGRL();
+    BPCSMTAT BPCSMTAT = new BPCSMTAT();
+    BPCOPRIL BPCOPRIL = new BPCOPRIL();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    BPCSMPRI BPCSMPRI;
+    public void MP(SCCGWA SCCGWA, BPCSMPRI BPCSMPRI) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.BPCSMPRI = BPCSMPRI;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        if (pgmRtn) return;
+        B000_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "BPZSMPRI return!");
+        Z_RET();
+        if (pgmRtn) return;
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPRTATH);
+        IBS.init(SCCGWA, BPCRGRPL);
+        IBS.init(SCCGWA, BPCRTATH);
+        IBS.init(SCCGWA, BPCRTATB);
+        IBS.init(SCCGWA, BPCPRIT);
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.TR_TIME);
+        WS_TLR_LENG = 8;
+        CEP.TRC(SCCGWA, WS_TLR_LENG);
+        if (BPCSMPRI.FUNC == 'Q'
+            || BPCSMPRI.FUNC == 'A') {
+            B010_TRANS_PROCESS();
+            if (pgmRtn) return;
+            B090_DATA_OUTPUT();
+            if (pgmRtn) return;
+        } else if (BPCSMPRI.FUNC == 'U') {
+            B020_MODIFY_PROCESS();
+            if (pgmRtn) return;
+            B090_DATA_OUTPUT();
+            if (pgmRtn) return;
+        } else if (BPCSMPRI.FUNC == 'D') {
+            B030_DELETE_PROCESS();
+            if (pgmRtn) return;
+            B090_DATA_OUTPUT();
+            if (pgmRtn) return;
+        } else if (BPCSMPRI.FUNC == 'B') {
+            B040_BROWSER_PROCESS();
+            if (pgmRtn) return;
+        } else {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_INPUT_ERROR;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void B010_TRANS_PROCESS() throws IOException,SQLException,Exception {
+        B010_01_CHECK_INPUT();
+        if (pgmRtn) return;
+        if (BPCSMPRI.TRAN_TYP == '0') {
+            B010_02_TRANS_ROLE();
+            if (pgmRtn) return;
+        }
+        if (BPCSMPRI.TRAN_TYP == '1') {
+            B010_03_TRANS_TXN();
+            if (pgmRtn) return;
+        }
+    }
+    public void B010_01_CHECK_INPUT() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCFTLRQ);
+        BPCFTLRQ.INFO.TLR = BPCSMPRI.TLR_OUT;
+        S000_CALL_BPZFTLRQ();
+        if (pgmRtn) return;
+        if (BPCFTLRQ.INFO.TLR_STS != 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_TLR_STS;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        IBS.init(SCCGWA, BPCFTLRQ);
+        BPCFTLRQ.INFO.TLR = BPCSMPRI.TLR_IN;
+        S000_CALL_BPZFTLRQ();
+        if (pgmRtn) return;
+        if (BPCFTLRQ.INFO.TLR_STS != 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_TLR_STS;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        IBS.init(SCCGWA, BPCPQORG);
+        BPCPQORG.BNK = SCCGWA.COMM_AREA.TR_BANK;
+        BPCPQORG.BR = BPCFTLRQ.INFO.NEW_BR;
+        S000_CALL_BPZPQORG();
+        if (pgmRtn) return;
+        if (BPCSMPRI.TRAN_TYP == '0') {
+            IBS.init(SCCGWA, BPRGRP);
+            IBS.init(SCCGWA, BPCRGRP);
+            BPRGRP.KEY.ROLE_CD = BPCSMPRI.TX_CD;
+            BPCRGRP.INFO.FUNC = 'Q';
+            S000_CALL_BPZRGRP();
+            if (pgmRtn) return;
+            if (BPCRGRP.RETURN_INFO == 'N') {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_GRP_NOTFND;
+                S000_ERR_MSG_PROC();
+                if (pgmRtn) return;
+            }
+            if (BPRGRP.EXP_DT < SCCGWA.COMM_AREA.AC_DATE) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_GRP_EXP;
+                S000_ERR_MSG_PROC();
+                if (pgmRtn) return;
+            }
+            if (BPCPQORG.SUPR_BR != BPCPQORG.BR) {
+                IBS.init(SCCGWA, BPCFOTRO);
+                BPCFOTRO.ASSTYP = 'O';
+                BPCFOTRO.ASS_ID = "" + BPCPQORG.SUPR_BR;
+                JIBS_tmp_int = BPCFOTRO.ASS_ID.length();
+                for (int i=0;i<6-JIBS_tmp_int;i++) BPCFOTRO.ASS_ID = "0" + BPCFOTRO.ASS_ID;
+                BPCFOTRO.ATH_TYP = BPCSMPRI.PRIV_TYP;
+                BPCFOTRO.ROLE_CD = BPCSMPRI.TX_CD;
+                S000_CALL_BPZFOTRO();
+                if (pgmRtn) return;
+                if (BPCFOTRO.PRIV_FLG != 'Y') {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_UP_ORG_NO_PRIV;
+                    S000_ERR_MSG_PROC();
+                    if (pgmRtn) return;
+                }
+            }
+        }
+        if (BPCSMPRI.TRAN_TYP == '1') {
+            if (BPCSMPRI.IN_FLG == 'I' 
+                || BPCSMPRI.IN_FLG == 'O') {
+                IBS.init(SCCGWA, BPRTXIF);
+                IBS.init(SCCGWA, BPCRTXIF);
+                BPRTXIF.KEY.IN_FLG = BPCSMPRI.IN_FLG;
+                BPRTXIF.KEY.SYS_MMO = BPCSMPRI.SYS_MMO;
+                BPRTXIF.KEY.TX_CD = BPCSMPRI.TX_CD;
+                BPCRTXIF.INFO.FUNC = 'Q';
+                S000_CALL_BPZRTXIF();
+                if (pgmRtn) return;
+                if (BPCRTXIF.RETURN_INFO == 'N') {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TXIF_NOTFND;
+                    S000_ERR_MSG_PROC();
+                    if (pgmRtn) return;
+                }
+                if (BPRTXIF.STS != 'Y') {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TXIF_INV;
+                    S000_ERR_MSG_PROC();
+                    if (pgmRtn) return;
+                }
+            }
+            if (BPCSMPRI.IN_FLG == 'F') {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_OPTION_INPUT;
+                S000_ERR_MSG_PROC();
+                if (pgmRtn) return;
+            }
+            if (BPCPQORG.SUPR_BR != BPCPQORG.BR) {
+                IBS.init(SCCGWA, BPCFOTTA);
+                BPCFOTTA.ASSTYP = 'O';
+                BPCFOTTA.ASS_ID = "" + BPCPQORG.SUPR_BR;
+                JIBS_tmp_int = BPCFOTTA.ASS_ID.length();
+                for (int i=0;i<6-JIBS_tmp_int;i++) BPCFOTTA.ASS_ID = "0" + BPCFOTTA.ASS_ID;
+                BPCFOTTA.ATH_TYP = BPCSMPRI.PRIV_TYP;
+                BPCFOTTA.IN_FLG = BPCSMPRI.IN_FLG;
+                BPCFOTTA.SYS_MMO = BPCSMPRI.SYS_MMO;
+                BPCFOTTA.TX_CD = BPCSMPRI.TX_CD;
+                S000_CALL_BPZFOTTA();
+                if (pgmRtn) return;
+                if (BPCFOTTA.PRIV_FLG != 'Y') {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_UP_ORG_NO_PRIV;
+                    S000_ERR_MSG_PROC();
+                    if (pgmRtn) return;
+                }
+            }
+        }
+        CEP.TRC(SCCGWA, K_MAX_DATE);
+        CEP.TRC(SCCGWA, BPCSMPRI.MOV_EFF_DATE);
+        CEP.TRC(SCCGWA, BPCSMPRI.MOV_EXP_DATE);
+        if (BPCSMPRI.FUNC != 'D') {
+            if (BPCSMPRI.MOV_EFF_DATE == 0) {
+                BPCSMPRI.MOV_EFF_DATE = SCCGWA.COMM_AREA.AC_DATE;
+            }
+            if (BPCSMPRI.MOV_EXP_DATE == 0) {
+                BPCSMPRI.MOV_EXP_DATE = K_MAX_DATE;
+            }
+            if (BPCSMPRI.MOV_EFF_DATE < SCCGWA.COMM_AREA.AC_DATE) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_EFF_DATE;
+                S000_ERR_MSG_PROC();
+                if (pgmRtn) return;
+            }
+            if (BPCSMPRI.MOV_EXP_DATE < BPCSMPRI.MOV_EFF_DATE) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_EXP_DATE;
+                S000_ERR_MSG_PROC();
+                if (pgmRtn) return;
+            }
+            if (BPCSMPRI.FUNC == 'A') {
+                if (BPCSMPRI.MOV_EFF_DATE == SCCGWA.COMM_AREA.AC_DATE 
+                    && BPCSMPRI.MOV_EFF_TIME < SCCGWA.COMM_AREA.TR_TIME) {
+                    BPCSMPRI.MOV_EFF_TIME = SCCGWA.COMM_AREA.TR_TIME;
+                }
+            }
+            if (BPCSMPRI.MOV_EFF_DATE == BPCSMPRI.MOV_EXP_DATE 
+                && BPCSMPRI.MOV_EFF_TIME > BPCSMPRI.MOV_EXP_TIME) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TIME_RANGE_ERR;
+                S000_ERR_MSG_PROC();
+                if (pgmRtn) return;
+            }
+        }
+    }
+    public void B010_02_TRANS_ROLE() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPCRGRPL);
+        BPRGRPL.KEY.ASS_TYP = 'T';
+        BPRGRPL.KEY.ASS_ID = BPCSMPRI.TLR_OUT;
+        BPRGRPL.KEY.ATH_TYP = BPCSMPRI.PRIV_TYP;
+        BPCRGRPL.INFO.FUNC = 'R';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+        if (BPCRGRPL.RETURN_INFO == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_GRPL_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        WS_TBL_GRPL_FLAG = 'N';
+        for (WS_I = 1; WS_I <= BPRGRPL.ROLE_CNT 
+            && WS_TBL_GRPL_FLAG != 'Y'; WS_I += 1) {
+            CEP.TRC(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD);
+            if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD.equalsIgnoreCase(BPCSMPRI.TX_CD)) {
+                WS_TBL_GRPL_FLAG = 'Y';
+            }
+        }
+        if (WS_TBL_GRPL_FLAG == 'N') {
+            CEP.TRC(SCCGWA, "ROLE NO NOTFND");
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_GRPL_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, WS_I);
+        CEP.TRC(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_FLG);
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1-1].MOV_FLG == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_MOV;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1-1].MOV_STS == '1' 
+            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1-1].MOV_STS == '2' 
+            && (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_DT > SCCGWA.COMM_AREA.AC_DATE 
+            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+            && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_TM > SCCGWA.COMM_AREA.TR_TIME))) 
+            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1-1].MOV_STS == '3' 
+            && (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_DT > SCCGWA.COMM_AREA.AC_DATE 
+            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+            && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_TM > SCCGWA.COMM_AREA.TR_TIME)))) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_NORMAL;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_NOT_EFF;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].EXP_DT < SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_EXP_DATE;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].EFF_DT > BPCSMPRI.MOV_EFF_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_MOV_EFF;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].EXP_DT < BPCSMPRI.MOV_EXP_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_MOV_EXP;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPCSMPRI.ATTR == '1') {
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_STS = '2';
+        } else {
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_STS = '3';
+        }
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_DT = BPCSMPRI.MOV_EFF_DATE;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_DT = BPCSMPRI.MOV_EXP_DATE;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_TM = BPCSMPRI.MOV_EFF_TIME;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_TM = BPCSMPRI.MOV_EXP_TIME;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_TLR = BPCSMPRI.TLR_IN;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.UPD_DT = BPCSMPRI.UPD_DATE;
+        BPRGRPL.UPD_TLR = BPCSMPRI.UPD_TLR;
+        BPCRGRPL.INFO.FUNC = 'U';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPCRGRPL);
+        IBS.init(SCCGWA, BPCSMGRL);
+        BPRGRPL.KEY.ATH_TYP = BPCSMPRI.PRIV_TYP;
+        BPRGRPL.KEY.ASS_ID = BPCSMPRI.TLR_IN;
+        BPRGRPL.KEY.ASS_TYP = 'T';
+        BPCRGRPL.INFO.FUNC = 'Q';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, BPCRGRPL.RETURN_INFO);
+        if (BPCRGRPL.RETURN_INFO == 'F') {
+            BPCSMGRL.FUNC = 'U';
+            BPCSMGRL.MODIFY_FUNC = 'A';
+        } else {
+            BPCSMGRL.FUNC = 'A';
+            BPCSMGRL.ROLE_NUM = 1;
+        }
+        BPCSMGRL.AUTH_TYP = BPCSMPRI.PRIV_TYP;
+        BPCSMGRL.ASS_ID = BPCSMPRI.TLR_IN;
+        BPCSMGRL.ASS_TYP = 'T';
+        BPCSMGRL.ROLE_CD = BPCSMPRI.TX_CD;
+        BPCSMGRL.MOV_FLG = 'N';
+        BPCSMGRL.MOV_STS = '1';
+        BPCSMGRL.MOV_EFF_DATE = BPCSMPRI.MOV_EFF_DATE;
+        BPCSMGRL.MOV_EXP_DATE = BPCSMPRI.MOV_EXP_DATE;
+        BPCSMGRL.MOV_EFF_TIME = BPCSMPRI.MOV_EFF_TIME;
+        BPCSMGRL.MOV_EXP_TIME = BPCSMPRI.MOV_EXP_TIME;
+        BPCSMGRL.EFF_DATE = BPCSMPRI.MOV_EFF_DATE;
+        BPCSMGRL.EXP_DATE = BPCSMPRI.MOV_EXP_DATE;
+        BPCSMGRL.UPD_DATE = BPCSMPRI.UPD_DATE;
+        BPCSMGRL.UPD_TLR = BPCSMPRI.UPD_TLR;
+        S00_CALL_BPZSMGRL();
+        if (pgmRtn) return;
+    }
+    public void B010_03_TRANS_TXN() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRTATH);
+        BPRTATH.KEY.ASS_TYP = 'T';
+        BPRTATH.KEY.ASS_ID = BPCSMPRI.TLR_OUT;
+        BPRTATH.KEY.ATH_TYP = BPCSMPRI.PRIV_TYP;
+        BPCRTATH.INFO.FUNC = 'R';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+        if (BPCRTATH.RETURN_INFO == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TATH_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        WS_TBL_TATH_FLAG = 'N';
+        for (WS_I = 1; WS_I <= BPRTATH.TXIF_CNT 
+            && WS_TBL_TATH_FLAG != 'Y'; WS_I += 1) {
+            CEP.TRC(SCCGWA, WS_I);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD);
+            if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG == BPCSMPRI.IN_FLG 
+                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO.equalsIgnoreCase(BPCSMPRI.SYS_MMO) 
+                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD.equalsIgnoreCase(BPCSMPRI.TX_CD)) {
+                WS_TBL_TATH_FLAG = 'Y';
+            }
+        }
+        CEP.TRC(SCCGWA, "END-PEROFROM");
+        CEP.TRC(SCCGWA, WS_I);
+        if (WS_TBL_TATH_FLAG == 'N') {
+            CEP.TRC(SCCGWA, "TATH NO NOTFND");
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TATH_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, "BBBBB");
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1-1].MOV_FLG == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_MOV;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, "CCCCC");
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1-1].MOV_STS == '1' 
+            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1-1].MOV_STS == '2' 
+            && (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_DT > SCCGWA.COMM_AREA.AC_DATE 
+            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+            && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_TM > SCCGWA.COMM_AREA.TR_TIME))) 
+            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1-1].MOV_STS == '3' 
+            && (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_DT > SCCGWA.COMM_AREA.AC_DATE 
+            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+            && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_TM > SCCGWA.COMM_AREA.TR_TIME)))) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_NORMAL;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, "DDDDD");
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_NOT_EFF;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, "EEEEE");
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].EXP_DT < SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_EXP_DATE;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, "FFFFF");
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].EFF_DT > BPCSMPRI.MOV_EFF_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_MOV_EFF;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, "GGGGG");
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].EXP_DT < BPCSMPRI.MOV_EXP_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_MOV_EXP;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPCSMPRI.ATTR == '1') {
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_STS = '2';
+        } else {
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_STS = '3';
+        }
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_DT = BPCSMPRI.MOV_EFF_DATE;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_DT = BPCSMPRI.MOV_EXP_DATE;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_TM = BPCSMPRI.MOV_EFF_TIME;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_TM = BPCSMPRI.MOV_EXP_TIME;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_TLR = BPCSMPRI.TLR_IN;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.UPD_DT = BPCSMPRI.UPD_DATE;
+        BPRTATH.UPD_TLR = BPCSMPRI.UPD_TLR;
+        BPCRTATH.INFO.FUNC = 'U';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "BEFORE-ADD");
+        IBS.init(SCCGWA, BPRTATH);
+        IBS.init(SCCGWA, BPCRTATH);
+        IBS.init(SCCGWA, BPCSMTAT);
+        BPRTATH.KEY.ATH_TYP = BPCSMPRI.PRIV_TYP;
+        BPRTATH.KEY.ASS_ID = BPCSMPRI.TLR_IN;
+        BPRTATH.KEY.ASS_TYP = 'T';
+        BPCRTATH.INFO.FUNC = 'Q';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, BPCRTATH.RETURN_INFO);
+        if (BPCRTATH.RETURN_INFO == 'F') {
+            BPCSMTAT.FUNC = 'U';
+            BPCSMTAT.MODIFY_FUNC = 'A';
+        } else {
+            BPCSMTAT.FUNC = 'A';
+            BPCSMTAT.TXIF_NUM = 1;
+        }
+        BPCSMTAT.AUTH_TYP = BPCSMPRI.PRIV_TYP;
+        BPCSMTAT.ASS_ID = BPCSMPRI.TLR_IN;
+        BPCSMTAT.ASS_TYP = 'T';
+        BPCSMTAT.IN_FLG = BPCSMPRI.IN_FLG;
+        BPCSMTAT.SYS_MMO = BPCSMPRI.SYS_MMO;
+        BPCSMTAT.TX_CD = BPCSMPRI.TX_CD;
+        BPCSMTAT.MOV_FLG = 'N';
+        BPCSMTAT.MOV_STS = '1';
+        BPCSMTAT.MOV_EFF_DATE = BPCSMPRI.MOV_EFF_DATE;
+        BPCSMTAT.MOV_EXP_DATE = BPCSMPRI.MOV_EXP_DATE;
+        BPCSMTAT.MOV_EFF_TIME = BPCSMPRI.MOV_EFF_TIME;
+        BPCSMTAT.MOV_EXP_TIME = BPCSMPRI.MOV_EXP_TIME;
+        BPCSMTAT.EFF_DATE = BPCSMPRI.MOV_EFF_DATE;
+        BPCSMTAT.EXP_DATE = BPCSMPRI.MOV_EXP_DATE;
+        BPCSMTAT.UPD_DATE = BPCSMPRI.UPD_DATE;
+        BPCSMTAT.UPD_TLR = BPCSMPRI.UPD_TLR;
+        S00_CALL_BPZSMTAT();
+        if (pgmRtn) return;
+    }
+    public void B020_MODIFY_PROCESS() throws IOException,SQLException,Exception {
+        B010_01_CHECK_INPUT();
+        if (pgmRtn) return;
+        if (BPCSMPRI.TRAN_TYP == '0') {
+            B020_01_MODIFY_ROLE();
+            if (pgmRtn) return;
+        }
+        if (BPCSMPRI.TRAN_TYP == '1') {
+            B020_02_MODIFY_TXN();
+            if (pgmRtn) return;
+        }
+    }
+    public void B020_01_MODIFY_ROLE() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPCRGRPL);
+        BPRGRPL.KEY.ASS_TYP = 'T';
+        BPRGRPL.KEY.ASS_ID = BPCSMPRI.TLR_OUT;
+        BPRGRPL.KEY.ATH_TYP = BPCSMPRI.PRIV_TYP;
+        BPCRGRPL.INFO.FUNC = 'R';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+        if (BPCRGRPL.RETURN_INFO == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_GRPL_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        WS_TBL_GRPL_FLAG = 'N';
+        for (WS_I = 1; WS_I <= BPRGRPL.ROLE_CNT 
+            && WS_TBL_GRPL_FLAG != 'Y'; WS_I += 1) {
+            CEP.TRC(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD);
+            if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD.equalsIgnoreCase(BPCSMPRI.TX_CD)) {
+                WS_TBL_GRPL_FLAG = 'Y';
+            }
+        }
+        if (WS_TBL_GRPL_FLAG == 'N') {
+            CEP.TRC(SCCGWA, "ROLE NO NOTFND");
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_GRPL_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, WS_I);
+        CEP.TRC(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_FLG);
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1-1].MOV_FLG == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_MOV;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (!(BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1-1].MOV_STS == '2' 
+            || BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1-1].MOV_STS == '3')) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_MOV;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (!BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_TLR.equalsIgnoreCase(BPCSMPRI.TLR_IN)) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_INPUT_ERROR;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_NOT_EFF;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].EXP_DT < SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_EXP_DATE;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_DT < SCCGWA.COMM_AREA.AC_DATE 
+            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+            && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_TM < SCCGWA.COMM_AREA.TR_TIME)) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_NORMAL;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_DT < SCCGWA.COMM_AREA.AC_DATE 
+            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+            && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_TM < SCCGWA.COMM_AREA.TR_TIME) 
+            && (BPCSMPRI.MOV_EFF_DATE != BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_DT 
+            || BPCSMPRI.MOV_EFF_TIME != BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_TM)) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_EFF_DATE;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].EFF_DT > BPCSMPRI.MOV_EFF_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_MOV_EFF;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].EXP_DT < BPCSMPRI.MOV_EXP_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_MOV_EXP;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPCSMPRI.ATTR == '1') {
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_STS = '2';
+        } else {
+            BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_STS = '3';
+        }
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_DT = BPCSMPRI.MOV_EFF_DATE;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_DT = BPCSMPRI.MOV_EXP_DATE;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_TM = BPCSMPRI.MOV_EFF_TIME;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_TM = BPCSMPRI.MOV_EXP_TIME;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_TLR = BPCSMPRI.TLR_IN;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.UPD_DT = BPCSMPRI.UPD_DATE;
+        BPRGRPL.UPD_TLR = BPCSMPRI.UPD_TLR;
+        BPCRGRPL.INFO.FUNC = 'U';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPCRGRPL);
+        BPRGRPL.KEY.ASS_TYP = 'T';
+        BPRGRPL.KEY.ASS_ID = BPCSMPRI.TLR_IN;
+        BPRGRPL.KEY.ATH_TYP = BPCSMPRI.PRIV_TYP;
+        BPCRGRPL.INFO.FUNC = 'R';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+        if (BPCRGRPL.RETURN_INFO == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_GRPL_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        WS_TBL_GRPL_FLAG = 'N';
+        for (WS_I = 1; WS_I <= BPRGRPL.ROLE_CNT 
+            && WS_TBL_GRPL_FLAG != 'Y'; WS_I += 1) {
+            CEP.TRC(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD);
+            if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD.equalsIgnoreCase(BPCSMPRI.TX_CD)) {
+                WS_TBL_GRPL_FLAG = 'Y';
+            }
+        }
+        if (WS_TBL_GRPL_FLAG == 'N') {
+            CEP.TRC(SCCGWA, "ROLE NO NOTFND");
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_GRPL_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_DT = BPCSMPRI.MOV_EFF_DATE;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_DT = BPCSMPRI.MOV_EXP_DATE;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_TM = BPCSMPRI.MOV_EFF_TIME;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_TM = BPCSMPRI.MOV_EXP_TIME;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].EFF_DT = BPCSMPRI.MOV_EFF_DATE;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].EXP_DT = BPCSMPRI.MOV_EXP_DATE;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.UPD_DT = BPCSMPRI.UPD_DATE;
+        BPRGRPL.UPD_TLR = BPCSMPRI.UPD_TLR;
+        BPCRGRPL.INFO.FUNC = 'U';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+    }
+    public void B020_02_MODIFY_TXN() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRTATH);
+        BPRTATH.KEY.ASS_TYP = 'T';
+        BPRTATH.KEY.ASS_ID = BPCSMPRI.TLR_OUT;
+        BPRTATH.KEY.ATH_TYP = BPCSMPRI.PRIV_TYP;
+        BPCRTATH.INFO.FUNC = 'R';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+        if (BPCRTATH.RETURN_INFO == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TATH_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        WS_TBL_TATH_FLAG = 'N';
+        for (WS_I = 1; WS_I <= BPRTATH.TXIF_CNT 
+            && WS_TBL_TATH_FLAG != 'Y'; WS_I += 1) {
+            CEP.TRC(SCCGWA, WS_I);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD);
+            if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG == BPCSMPRI.IN_FLG 
+                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO.equalsIgnoreCase(BPCSMPRI.SYS_MMO) 
+                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD.equalsIgnoreCase(BPCSMPRI.TX_CD)) {
+                WS_TBL_TATH_FLAG = 'Y';
+            }
+        }
+        if (WS_TBL_TATH_FLAG == 'N') {
+            CEP.TRC(SCCGWA, "TATH NO NOTFND");
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TATH_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, WS_I);
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1-1].MOV_FLG == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_MOV;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (!(BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1-1].MOV_STS == '2' 
+            || BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1-1].MOV_STS == '3')) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_MOV;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (!BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_TLR.equalsIgnoreCase(BPCSMPRI.TLR_IN)) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_INPUT_ERROR;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_NOT_EFF;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].EXP_DT < SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_EXP_DATE;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_DT < SCCGWA.COMM_AREA.AC_DATE 
+            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_DT == SCCGWA.COMM_AREA.AC_DATE 
+            && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_TM < SCCGWA.COMM_AREA.TR_TIME)) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_NORMAL;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_DT < SCCGWA.COMM_AREA.AC_DATE 
+            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+            && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_TM < SCCGWA.COMM_AREA.TR_TIME) 
+            && (BPCSMPRI.MOV_EFF_DATE != BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_DT 
+            || BPCSMPRI.MOV_EFF_TIME != BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_TM)) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_EFF_DATE;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].EFF_DT > BPCSMPRI.MOV_EFF_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_MOV_EFF;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].EXP_DT < BPCSMPRI.MOV_EXP_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_MOV_EXP;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPCSMPRI.ATTR == '1') {
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_STS = '2';
+        } else {
+            BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_STS = '3';
+        }
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_DT = BPCSMPRI.MOV_EFF_DATE;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_DT = BPCSMPRI.MOV_EXP_DATE;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_TM = BPCSMPRI.MOV_EFF_TIME;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_TM = BPCSMPRI.MOV_EXP_TIME;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_TLR = BPCSMPRI.TLR_IN;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.UPD_DT = BPCSMPRI.UPD_DATE;
+        BPRTATH.UPD_TLR = BPCSMPRI.UPD_TLR;
+        BPCRTATH.INFO.FUNC = 'U';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, BPRTATH);
+        BPRTATH.KEY.ASS_TYP = 'T';
+        BPRTATH.KEY.ASS_ID = BPCSMPRI.TLR_IN;
+        BPRTATH.KEY.ATH_TYP = BPCSMPRI.PRIV_TYP;
+        BPCRTATH.INFO.FUNC = 'R';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+        if (BPCRTATH.RETURN_INFO == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TATH_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        WS_TBL_TATH_FLAG = 'N';
+        for (WS_I = 1; WS_I <= BPRTATH.TXIF_CNT 
+            && WS_TBL_TATH_FLAG != 'Y'; WS_I += 1) {
+            CEP.TRC(SCCGWA, WS_I);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD);
+            if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG == BPCSMPRI.IN_FLG 
+                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO.equalsIgnoreCase(BPCSMPRI.SYS_MMO) 
+                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD.equalsIgnoreCase(BPCSMPRI.TX_CD)) {
+                WS_TBL_TATH_FLAG = 'Y';
+            }
+        }
+        if (WS_TBL_TATH_FLAG == 'N') {
+            CEP.TRC(SCCGWA, "TATH NO NOTFND");
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TATH_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_DT = BPCSMPRI.MOV_EFF_DATE;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_DT = BPCSMPRI.MOV_EXP_DATE;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_TM = BPCSMPRI.MOV_EFF_TIME;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_TM = BPCSMPRI.MOV_EXP_TIME;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].EFF_DT = BPCSMPRI.MOV_EFF_DATE;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].EXP_DT = BPCSMPRI.MOV_EXP_DATE;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.UPD_DT = BPCSMPRI.UPD_DATE;
+        BPRTATH.UPD_TLR = BPCSMPRI.UPD_TLR;
+        BPCRTATH.INFO.FUNC = 'U';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+    }
+    public void B030_DELETE_PROCESS() throws IOException,SQLException,Exception {
+        B010_01_CHECK_INPUT();
+        if (pgmRtn) return;
+        if (BPCSMPRI.TRAN_TYP == '0') {
+            B030_01_DELETE_ROLE();
+            if (pgmRtn) return;
+        }
+        if (BPCSMPRI.TRAN_TYP == '1') {
+            B030_02_DELETE_TXN();
+            if (pgmRtn) return;
+        }
+    }
+    public void B030_01_DELETE_ROLE() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPCRGRPL);
+        BPRGRPL.KEY.ASS_TYP = 'T';
+        BPRGRPL.KEY.ASS_ID = BPCSMPRI.TLR_OUT;
+        BPRGRPL.KEY.ATH_TYP = BPCSMPRI.PRIV_TYP;
+        BPCRGRPL.INFO.FUNC = 'R';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+        if (BPCRGRPL.RETURN_INFO == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_GRPL_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        WS_TBL_GRPL_FLAG = 'N';
+        for (WS_I = 1; WS_I <= BPRGRPL.ROLE_CNT 
+            && WS_TBL_GRPL_FLAG != 'Y'; WS_I += 1) {
+            CEP.TRC(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD);
+            if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD.equalsIgnoreCase(BPCSMPRI.TX_CD)) {
+                WS_TBL_GRPL_FLAG = 'Y';
+            }
+        }
+        if (WS_TBL_GRPL_FLAG == 'N') {
+            CEP.TRC(SCCGWA, "ROLE NO NOTFND");
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_GRPL_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (!(BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1-1].MOV_STS == '2' 
+            || BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1-1].MOV_STS == '3')) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_MOV;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (!BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_TLR.equalsIgnoreCase(BPCSMPRI.TLR_IN)) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_INPUT_ERROR;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_NOT_EFF;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].EXP_DT < SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_EXP_DATE;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_DT < SCCGWA.COMM_AREA.AC_DATE 
+            || (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+            && BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_TM < SCCGWA.COMM_AREA.TR_TIME)) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_NORMAL;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_STS = '0';
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_DT = 0;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_DT = 0;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EFF_TM = 0;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_EXP_TM = 0;
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I - 1-1].MOV_TLR = " ";
+        BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+        BPRGRPL.UPD_DT = BPCSMPRI.UPD_DATE;
+        BPRGRPL.UPD_TLR = BPCSMPRI.UPD_TLR;
+        BPCRGRPL.INFO.FUNC = 'U';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPCRGRPL);
+        BPRGRPL.KEY.ASS_TYP = 'T';
+        BPRGRPL.KEY.ASS_ID = BPCSMPRI.TLR_IN;
+        BPRGRPL.KEY.ATH_TYP = BPCSMPRI.PRIV_TYP;
+        BPCRGRPL.INFO.FUNC = 'R';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+        if (BPCRGRPL.RETURN_INFO == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_GRPL_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        WS_TBL_GRPL_FLAG = 'N';
+        for (WS_I = 1; WS_I <= BPRGRPL.ROLE_CNT 
+            && WS_TBL_GRPL_FLAG != 'Y'; WS_I += 1) {
+            CEP.TRC(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD);
+            if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD.equalsIgnoreCase(BPCSMPRI.TX_CD)) {
+                WS_TBL_GRPL_FLAG = 'Y';
+            }
+        }
+        if (WS_TBL_GRPL_FLAG == 'N') {
+            CEP.TRC(SCCGWA, "ROLE NO NOTFND");
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_GRPL_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, BPRGRPL.ROLE_CNT);
+        CEP.TRC(SCCGWA, WS_I);
+        if (BPRGRPL.ROLE_CNT > 1) {
+            for (WS_J = WS_I; WS_J <= BPRGRPL.ROLE_CNT; WS_J += 1) {
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J - 1-1].ROLE_CD = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].ROLE_CD;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J - 1-1].MOV_FLG = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_FLG;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J - 1-1].MOV_STS = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_STS;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J - 1-1].MOV_EFF_DT = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_DT;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J - 1-1].MOV_EXP_DT = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_DT;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J - 1-1].MOV_EFF_TM = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EFF_TM;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J - 1-1].MOV_EXP_TM = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_EXP_TM;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J - 1-1].EFF_DT = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EFF_DT;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J - 1-1].EXP_DT = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].EXP_DT;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+                BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J - 1-1].MOV_TLR = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J-1].MOV_TLR;
+                BPRGRPL.REDEFINES14.ROLE_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16);
+            }
+            IBS.init(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_J - 1-1]);
+            BPRGRPL.ROLE_CNT += -1;
+        } else {
+            IBS.init(SCCGWA, BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[1-1]);
+            BPRGRPL.ROLE_CNT = 0;
+        }
+        BPRGRPL.UPD_DT = BPCSMPRI.UPD_DATE;
+        BPRGRPL.UPD_TLR = BPCSMPRI.UPD_TLR;
+        BPCRGRPL.INFO.FUNC = 'U';
+        S000_CALL_BPZRGRPL();
+        if (pgmRtn) return;
+    }
+    public void B030_02_DELETE_TXN() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRTATH);
+        BPRTATH.KEY.ASS_TYP = 'T';
+        BPRTATH.KEY.ASS_ID = BPCSMPRI.TLR_OUT;
+        BPRTATH.KEY.ATH_TYP = BPCSMPRI.PRIV_TYP;
+        BPCRTATH.INFO.FUNC = 'R';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+        if (BPCRTATH.RETURN_INFO == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TATH_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        WS_TBL_TATH_FLAG = 'N';
+        for (WS_I = 1; WS_I <= BPRTATH.TXIF_CNT 
+            && WS_TBL_TATH_FLAG != 'Y'; WS_I += 1) {
+            CEP.TRC(SCCGWA, WS_I);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD);
+            if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG == BPCSMPRI.IN_FLG 
+                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO.equalsIgnoreCase(BPCSMPRI.SYS_MMO) 
+                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD.equalsIgnoreCase(BPCSMPRI.TX_CD)) {
+                WS_TBL_TATH_FLAG = 'Y';
+            }
+        }
+        if (WS_TBL_TATH_FLAG == 'N') {
+            CEP.TRC(SCCGWA, "TATH NO NOTFND");
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TATH_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, WS_I);
+        if (!(BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1-1].MOV_STS == '2' 
+            || BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1-1].MOV_STS == '3')) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_MOV;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (!BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_TLR.equalsIgnoreCase(BPCSMPRI.TLR_IN)) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_INPUT_ERROR;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].EFF_DT > SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_NOT_EFF;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].EXP_DT < SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ERR_PRIV_EXP_DATE;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_DT < SCCGWA.COMM_AREA.AC_DATE 
+            || (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_DT == SCCGWA.COMM_AREA.AC_DATE 
+            && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_TM < SCCGWA.COMM_AREA.TR_TIME)) {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_PRIV_NOT_NORMAL;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_STS = '0';
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_DT = 0;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_DT = 0;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EFF_TM = 0;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_EXP_TM = 0;
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I - 1-1].MOV_TLR = " ";
+        BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+        BPRTATH.UPD_DT = BPCSMPRI.UPD_DATE;
+        BPRTATH.UPD_TLR = BPCSMPRI.UPD_TLR;
+        BPCRTATH.INFO.FUNC = 'U';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, BPRTATH);
+        BPRTATH.KEY.ASS_TYP = 'T';
+        BPRTATH.KEY.ASS_ID = BPCSMPRI.TLR_IN;
+        BPRTATH.KEY.ATH_TYP = BPCSMPRI.PRIV_TYP;
+        BPCRTATH.INFO.FUNC = 'R';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+        if (BPCRTATH.RETURN_INFO == 'N') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TATH_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        WS_TBL_TATH_FLAG = 'N';
+        for (WS_I = 1; WS_I <= BPRTATH.TXIF_CNT 
+            && WS_TBL_TATH_FLAG != 'Y'; WS_I += 1) {
+            CEP.TRC(SCCGWA, WS_I);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO);
+            CEP.TRC(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD);
+            if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG == BPCSMPRI.IN_FLG 
+                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO.equalsIgnoreCase(BPCSMPRI.SYS_MMO) 
+                && BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD.equalsIgnoreCase(BPCSMPRI.TX_CD)) {
+                WS_TBL_TATH_FLAG = 'Y';
+            }
+        }
+        if (WS_TBL_TATH_FLAG == 'N') {
+            CEP.TRC(SCCGWA, "TATH NO NOTFND");
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TATH_NOTFND;
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, BPRTATH.TXIF_CNT);
+        CEP.TRC(SCCGWA, WS_I);
+        if (BPRTATH.TXIF_CNT > 1) {
+            for (WS_J = WS_I; WS_J <= BPRTATH.TXIF_CNT; WS_J += 1) {
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1].IN_FLG = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].IN_FLG;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1].SYS_MMO = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].SYS_MMO;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1].TX_CD = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].TX_CD;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1].MOV_FLG = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_FLG;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1].MOV_STS = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_STS;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1].MOV_EFF_DT = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_DT;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1].MOV_EXP_DT = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_DT;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1].MOV_EFF_TM = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EFF_TM;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1].MOV_EXP_TM = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_EXP_TM;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1].EFF_DT = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EFF_DT;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1].EXP_DT = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].EXP_DT;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+                BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1].MOV_TLR = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J-1].MOV_TLR;
+                BPRTATH.REDEFINES14.TXIF_TXT_TEXT1 = IBS.CLS2CPY(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16);
+            }
+            IBS.init(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_J - 1-1]);
+            BPRTATH.TXIF_CNT += -1;
+        } else {
+            IBS.init(SCCGWA, BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[1-1]);
+            BPRTATH.TXIF_CNT = 0;
+        }
+        BPRTATH.UPD_DT = BPCSMPRI.UPD_DATE;
+        BPRTATH.UPD_TLR = BPCSMPRI.UPD_TLR;
+        BPCRTATH.INFO.FUNC = 'U';
+        S000_CALL_BPZRTATH();
+        if (pgmRtn) return;
+    }
+    public void B040_BROWSER_PROCESS() throws IOException,SQLException,Exception {
+        B040_01_OUT_TITLE();
+        if (pgmRtn) return;
+        B040_02_BROWSER_ROLE();
+        if (pgmRtn) return;
+        B040_03_BROWSER_TXN();
+        if (pgmRtn) return;
+    }
+    public void B040_01_OUT_TITLE() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, SCCMPAG);
+        SCCMPAG.FUNC = 'S';
+        SCCMPAG.TITL = " ";
+        SCCMPAG.SUBT_ROW_CNT = 0;
+        SCCMPAG.MAX_COL_NO = 92;
+        SCCMPAG.SCR_ROW_CNT = (short) K_MAX_ROW;
+        SCCMPAG.SCR_COL_CNT = (short) K_COL_CNT;
+        B_MPAG();
+        if (pgmRtn) return;
+    }
+    public void B040_02_BROWSER_ROLE() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRGRPL);
+        IBS.init(SCCGWA, BPCRGPLB);
+        BPCRGPLB.INFO.FUNC = '1';
+        BPRGRPL.KEY.ASS_TYP = 'T';
+        BPRGRPL.KEY.ATH_TYP = ALL.charAt(0);
+        BPRGRPL.KEY.ASS_ID = BPCSMPRI.TLR_OUT;
+        S000_CALL_BPZRGPLB();
+        if (pgmRtn) return;
+        BPCRGPLB.INFO.FUNC = 'N';
+        S000_CALL_BPZRGPLB();
+        if (pgmRtn) return;
+        while (BPCRGPLB.RETURN_INFO != 'N' 
+            && SCCMPAG.FUNC != 'E') {
+            for (WS_I = 1; WS_I <= BPRGRPL.ROLE_CNT; WS_I += 1) {
+                if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_STS == '2' 
+                    || BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_STS == '3') {
+                    IBS.init(SCCGWA, BPCOPRIL);
+                    if (BPRGRPL.KEY.ASS_ID == null) BPRGRPL.KEY.ASS_ID = "";
+                    JIBS_tmp_int = BPRGRPL.KEY.ASS_ID.length();
+                    for (int i=0;i<30-JIBS_tmp_int;i++) BPRGRPL.KEY.ASS_ID += " ";
+                    BPCOPRIL.TLR_OUT = BPRGRPL.KEY.ASS_ID.substring(0, WS_TLR_LENG);
+                    BPCOPRIL.PRIV_TYP = BPRGRPL.KEY.ATH_TYP;
+                    BPCOPRIL.TRAN_TYP = '0';
+                    BPCOPRIL.TX_CD = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].ROLE_CD;
+                    if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_STS == '2') {
+                        BPCOPRIL.MOV_STS = '1';
+                    }
+                    if (BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_STS == '3') {
+                        BPCOPRIL.MOV_STS = '0';
+                    }
+                    BPCOPRIL.MOV_EFF_DATE = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EFF_DT;
+                    BPCOPRIL.MOV_EXP_DATE = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EXP_DT;
+                    BPCOPRIL.MOV_EFF_TIME = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EFF_TM;
+                    BPCOPRIL.MOV_EXP_TIME = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_EXP_TM;
+                    BPCOPRIL.TLR_IN = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].MOV_TLR;
+                    BPCOPRIL.EFF_DATE = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EFF_DT;
+                    BPCOPRIL.EXP_DATE = BPRGRPL.REDEFINES14.REDEFINES16.ROLE_INFO[WS_I-1].EXP_DT;
+                    BPCOPRIL.UPD_DATE = BPRGRPL.UPD_DT;
+                    BPCOPRIL.UPD_TLR = BPRGRPL.UPD_TLR;
+                    B040_02_01_OUT_BRW_DATA();
+                    if (pgmRtn) return;
+                }
+            }
+            BPCRGPLB.INFO.FUNC = 'N';
+            S000_CALL_BPZRGPLB();
+            if (pgmRtn) return;
+        }
+        BPCRGPLB.INFO.FUNC = 'E';
+        S000_CALL_BPZRGPLB();
+        if (pgmRtn) return;
+    }
+    public void B040_03_BROWSER_TXN() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRTATH);
+        IBS.init(SCCGWA, BPCRTATB);
+        BPCRTATB.INFO.FUNC = '1';
+        BPRTATH.KEY.ASS_TYP = 'T';
+        BPRTATH.KEY.ATH_TYP = ALL.charAt(0);
+        BPRTATH.KEY.ASS_ID = BPCSMPRI.TLR_OUT;
+        CEP.TRC(SCCGWA, BPRTATH.KEY.ASS_TYP);
+        CEP.TRC(SCCGWA, BPRTATH.KEY.ASS_ID);
+        CEP.TRC(SCCGWA, BPRTATH.KEY.ATH_TYP);
+        S000_CALL_BPZRTATB();
+        if (pgmRtn) return;
+        BPCRTATB.INFO.FUNC = 'N';
+        S000_CALL_BPZRTATB();
+        if (pgmRtn) return;
+        while (BPCRTATB.RETURN_INFO != 'N') {
+            for (WS_I = 1; WS_I <= BPRTATH.TXIF_CNT; WS_I += 1) {
+                if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_STS == '2' 
+                    || BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_STS == '3') {
+                    IBS.init(SCCGWA, BPCOPRIL);
+                    if (BPRTATH.KEY.ASS_ID == null) BPRTATH.KEY.ASS_ID = "";
+                    JIBS_tmp_int = BPRTATH.KEY.ASS_ID.length();
+                    for (int i=0;i<30-JIBS_tmp_int;i++) BPRTATH.KEY.ASS_ID += " ";
+                    BPCOPRIL.TLR_OUT = BPRTATH.KEY.ASS_ID.substring(0, WS_TLR_LENG);
+                    BPCOPRIL.PRIV_TYP = BPRTATH.KEY.ATH_TYP;
+                    BPCOPRIL.TRAN_TYP = '1';
+                    BPCOPRIL.IN_FLG = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].IN_FLG;
+                    BPCOPRIL.SYS_MMO = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].SYS_MMO;
+                    BPCOPRIL.TX_CD = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].TX_CD;
+                    if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_STS == '2') {
+                        BPCOPRIL.MOV_STS = '1';
+                    }
+                    if (BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_STS == '3') {
+                        BPCOPRIL.MOV_STS = '0';
+                    }
+                    BPCOPRIL.MOV_EFF_DATE = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EFF_DT;
+                    BPCOPRIL.MOV_EXP_DATE = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EXP_DT;
+                    BPCOPRIL.MOV_EFF_TIME = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EFF_TM;
+                    BPCOPRIL.MOV_EXP_TIME = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_EXP_TM;
+                    BPCOPRIL.TLR_IN = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].MOV_TLR;
+                    BPCOPRIL.EFF_DATE = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EFF_DT;
+                    BPCOPRIL.EXP_DATE = BPRTATH.REDEFINES14.REDEFINES16.TXIF_INFO[WS_I-1].EXP_DT;
+                    BPCOPRIL.UPD_DATE = BPRTATH.UPD_DT;
+                    BPCOPRIL.UPD_TLR = BPRTATH.UPD_TLR;
+                    B040_02_01_OUT_BRW_DATA();
+                    if (pgmRtn) return;
+                }
+                BPCRTATB.INFO.FUNC = 'N';
+                S000_CALL_BPZRTATB();
+                if (pgmRtn) return;
+            }
+        }
+        BPCRTATB.INFO.FUNC = 'E';
+        S000_CALL_BPZRTATB();
+        if (pgmRtn) return;
+    }
+    public void B040_02_01_OUT_BRW_DATA() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, "OUT PUT DATA");
+        CEP.TRC(SCCGWA, BPCOPRIL);
+        CEP.TRC(SCCGWA, BPCOPRIL.TLR_OUT);
+        CEP.TRC(SCCGWA, BPCOPRIL.TRAN_TYP);
+        IBS.init(SCCGWA, SCCMPAG);
+        SCCMPAG.FUNC = 'D';
+        SCCMPAG.DATA_PTR = IBS.CLS2CPY(SCCGWA, BPCOPRIL);
+        SCCMPAG.DATA_LEN = 92;
+        B_MPAG();
+        if (pgmRtn) return;
+    }
+    public void B080_HISTORY_PROCESS() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCPNHIS);
+        BPCPNHIS.INFO.JRNNO = SCCGWA.COMM_AREA.JRN_NO;
+        BPCPNHIS.INFO.TX_RMK = K_HIS_REMARK;
+        BPCPNHIS.INFO.FMT_ID = K_HIS_COPYBOOK;
+        BPCPRIT.TLR_OUT = BPCSMPRI.TLR_OUT;
+        BPCPRIT.TLR_IN = BPCSMPRI.TLR_IN;
+        BPCPRIT.PRIV_TYP = BPCSMPRI.PRIV_TYP;
+        BPCPRIT.TRAN_TYP = BPCSMPRI.TRAN_TYP;
+        BPCPRIT.IN_FLG = BPCSMPRI.IN_FLG;
+        BPCPRIT.SYS_MMO = BPCSMPRI.SYS_MMO;
+        BPCPRIT.TX_CD = BPCSMPRI.TX_CD;
+        BPCPRIT.ATTR = BPCSMPRI.ATTR;
+        BPCPRIT.MOV_EFF_DATE = BPCSMPRI.MOV_EFF_DATE;
+        BPCPRIT.MOV_EXP_DATE = BPCSMPRI.MOV_EXP_DATE;
+        BPCPRIT.MOV_EFF_TIME = BPCSMPRI.MOV_EFF_TIME;
+        BPCPRIT.MOV_EXP_TIME = BPCSMPRI.MOV_EXP_TIME;
+        BPCPRIT.UPD_DATE = BPCSMPRI.UPD_DATE;
+        BPCPRIT.UPD_TLR = BPCSMPRI.UPD_TLR;
+        BPCPNHIS.INFO.TX_TYP = 'A';
+        S000_CALL_BPZPNHIS();
+        if (pgmRtn) return;
+    }
+    public void B090_DATA_OUTPUT() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCOPRI1);
+        R010_TRANS_DATA_OUPUT();
+        if (pgmRtn) return;
+        IBS.init(SCCGWA, SCCFMT);
+        SCCFMT.FMTID = K_OUTPUT_FMT;
+        SCCFMT.DATA_PTR = BPCOPRI1;
+        SCCFMT.DATA_LEN = 76;
+        IBS.FMT(SCCGWA, SCCFMT);
+    }
+    public void R010_TRANS_DATA_OUPUT() throws IOException,SQLException,Exception {
+        BPCOPRI1.TLR_OUT = BPCSMPRI.TLR_OUT;
+        BPCOPRI1.TLR_IN = BPCSMPRI.TLR_IN;
+        BPCOPRI1.PRIV_TYP = BPCSMPRI.PRIV_TYP;
+        BPCOPRI1.TRAN_TYP = BPCSMPRI.TRAN_TYP;
+        BPCOPRI1.IN_FLG = BPCSMPRI.IN_FLG;
+        BPCOPRI1.SYS_MMO = BPCSMPRI.SYS_MMO;
+        BPCOPRI1.TX_CD = BPCSMPRI.TX_CD;
+        BPCOPRI1.ATTR = BPCSMPRI.ATTR;
+        BPCOPRI1.MOV_EFF_DATE = BPCSMPRI.MOV_EFF_DATE;
+        BPCOPRI1.MOV_EXP_DATE = BPCSMPRI.MOV_EXP_DATE;
+        BPCOPRI1.MOV_EFF_TIME = BPCSMPRI.MOV_EFF_TIME;
+        BPCOPRI1.MOV_EXP_TIME = BPCSMPRI.MOV_EXP_TIME;
+        BPCOPRI1.UPD_DATE = BPCSMPRI.UPD_DATE;
+        BPCOPRI1.UPD_TLR = BPCSMPRI.UPD_TLR;
+    }
+    public void S000_CALL_BPZFTLRQ() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-F-TLR-INF-QUERY  ", BPCFTLRQ);
+        if (BPCFTLRQ.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCFTLRQ.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZPQORG() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-P-INQ-ORG        ", BPCPQORG);
+        if (BPCPQORG.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCPQORG.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZFOTRO() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-F-OTS-ROL-CHK    ", BPCFOTRO);
+        if (BPCFOTRO.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCFOTRO.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZFOTTA() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-F-OTS-TATH-CHK   ", BPCFOTTA);
+        if (BPCFOTTA.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCFOTTA.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZRTXIF() throws IOException,SQLException,Exception {
+        BPCRTXIF.INFO.POINTER = BPRTXIF;
+        BPCRTXIF.INFO.LEN = 106;
+        IBS.CALLCPN(SCCGWA, "BP-R-MGM-TXIF       ", BPCRTXIF);
+        if (BPCRTXIF.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCRTXIF.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZRGRP() throws IOException,SQLException,Exception {
+        BPCRGRP.INFO.POINTER = BPRGRP;
+        BPCRGRP.INFO.LEN = 292;
+        IBS.CALLCPN(SCCGWA, "BP-R-MGM-GRP        ", BPCRGRP);
+        if (BPCRGRP.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCRGRP.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZRGRPL() throws IOException,SQLException,Exception {
+        BPCRGRPL.INFO.POINTER = BPRGRPL;
+        BPCRGRPL.INFO.LEN = 52;
+        CEP.TRC(SCCGWA, BPRGRPL.BLOB_ROLE_TXT.trim().length());
+        IBS.CALLCPN(SCCGWA, "BP-R-MGM-GRPL       ", BPCRGRPL);
+        if (BPCRGRPL.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCRGRPL.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZRTATH() throws IOException,SQLException,Exception {
+        BPCRTATH.INFO.POINTER = BPRTATH;
+        BPCRTATH.INFO.LEN = 52;
+        CEP.TRC(SCCGWA, BPRTATH.BLOB_TXIF_TXT.trim().length());
+        IBS.CALLCPN(SCCGWA, "BP-R-MGM-TATH       ", BPCRTATH);
+        if (BPCRTATH.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCRTATH.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZRGPLB() throws IOException,SQLException,Exception {
+        BPCRGPLB.INFO.POINTER = BPRGRPL;
+        BPCRGPLB.INFO.LEN = 52;
+        IBS.CALLCPN(SCCGWA, "BP-R-MGM-GPLB       ", BPCRGPLB);
+        if (BPCRGPLB.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCRGPLB.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZRTATB() throws IOException,SQLException,Exception {
+        BPCRTATB.INFO.POINTER = BPRTATH;
+        BPCRTATB.INFO.LEN = 52;
+        IBS.CALLCPN(SCCGWA, "BP-R-MGM-TATB    ", BPCRTATB);
+        if (BPCRTATB.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCRTATB.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZPNHIS() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, CPN_REC_NHIS, BPCPNHIS);
+        if (BPCPNHIS.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCPNHIS.RC);
+            S000_ERR_MSG_PROC();
+            if (pgmRtn) return;
+        }
+    }
+    public void S00_CALL_BPZSMGRL() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-S-MGM-GRPL", BPCSMGRL, true);
+    }
+    public void S00_CALL_BPZSMTAT() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-S-MGM-TATH", BPCSMTAT, true);
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void B_MPAG() throws IOException,SQLException,Exception {
+    if (!SCCGWA.COMM_AREA.BSP_FLG.equalsIgnoreCase("BSP") && !SCCGWA.COMM_AREA.CHNL.equalsIgnoreCase("BAT")) { //FROM #IFDEF ONL
+        JIBS_tmp_str[9] = "SCZMPAG";
+        Class<?>clazz = Class.forName(JIBS_tmp_str[9].trim());
+        Object obj = clazz.newInstance();
+        Method m = clazz.getDeclaredMethod("MP",new Class[]{SCCGWA.getClass(), SCCMPAG.getClass()});
+        m.invoke(obj, SCCGWA, SCCMPAG);
+        if (SCCGWA.COMM_AREA.EXCP_FLG == 'Y') {
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    } else { //FROM #ELSE
+    } //FROM #ENDIF
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        pgmRtn = true;
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

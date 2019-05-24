@@ -1,0 +1,40 @@
+package com.hisun.DD;
+
+public class DDZSMTDR_WS_OUT_INF {
+    int WS_DD_O_NUM = 0;
+    String WS_DD_O_DD_AC = " ";
+    char WS_DD_O_ADP_STS = ' ';
+    String WS_DD_O_CCY = " ";
+    char WS_DD_O_FLG = ' ';
+    String WS_DD_O_CI_NO = " ";
+    String WS_DD_O_CI_CNM = " ";
+    char DDZSMTDR_FILLER21 = 0X02;
+    String WS_DD_O_CI_ENM = " ";
+    char DDZSMTDR_FILLER23 = 0X02;
+    double WS_DD_O_BALB = 0;
+    char DDZSMTDR_FILLER25 = 0X01;
+    double WS_DD_O_BALS = 0;
+    char DDZSMTDR_FILLER27 = 0X01;
+    int WS_DD_O_STR_DB = 0;
+    int WS_DD_O_STR_DT = 0;
+    String WS_DD_O_RATETY = " ";
+    String WS_DD_O_TERM = " ";
+    double WS_DD_O_INTRAT = 0;
+    char DDZSMTDR_FILLER33 = 0X01;
+    char WS_DD_O_TYP = ' ';
+    double WS_DD_O_RATEOF = 0;
+    char DDZSMTDR_FILLER36 = 0X01;
+    double WS_DD_O_PCTS = 0;
+    char DDZSMTDR_FILLER38 = 0X01;
+    double WS_DD_O_CXRAT = 0;
+    char DDZSMTDR_FILLER40 = 0X01;
+    int WS_DD_O_CRTDT = 0;
+    int WS_DD_O_VSTRDT = 0;
+    int WS_DD_O_ENDDT = 0;
+    int WS_DD_O_RCVDT = 0;
+    int WS_DD_O_PROCDT = 0;
+    String WS_DD_O_PROL_NO = " ";
+    String WS_DD_O_TLR_NO = " ";
+    String WS_DD_O_TLE_NO = " ";
+    char WS_DD_O_STS = ' ';
+}

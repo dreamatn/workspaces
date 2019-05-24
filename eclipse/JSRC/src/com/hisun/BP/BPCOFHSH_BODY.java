@@ -1,0 +1,46 @@
+package com.hisun.BP;
+
+public class BPCOFHSH_BODY {
+    public int TX_DT = 0;
+    public int AC_DT = 0;
+    public long JRNNO = 0;
+    public short JRN_SEQ = 0;
+    public String AC = " ";
+    public String REF_NO = " ";
+    public String TX_TOOL = " ";
+    public String APP_MMO = " ";
+    public String TX_CD = " ";
+    public int TX_BR = 0;
+    public short TX_DP = 0;
+    public String TX_TLR = " ";
+    public String SUP1 = " ";
+    public String SUP2 = " ";
+    public String TX_CHNL = " ";
+    public String TX_REQ_CHNL = " ";
+    public String TX_CHNL_DTL = " ";
+    public String CI_NO = " ";
+    public char DRCR_FLG = ' ';
+    public String TX_CCY = " ";
+    public char CCY_TYPE = ' ';
+    public String TX_AMT = " ";
+    public String CUR_BAL = " ";
+    public int TX_VAL_DT = 0;
+    public String PROD_CD = " ";
+    public char STS = ' ';
+    public int TX_TM = 0;
+    public String REMARK = " ";
+    public String MAKER_TLR = " ";
+    public String NARRATIVE = " ";
+    public String TX_MMO = " ";
+    public String REL_AC = " ";
+    public String REL_CI_NAME = " ";
+    public String REL_BR = " ";
+    public String REL_BR_DESC = " ";
+    public String BV_CODE = " ";
+    public String HEAD_NO = " ";
+    public String BV_NO = " ";
+    public String COM_PROD = " ";
+    public String AC_CI_NAME = " ";
+    public int AC_BR = 0;
+    public String AC_BR_DESC = " ";
+}

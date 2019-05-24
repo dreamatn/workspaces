@@ -1,0 +1,8 @@
+package com.hisun.DD;
+
+public class DDCNCLS1 {
+    public char FILE_FLG = ' ';
+    public DDCNCLS1_DETAIL_REC DETAIL_REC = new DDCNCLS1_DETAIL_REC();
+    public DDCNCLS1_HEADER_REC HEADER_REC = new DDCNCLS1_HEADER_REC();
+    public DDCNCLS1_TRAILER_REC TRAILER_REC = new DDCNCLS1_TRAILER_REC();
+}

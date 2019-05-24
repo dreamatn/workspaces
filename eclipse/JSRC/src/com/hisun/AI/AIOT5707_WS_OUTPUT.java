@@ -1,0 +1,46 @@
+package com.hisun.AI;
+
+public class AIOT5707_WS_OUTPUT {
+    String WS_OUT_GL_BOOK = " ";
+    int WS_OUT_BR = 0;
+    String WS_OUT_ITM = " ";
+    int WS_OUT_SEQ = 0;
+    String WS_OUT_NAME = " ";
+    char AIOT5707_FILLER9 = 0X02;
+    char WS_OUT_AC_TYP = ' ';
+    char WS_OUT_CCY_LMT = ' ';
+    char WS_OUT_BAL_DIR = ' ';
+    char WS_OUT_BAL_RFLG = ' ';
+    char WS_OUT_DTL_FLG = ' ';
+    char WS_OUT_RVS_TYP = ' ';
+    char WS_OUT_RVS_KND = ' ';
+    short WS_OUT_RVS_EXP = 0;
+    char WS_OUT_RVS_UNIT = ' ';
+    int WS_OUT_AC_EXP = 0;
+    char WS_OUT_MANUAL = ' ';
+    char WS_OUT_AMT_DIR = ' ';
+    char WS_OUT_ONL_FLG = ' ';
+    char WS_OUT_CARD_FLG = ' ';
+    char WS_OUT_HOT_FLG = ' ';
+    double WS_OUT_DRLT_BAL = 0;
+    char AIOT5707_FILLER26 = 0X01;
+    double WS_OUT_CRLT_BAL = 0;
+    char AIOT5707_FILLER28 = 0X01;
+    char WS_OUT_BAL_CHK = ' ';
+    int WS_OUT_EFF_DATE = 0;
+    int WS_OUT_EXP_DATE = 0;
+    char WS_OUT_STS = ' ';
+    String WS_OUT_APP1 = " ";
+    String WS_OUT_APP2 = " ";
+    String WS_OUT_APP3 = " ";
+    String WS_OUT_APP4 = " ";
+    String WS_OUT_APP5 = " ";
+    String WS_OUT_APP6 = " ";
+    String WS_OUT_APP7 = " ";
+    String WS_OUT_APP8 = " ";
+    String WS_OUT_APP9 = " ";
+    String WS_OUT_APP10 = " ";
+    char WS_MIB_FOUND = ' ';
+    char WS_MIB_MOD = ' ';
+    String WS_MSGID = " ";
+}

@@ -1,0 +1,64 @@
+package com.hisun.CM;
+
+public class CMB3040_AWA_3040 {
+    public char BUSI_KND = ' ';
+    public short BUSI_KND_NO = 0;
+    public char TX_TYP = ' ';
+    public short TX_TYP_NO = 0;
+    public String CARD_NO = " ";
+    public short CARD_NO_NO = 0;
+    public int CARD_SEQ = 0;
+    public short CARD_SEQ_NO = 0;
+    public String OPP_AC = " ";
+    public short OPP_AC_NO = 0;
+    public String TXN_CCY = " ";
+    public short TXN_CCY_NO = 0;
+    public double TXN_AMT = 0;
+    public short TXN_AMT_NO = 0;
+    public String TXN_PSW = " ";
+    public short TXN_PSW_NO = 0;
+    public String TXN_RMK = " ";
+    public short TXN_RMK_NO = 0;
+    public String TRK2_DAT = " ";
+    public short TRK2_DAT_NO = 0;
+    public String TRK3_DAT = " ";
+    public short TRK3_DAT_NO = 0;
+    public String CVN = " ";
+    public short CVN_NO = 0;
+    public char CITY_FLG = ' ';
+    public short CITY_FLG_NO = 0;
+    public String AREA_CD = " ";
+    public short AREA_CD_NO = 0;
+    public String SLT_AC = " ";
+    public short SLT_AC_NO = 0;
+    public String SLT_NO = " ";
+    public short SLT_NO_NO = 0;
+    public char ID_FLG = ' ';
+    public short ID_FLG_NO = 0;
+    public String ID_TYP = " ";
+    public short ID_TYP_NO = 0;
+    public String ID_NO = " ";
+    public short ID_NO_NO = 0;
+    public char NM_FLG = ' ';
+    public short NM_FLG_NO = 0;
+    public String CI_NM = " ";
+    public short CI_NM_NO = 0;
+    public char TEL_FLG = ' ';
+    public short TEL_FLG_NO = 0;
+    public String TEL_NO = " ";
+    public short TEL_NO_NO = 0;
+    public String SMR = " ";
+    public short SMR_NO = 0;
+    public int STL_DT = 0;
+    public short STL_DT_NO = 0;
+    public String OPP_NM = " ";
+    public short OPP_NM_NO = 0;
+    public int OPP_BR = 0;
+    public short OPP_BR_NO = 0;
+    public String OPP_BRNM = " ";
+    public short OPP_BRNM_NO = 0;
+    public CMB3040_FEE_DATA[] FEE_DATA = new CMB3040_FEE_DATA[3];
+    public CMB3040_AWA_3040() {
+        for (int i=0;i<3;i++) FEE_DATA[i] = new CMB3040_FEE_DATA();
+    }
+}

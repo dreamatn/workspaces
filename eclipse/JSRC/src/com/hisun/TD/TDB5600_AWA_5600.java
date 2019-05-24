@@ -1,0 +1,48 @@
+package com.hisun.TD;
+
+public class TDB5600_AWA_5600 {
+    public String BV_CD = " ";
+    public short BV_CD_NO = 0;
+    public char BV_TYPE = ' ';
+    public short BV_TYPE_NO = 0;
+    public String BV_NO = " ";
+    public short BV_NO_NO = 0;
+    public String AC_NO = " ";
+    public short AC_NO_NO = 0;
+    public int AC_SEQ = 0;
+    public short AC_SEQ_NO = 0;
+    public double AC_BAL = 0;
+    public short AC_BAL_NO = 0;
+    public String AC_NAME = " ";
+    public short AC_NAME_NO = 0;
+    public char REG_MTH = ' ';
+    public short REG_MTH_NO = 0;
+    public char DRAW_MTH = ' ';
+    public short DRAW_MTH_NO = 0;
+    public String ID_TYPE = " ";
+    public short ID_TYPE_NO = 0;
+    public String ID_NO = " ";
+    public short ID_NO_NO = 0;
+    public String PSW = " ";
+    public short PSW_NO = 0;
+    public int SEAL_NO = 0;
+    public short SEAL_NO_NO = 0;
+    public char FLG = ' ';
+    public short FLG_NO = 0;
+    public String AG_ID_TY = " ";
+    public short AG_ID_TY_NO = 0;
+    public String AG_ID_NO = " ";
+    public short AG_ID_NO_NO = 0;
+    public String AG_NAME = " ";
+    public short AG_NAME_NO = 0;
+    public char REG_CHNL = ' ';
+    public short REG_CHNL_NO = 0;
+    public int LOS_DT = 0;
+    public short LOS_DT_NO = 0;
+    public String LOS_ADR = " ";
+    public short LOS_ADR_NO = 0;
+    public String LOS_RSN = " ";
+    public short LOS_RSN_NO = 0;
+    public char HLD_FLG = ' ';
+    public short HLD_FLG_NO = 0;
+}

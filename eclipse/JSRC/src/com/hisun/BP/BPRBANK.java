@@ -1,0 +1,47 @@
+package com.hisun.BP;
+
+public class BPRBANK {
+    public BPRBANK_KEY KEY = new BPRBANK_KEY();
+    public String CHN_NM = " ";
+    public String ENG_NM = " ";
+    public int EFF_DT = 0;
+    public int EXP_DT = 0;
+    public char AC_CHK = ' ';
+    public char CI_CHK = ' ';
+    public char FX_RATE = ' ';
+    public char MAX_LVL = ' ';
+    public char AUH_LVL = ' ';
+    public int HEAD_BR = 0;
+    public char CLR_MTH = ' ';
+    public char CLR_AC = ' ';
+    public char CCY_FLG = ' ';
+    public String LOC_CCY1 = " ";
+    public String LOC_CCY2 = " ";
+    public String EVA_CCY = " ";
+    public String TOT_CCY = " ";
+    public char TAI_FEN = ' ';
+    public String LANG_CD = " ";
+    public int TLR_PMAX = 0;
+    public String TLR_PDAY = " ";
+    public char TLR_COND = ' ';
+    public String CALD_LAW = " ";
+    public String CALD_BUI = " ";
+    public String CALD_SYS = " ";
+    public char ONL_PVCH = ' ';
+    public char ONL_GVCH = ' ';
+    public short EOY_MMDD = 0;
+    public char INT_TAX = ' ';
+    public String COUN_CD = " ";
+    public String TIM_ZON = " ";
+    public char CLS = ' ';
+    public char GL_MEG = ' ';
+    public String GL_SET = " ";
+    public char FEE_FLG = ' ';
+    public int OPN_TM = 0;
+    public int CLS_TM = 0;
+    public int HOPN_TM = 0;
+    public int HCLS_TM = 0;
+    public int UPT_DT = 0;
+    public String UPT_TLR = " ";
+    public String TS = " ";
+}

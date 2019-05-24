@@ -1,0 +1,47 @@
+package com.hisun.AI;
+
+public class AIRGLBL {
+    public AIRGLBL_KEY KEY = new AIRGLBL_KEY();
+    public String AC_CNAME = " ";
+    public double LDDBAL = 0;
+    public double LDCBAL = 0;
+    public double CDDBAL = 0;
+    public double CDCBAL = 0;
+    public double CDDRAMT = 0;
+    public double CDCRAMT = 0;
+    public int CDNODR = 0;
+    public int CDNOCR = 0;
+    public double LTDBAL = 0;
+    public double LTCBAL = 0;
+    public double CTDRAMT = 0;
+    public double CTCRAMT = 0;
+    public int CTNODR = 0;
+    public int CTNOCR = 0;
+    public double LMDBAL = 0;
+    public double LMCBAL = 0;
+    public double CMDRAMT = 0;
+    public double CMCRAMT = 0;
+    public int CMNODR = 0;
+    public int CMNOCR = 0;
+    public double LSDBAL = 0;
+    public double LSCBAL = 0;
+    public double CSDRAMT = 0;
+    public double CSCRAMT = 0;
+    public int CSNODR = 0;
+    public int CSNOCR = 0;
+    public double LHYDBAL = 0;
+    public double LHYCBAL = 0;
+    public double CHYDRAMT = 0;
+    public double CHYCRAMT = 0;
+    public int CHYNODR = 0;
+    public int CHYNOCR = 0;
+    public double LYDBAL = 0;
+    public double LYCBAL = 0;
+    public double CYDRAMT = 0;
+    public double CYCRAMT = 0;
+    public int CYNODR = 0;
+    public int CYNOCR = 0;
+    public String LAST_UPD_USER = " ";
+    public int UPDTBL_DATE = 0;
+    public String TS = " ";
+}

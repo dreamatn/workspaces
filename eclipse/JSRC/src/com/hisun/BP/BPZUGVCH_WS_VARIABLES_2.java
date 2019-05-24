@@ -1,0 +1,5 @@
+package com.hisun.BP;
+
+public class BPZUGVCH_WS_VARIABLES_2 {
+    BPZUGVCH_WS_EVENT_VCH WS_EVENT_VCH = new BPZUGVCH_WS_EVENT_VCH();
+}

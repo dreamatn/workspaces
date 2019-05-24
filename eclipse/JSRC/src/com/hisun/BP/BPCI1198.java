@@ -1,0 +1,43 @@
+package com.hisun.BP;
+
+public class BPCI1198 {
+    public String FEE_CODE = " ";
+    public String CHNL = " ";
+    public String RGN_NO = " ";
+    public String PRD_CODE = " ";
+    public String AC_NO = " ";
+    public String CI_NO = " ";
+    public String FFEE_CCY = " ";
+    public double FEE_AMT = 0;
+    public short ACC_CNT = 0;
+    public String CHG_CCY = " ";
+    public double CHG_AMT = 0;
+    public char AC_TYP = ' ';
+    public String FEE_AC = " ";
+    public long ACCT_CD = 0;
+    public int DR_BANK = 0;
+    public String RMK = " ";
+    public String CFEE_CCY = " ";
+    public int BR = 0;
+    public String REMK = " ";
+    public String TICKET = " ";
+    public double RATE = 0;
+    public double FEE_BAS = 0;
+    public double ADJ_AMT = 0;
+    public int EXG_DATE = 0;
+    public int EXG_TIME = 0;
+    public String C_P_NO = " ";
+    public String CHQ_NO = " ";
+    public int SALE_DT = 0;
+    public String FEE_CTRT = " ";
+    public int FEE_DPTM = 0;
+    public String FEE_CONT = " ";
+    public String FEE_ADVI = " ";
+    public char CHG_MOD = ' ';
+    public char AMO_FLG = ' ';
+    public int AMO_STDT = 0;
+    public int AMO_EDDT = 0;
+    public char CCY_TYPE = ' ';
+    public String BSNS_NO = " ";
+    public String CREV_NO = " ";
+}

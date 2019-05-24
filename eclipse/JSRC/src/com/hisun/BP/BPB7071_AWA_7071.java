@@ -1,0 +1,42 @@
+package com.hisun.BP;
+
+public class BPB7071_AWA_7071 {
+    public long JRNNO = 0;
+    public short JRNNO_NO = 0;
+    public short JRN_SEQ = 0;
+    public short JRN_SEQ_NO = 0;
+    public String AC = " ";
+    public short AC_NO = 0;
+    public String REF_NO = " ";
+    public short REF_NO_NO = 0;
+    public String TX_TOOL = " ";
+    public short TX_TOOL_NO = 0;
+    public int AC_SEQ = 0;
+    public short AC_SEQ_NO = 0;
+    public String TX_CCY = " ";
+    public short TX_CCY_NO = 0;
+    public char CCY_TYPE = ' ';
+    public short CCY_TYPE_NO = 0;
+    public String TX_CD = " ";
+    public short TX_CD_NO = 0;
+    public String TX_TLR = " ";
+    public short TX_TLR_NO = 0;
+    public int TX_BR = 0;
+    public short TX_BR_NO = 0;
+    public int STR_DT = 0;
+    public short STR_DT_NO = 0;
+    public int END_DT = 0;
+    public short END_DT_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public char DRCR_FLG = ' ';
+    public short DRCR_FLG_NO = 0;
+    public char SORT_FLG = ' ';
+    public short SORT_FLG_NO = 0;
+    public String REL_AC = " ";
+    public short REL_AC_NO = 0;
+    public char STS = ' ';
+    public short STS_NO = 0;
+    public String BV_NO = " ";
+    public short BV_NO_NO = 0;
+}

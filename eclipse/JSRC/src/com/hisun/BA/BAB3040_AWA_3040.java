@@ -1,0 +1,48 @@
+package com.hisun.BA;
+
+public class BAB3040_AWA_3040 {
+    public int TX_BR = 0;
+    public short TX_BR_NO = 0;
+    public String DRWR_AC = " ";
+    public short DRWR_AC_NO = 0;
+    public String BILL_NO = " ";
+    public short BILL_NO_NO = 0;
+    public int S_ACP_DT = 0;
+    public short S_ACP_DT_NO = 0;
+    public int E_ACP_DT = 0;
+    public short E_ACP_DT_NO = 0;
+    public int S_MAT_DT = 0;
+    public short S_MAT_DT_NO = 0;
+    public int E_MAT_DT = 0;
+    public short E_MAT_DT_NO = 0;
+    public int S_PAY_DT = 0;
+    public short S_PAY_DT_NO = 0;
+    public int E_PAY_DT = 0;
+    public short E_PAY_DT_NO = 0;
+    public char BILL_STS = ' ';
+    public short BILL_STS_NO = 0;
+    public char AMT_STS = ' ';
+    public short AMT_STS_NO = 0;
+    public char FUN_CD = ' ';
+    public short FUN_CD_NO = 0;
+    public short PAG_ROW = 0;
+    public short PAG_ROW_NO = 0;
+    public int S_R1_SEQ = 0;
+    public short S_R1_SEQ_NO = 0;
+    public int S_R2_SEQ = 0;
+    public short S_R2_SEQ_NO = 0;
+    public int E_R1_SEQ = 0;
+    public short E_R1_SEQ_NO = 0;
+    public int E_R2_SEQ = 0;
+    public short E_R2_SEQ_NO = 0;
+    public int K_DT = 0;
+    public short K_DT_NO = 0;
+    public long K_JRRNO = 0;
+    public short K_JRRNO_NO = 0;
+    public String RMK = " ";
+    public short RMK_NO = 0;
+    public int PAGE_ROW = 0;
+    public short PAGE_ROW_NO = 0;
+    public int PAGE_NUM = 0;
+    public short PAGE_NUM_NO = 0;
+}

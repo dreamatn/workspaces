@@ -1,0 +1,44 @@
+package com.hisun.LN;
+
+public class LNB1300_AWA_1300 {
+    public char TXFUCTYP = ' ';
+    public short TXFUCTYP_NO = 0;
+    public String TXRSEQ = " ";
+    public short TXRSEQ_NO = 0;
+    public String TXAC = " ";
+    public short TXAC_NO = 0;
+    public String TXTMAC = " ";
+    public short TXTMAC_NO = 0;
+    public int TXSEQ = 0;
+    public short TXSEQ_NO = 0;
+    public String TXCCY = " ";
+    public short TXCCY_NO = 0;
+    public char TXTYP = ' ';
+    public short TXTYP_NO = 0;
+    public String TXCTA_NO = " ";
+    public short TXCTA_NO_NO = 0;
+    public String TXREF_NO = " ";
+    public short TXREF_NO_NO = 0;
+    public double TXAMT = 0;
+    public short TXAMT_NO = 0;
+    public char TXSTLT = ' ';
+    public short TXSTLT_NO = 0;
+    public String TXTDD_AC = " ";
+    public short TXTDD_AC_NO = 0;
+    public String TXSYS_NO = " ";
+    public short TXSYS_NO_NO = 0;
+    public char TXINT_F = ' ';
+    public short TXINT_F_NO = 0;
+    public char TXEINT_F = ' ';
+    public short TXEINT_F_NO = 0;
+    public String TXINT_AC = " ";
+    public short TXINT_AC_NO = 0;
+    public char CANL_FLG = ' ';
+    public short CANL_FLG_NO = 0;
+    public String TXRMN_AC = " ";
+    public short TXRMN_AC_NO = 0;
+    public String TXMMO = " ";
+    public short TXMMO_NO = 0;
+    public String TXSMR = " ";
+    public short TXSMR_NO = 0;
+}

@@ -1,0 +1,41 @@
+package com.hisun.BP;
+
+public class BPCPQBCH {
+    public BPCPQBCH_RC RC = new BPCPQBCH_RC();
+    public String BNK = " ";
+    public String BCH = " ";
+    public int ACCT = 0;
+    public int EFF_DT = 0;
+    public int EXP_DT = 0;
+    public String CHN_NM = " ";
+    public String CHN_ADDR = " ";
+    public String ENG_NM = " ";
+    public String ENG_ADDR = " ";
+    public String LINK_MAN = " ";
+    public String LINK_TEL = " ";
+    public String POST = " ";
+    public char TLR_MAX = ' ';
+    public char ATH_MAX = ' ';
+    public int OPN_DT = 0;
+    public char RUN_HDAY = ' ';
+    public String CALD_CD = " ";
+    public int UPT_DT = 0;
+    public String UPT_TLR = " ";
+    public String FAX = " ";
+    public String TELEX = " ";
+    public String DEF_PTR = " ";
+    public String PAY_PTR = " ";
+    public String CFM_PTR = " ";
+    public String SWF_ID = " ";
+    public String BIC_NO = " ";
+    public String IBAN_NO = " ";
+    public int CI_LEN = 0;
+    public String COUN_CD = " ";
+    public String CITY_CD = " ";
+    public char UNSCH_HOL = ' ';
+    public int UNSCH_HOL_TM = 0;
+    public char OPN_CHECK_FLG = ' ';
+    public char VOU_CHECK_FLG = ' ';
+    public char INT_TAX_FLG = ' ';
+    public int ERP_BRAN = 0;
+}

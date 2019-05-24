@@ -1,0 +1,40 @@
+package com.hisun.DC;
+
+public class DCB5660_AWA_5660 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public String PROD_DSC = " ";
+    public short PROD_DSC_NO = 0;
+    public int EFFDAT = 0;
+    public short EFFDAT_NO = 0;
+    public int EXPDAT = 0;
+    public short EXPDAT_NO = 0;
+    public char CI_TYP = ' ';
+    public short CI_TYP_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public char CCY_TYPE = ' ';
+    public short CCY_TYPE_NO = 0;
+    public char PERM_KND = ' ';
+    public short PERM_KND_NO = 0;
+    public short PERM_MD = 0;
+    public short PERM_MD_NO = 0;
+    public char PERM_MTH = ' ';
+    public short PERM_MTH_NO = 0;
+    public double MRM_AMT = 0;
+    public short MRM_AMT_NO = 0;
+    public char INT_MTH = ' ';
+    public short INT_MTH_NO = 0;
+    public String PROD_DD = " ";
+    public short PROD_DD_NO = 0;
+    public String DESC_DD = " ";
+    public short DESC_DD_NO = 0;
+    public String PROD_TD = " ";
+    public short PROD_TD_NO = 0;
+    public String DESC_TD = " ";
+    public short DESC_TD_NO = 0;
+    public char DRAW_ORD = ' ';
+    public short DRAW_ORD_NO = 0;
+}

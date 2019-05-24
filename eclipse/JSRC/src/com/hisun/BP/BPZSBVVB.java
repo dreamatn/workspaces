@@ -1,0 +1,371 @@
+package com.hisun.BP;
+
+import com.hisun.SC.*;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class BPZSBVVB {
+    short CYC_TIMES = 4;
+    short CYC_TIMES_10 = 10;
+    String U_BVIN = "BP-U-TLR-BV-IN      ";
+    String U_BVOUT = "BP-U-TLR-BV-OUT     ";
+    String REC_NHIS = "BP-REC-NHIS         ";
+    String QUERY_TLR = "BP-F-TLR-INF-QUERY  ";
+    String TLR_K_PSW = "BP-F-K-PSW-MAINTAIN ";
+    String TLR_C_PSW = "BP-F-C-PSW-MAINTAIN ";
+    String R_MGM_BUSE = "BP-R-MGM-BUSE       ";
+    String F_BV_PRM_QUERY = "BP-F-BV-PRM-QUERY   ";
+    String OUTPUT_FMT = "BP153";
+    String R_BPTVHPB_MTN = "BP-R-BPTVHPB-MTN";
+    BPZSBVVB_WS_VARIABLES WS_VARIABLES = new BPZSBVVB_WS_VARIABLES();
+    BPZSBVVB_WS_HIS_REMARKS WS_HIS_REMARKS = new BPZSBVVB_WS_HIS_REMARKS();
+    BPZSBVVB_WS_HIS_PB_REMARKS WS_HIS_PB_REMARKS = new BPZSBVVB_WS_HIS_PB_REMARKS();
+    BPCMSG_ERROR_MSG ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCFMT SCCFMT = new SCCFMT();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    BPRBUSE BPRBUSE = new BPRBUSE();
+    BPCO153 BPCO153 = new BPCO153();
+    BPCUBVIN BPCUBVIN = new BPCUBVIN();
+    BPCUBVOU BPCUBVOU = new BPCUBVOU();
+    BPCFBVQU BPCFBVQU = new BPCFBVQU();
+    BPCFCPSW BPCFCPSW = new BPCFCPSW();
+    BPCFKPSW BPCFKPSW = new BPCFKPSW();
+    BPCFTLRQ BPCFTLRQ = new BPCFTLRQ();
+    BPCPNHIS BPCPNHIS = new BPCPNHIS();
+    BPCRBUSE BPCRBUSE = new BPCRBUSE();
+    BPRVHPB BPRVHPB = new BPRVHPB();
+    BPCRVHPB BPCRVHPB = new BPCRVHPB();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA SC_AREA;
+    SCCGBPA_BP_AREA BP_AREA;
+    BPCPORUP BPCPORUP;
+    BPCSBVVB BPCSBVVB;
+    public void MP(SCCGWA SCCGWA, BPCSBVVB BPCSBVVB) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.BPCSBVVB = BPCSBVVB;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "BPZSBVVB return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        BPCPORUP = (BPCPORUP_DATA_INFO) SCCGWA.COMM_AREA.TR_BR_PTR;
+        IBS.init(SCCGWA, WS_VARIABLES);
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        if (SCCGWA.COMM_AREA.TR_BANK.equalsIgnoreCase("043")) {
+            CEP.TRC(SCCGWA, BPCSBVVB.BV_FUNC);
+            if (BPCSBVVB.BV_FUNC == '0') {
+                B020_SENDOUT_INCEPT_VOUCHER();
+            } else {
+                B015_BOX_TLR_RELATED();
+            }
+            B040_REC_NHIS_CN();
+            B090_DATA_OUTPUT_CN();
+        } else {
+            B020_SENDOUT_INCEPT_VOUCHER();
+            B040_REC_NHIS();
+            B090_DATA_OUTPUT();
+        }
+    }
+    public void B010_CHECK_TLR_BV() throws IOException,SQLException,Exception {
+        for (WS_VARIABLES.CNT = 1; WS_VARIABLES.CNT <= BPCSBVVB.COUNT; WS_VARIABLES.CNT += 1) {
+            IBS.init(SCCGWA, BPCFTLRQ);
+            CEP.TRC(SCCGWA, BPCSBVVB.DATA[WS_VARIABLES.CNT-1].TLR);
+            BPCFTLRQ.INFO.TLR = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].TLR;
+            S000_CALL_BPZFTLRQ();
+            if (BPCFTLRQ.INFO.SIGN_STS != 'O' 
+                && BPCFTLRQ.INFO.SIGN_STS != 'T') {
+                WS_VARIABLES.ERR_MSG = ERROR_MSG.BP_TLR_MUST_SIGN;
+                S000_ERR_MSG_PROC();
+            }
+            if (BPCSBVVB.PSW_TYP == '0') {
+                IBS.init(SCCGWA, BPCFKPSW);
+                BPCFKPSW.OPT = 'C';
+                BPCFKPSW.TLR = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].TLR;
+                BPCFKPSW.OLD_PSW = BPCSBVVB.PSW;
+                CEP.TRC(SCCGWA, BPCFKPSW.OLD_PSW);
+                CEP.TRC(SCCGWA, BPCSBVVB.DATA[WS_VARIABLES.CNT-1].TLR);
+                CEP.TRC(SCCGWA, BPCFKPSW.TLR);
+                S000_CALL_BPZFKPSW();
+            } else {
+                IBS.init(SCCGWA, BPCFCPSW);
+                BPCFCPSW.OPT = 'C';
+                BPCFCPSW.TLR = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].TLR;
+                BPCFCPSW.OLD_PSW = BPCSBVVB.CPSW;
+                S000_CALL_BPZFCPSW();
+            }
+        }
+    }
+    public void B020_SENDOUT_INCEPT_VOUCHER() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, BPCSBVVB.DATA[1-1].CODE);
+        CEP.TRC(SCCGWA, BPCSBVVB.DATA[1-1].HEAD_NO);
+        CEP.TRC(SCCGWA, BPCSBVVB.DATA[1-1].BEG_NO);
+        CEP.TRC(SCCGWA, BPCSBVVB.DATA[1-1].END_NO);
+        CEP.TRC(SCCGWA, BPCSBVVB.DATA[1-1].NUM);
+        for (WS_VARIABLES.CNT = 1; WS_VARIABLES.CNT <= BPCSBVVB.COUNT 
+            && BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CODE.trim().length() != 0; WS_VARIABLES.CNT += 1) {
+            IBS.init(SCCGWA, BPCUBVOU);
+            IBS.init(SCCGWA, BPCFBVQU);
+            BPCFBVQU.TX_DATA.KEY.CODE = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CODE;
+            S000_CALL_BPZFBVQU();
+            BPCUBVOU.TLR = SCCGWA.COMM_AREA.TL_ID;
+            CEP.TRC(SCCGWA, BPCFBVQU.TX_DATA.TYPE);
+            BPCUBVOU.TYPE = BPCFBVQU.TX_DATA.TYPE;
+            BPCUBVOU.BV_CODE = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CODE;
+            BPCUBVOU.HEAD_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].HEAD_NO;
+            BPCUBVOU.BEG_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].BEG_NO;
+            BPCUBVOU.END_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].END_NO;
+            BPCUBVOU.NUM = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].NUM;
+            BPCUBVOU.VB_FLG = '1';
+            BPCUBVOU.BV_STS = '0';
+            BPCUBVOU.AC_TYP = '1';
+            BPCUBVOU.USECTL = 'N';
+            CEP.TRC(SCCGWA, BPCUBVOU.BV_CODE);
+            CEP.TRC(SCCGWA, BPCUBVOU);
+            CEP.TRC(SCCGWA, BPCUBVOU.NUM);
+            S000_CALL_BPZUBVOU();
+            IBS.init(SCCGWA, BPCUBVIN);
+            BPCUBVIN.TLR = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].TLR;
+            BPCUBVIN.TYPE = BPCFBVQU.TX_DATA.TYPE;
+            BPCUBVIN.BV_CODE = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CODE;
+            BPCUBVIN.HEAD_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].HEAD_NO;
+            BPCUBVIN.BEG_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].BEG_NO;
+            BPCUBVIN.END_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].END_NO;
+            BPCUBVIN.NUM = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].NUM;
+            CEP.TRC(SCCGWA, BPCUBVIN.NUM);
+            BPCUBVIN.VB_FLG = '0';
+            BPCUBVIN.BV_STS = '0';
+            BPCUBVIN.AC_TYP = '1';
+            S000_CALL_BPZUBVIN();
+        }
+    }
+    public void B021_BUSE_PROCESS() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCFBVQU);
+        BPCFBVQU.TX_DATA.KEY.CODE = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CODE;
+        S000_CALL_BPZFBVQU();
+        if (BPCFBVQU.TX_DATA.TYPE == '0' 
+            && BPCFBVQU.TX_DATA.CTL_FLG != '0') {
+            B021_ADD_BUSE_PROCESS();
+        }
+    }
+    public void B021_ADD_BUSE_PROCESS() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRBUSE);
+        IBS.init(SCCGWA, BPCRBUSE);
+        BPRBUSE.KEY.BR = SCCGWA.COMM_AREA.BR_DP.TR_BRANCH;
+        BPRBUSE.KEY.BV_CODE = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CODE;
+        BPRBUSE.KEY.HEAD_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].HEAD_NO;
+        BPRBUSE.KEY.BEG_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].BEG_NO;
+        BPRBUSE.KEY.END_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].END_NO;
+        BPRBUSE.KEY.TX_DT = SCCGWA.COMM_AREA.AC_DATE;
+        BPRBUSE.KEY.TX_JRN = SCCGWA.COMM_AREA.JRN_NO;
+        BPRBUSE.TYPE = '0';
+        BPRBUSE.TX_CODE = IBS.CLS2CPY(SCCGWA, SCCGWA.COMM_AREA.TR_ID);
+        BPRBUSE.TX_BR = SCCGWA.COMM_AREA.BR_DP.TR_BRANCH;
+        BPRBUSE.TX_TLR = SCCGWA.COMM_AREA.TL_ID;
+        BPRBUSE.TX_AUTH = " ";
+        BPRBUSE.STS = '0';
+        BPRBUSE.REC_STS = '0';
+        BPCRBUSE.INFO.FUNC = 'A';
+        S000_CALL_BPZRBUSE();
+    }
+    public void B015_BOX_TLR_RELATED() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPRVHPB);
+        IBS.init(SCCGWA, BPCRVHPB);
+        BPRVHPB.CUR_TLR = BPCSBVVB.REC_TLR;
+        BPRVHPB.POLL_BOX_IND = '0';
+        BPRVHPB.STS = 'N';
+        BPCRVHPB.INFO.FUNC = 'F';
+        S000_CALL_BPZRVHPB();
+        if (BPCRVHPB.RETURN_INFO == 'F') {
+            WS_VARIABLES.ERR_MSG = ERROR_MSG.BP_TLR_BVB_EXIST;
+            S000_ERR_MSG_PROC();
+        }
+        IBS.init(SCCGWA, BPRVHPB);
+        IBS.init(SCCGWA, BPCRVHPB);
+        BPRVHPB.KEY.POOL_BOX_NO = BPCSBVVB.PB_NO;
+        BPCRVHPB.INFO.FUNC = 'R';
+        S000_CALL_BPZRVHPB();
+        BPRVHPB.LST_TLR = BPRVHPB.CUR_TLR;
+        BPRVHPB.CUR_TLR = BPCSBVVB.REC_TLR;
+        BPRVHPB.RELATE_FLG = 'Y';
+        BPRVHPB.BV_CHK_FLG = 'N';
+        BPRVHPB.UPD_DATE = SCCGWA.COMM_AREA.AC_DATE;
+        BPRVHPB.UPD_TLR = SCCGWA.COMM_AREA.TL_ID;
+        BPCRVHPB.INFO.FUNC = 'U';
+        S000_CALL_BPZRVHPB();
+    }
+    public void S000_CALL_BPZRVHPB() throws IOException,SQLException,Exception {
+        BPCRVHPB.INFO.POINTER = BPRVHPB;
+        BPCRVHPB.INFO.LEN = 206;
+        IBS.CALLCPN(SCCGWA, R_BPTVHPB_MTN, BPCRVHPB);
+        if (BPCRVHPB.RC.RC_CODE != 0) {
+            WS_VARIABLES.ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCRVHPB.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void B040_REC_NHIS() throws IOException,SQLException,Exception {
+        for (WS_VARIABLES.CNT = 1; WS_VARIABLES.CNT <= CYC_TIMES 
+            && BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CODE.trim().length() != 0; WS_VARIABLES.CNT += 1) {
+            IBS.init(SCCGWA, BPCPNHIS);
+            BPCPNHIS.INFO.TX_TYP = 'O';
+            BPCPNHIS.INFO.JRNNO = SCCGWA.COMM_AREA.JRN_NO;
+            WS_HIS_REMARKS.HIS_BVCODE = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CODE;
+            WS_HIS_REMARKS.HIS_HEADNO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].HEAD_NO;
+            WS_HIS_REMARKS.HIS_BEGNO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].BEG_NO;
+            WS_HIS_REMARKS.HIS_ENDNO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].END_NO;
+            WS_HIS_REMARKS.HIS_NUMNO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].NUM;
+            WS_HIS_REMARKS.HIS_TLR = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].TLR;
+            BPCPNHIS.INFO.TX_RMK = IBS.CLS2CPY(SCCGWA, WS_HIS_REMARKS);
+            CEP.TRC(SCCGWA, WS_HIS_REMARKS);
+            S000_CALL_BPZPNHIS();
+        }
+    }
+    public void B040_REC_NHIS_CN() throws IOException,SQLException,Exception {
+        if (BPCSBVVB.BV_FUNC == '1') {
+            IBS.init(SCCGWA, BPCPNHIS);
+            BPCPNHIS.INFO.TX_TYP = 'O';
+            BPCPNHIS.INFO.TX_TYP_CD = "P906";
+            BPCPNHIS.INFO.JRNNO = SCCGWA.COMM_AREA.JRN_NO;
+            WS_HIS_PB_REMARKS.HIS_PB_NO = BPCSBVVB.PB_NO;
+            BPCPNHIS.INFO.TX_RMK = IBS.CLS2CPY(SCCGWA, WS_HIS_PB_REMARKS);
+            S000_CALL_BPZPNHIS();
+        } else {
+            for (WS_VARIABLES.CNT = 1; WS_VARIABLES.CNT <= CYC_TIMES_10 
+                && BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CODE.trim().length() != 0; WS_VARIABLES.CNT += 1) {
+                IBS.init(SCCGWA, BPCPNHIS);
+                BPCPNHIS.INFO.TX_TYP = 'O';
+                BPCPNHIS.INFO.TX_TYP_CD = "P906";
+                BPCPNHIS.INFO.JRNNO = SCCGWA.COMM_AREA.JRN_NO;
+                WS_HIS_REMARKS.HIS_BVCODE = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CODE;
+                WS_HIS_REMARKS.HIS_HEADNO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].HEAD_NO;
+                WS_HIS_REMARKS.HIS_BEGNO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].BEG_NO;
+                WS_HIS_REMARKS.HIS_ENDNO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].END_NO;
+                WS_HIS_REMARKS.HIS_NUMNO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].NUM;
+                WS_HIS_REMARKS.HIS_TLR = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].TLR;
+                BPCPNHIS.INFO.TX_RMK = IBS.CLS2CPY(SCCGWA, WS_HIS_REMARKS);
+                CEP.TRC(SCCGWA, WS_HIS_REMARKS);
+                S000_CALL_BPZPNHIS();
+            }
+        }
+    }
+    public void B090_DATA_OUTPUT() throws IOException,SQLException,Exception {
+        R010_TRANS_DATA_OUPUT();
+        IBS.init(SCCGWA, SCCFMT);
+        SCCFMT.FMTID = OUTPUT_FMT;
+        SCCFMT.DATA_PTR = BPCO153;
+        SCCFMT.DATA_LEN = 2979;
+        CEP.TRC(SCCGWA, BPCO153);
+        IBS.FMT(SCCGWA, SCCFMT);
+    }
+    public void R010_TRANS_DATA_OUPUT() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, BPCSBVVB);
+        BPCO153.COUNT = 0;
+        CEP.TRC(SCCGWA, BPCSBVVB.COUNT);
+        for (WS_VARIABLES.CNT = 1; WS_VARIABLES.CNT <= BPCSBVVB.COUNT; WS_VARIABLES.CNT += 1) {
+            BPCO153.COUNT += 1;
+            BPCO153.DATA[WS_VARIABLES.CNT-1].BV_CODE = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CODE;
+            BPCO153.DATA[WS_VARIABLES.CNT-1].ENM = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].ENM;
+            BPCO153.DATA[WS_VARIABLES.CNT-1].CNM = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CNM;
+            BPCO153.DATA[WS_VARIABLES.CNT-1].HEAD_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].HEAD_NO;
+            BPCO153.DATA[WS_VARIABLES.CNT-1].BEG_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].BEG_NO;
+            BPCO153.DATA[WS_VARIABLES.CNT-1].END_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].END_NO;
+            BPCO153.DATA[WS_VARIABLES.CNT-1].NUM = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].NUM;
+        }
+        BPCO153.REC_TLR = BPCSBVVB.REC_TLR;
+    }
+    public void B090_DATA_OUTPUT_CN() throws IOException,SQLException,Exception {
+        R010_TRANS_DATA_OUPUT_CN();
+        IBS.init(SCCGWA, SCCFMT);
+        SCCFMT.FMTID = OUTPUT_FMT;
+        SCCFMT.DATA_PTR = BPCO153;
+        SCCFMT.DATA_LEN = 2979;
+        CEP.TRC(SCCGWA, BPCO153);
+        IBS.FMT(SCCGWA, SCCFMT);
+    }
+    public void R010_TRANS_DATA_OUPUT_CN() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, BPCSBVVB);
+        BPCO153.BV_FUNC = BPCSBVVB.BV_FUNC;
+        BPCO153.PB_NO = BPCSBVVB.PB_NO;
+        BPCO153.REC_TLR = BPCSBVVB.REC_TLR;
+        if (BPCSBVVB.BV_FUNC == '0') {
+            BPCO153.COUNT = 0;
+            CEP.TRC(SCCGWA, BPCSBVVB.COUNT);
+            for (WS_VARIABLES.CNT = 1; WS_VARIABLES.CNT <= BPCSBVVB.COUNT; WS_VARIABLES.CNT += 1) {
+                BPCO153.COUNT += 1;
+                BPCO153.DATA[WS_VARIABLES.CNT-1].BV_CODE = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CODE;
+                BPCO153.DATA[WS_VARIABLES.CNT-1].ENM = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].ENM;
+                BPCO153.DATA[WS_VARIABLES.CNT-1].CNM = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].CNM;
+                BPCO153.DATA[WS_VARIABLES.CNT-1].HEAD_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].HEAD_NO;
+                BPCO153.DATA[WS_VARIABLES.CNT-1].BEG_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].BEG_NO;
+                BPCO153.DATA[WS_VARIABLES.CNT-1].END_NO = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].END_NO;
+                BPCO153.DATA[WS_VARIABLES.CNT-1].NUM = BPCSBVVB.DATA[WS_VARIABLES.CNT-1].NUM;
+            }
+        }
+    }
+    public void S000_CALL_BPZUBVIN() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, U_BVIN, BPCUBVIN);
+    }
+    public void S000_CALL_BPZUBVOU() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, U_BVOUT, BPCUBVOU);
+    }
+    public void S000_CALL_BPZRBUSE() throws IOException,SQLException,Exception {
+        BPCRBUSE.INFO.POINTER = BPRBUSE;
+        BPCRBUSE.INFO.LEN = 189;
+        IBS.CALLCPN(SCCGWA, R_MGM_BUSE, BPCRBUSE);
+        if (BPCRBUSE.RC.RC_CODE != 0) {
+            WS_VARIABLES.ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCRBUSE.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_CALL_BPZPNHIS() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, REC_NHIS, BPCPNHIS);
+        if (BPCPNHIS.RC.RC_CODE != 0) {
+            WS_VARIABLES.ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCPNHIS.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_CALL_BPZFTLRQ() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, QUERY_TLR, BPCFTLRQ);
+        if (BPCFTLRQ.RC.RC_CODE != 0) {
+            WS_VARIABLES.ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCFTLRQ.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_CALL_BPZFKPSW() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, TLR_K_PSW, BPCFKPSW);
+        if (BPCFKPSW.RC.RC_CODE != 0) {
+            WS_VARIABLES.ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCFKPSW.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_CALL_BPZFBVQU() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, F_BV_PRM_QUERY, BPCFBVQU);
+        if (BPCFBVQU.RC.RC_CODE != 0) {
+            WS_VARIABLES.ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCFBVQU.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_CALL_BPZFCPSW() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, TLR_C_PSW, BPCFCPSW);
+        if (BPCFCPSW.RC.RC_CODE != 0) {
+            WS_VARIABLES.ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCFCPSW.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_VARIABLES.ERR_MSG);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

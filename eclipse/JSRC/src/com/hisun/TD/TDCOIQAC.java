@@ -1,0 +1,6 @@
+package com.hisun.TD;
+
+public class TDCOIQAC {
+    public TDCOIQAC_INPUT_DATA INPUT_DATA = new TDCOIQAC_INPUT_DATA();
+    public TDCOIQAC_OUTPUT_DATA OUTPUT_DATA = new TDCOIQAC_OUTPUT_DATA();
+}

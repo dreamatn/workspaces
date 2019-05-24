@@ -1,0 +1,7 @@
+package com.hisun.DC;
+
+public class DCCSCHCD {
+    public DCCSCHCD_INPUT_DATA INPUT_DATA = new DCCSCHCD_INPUT_DATA();
+    public DCCSCHCD_OUTPUT_DATA OUTPUT_DATA = new DCCSCHCD_OUTPUT_DATA();
+    public DCCSCHCD_RC RC = new DCCSCHCD_RC();
+}

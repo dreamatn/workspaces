@@ -1,0 +1,48 @@
+package com.hisun.DD;
+
+public class DDCI5800 {
+    public String PROD_CD = " ";
+    public String CI_NO = " ";
+    public String CI_CNM = " ";
+    public String CI_ENM = " ";
+    public char AC_TYP = ' ';
+    public char PSBK_FLG = ' ';
+    public char CARD_FLG = ' ';
+    public String PSBK_NO = " ";
+    public char CMAD_TYP = ' ';
+    public String CARD_NO = " ";
+    public char CARD_TYP = ' ';
+    public char COLACFLG = ' ';
+    public String CARD_PRD = " ";
+    public String CARD_BIN = " ";
+    public char CARD_MTH = ' ';
+    public long CARD_SEQ = 0;
+    public String CARD_PRN = " ";
+    public short CARD_DUE = 0;
+    public char DRAW_MTH = ' ';
+    public String PSWD = " ";
+    public String DD_AC = " ";
+    public String REMARK = " ";
+    public char AC_TYPE = ' ';
+    public String CUS_MGR = " ";
+    public String REG_CENT = " ";
+    public String SUB_BIZ = " ";
+    public String AGID_TYP = " ";
+    public String AGID_NO = " ";
+    public String AG_NM = " ";
+    public String POST_AC = " ";
+    public short RGN_CODE = 0;
+    public String CARD_TPY = " ";
+    public char DB_FREE = ' ';
+    public String YW_TYP = " ";
+    public String CARD_CLS = " ";
+    public String BV_CD_NO = " ";
+    public char DR_FLG = ' ';
+    public char BV_TYPE = ' ';
+    public String TRT_CTLW = " ";
+    public String LMT_CCY = " ";
+    public double LMT_BAL = 0;
+    public String AGID_CTY = " ";
+    public String AGID_CNO = " ";
+    public String AGID_CNM = " ";
+}

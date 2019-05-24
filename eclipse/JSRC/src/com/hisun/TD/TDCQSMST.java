@@ -1,0 +1,8 @@
+package com.hisun.TD;
+
+public class TDCQSMST {
+    public char FILE_FLG = ' ';
+    public TDCQSMST_DETAIL_REC DETAIL_REC = new TDCQSMST_DETAIL_REC();
+    public TDCQSMST_HEADER_REC HEADER_REC = new TDCQSMST_HEADER_REC();
+    public TDCQSMST_TRAILER_REC TRAILER_REC = new TDCQSMST_TRAILER_REC();
+}

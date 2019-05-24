@@ -1,0 +1,46 @@
+package com.hisun.DD;
+
+public class DDRINTB {
+    public DDRINTB_KEY KEY = new DDRINTB_KEY();
+    public int OWNER_BK = 0;
+    public int STRT_TOT_DATE = 0;
+    public int END_TOT_DATE = 0;
+    public char CAL_INT_MTH = ' ';
+    public double DEP_TODAY_ACCU_INT = 0;
+    public double OD_TODAY_ACCU_TAX = 0;
+    public double DEP_ACCU_INT = 0;
+    public double DEP_SPC_INT = 0;
+    public double OD_ACCU_TAX = 0;
+    public double TOT_ACCU = 0;
+    public double PAY_DEP_INT = 0;
+    public double DEP_ADJ_INT = 0;
+    public double DEP_SPC_ADJ_INT = 0;
+    public char TIR_TYPE = ' ';
+    public char AGSP_FLG = ' ';
+    public double DEP_TOT1 = 0;
+    public double TIR_AMT1 = 0;
+    public double TIR_RATE1 = 0;
+    public double DEP_TOT2 = 0;
+    public double TIR_AMT2 = 0;
+    public double TIR_RATE2 = 0;
+    public double DEP_TOT3 = 0;
+    public double TIR_AMT3 = 0;
+    public double TIR_RATE3 = 0;
+    public double DEP_TOT4 = 0;
+    public double TIR_AMT4 = 0;
+    public double TIR_RATE4 = 0;
+    public double DEP_TOT5 = 0;
+    public double TIR_AMT5 = 0;
+    public double TIR_RATE5 = 0;
+    public int LST_TOT_DATE = 0;
+    public double TAX_RATE = 0;
+    public int TAX_RATE_DATE = 0;
+    public int DEPR_CHA_DATE = 0;
+    public int LST_DPOST_DATE = 0;
+    public int LST_APOST_DATE = 0;
+    public int CRT_DATE = 0;
+    public String CRT_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public String UPDTBL_TLR = " ";
+    public String TS = " ";
+}

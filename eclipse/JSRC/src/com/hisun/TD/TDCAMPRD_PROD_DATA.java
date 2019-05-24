@@ -1,0 +1,8 @@
+package com.hisun.TD;
+
+public class TDCAMPRD_PROD_DATA {
+    public TDCAMPRD_TXN_PRM TXN_PRM = new TDCAMPRD_TXN_PRM();
+    public TDCAMPRD_INT_PRM INT_PRM = new TDCAMPRD_INT_PRM();
+    public TDCAMPRD_EXP_PRM EXP_PRM = new TDCAMPRD_EXP_PRM();
+    public TDCAMPRD_OTH_PRM OTH_PRM = new TDCAMPRD_OTH_PRM();
+}

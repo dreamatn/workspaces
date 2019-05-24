@@ -1,0 +1,589 @@
+package com.hisun.BP;
+
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class BPOT2000 {
+    int JIBS_tmp_int;
+    String JIBS_tmp_str[] = new String[10];
+    String K_OUTPUT_FMT = "BP108";
+    String CPN_S_CASHBL_MAINTAIN = "BP-S-CASHBL-MAINTAIN";
+    String CPN_P_INQ_ORG_STATION = "BP-P-INQ-ORG-STATION";
+    String CPN_F_TLR_INF_QUERY = "BP-F-TLR-INF-QUERY";
+    String CPN_P_INQ_ORG = "BP-P-INQ-ORG";
+    String WS_ERR_MSG = " ";
+    short WS_FLD_NO = 0;
+    short WS_IDX = 0;
+    int WS_BR = 0;
+    int WS_BR3 = 0;
+    int WS_BR4 = 0;
+    int WS_I = 0;
+    int WS_CNT = 0;
+    char WS_FUNC_FLG = ' ';
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCFMT SCCFMT = new SCCFMT();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    BPCFTLRQ BPCFTLRQ = new BPCFTLRQ();
+    BPCOLIBM BPCOLIBM = new BPCOLIBM();
+    BPCPRGST BPCPRGST = new BPCPRGST();
+    BPCPQORG BPCPQORG = new BPCPQORG();
+    BPCTBRIS BPCTBRIS = new BPCTBRIS();
+    BPCPQBNK BPCPQBNK = new BPCPQBNK();
+    BPRBRIS BPRBRIS = new BPRBRIS();
+    BPCRBANK BPCRBANK = new BPCRBANK();
+    SCCGWA SCCGWA;
+    BPB2000_AWA_2000 BPB2000_AWA_2000;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "BPOT2000 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "BPB2000_AWA_2000>");
+        BPB2000_AWA_2000 = (BPB2000_AWA_2000) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, BPB2000_AWA_2000.FUNC);
+        CEP.TRC(SCCGWA, BPB2000_AWA_2000.TLR);
+        CEP.TRC(SCCGWA, BPB2000_AWA_2000.BR);
+        CEP.TRC(SCCGWA, BPB2000_AWA_2000.CCYS[1-1].CASH_TYP);
+        CEP.TRC(SCCGWA, BPB2000_AWA_2000.PLBOX_TP);
+        CEP.TRC(SCCGWA, BPB2000_AWA_2000.UP_PBNO);
+        CEP.TRC(SCCGWA, BPB2000_AWA_2000.INSR_CCY);
+        CEP.TRC(SCCGWA, BPB2000_AWA_2000.BIND_TYP);
+        CEP.TRC(SCCGWA, BPB2000_AWA_2000.INSR_AMT);
+        CEP.TRC(SCCGWA, BPB2000_AWA_2000.CCYS[1-1].CCY);
+        if (SCCGWA.COMM_AREA.TR_BANK.equalsIgnoreCase("043")) {
+            B010_CHECK_INPUT_FOR_CN();
+            B020_ADD_BLCASH_LMT_FOR_CN();
+        } else {
+            B010_CHECK_INPUT();
+            B020_ADD_BLCASH_LMT();
+        }
+    }
+    public void B010_CHECK_INPUT() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, BPB2000_AWA_2000.FUNC);
+        WS_FUNC_FLG = BPB2000_AWA_2000.FUNC;
+        if (WS_FUNC_FLG != 'A') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_FUNC_IS_INVALID;
+            WS_FLD_NO = BPB2000_AWA_2000.FUNC_NO;
+            S000_ERR_MSG_PROC();
+        }
+        if (BPB2000_AWA_2000.TLR.trim().length() > 0) {
+            if (BPB2000_AWA_2000.TLR.equalsIgnoreCase(SCCGWA.COMM_AREA.TL_ID)) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_CANNOT_MAINT_ONESELF;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+        }
+        if (BPB2000_AWA_2000.TLR.trim().length() > 0) {
+            IBS.init(SCCGWA, BPCFTLRQ);
+            BPCFTLRQ.INFO.TLR = BPB2000_AWA_2000.TLR;
+            S000_CALL_BPZFTLRQ();
+            if (BPB2000_AWA_2000.BR != BPCFTLRQ.INFO.TLR_BR) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_INP_TLR_NOT_INP_BR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            WS_BR = BPCFTLRQ.INFO.TLR_BR;
+            WS_BR3 = BPB2000_AWA_2000.BR;
+            CEP.TRC(SCCGWA, WS_BR3);
+            WS_BR4 = BPCFTLRQ.INFO.TLR_BR;
+            CEP.TRC(SCCGWA, WS_BR4);
+            CEP.TRC(SCCGWA, BPB2000_AWA_2000.PLBOX_TP);
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            CEP.TRC(SCCGWA, BPCFTLRQ.INFO.TLR_STSW.substring(4 - 1, 4 + 1 - 1));
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPB2000_AWA_2000.PLBOX_TP == '1' 
+                && !BPCFTLRQ.INFO.TLR_STSW.substring(4 - 1, 4 + 1 - 1).equalsIgnoreCase("1")) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_NOT_CASHLIB_TLR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPB2000_AWA_2000.PLBOX_TP == '2' 
+                && !BPCFTLRQ.INFO.TLR_STSW.substring(4 - 1, 4 + 1 - 1).equalsIgnoreCase("1")) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_NOT_CASHLIB_TLR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPB2000_AWA_2000.PLBOX_TP == '3' 
+                && !BPCFTLRQ.INFO.TLR_STSW.substring(3 - 1, 3 + 1 - 1).equalsIgnoreCase("1")) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_NOT_CASHBOX_TLR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPB2000_AWA_2000.PLBOX_TP == '4' 
+                && BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1).equalsIgnoreCase("0")) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_NOT_CASHBOX_TLR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPB2000_AWA_2000.PLBOX_TP == '3' 
+                && BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1).equalsIgnoreCase("1") 
+                || BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1).equalsIgnoreCase("2") 
+                || BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1).equalsIgnoreCase("4")) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_NOT_CASHBOX_TLR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            if (BPCFTLRQ.INFO.TLR_TYP == 'T') {
+                if (BPCFTLRQ.INFO.SIGN_STS != 'O') {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TELLER_NOT_SIGN_ON;
+                    WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                    S000_ERR_MSG_PROC();
+                }
+            }
+        }
+        IBS.init(SCCGWA, BPCPRGST);
+        for (WS_I = 1; WS_I <= 20; WS_I += 1) {
+            if (BPB2000_AWA_2000.CCYS[WS_I-1].CCY.trim().length() > 0) {
+                if (BPB2000_AWA_2000.BLMT_L == 0) {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_LMT_IS_ZEROS;
+                    WS_FLD_NO = BPB2000_AWA_2000.CCYS[WS_I-1].MIN_LMT_NO;
+                    S000_ERR_MSG_PROC();
+                }
+                if (BPB2000_AWA_2000.BLMT_U == 0) {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_LMT_IS_ZEROS;
+                    WS_FLD_NO = BPB2000_AWA_2000.CCYS[WS_I-1].MAX_LMT_NO;
+                    S000_ERR_MSG_PROC();
+                }
+                if (BPB2000_AWA_2000.BLMT_U < BPB2000_AWA_2000.BLMT_L) {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_MINLMT_UPP_MAXLMT;
+                    WS_FLD_NO = BPB2000_AWA_2000.CCYS[WS_I-1].MAX_LMT_NO;
+                    S000_ERR_MSG_PROC();
+                }
+                if (BPB2000_AWA_2000.BLMT_U == BPB2000_AWA_2000.BLMT_L) {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_MINLMT_EQUAL_MAXLMT;
+                    WS_FLD_NO = BPB2000_AWA_2000.CCYS[WS_I-1].MAX_LMT_NO;
+                    S000_ERR_MSG_PROC();
+                }
+            }
+        }
+    }
+    public void B010_CHECK_INPUT_FOR_CN() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCPQORG);
+        BPCPQORG.BR = BPB2000_AWA_2000.BR;
+        S000_CALL_BPZPQORG();
+        CEP.TRC(SCCGWA, BPCPQORG.FX_BUSI);
+        if (!BPCPQORG.TRA_TYP.equalsIgnoreCase("00") 
+            && BPCPQORG.INT_BR_FLG == 'Y') {
+            CEP.ERR(SCCGWA, BPCMSG_ERROR_MSG.BP_TRA_BR_NOT_CASH_BV);
+        }
+        WS_FUNC_FLG = BPB2000_AWA_2000.FUNC;
+        if (WS_FUNC_FLG != 'A') {
+            WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_FUNC_IS_INVALID;
+            WS_FLD_NO = BPB2000_AWA_2000.FUNC_NO;
+            S000_ERR_MSG_PROC();
+        }
+        if (BPB2000_AWA_2000.TLR.trim().length() > 0) {
+            if (BPB2000_AWA_2000.TLR.equalsIgnoreCase(SCCGWA.COMM_AREA.TL_ID)) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_CANNOT_MAINT_ONESELF;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+        }
+        if (BPB2000_AWA_2000.PLBOX_TP == '1' 
+            || BPB2000_AWA_2000.PLBOX_TP == '2' 
+            || BPB2000_AWA_2000.PLBOX_TP == '5') {
+            if (BPB2000_AWA_2000.TLR.trim().length() == 0) {
+                CEP.ERR(SCCGWA, BPCMSG_ERROR_MSG.BP_TLR_MUST_INPUT);
+            }
+        }
+        if (BPB2000_AWA_2000.BIND_TYP == ' ') {
+            CEP.ERR(SCCGWA, BPCMSG_ERROR_MSG.BP_BIND_MUST_INPUT);
+        }
+        if (BPB2000_AWA_2000.PLBOX_TP == '6') {
+            if (BPB2000_AWA_2000.TLR.trim().length() > 0) {
+                CEP.ERR(SCCGWA, BPCMSG_ERROR_MSG.BP_TLR_MUST_SPACE);
+            }
+        }
+        if (BPB2000_AWA_2000.TLR.trim().length() > 0) {
+            IBS.init(SCCGWA, BPCFTLRQ);
+            BPCFTLRQ.INFO.TLR = BPB2000_AWA_2000.TLR;
+            S000_CALL_BPZFTLRQ();
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPB2000_AWA_2000.PLBOX_TP == '1' 
+                && !BPCFTLRQ.INFO.TLR_STSW.substring(4 - 1, 4 + 1 - 1).equalsIgnoreCase("1")) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_NOT_CASHLIB_TLR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPB2000_AWA_2000.PLBOX_TP == '2' 
+                && !BPCFTLRQ.INFO.TLR_STSW.substring(4 - 1, 4 + 1 - 1).equalsIgnoreCase("1")) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_NOT_CASHLIB_TLR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            CEP.TRC(SCCGWA, BPCFTLRQ.INFO.TLR_STSW.substring(3 - 1, 3 + 1 - 1));
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPB2000_AWA_2000.PLBOX_TP == '3' 
+                && !BPCFTLRQ.INFO.TLR_STSW.substring(3 - 1, 3 + 1 - 1).equalsIgnoreCase("1")) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_NOT_CASHBOX_TLR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            CEP.TRC(SCCGWA, BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1));
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPB2000_AWA_2000.PLBOX_TP == '4' 
+                && BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1).equalsIgnoreCase("0")) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_ATMBOX_NOT_ATM_TLR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            CEP.TRC(SCCGWA, BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1));
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPB2000_AWA_2000.PLBOX_TP == '3' 
+                && (BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1).equalsIgnoreCase("1") 
+                || BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1).equalsIgnoreCase("2") 
+                || BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1).equalsIgnoreCase("4"))) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_CASHBOX_NOT_ATMTLR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPB2000_AWA_2000.PLBOX_TP == '5' 
+                && !BPCFTLRQ.INFO.TLR_STSW.substring(3 - 1, 3 + 1 - 1).equalsIgnoreCase("1")) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_NOT_CASHBOX_TLR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPB2000_AWA_2000.PLBOX_TP == '5' 
+                && !BPCFTLRQ.INFO.TLR_STSW.substring(4 - 1, 4 + 1 - 1).equalsIgnoreCase("1")) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_NOT_CASHLIB_TLR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+            CEP.TRC(SCCGWA, BPB2000_AWA_2000.PLBOX_TP);
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            CEP.TRC(SCCGWA, BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1));
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if (BPCFTLRQ.INFO.TLR_STSW == null) BPCFTLRQ.INFO.TLR_STSW = "";
+            JIBS_tmp_int = BPCFTLRQ.INFO.TLR_STSW.length();
+            for (int i=0;i<64-JIBS_tmp_int;i++) BPCFTLRQ.INFO.TLR_STSW += " ";
+            if ((BPB2000_AWA_2000.PLBOX_TP == '1' 
+                || BPB2000_AWA_2000.PLBOX_TP == '2' 
+                || BPB2000_AWA_2000.PLBOX_TP == '5') 
+                && (BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1).equalsIgnoreCase("1") 
+                || BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1).equalsIgnoreCase("2") 
+                || BPCFTLRQ.INFO.TLR_STSW.substring(8 - 1, 8 + 1 - 1).equalsIgnoreCase("4"))) {
+                CEP.ERR(SCCGWA, BPCMSG_ERROR_MSG.BP_CASHLIB_NOT_ATMTLR);
+            }
+            if (BPCFTLRQ.INFO.TLR_TYP == 'T') {
+                if (BPCFTLRQ.INFO.SIGN_STS != 'O' 
+                    && BPCFTLRQ.INFO.SIGN_STS != 'T') {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_TELLER_NOT_SIGN_ON;
+                    WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                    S000_ERR_MSG_PROC();
+                }
+            }
+            if (BPB2000_AWA_2000.BR != BPCFTLRQ.INFO.NEW_BR) {
+                WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_INP_TLR_NOT_INP_BR;
+                WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+                S000_ERR_MSG_PROC();
+            }
+        }
+        IBS.init(SCCGWA, BPCFTLRQ);
+        BPCFTLRQ.INFO.TLR = SCCGWA.COMM_AREA.TL_ID;
+        S000_CALL_BPZFTLRQ();
+        if (BPCFTLRQ.INFO.TX_LVL == '0') {
+            CEP.ERR(SCCGWA, BPCMSG_ERROR_MSG.BP_NOT_DIRECTOR_TLR);
+        }
+        for (WS_I = 1; WS_I <= 20; WS_I += 1) {
+            if (BPB2000_AWA_2000.CCYS[WS_I-1].CCY.trim().length() > 0) {
+                CEP.TRC(SCCGWA, BPCPQORG.FX_BUSI);
+                CEP.TRC(SCCGWA, BPB2000_AWA_2000.CCYS[WS_I-1].CCY);
+                if (BPCPQORG.FX_BUSI.equalsIgnoreCase("00")) {
+                    if (!BPB2000_AWA_2000.CCYS[WS_I-1].CCY.equalsIgnoreCase("156")) {
+                        CEP.ERR(SCCGWA, BPCMSG_ERROR_MSG.CCY_ONLY_MTAIN_RMB);
+                    }
+                } else {
+                    if (BPCPQORG.FX_BUSI.equalsIgnoreCase("01") 
+                        || BPCPQORG.FX_BUSI.equalsIgnoreCase("02")) {
+                        if (BPB2000_AWA_2000.CCYS[WS_I-1].CCY.equalsIgnoreCase("156")) {
+                            CEP.ERR(SCCGWA, BPCMSG_ERROR_MSG.CCY_ONLY_MTAIN_FRG);
+                        }
+                    }
+                }
+                if (BPB2000_AWA_2000.CCYS[WS_I-1].MIN_LMT == 0) {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_LMT_IS_ZEROS;
+                    WS_FLD_NO = BPB2000_AWA_2000.CCYS[WS_I-1].MIN_LMT_NO;
+                    S000_ERR_MSG_PROC();
+                }
+                if (BPB2000_AWA_2000.CCYS[WS_I-1].MAX_LMT == 0) {
+                    WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_LMT_IS_ZEROS;
+                    WS_FLD_NO = BPB2000_AWA_2000.CCYS[WS_I-1].MAX_LMT_NO;
+                    S000_ERR_MSG_PROC();
+                }
+                IBS.init(SCCGWA, BPRBRIS);
+                CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.BR_DP.TR_BRANCH);
+                CEP.TRC(SCCGWA, BPB2000_AWA_2000.CCYS[WS_I-1].CCY);
+                BPRBRIS.KEY.BR = BPB2000_AWA_2000.BR;
+                BPRBRIS.KEY.LMT_CCY = BPB2000_AWA_2000.CCYS[WS_I-1].CCY;
+                BPCTBRIS.INFO.FUNC = 'Q';
+                BPCTBRIS.POINTER = BPRBRIS;
+                BPCTBRIS.LEN = 134;
+                S000_CALL_BPZTBRIS();
+                if (BPCTBRIS.RETURN_INFO == 'N') {
+                }
+                CEP.TRC(SCCGWA, BPB2000_AWA_2000.CCYS[WS_I-1].MAX_LMT);
+                CEP.TRC(SCCGWA, BPRBRIS.LMT_U);
+                if (BPCTBRIS.RETURN_INFO == 'F') {
+                    if (BPB2000_AWA_2000.CCYS[WS_I-1].MAX_LMT > BPRBRIS.LMT_U) {
+                        CEP.TRC(SCCGWA, "DEV");
+                        CEP.ERR(SCCGWA, BPCMSG_ERROR_MSG.BP_INPUT_ERROR68);
+                    }
+                    if (BPB2000_AWA_2000.CCYS[WS_I-1].MAX_LMT < BPB2000_AWA_2000.CCYS[WS_I-1].MIN_LMT) {
+                        WS_ERR_MSG = BPCMSG_ERROR_MSG.BP_MINLMT_UPP_MAXLMT;
+                        WS_FLD_NO = BPB2000_AWA_2000.CCYS[WS_I-1].MAX_LMT_NO;
+                        S000_ERR_MSG_PROC();
+                    }
+                }
+            }
+        }
+    }
+    public void S000_CALL_BPZTBRIS() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-R-ADW-BRIS", BPCTBRIS);
+    }
+    public void S000_CALL_BPZPQBNK() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-P-QUERY-BANK", BPCPQBNK);
+        if (BPCPQBNK.RC.RC_CODE != 0) {
+            JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, BPCPQBNK.RC);
+            CEP.ERR(SCCGWA, JIBS_tmp_str[0]);
+        }
+    }
+    public void S000_CALL_BPZPQORG() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, CPN_P_INQ_ORG, BPCPQORG);
+        CEP.TRC(SCCGWA, BPCPQORG.FX_BUSI);
+        if (BPCPQORG.RC.RC_CODE != 0) {
+            JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, BPCPQORG.RC);
+            CEP.ERR(SCCGWA, JIBS_tmp_str[0]);
+        }
+    }
+    public void B020_ADD_BLCASH_LMT_FOR_CN() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCOLIBM);
+        BPCOLIBM.FUNC = 'A';
+        BPCOLIBM.OUTPUT_FMT = K_OUTPUT_FMT;
+        BPCOLIBM.TX_TYP_CD = "P903";
+        R000_TRANS_DATA_PARM_FOR_CN();
+        S000_CALL_BPZSLIBM();
+    }
+    public void B020_ADD_BLCASH_LMT() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCOLIBM);
+        BPCOLIBM.FUNC = 'A';
+        BPCOLIBM.OUTPUT_FMT = K_OUTPUT_FMT;
+        R000_TRANS_DATA_PARAMETER();
+        CEP.TRC(SCCGWA, BPCOLIBM.FUNC);
+        CEP.TRC(SCCGWA, BPCOLIBM.TLR);
+        CEP.TRC(SCCGWA, BPCOLIBM.BR);
+        CEP.TRC(SCCGWA, BPCOLIBM.PLBOX_TP);
+        CEP.TRC(SCCGWA, BPCOLIBM.UP_PBNO);
+        CEP.TRC(SCCGWA, BPCOLIBM.INSR_CCY);
+        CEP.TRC(SCCGWA, BPCOLIBM.INSR_AMT);
+        CEP.TRC(SCCGWA, BPCOLIBM.CCYS[1-1].CCY);
+        S000_CALL_BPZSLIBM();
+    }
+    public void R000_TRANS_DATA_PARM_FOR_CN() throws IOException,SQLException,Exception {
+        BPCOLIBM.FUNC = BPB2000_AWA_2000.FUNC;
+        BPCOLIBM.TLR = BPB2000_AWA_2000.TLR;
+        BPCOLIBM.BR = BPB2000_AWA_2000.BR;
+        BPCOLIBM.PLBOX_TP = BPB2000_AWA_2000.PLBOX_TP;
+        BPCOLIBM.BIND_TYP = BPB2000_AWA_2000.BIND_TYP;
+        BPCOLIBM.INSR_CCY = BPB2000_AWA_2000.INSR_CCY;
+        BPCOLIBM.INSR_AMT = BPB2000_AWA_2000.INSR_AMT;
+        BPCOLIBM.UP_PBNO = BPB2000_AWA_2000.UP_PBNO;
+        BPCOLIBM.BLMT_CCY = BPB2000_AWA_2000.BLMT_CCY;
+        BPCOLIBM.BLMT_U = BPB2000_AWA_2000.BLMT_U;
+        BPCOLIBM.BLMT_L = BPB2000_AWA_2000.BLMT_L;
+        for (WS_I = 1; WS_I <= 20; WS_I += 1) {
+            if (BPB2000_AWA_2000.CCYS[WS_I-1].CCY.trim().length() > 0) {
+                if (!BPB2000_AWA_2000.CCYS[WS_I-1].CASH_TYP.equalsIgnoreCase("01")) {
+                    CEP.ERR(SCCGWA, BPCMSG_ERROR_MSG.BP_CASH_TYP_ERR);
+                }
+                BPCOLIBM.CCYS[WS_I-1].CASH_TYP = BPB2000_AWA_2000.CCYS[WS_I-1].CASH_TYP;
+                BPCOLIBM.CCYS[WS_I-1].CCY = BPB2000_AWA_2000.CCYS[WS_I-1].CCY;
+                BPCOLIBM.CCYS[WS_I-1].LMT_CCY = BPB2000_AWA_2000.CCYS[WS_I-1].CCY;
+                BPCOLIBM.CCYS[WS_I-1].MAX_LMT = BPB2000_AWA_2000.CCYS[WS_I-1].MAX_LMT;
+                BPCOLIBM.CCYS[WS_I-1].MIN_LMT = BPB2000_AWA_2000.CCYS[WS_I-1].MIN_LMT;
+            }
+        }
+        BPCOLIBM.UPT_DT = SCCGWA.COMM_AREA.AC_DATE;
+        BPCOLIBM.UPT_TLR = SCCGWA.COMM_AREA.TL_ID;
+    }
+    public void R000_TRANS_DATA_PARAMETER() throws IOException,SQLException,Exception {
+        BPCOLIBM.FUNC = BPB2000_AWA_2000.FUNC;
+        BPCOLIBM.TLR = BPB2000_AWA_2000.TLR;
+        BPCOLIBM.BR = BPB2000_AWA_2000.BR;
+        BPCOLIBM.PLBOX_TP = BPB2000_AWA_2000.PLBOX_TP;
+        BPCOLIBM.INSR_CCY = BPB2000_AWA_2000.INSR_CCY;
+        BPCOLIBM.INSR_AMT = BPB2000_AWA_2000.INSR_AMT;
+        BPCOLIBM.UP_PBNO = BPB2000_AWA_2000.UP_PBNO;
+        BPCOLIBM.BLMT_CCY = BPB2000_AWA_2000.BLMT_CCY;
+        BPCOLIBM.BLMT_U = BPB2000_AWA_2000.BLMT_U;
+        BPCOLIBM.BLMT_L = BPB2000_AWA_2000.BLMT_L;
+        BPCOLIBM.CCYS[1-1].CASH_TYP = BPB2000_AWA_2000.CCYS[1-1].CASH_TYP;
+        BPCOLIBM.CCYS[1-1].CCY = BPB2000_AWA_2000.CCYS[1-1].CCY;
+        BPCOLIBM.CCYS[2-1].CASH_TYP = BPB2000_AWA_2000.CCYS[2-1].CASH_TYP;
+        BPCOLIBM.CCYS[2-1].CCY = BPB2000_AWA_2000.CCYS[2-1].CCY;
+        BPCOLIBM.CCYS[3-1].CASH_TYP = BPB2000_AWA_2000.CCYS[3-1].CASH_TYP;
+        BPCOLIBM.CCYS[3-1].CCY = BPB2000_AWA_2000.CCYS[3-1].CCY;
+        BPCOLIBM.CCYS[4-1].CASH_TYP = BPB2000_AWA_2000.CCYS[4-1].CASH_TYP;
+        BPCOLIBM.CCYS[4-1].CCY = BPB2000_AWA_2000.CCYS[4-1].CCY;
+        BPCOLIBM.CCYS[5-1].CASH_TYP = BPB2000_AWA_2000.CCYS[5-1].CASH_TYP;
+        BPCOLIBM.CCYS[5-1].CCY = BPB2000_AWA_2000.CCYS[5-1].CCY;
+        BPCOLIBM.CCYS[6-1].CASH_TYP = BPB2000_AWA_2000.CCYS[6-1].CASH_TYP;
+        BPCOLIBM.CCYS[6-1].CCY = BPB2000_AWA_2000.CCYS[6-1].CCY;
+        BPCOLIBM.CCYS[7-1].CASH_TYP = BPB2000_AWA_2000.CCYS[7-1].CASH_TYP;
+        BPCOLIBM.CCYS[7-1].CCY = BPB2000_AWA_2000.CCYS[7-1].CCY;
+        BPCOLIBM.CCYS[8-1].CASH_TYP = BPB2000_AWA_2000.CCYS[8-1].CASH_TYP;
+        BPCOLIBM.CCYS[8-1].CCY = BPB2000_AWA_2000.CCYS[8-1].CCY;
+        BPCOLIBM.CCYS[9-1].CASH_TYP = BPB2000_AWA_2000.CCYS[9-1].CASH_TYP;
+        BPCOLIBM.CCYS[9-1].CCY = BPB2000_AWA_2000.CCYS[9-1].CCY;
+        BPCOLIBM.CCYS[10-1].CASH_TYP = BPB2000_AWA_2000.CCYS[10-1].CASH_TYP;
+        BPCOLIBM.CCYS[10-1].CCY = BPB2000_AWA_2000.CCYS[10-1].CCY;
+        BPCOLIBM.CCYS[11-1].CASH_TYP = BPB2000_AWA_2000.CCYS[11-1].CASH_TYP;
+        BPCOLIBM.CCYS[11-1].CCY = BPB2000_AWA_2000.CCYS[11-1].CCY;
+        BPCOLIBM.CCYS[12-1].CASH_TYP = BPB2000_AWA_2000.CCYS[12-1].CASH_TYP;
+        BPCOLIBM.CCYS[12-1].CCY = BPB2000_AWA_2000.CCYS[12-1].CCY;
+        BPCOLIBM.CCYS[13-1].CASH_TYP = BPB2000_AWA_2000.CCYS[13-1].CASH_TYP;
+        BPCOLIBM.CCYS[13-1].CCY = BPB2000_AWA_2000.CCYS[13-1].CCY;
+        BPCOLIBM.CCYS[14-1].CASH_TYP = BPB2000_AWA_2000.CCYS[14-1].CASH_TYP;
+        BPCOLIBM.CCYS[14-1].CCY = BPB2000_AWA_2000.CCYS[14-1].CCY;
+        BPCOLIBM.CCYS[15-1].CASH_TYP = BPB2000_AWA_2000.CCYS[15-1].CASH_TYP;
+        BPCOLIBM.CCYS[15-1].CCY = BPB2000_AWA_2000.CCYS[15-1].CCY;
+        BPCOLIBM.CCYS[16-1].CASH_TYP = BPB2000_AWA_2000.CCYS[16-1].CASH_TYP;
+        BPCOLIBM.CCYS[16-1].CCY = BPB2000_AWA_2000.CCYS[16-1].CCY;
+        BPCOLIBM.CCYS[17-1].CASH_TYP = BPB2000_AWA_2000.CCYS[17-1].CASH_TYP;
+        BPCOLIBM.CCYS[17-1].CCY = BPB2000_AWA_2000.CCYS[17-1].CCY;
+        BPCOLIBM.CCYS[18-1].CASH_TYP = BPB2000_AWA_2000.CCYS[18-1].CASH_TYP;
+        BPCOLIBM.CCYS[18-1].CCY = BPB2000_AWA_2000.CCYS[18-1].CCY;
+        BPCOLIBM.CCYS[19-1].CASH_TYP = BPB2000_AWA_2000.CCYS[19-1].CASH_TYP;
+        BPCOLIBM.CCYS[19-1].CCY = BPB2000_AWA_2000.CCYS[19-1].CCY;
+        BPCOLIBM.CCYS[20-1].CASH_TYP = BPB2000_AWA_2000.CCYS[20-1].CASH_TYP;
+        BPCOLIBM.CCYS[20-1].CCY = BPB2000_AWA_2000.CCYS[20-1].CCY;
+        BPCOLIBM.UPT_DT = SCCGWA.COMM_AREA.AC_DATE;
+        BPCOLIBM.UPT_TLR = SCCGWA.COMM_AREA.TL_ID;
+    }
+    public void S000_CALL_BPZSLIBM() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, SCCCALL);
+        SCCCALL.CPN_NAME = CPN_S_CASHBL_MAINTAIN;
+        SCCCALL.COMMAREA_PTR = BPCOLIBM;
+        SCCCALL.ERR_FLDNO = BPB2000_AWA_2000.FUNC_NO;
+        IBS.CALL(SCCGWA, SCCCALL);
+        if (BPCOLIBM.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCOLIBM.RC);
+            WS_FLD_NO = BPB2000_AWA_2000.FUNC_NO;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_CALL_BPZPRGST() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, SCCCALL);
+        SCCCALL.CPN_NAME = CPN_P_INQ_ORG_STATION;
+        SCCCALL.COMMAREA_PTR = BPCPRGST;
+        SCCCALL.ERR_FLDNO = BPB2000_AWA_2000.TLR_NO;
+        IBS.CALL(SCCGWA, SCCCALL);
+        if (BPCPRGST.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCPRGST.RC);
+            WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_CALL_BPZFTLRQ() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, SCCCALL);
+        SCCCALL.CPN_NAME = CPN_F_TLR_INF_QUERY;
+        SCCCALL.COMMAREA_PTR = BPCFTLRQ;
+        SCCCALL.ERR_FLDNO = BPB2000_AWA_2000.TLR_NO;
+        IBS.CALL(SCCGWA, SCCCALL);
+        if (BPCFTLRQ.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCFTLRQ.RC);
+            WS_FLD_NO = BPB2000_AWA_2000.TLR_NO;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG, WS_FLD_NO);
+    }
+    public void S000_ERR_MSG_PROC_CONTINUE() throws IOException,SQLException,Exception {
+        CEP.ERRC(SCCGWA, WS_ERR_MSG, WS_FLD_NO);
+    }
+    public void S000_ERR_MSG_PROC_LAST() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

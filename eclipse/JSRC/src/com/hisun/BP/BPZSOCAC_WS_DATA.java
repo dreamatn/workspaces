@@ -1,0 +1,48 @@
+package com.hisun.BP;
+
+public class BPZSOCAC_WS_DATA {
+    String WS_AC = " ";
+    String WS_ACO_AC = " ";
+    char WS_STS = ' ';
+    String WS_WORK_TYP = " ";
+    String WS_CAL_TYP = " ";
+    char WS_LOSS_TYP = ' ';
+    char WS_CI_TYPE = ' ';
+    char WS_BV_TYP = ' ';
+    String WS_BV_NO = " ";
+    String WS_ID_TYP = " ";
+    String WS_ID_NO = " ";
+    String WS_CI_CNM = " ";
+    char WS_CARD_FLG = ' ';
+    int WS_SEQ = 0;
+    String WS_CCY = " ";
+    char WS_CCY_TYPE = ' ';
+    String WS_AUT_TLR = " ";
+    int WS_OPEN_DATE = 0;
+    int WS_CLOSE_DATE = 0;
+    String WS_OPEN_TLR = " ";
+    String WS_CLOSE_TLR = " ";
+    String WS_OPEN_NO = " ";
+    int WS_REOPN_DATE = 0;
+    String WS_CLOSE_REASON = " ";
+    String WS_CLOSE_NO = " ";
+    char WS_CLOSE_AC_STS = ' ';
+    double WS_LOSS_RAT = 0;
+    double WS_LOSS_INT = 0;
+    double WS_LOSS_TAX = 0;
+    double WS_LOSS_AMT = 0;
+    String WS_CHNL_NO = " ";
+    double WS_OPEN_AMT = 0;
+    String WS_PROD_CD = " ";
+    String WS_REMARK = " ";
+    String WS_OTH_RPT_NM = " ";
+    String WS_OTH_ID_TYP = " ";
+    String WS_OTH_ID_NO = " ";
+    int WS_BR = 0;
+    int WS_CLO_BR = 0;
+    int WS_CREATE_DT = 0;
+    String WS_CREATE_TLR = " ";
+    double WS_OPEN_RAT = 0;
+    String WS_AC_CNM = " ";
+    char WS_COL_IND = ' ';
+}

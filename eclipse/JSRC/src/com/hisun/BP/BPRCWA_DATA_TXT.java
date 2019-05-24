@@ -1,0 +1,42 @@
+package com.hisun.BP;
+
+public class BPRCWA_DATA_TXT {
+    public short VERSION_NO = 0;
+    public String SYS_ID = " ";
+    public char SYS_DEST = ' ';
+    public char SYS_STUS = ' ';
+    public char SYS_MODE = ' ';
+    public String SYS_MODE_ID = " ";
+    public String REEN_MODE = " ";
+    public int ACT_TR_LMT = 0;
+    public int ACT_LTR_LMT = 0;
+    public long WARN_JRN_NO = 0;
+    public long NEXT_JRN_NO = 0;
+    public char JRN_IN_USE = ' ';
+    public char MST_IN_USE = ' ';
+    public char PARM_IN_USE = ' ';
+    public int AC_DATE_MD = 0;
+    public int LAST_AC_DATE = 0;
+    public String FBAL_E_WORD = " ";
+    public String FBAL_C_WORD = " ";
+    public int ET_FIN_DATE = 0;
+    public int BTR1_TR_LMT = 0;
+    public int BTR2_TR_LMT = 0;
+    public int BTP_JOB_LMT = 0;
+    public char MBT_STATUS = ' ';
+    public char TPH_IND = ' ';
+    public char LOG_IND = ' ';
+    public char AI_SETTLE_IND = ' ';
+    public char ECGO_IND = ' ';
+    public String HQ_BK = " ";
+    public String LOCAL_CCY = " ";
+    public int APVL_SEQ = 0;
+    public char ABROAD_OPER = ' ';
+    public int EX_POS_SEQ = 0;
+    public short TIME_DIF = 0;
+    public String LOCAL_BK_NO = " ";
+    public int BR_NO = 0;
+    public String HOLD_CCY = " ";
+    public String REGION_CODE = " ";
+    public BPRCWA_TXT TXT = new BPRCWA_TXT();
+}

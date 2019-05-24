@@ -1,0 +1,48 @@
+package com.hisun.LN;
+
+public class LNCSDRP {
+    public String CONT_NO = " ";
+    public String FILLER2 = "@_@";
+    public short CAL_TERM = 0;
+    public String FILLER4 = "@_@";
+    public char LOAN_STS = ' ';
+    public String FILLER8 = "@_@";
+    public String P_REC = " ";
+    public String FILLER10 = "@_@";
+    public String P_UNPAID = " ";
+    public String FILLER12 = "@_@";
+    public String I_REC = " ";
+    public String FILLER14 = "@_@";
+    public String I_UNPAID = " ";
+    public String FILLER16 = "@_@";
+    public String O_REC = " ";
+    public String FILLER18 = "@_@";
+    public String O_UNPAID = " ";
+    public String FILLER20 = "@_@";
+    public String L_REC = " ";
+    public String FILLER22 = "@_@";
+    public String L_UNPAID = " ";
+    public String FILLER24 = "@_@";
+    public String VAL_DATE = " ";
+    public String FILLER26 = "@_@";
+    public String DUE_DATE = " ";
+    public String FILLER28 = "@_@";
+    public String PAY_DATE = " ";
+    public String FILLER30 = "@_@";
+    public char REPY_STS = ' ';
+    public String FILLER35 = "@_@";
+    public String TOT_OWE_P = " ";
+    public String FILLER37 = "@_@";
+    public String TOT_OWE_I = " ";
+    public String FILLER39 = "@_@";
+    public String MON_P_PAID = " ";
+    public String FILLER41 = "@_@";
+    public String MON_I_PAID = " ";
+    public String FILLER43 = "@_@";
+    public String MON_OL_PAID = " ";
+    public String FILLER45 = "@_@";
+    public String START_DATE = " ";
+    public String FILLER47 = "@_@";
+    public String END_DATE = " ";
+    public char FILLER49 = 0X0A;
+}

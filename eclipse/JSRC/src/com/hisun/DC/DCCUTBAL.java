@@ -1,0 +1,6 @@
+package com.hisun.DC;
+
+public class DCCUTBAL {
+    public DCCUTBAL_INPUT_DATA INPUT_DATA = new DCCUTBAL_INPUT_DATA();
+    public DCCUTBAL_OUTPUT_DATA OUTPUT_DATA = new DCCUTBAL_OUTPUT_DATA();
+}

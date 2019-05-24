@@ -1,0 +1,7 @@
+package com.hisun.AI;
+
+public class AICPQMIB {
+    public AICPQMIB_RC RC = new AICPQMIB_RC();
+    public AICPQMIB_INPUT_DATA INPUT_DATA = new AICPQMIB_INPUT_DATA();
+    public AICPQMIB_OUTPUT_DATA OUTPUT_DATA = new AICPQMIB_OUTPUT_DATA();
+}

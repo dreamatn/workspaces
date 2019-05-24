@@ -1,0 +1,44 @@
+package com.hisun.LN;
+
+public class LNCUEXT_RAT_INFO {
+    public char RFLT_FLG = ' ';
+    public int NFLT_DT = 0;
+    public char FST_FLG = ' ';
+    public int FIRST_FD = 0;
+    public char FLT_MTH = ' ';
+    public short FLT_PERD = 0;
+    public char FLT_PUNT = ' ';
+    public String IRAT_CD = " ";
+    public String IRATCLS = " ";
+    public double INT_RTV = 0;
+    public double RAT_PCT = 0;
+    public double INT_RAT = 0;
+    public double COST_RAT = 0;
+    public double ALL_RAT = 0;
+    public char PEN_RRAT = ' ';
+    public char PEN_TYP = ' ';
+    public String PEN_RATT = " ";
+    public String PEN_RATC = " ";
+    public double PEN_SPR = 0;
+    public double PEN_PCT = 0;
+    public double PEN_IRAT = 0;
+    public char INT_MTH = ' ';
+    public char CPND_USE = ' ';
+    public char CPND_RRAT = ' ';
+    public char CPND_TYP = ' ';
+    public String CPNDRATT = " ";
+    public String CPNDRATC = " ";
+    public double CPND_SPR = 0;
+    public double CPND_PCT = 0;
+    public double CPND_IRAT = 0;
+    public char ABUS_RAT = ' ';
+    public char ABUS_TYP = ' ';
+    public String ABUSRATT = " ";
+    public String ABUSRATC = " ";
+    public double ABUSSPR = 0;
+    public double ABUSPCT = 0;
+    public double ABUSIRAT = 0;
+    public char PEN_FLG = ' ';
+    public char ADJ_FLG = ' ';
+    public char RAT_FLG = ' ';
+}

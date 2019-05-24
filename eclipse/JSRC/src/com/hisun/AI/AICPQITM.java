@@ -1,0 +1,7 @@
+package com.hisun.AI;
+
+public class AICPQITM {
+    public AICPQITM_RC RC = new AICPQITM_RC();
+    public AICPQITM_INPUT_DATA INPUT_DATA = new AICPQITM_INPUT_DATA();
+    public AICPQITM_OUTPUT_DATA OUTPUT_DATA = new AICPQITM_OUTPUT_DATA();
+}

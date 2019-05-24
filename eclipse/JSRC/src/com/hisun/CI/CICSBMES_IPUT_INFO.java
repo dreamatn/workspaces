@@ -1,0 +1,48 @@
+package com.hisun.CI;
+
+public class CICSBMES_IPUT_INFO {
+    public String BK = " ";
+    public int SEND_BR = 0;
+    public int DATE = 0;
+    public int TIME = 0;
+    public String MMO = " ";
+    public String CHNL_NO = " ";
+    public String AC_NO1 = " ";
+    public String CARD_NO1 = " ";
+    public String AC_NO2 = " ";
+    public String CARD_NO2 = " ";
+    public String CCY1 = " ";
+    public double AMT1 = 0;
+    public String CCY2 = " ";
+    public double AMT2 = 0;
+    public String CCY3 = " ";
+    public double AMT3 = 0;
+    public String CCY4 = " ";
+    public double AMT4 = 0;
+    public short NUM1 = 0;
+    public short NUM2 = 0;
+    public short NUM3 = 0;
+    public int INPUT_DT = 0;
+    public int EXP_DT = 0;
+    public char AC_TYPE = ' ';
+    public char DC_FLG = ' ';
+    public char ACPA_FLG = ' ';
+    public char SUCFAI_FLG = ' ';
+    public char OPEN_REJ_FLG = ' ';
+    public char FEE_FLG = ' ';
+    public char NOR_REV_FLG = ' ';
+    public char PAY_STE_FLG = ' ';
+    public char LN_REMIND_FLG1 = ' ';
+    public char LN_REMIND_FLG2 = ' ';
+    public char INT_UNLOAD_FLG = ' ';
+    public char NEW_AC_OPEN_FLG = ' ';
+    public char AC_LM_REM_FLG = ' ';
+    public char TEMPAC_EXP_FLG = ' ';
+    public char YEARCHK_FLG = ' ';
+    public char OTH_FLG = ' ';
+    public String CI_NO = " ";
+    public String AC_NAME = " ";
+    public String REMARK = " ";
+    public String TEL_NO = " ";
+    public String FILLER80 = " ";
+}

@@ -1,0 +1,45 @@
+package com.hisun.EQ;
+
+public class EQCOQ405_OPT_8405 {
+    public String EQ_BKID = " ";
+    public String FRZ_NO = " ";
+    public char PROC_FLG = ' ';
+    public String EQ_AC = " ";
+    public String EQ_ACT = " ";
+    public String EQ_CINO = " ";
+    public String CI_NO = " ";
+    public String EQ_CNM = " ";
+    public char FILLER9 = ' ';
+    public String ID_TYPE = " ";
+    public String ID_NO = " ";
+    public char FILLER12 = ' ';
+    public String PSBK_NO = " ";
+    public int TXN_DT = 0;
+    public String BAT_NO = " ";
+    public double PFRZ_QTY = 0;
+    public char FILLER17 = ' ';
+    public double TXN_QTY = 0;
+    public char FILLER19 = ' ';
+    public String SPR_NM = " ";
+    public char FILLER21 = ' ';
+    public String UPT_NO = " ";
+    public char FILLER23 = ' ';
+    public String UPT_RSN = " ";
+    public char FILLER25 = ' ';
+    public char DD_FLG = ' ';
+    public char RVS_FLG = ' ';
+    public String LAW_NM1 = " ";
+    public char FILLER29 = ' ';
+    public String LAW_BNO1 = " ";
+    public char FILLER31 = ' ';
+    public String LAW_ENO1 = " ";
+    public char FILLER33 = ' ';
+    public String LAW_NM2 = " ";
+    public char FILLER35 = ' ';
+    public String LAW_BNO2 = " ";
+    public char FILLER37 = ' ';
+    public String LAW_ENO2 = " ";
+    public char FILLER39 = ' ';
+    public String REMARK = " ";
+    public char FILLER41 = ' ';
+}

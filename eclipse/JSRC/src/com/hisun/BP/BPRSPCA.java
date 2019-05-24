@@ -1,0 +1,45 @@
+package com.hisun.BP;
+
+public class BPRSPCA {
+    public BPRSPCA_KEY KEY = new BPRSPCA_KEY();
+    public char CMP_FLG = ' ';
+    public short CNT = 0;
+    public double DEV1 = 0;
+    public String AUTH_LVL1 = " ";
+    public String MSG_CODE1 = " ";
+    public double DEV2 = 0;
+    public String AUTH_LVL2 = " ";
+    public String MSG_CODE2 = " ";
+    public double DEV3 = 0;
+    public String AUTH_LVL3 = " ";
+    public String MSG_CODE3 = " ";
+    public double DEV4 = 0;
+    public String AUTH_LVL4 = " ";
+    public String MSG_CODE4 = " ";
+    public double DEV5 = 0;
+    public String AUTH_LVL5 = " ";
+    public String MSG_CODE5 = " ";
+    public double DEV6 = 0;
+    public String AUTH_LVL6 = " ";
+    public String MSG_CODE6 = " ";
+    public double DEV7 = 0;
+    public String AUTH_LVL7 = " ";
+    public String MSG_CODE7 = " ";
+    public double DEV8 = 0;
+    public String AUTH_LVL8 = " ";
+    public String MSG_CODE8 = " ";
+    public double DEV9 = 0;
+    public String AUTH_LVL9 = " ";
+    public String MSG_CODE9 = " ";
+    public double DEV10 = 0;
+    public String AUTH_LVL10 = " ";
+    public String MSG_CODE10 = " ";
+    public int CRE_DT = 0;
+    public int CRE_BR = 0;
+    public String CRE_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public int UPD_TM = 0;
+    public int UPD_BR = 0;
+    public String UPD_TLR = " ";
+    public String TS = " ";
+}

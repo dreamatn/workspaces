@@ -1,0 +1,45 @@
+package com.hisun.AI;
+
+public class AIRHMIB {
+    public AIRHMIB_KEY KEY = new AIRHMIB_KEY();
+    public String CCY = " ";
+    public int BR = 0;
+    public String ITM = " ";
+    public int SEQ = 0;
+    public int VAL_DATE = 0;
+    public int TR_TIME = 0;
+    public char SIGN = ' ';
+    public double AMT = 0;
+    public double AFT_AMT = 0;
+    public String TR_CODE = " ";
+    public int TR_BR = 0;
+    public String TR_TELLER = " ";
+    public String DESC = " ";
+    public String POST_NARR = " ";
+    public String THEIR_AC = " ";
+    public String THEIR_CCY = " ";
+    public double THEIR_AMT = 0;
+    public double THEIR_RAT = 0;
+    public String ORI_AC = " ";
+    public String PAY_MAN = " ";
+    public int PAY_BR = 0;
+    public String PAY_BKNM = " ";
+    public String TM_NO = " ";
+    public String CHNL_NO = " ";
+    public String RVS_NO = " ";
+    public int RVS_SEQ = 0;
+    public char EC_IND = ' ';
+    public char ODE_FLG = ' ';
+    public String OTHSYS_KEY = " ";
+    public String REQFM_NO = " ";
+    public int REQFM_DT = 0;
+    public String CREV_NO = " ";
+    public String FLR = " ";
+    public String SUP_TLR1 = " ";
+    public String SUP_TLR2 = " ";
+    public String RES_CENT = " ";
+    public int OWNER_BK = 0;
+    public String LAST_UPD_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public String TS = " ";
+}

@@ -1,0 +1,45 @@
+package com.hisun.DD;
+
+public class DDCOQCLR {
+    public String DR_CARD = " ";
+    public String AC_NO = " ";
+    public char AC_STS = ' ';
+    public String AC_CNM = " ";
+    public char FILLER5 = 0X02;
+    public String AC_ENM = " ";
+    public char FILLER7 = 0X02;
+    public String CCY = " ";
+    public char CCY_TYPE = ' ';
+    public String PSBK_NO = " ";
+    public char BILL_TYPE = ' ';
+    public String CHQ_NO = " ";
+    public String DRW_PSW = " ";
+    public String ID_TYP = " ";
+    public String ID_NO = " ";
+    public char FILLER16 = 0X02;
+    public double PRIN = 0;
+    public char FILLER18 = 0X01;
+    public double DEP_INT = 0;
+    public char FILLER20 = 0X01;
+    public double OD_INT = 0;
+    public char FILLER22 = 0X01;
+    public double INT_TAX = 0;
+    public char FILLER24 = 0X01;
+    public double TOT_AMT = 0;
+    public char FILLER26 = 0X01;
+    public char SETT_MTH = ' ';
+    public String INTO_CARD = " ";
+    public String INTO_AC = " ";
+    public String INTO_AC_CNM = " ";
+    public char FILLER31 = 0X02;
+    public String INTO_AC_ENM = " ";
+    public char FILLER33 = 0X02;
+    public String CASH_NO = " ";
+    public String NARRATIVE = " ";
+    public String RMKS = " ";
+    public char FILLER37 = 0X02;
+    public char PAY_TYPE = ' ';
+    public char AC_TYPE = ' ';
+    public double TOTAL_AMT = 0;
+    public char FILLER41 = 0X01;
+}

@@ -1,0 +1,67 @@
+package com.hisun.BP;
+
+public class BPCI9122 {
+    public String CTNO = " ";
+    public String FEE_DESC = " ";
+    public String CINO = " ";
+    public String CI_CNM = " ";
+    public String CT_TYP = " ";
+    public String FEE_TYP = " ";
+    public int BOOK_BR = 0;
+    public String PRDT_TYP = " ";
+    public int START_DT = 0;
+    public int END_DT = 0;
+    public char HOL_OVR = ' ';
+    public String CAL_CD1 = " ";
+    public char HOL_METH = ' ';
+    public String CAL_CD2 = " ";
+    public char PAY_IND = ' ';
+    public char CSH_FLW = ' ';
+    public String BK_PFLO = " ";
+    public char PAY_METH = ' ';
+    public char ACU_TYP = ' ';
+    public char FEE_METH = ' ';
+    public String TXN_CCY = " ";
+    public double TXN_AMT = 0;
+    public String RLT_CTNO = " ";
+    public String RLT_CTYP = " ";
+    public short AMT_TYP = 0;
+    public String RLT_PTYP = " ";
+    public double AMT_PCT = 0;
+    public String FBAS_CNT = " ";
+    public char AGGR_TYP = ' ';
+    public String REF_CCY = " ";
+    public char REF_METH = ' ';
+    public BPCI9122_REF_FEED[] REF_FEED = new BPCI9122_REF_FEED[5];
+    public String CHG_CCY = " ";
+    public double CHG_AMT = 0;
+    public char CHG_METH = ' ';
+    public String CHG_ACNO = " ";
+    public String NOSAC_CD = " ";
+    public String CHQ_NO = " ";
+    public int GLMST_BR = 0;
+    public int GLMST_HO = 0;
+    public int GLMST_IA = 0;
+    public int GLMST_UN = 0;
+    public BPCI9122_TXN_OICD[] TXN_OICD = new BPCI9122_TXN_OICD[5];
+    public char CT_STS = ' ';
+    public String REMARK = " ";
+    public double FEEB_AMT = 0;
+    public String CHG_CCYR = " ";
+    public double CHG_AMTR = 0;
+    public String TICKET = " ";
+    public double RATE = 0;
+    public int EXG_DATE = 0;
+    public int EXG_TIME = 0;
+    public double MIN_AMT = 0;
+    public String CP_NO = " ";
+    public int SALE_DT = 0;
+    public char CCY_TYPE = ' ';
+    public char CHG_FLG = ' ';
+    public char RELT_FLG = ' ';
+    public String CREV_NO = " ";
+    public BPCI9122() {
+        for (int i=0;i<5;i++) REF_FEED[i] = new BPCI9122_REF_FEED();
+        for (int i=0;i<5;i++) TXN_OICD[i] = new BPCI9122_TXN_OICD();
+    }
+}

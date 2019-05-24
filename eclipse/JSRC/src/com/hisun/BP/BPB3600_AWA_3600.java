@@ -1,0 +1,44 @@
+package com.hisun.BP;
+
+public class BPB3600_AWA_3600 {
+    public int BR = 0;
+    public short BR_NO = 0;
+    public String TLR = " ";
+    public short TLR_NO = 0;
+    public char MOV_STS = ' ';
+    public short MOV_STS_NO = 0;
+    public String PBOX_NO = " ";
+    public short PBOX_NO_NO = 0;
+    public String CODE_NO = " ";
+    public short CODE_NO_NO = 0;
+    public int SC_DATE = 0;
+    public short SC_DATE_NO = 0;
+    public char SC_TYPE = ' ';
+    public short SC_TYPE_NO = 0;
+    public char SC_STS = ' ';
+    public short SC_STS_NO = 0;
+    public String MC_NO = " ";
+    public short MC_NO_NO = 0;
+    public int RT_DATE = 0;
+    public short RT_DATE_NO = 0;
+    public String DRW_NM = " ";
+    public short DRW_NM_NO = 0;
+    public String ID_TYP = " ";
+    public short ID_TYP_NO = 0;
+    public String ID_NO = " ";
+    public short ID_NO_NO = 0;
+    public int STR_DATE = 0;
+    public short STR_DATE_NO = 0;
+    public int END_DATE = 0;
+    public short END_DATE_NO = 0;
+    public char PL_FLG = ' ';
+    public short PL_FLG_NO = 0;
+    public int IN_BR = 0;
+    public short IN_BR_NO = 0;
+    public String BK_NM = " ";
+    public short BK_NM_NO = 0;
+    public String CD_CNM = " ";
+    public short CD_CNM_NO = 0;
+    public String SC_RES = " ";
+    public short SC_RES_NO = 0;
+}

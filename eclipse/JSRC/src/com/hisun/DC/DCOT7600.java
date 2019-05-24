@@ -1,0 +1,131 @@
+package com.hisun.DC;
+
+import com.hisun.DD.*;
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class DCOT7600 {
+    short WS_FLD_NO = 0;
+    String WS_ERR_MSG = " ";
+    DCCMSG_ERROR_MSG DCCMSG_ERROR_MSG = new DCCMSG_ERROR_MSG();
+    DDCMSG_ERROR_MSG DDCMSG_ERROR_MSG = new DDCMSG_ERROR_MSG();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    DCCSOCVA DCCSOCVA = new DCCSOCVA();
+    SCCGWA SCCGWA;
+    DCB7600_AWA_7600 DCB7600_AWA_7600;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROCESS();
+        B000_MAIN_PROCESS();
+        CEP.TRC(SCCGWA, "DCOT7600 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROCESS() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "DCB7600_AWA_7600>");
+        DCB7600_AWA_7600 = (DCB7600_AWA_7600) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+    }
+    public void B000_MAIN_PROCESS() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.CI_NO);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.PROD_COD);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.AC);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.AC_CNM);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.AC_ENM);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.AC_CCY);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.CCY_TYPE);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.AC_TYPE);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.SPC_KIND);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.EXP_DATE);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.FRG_CODE);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.FR_OP_NO);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.FRG_IND);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.AC_PURP);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.PAY_MTH);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.FEE_METH);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.CR_CR_FL);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.OPEN_BR);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.CHCK_IND);
+        B100_CHECK_INPUT_DATA();
+        B200_TRANS_DATA_PROC();
+    }
+    public void B100_CHECK_INPUT_DATA() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.CI_NO);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.PROD_COD);
+        CEP.TRC(SCCGWA, DCB7600_AWA_7600.PAY_MTH);
+        if (DCB7600_AWA_7600.CI_NO.trim().length() == 0) {
+            WS_ERR_MSG = DDCMSG_ERROR_MSG.DD_CINO_IDNO_M_INPUT;
+            WS_FLD_NO = DCB7600_AWA_7600.CI_NO_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+        }
+        if (DCB7600_AWA_7600.PROD_COD.trim().length() == 0) {
+            WS_ERR_MSG = DDCMSG_ERROR_MSG.DD_PROD_CD_M_INPUT;
+            WS_FLD_NO = DCB7600_AWA_7600.PROD_COD_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+        }
+        if (DCB7600_AWA_7600.AC_CCY.trim().length() == 0) {
+            WS_ERR_MSG = DDCMSG_ERROR_MSG.DD_CCY_M_INPUT;
+            WS_FLD_NO = DCB7600_AWA_7600.AC_CCY_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+        } else {
+            if (!DCB7600_AWA_7600.AC_CCY.equalsIgnoreCase("156")) {
+                WS_ERR_MSG = DDCMSG_ERROR_MSG.DD_INPUT_CCY_NOT_CNY;
+                WS_FLD_NO = DCB7600_AWA_7600.AC_CCY_NO;
+                S000_ERR_MSG_PROC_CONTINUE();
+            }
+        }
+        if (DCB7600_AWA_7600.PAY_MTH == ' ') {
+            WS_ERR_MSG = DDCMSG_ERROR_MSG.DD_PAY_MTH_M_INPUT;
+            WS_FLD_NO = DCB7600_AWA_7600.PAY_MTH_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+        }
+        WS_ERR_MSG = DDCMSG_ERROR_MSG.DD_INPUT_DATA_ERR;
+        S000_ERR_MSG_PROC_LAST();
+    }
+    public void B200_TRANS_DATA_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, DCCSOCVA);
+        DCCSOCVA.CI_NO = DCB7600_AWA_7600.CI_NO;
+        DCCSOCVA.VIA_PROD = DCB7600_AWA_7600.VIA_PROD;
+        DCCSOCVA.PROD_CODE = DCB7600_AWA_7600.PROD_COD;
+        DCCSOCVA.AC = DCB7600_AWA_7600.AC;
+        DCCSOCVA.AC_CNM = DCB7600_AWA_7600.AC_CNM;
+        DCCSOCVA.AC_ENM = DCB7600_AWA_7600.AC_ENM;
+        DCCSOCVA.AC_CCY = DCB7600_AWA_7600.AC_CCY;
+        DCCSOCVA.CCY_TYPE = DCB7600_AWA_7600.CCY_TYPE;
+        DCCSOCVA.AC_TYP = DCB7600_AWA_7600.AC_TYPE;
+        DCCSOCVA.SPC_KIND = DCB7600_AWA_7600.SPC_KIND;
+        DCCSOCVA.EXP_DATE = DCB7600_AWA_7600.EXP_DATE;
+        DCCSOCVA.FRG_CODE = DCB7600_AWA_7600.FRG_CODE;
+        DCCSOCVA.FR_OP_NO = DCB7600_AWA_7600.FR_OP_NO;
+        DCCSOCVA.FRG_IND = DCB7600_AWA_7600.FRG_IND;
+        DCCSOCVA.AC_PURP = DCB7600_AWA_7600.AC_PURP;
+        DCCSOCVA.PAY_MTH = DCB7600_AWA_7600.PAY_MTH;
+        DCCSOCVA.FEE_METH = DCB7600_AWA_7600.FEE_METH;
+        DCCSOCVA.CR_CR_FL = DCB7600_AWA_7600.CR_CR_FL;
+        DCCSOCVA.CR_DR_FL = DCB7600_AWA_7600.CR_DR_FL;
+        DCCSOCVA.CASH_FLG = DCB7600_AWA_7600.CASH_FLG;
+        DCCSOCVA.OPEN_BR = DCB7600_AWA_7600.OPEN_BR;
+        DCCSOCVA.CHCK_IND = DCB7600_AWA_7600.CHCK_IND;
+        S000_CALL_DCZSOCVA();
+    }
+    public void S000_CALL_DCZSOCVA() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "DC-S-OPEN-VA", DCCSOCVA);
+    }
+    public void S000_ERR_MSG_PROC_CONTINUE() throws IOException,SQLException,Exception {
+        CEP.ERRC(SCCGWA, WS_ERR_MSG, WS_FLD_NO);
+    }
+    public void S000_ERR_MSG_PROC_LAST() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

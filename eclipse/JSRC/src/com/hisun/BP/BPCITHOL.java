@@ -1,0 +1,8 @@
+package com.hisun.BP;
+
+public class BPCITHOL {
+    public BPCITHOL_RC RC = new BPCITHOL_RC();
+    public BPCITHOL_INPUT_DAT INPUT_DAT = new BPCITHOL_INPUT_DAT();
+    public BPCITHOL_OUPUT_DAT OUPUT_DAT = new BPCITHOL_OUPUT_DAT();
+    public BPCITHOL_OUPUT_DAT_2 OUPUT_DAT_2 = new BPCITHOL_OUPUT_DAT_2();
+}

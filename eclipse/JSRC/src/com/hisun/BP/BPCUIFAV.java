@@ -1,0 +1,7 @@
+package com.hisun.BP;
+
+public class BPCUIFAV {
+    public BPCUIFAV_RC RC = new BPCUIFAV_RC();
+    public BPCUIFAV_INPUT_AREA INPUT_AREA = new BPCUIFAV_INPUT_AREA();
+    public BPCUIFAV_OUTPUT_AREA OUTPUT_AREA = new BPCUIFAV_OUTPUT_AREA();
+}

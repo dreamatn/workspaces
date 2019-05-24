@@ -1,0 +1,122 @@
+package com.hisun.DC;
+
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class DCOT1100 {
+    short WS_FLD_NO = 0;
+    String WS_ERR_MSG = " ";
+    DCCMSG_ERROR_MSG DCCMSG_ERROR_MSG = new DCCMSG_ERROR_MSG();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    DCCSTRAC DCCSTRAC = new DCCSTRAC();
+    SCCGWA SCCGWA;
+    DCB1100_AWA_1100 DCB1100_AWA_1100;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROCESS();
+        B000_MAIN_PROCESS();
+        CEP.TRC(SCCGWA, "DCOT1100 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROCESS() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "DCB1100_AWA_1100>");
+        DCB1100_AWA_1100 = (DCB1100_AWA_1100) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+    }
+    public void B000_MAIN_PROCESS() throws IOException,SQLException,Exception {
+        B100_CHECK_INPUT_DATA();
+        B200_TRANS_DATA_PROC();
+    }
+    public void B100_CHECK_INPUT_DATA() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.FR_AC);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.FR_AC_CN);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.CHQ_TYPE);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.CHQ_NO);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.CHQ_ISS);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.FR_CCY);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.FR_AMT);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.FR_CCY_T);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.TO_AC);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.TO_CCY_T);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.TO_AC_CN);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.VAL_DATE);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.TX_RMK);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.REMARKS);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.VIA_AC);
+        CEP.TRC(SCCGWA, DCB1100_AWA_1100.NRTV);
+        if (DCB1100_AWA_1100.FR_AC.trim().length() == 0) {
+            WS_ERR_MSG = DCCMSG_ERROR_MSG.DC_FRAC_NO_M_INPUT;
+            S000_ERR_MSG_PROC_CONTINUE();
+        }
+        if (DCB1100_AWA_1100.FR_CCY.trim().length() == 0) {
+            WS_ERR_MSG = DCCMSG_ERROR_MSG.DC_CCY_M_INPUT;
+            WS_FLD_NO = DCB1100_AWA_1100.FR_CCY_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+        }
+        if (DCB1100_AWA_1100.FR_AMT == 0) {
+            WS_ERR_MSG = DCCMSG_ERROR_MSG.DC_TRF_AMT_M_INPUT;
+            WS_FLD_NO = DCB1100_AWA_1100.FR_AMT_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+        }
+        if (DCB1100_AWA_1100.TO_AC.trim().length() == 0) {
+            WS_ERR_MSG = DCCMSG_ERROR_MSG.DC_TOAC_NO_M_INPUT;
+            S000_ERR_MSG_PROC_CONTINUE();
+        }
+        S000_ERR_MSG_PROC_LAST();
+    }
+    public void B200_TRANS_DATA_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, DCCSTRAC);
+        DCCSTRAC.FR_AC = DCB1100_AWA_1100.FR_AC;
+        DCCSTRAC.FR_AC_CNAME = DCB1100_AWA_1100.FR_AC_CN;
+        DCCSTRAC.CHQ_TYPE = DCB1100_AWA_1100.CHQ_TYPE;
+        DCCSTRAC.CHQ_NO = DCB1100_AWA_1100.CHQ_NO;
+        DCCSTRAC.CHQ_ISS_DATE = DCB1100_AWA_1100.CHQ_ISS;
+        DCCSTRAC.FR_CCY = DCB1100_AWA_1100.FR_CCY;
+        DCCSTRAC.FR_AMT = DCB1100_AWA_1100.FR_AMT;
+        DCCSTRAC.FR_CCY_TYPE = DCB1100_AWA_1100.FR_CCY_T;
+        DCCSTRAC.TO_AC = DCB1100_AWA_1100.TO_AC;
+        DCCSTRAC.TO_CCY_TYPE = DCB1100_AWA_1100.TO_CCY_T;
+        DCCSTRAC.TO_AC_CNAME = DCB1100_AWA_1100.TO_AC_CN;
+        DCCSTRAC.VAL_DATE = DCB1100_AWA_1100.VAL_DATE;
+        DCCSTRAC.TX_RMK = DCB1100_AWA_1100.TX_RMK;
+        DCCSTRAC.REMARKS = DCB1100_AWA_1100.REMARKS;
+        DCCSTRAC.VIA_AC = DCB1100_AWA_1100.VIA_AC;
+        DCCSTRAC.NRTV = DCB1100_AWA_1100.NRTV;
+        CEP.TRC(SCCGWA, DCCSTRAC.FR_AC);
+        CEP.TRC(SCCGWA, DCCSTRAC.FR_AC_CNAME);
+        CEP.TRC(SCCGWA, DCCSTRAC.CHQ_TYPE);
+        CEP.TRC(SCCGWA, DCCSTRAC.CHQ_NO);
+        CEP.TRC(SCCGWA, DCCSTRAC.CHQ_ISS_DATE);
+        CEP.TRC(SCCGWA, DCCSTRAC.FR_CCY);
+        CEP.TRC(SCCGWA, DCCSTRAC.FR_AMT);
+        CEP.TRC(SCCGWA, DCCSTRAC.FR_CCY_TYPE);
+        CEP.TRC(SCCGWA, DCCSTRAC.TO_AC);
+        CEP.TRC(SCCGWA, DCCSTRAC.TO_CCY_TYPE);
+        CEP.TRC(SCCGWA, DCCSTRAC.TO_AC_CNAME);
+        CEP.TRC(SCCGWA, DCCSTRAC.VAL_DATE);
+        CEP.TRC(SCCGWA, DCCSTRAC.TX_RMK);
+        CEP.TRC(SCCGWA, DCCSTRAC.REMARKS);
+        CEP.TRC(SCCGWA, DCCSTRAC.NRTV);
+        S000_CALL_DCZSTRAC();
+    }
+    public void S000_CALL_DCZSTRAC() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "DC-S-TR-AC", DCCSTRAC);
+    }
+    public void S000_ERR_MSG_PROC_CONTINUE() throws IOException,SQLException,Exception {
+        CEP.ERRC(SCCGWA, WS_ERR_MSG, WS_FLD_NO);
+    }
+    public void S000_ERR_MSG_PROC_LAST() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

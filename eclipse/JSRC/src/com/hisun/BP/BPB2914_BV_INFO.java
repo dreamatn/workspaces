@@ -1,0 +1,40 @@
+package com.hisun.BP;
+
+public class BPB2914_BV_INFO {
+    public String BV_CODE = " ";
+    public short BV_CODE_NO = 0;
+    public int OUT_NUM = 0;
+    public short OUT_NUM_NO = 0;
+    public String HEAD_NO1 = " ";
+    public short HEAD_NO1_NO = 0;
+    public String BEG_NO1 = " ";
+    public short BEG_NO1_NO = 0;
+    public String END_NO1 = " ";
+    public short END_NO1_NO = 0;
+    public int NUM1 = 0;
+    public short NUM1_NO = 0;
+    public String HEAD_NO2 = " ";
+    public short HEAD_NO2_NO = 0;
+    public String BEG_NO2 = " ";
+    public short BEG_NO2_NO = 0;
+    public String END_NO2 = " ";
+    public short END_NO2_NO = 0;
+    public int NUM2 = 0;
+    public short NUM2_NO = 0;
+    public String HEAD_NO3 = " ";
+    public short HEAD_NO3_NO = 0;
+    public String BEG_NO3 = " ";
+    public short BEG_NO3_NO = 0;
+    public String END_NO3 = " ";
+    public short END_NO3_NO = 0;
+    public int NUM3 = 0;
+    public short NUM3_NO = 0;
+    public String HEAD_NO4 = " ";
+    public short HEAD_NO4_NO = 0;
+    public String BEG_NO4 = " ";
+    public short BEG_NO4_NO = 0;
+    public String END_NO4 = " ";
+    public short END_NO4_NO = 0;
+    public int NUM4 = 0;
+    public short NUM4_NO = 0;
+}

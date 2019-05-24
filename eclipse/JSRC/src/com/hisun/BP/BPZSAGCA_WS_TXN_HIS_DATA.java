@@ -1,0 +1,11 @@
+package com.hisun.BP;
+
+public class BPZSAGCA_WS_TXN_HIS_DATA {
+    BPZSAGCA_WS_OLD_MONTH WS_OLD_MONTH = new BPZSAGCA_WS_OLD_MONTH();
+    BPZSAGCA_WS_NEW_MONTH WS_NEW_MONTH = new BPZSAGCA_WS_NEW_MONTH();
+    String WS_OLD_NAME = " ";
+    String WS_OLD_BCAL_CODE = " ";
+    int WS_OLD_EFF_DATE = 0;
+    int WS_OLD_EXP_DATE = 0;
+    BPZSAGCA_WS_HIS_REF WS_HIS_REF = new BPZSAGCA_WS_HIS_REF();
+}

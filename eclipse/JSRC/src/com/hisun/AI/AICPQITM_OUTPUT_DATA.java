@@ -1,0 +1,44 @@
+package com.hisun.AI;
+
+public class AICPQITM_OUTPUT_DATA {
+    public String ENG_NM = " ";
+    public String CHS_NM = " ";
+    public String TYPE = " ";
+    public char CATE = ' ';
+    public char MIB_FLG = ' ';
+    public char ITM_LVL = ' ';
+    public char RED_FLG = ' ';
+    public String UP_ITM = " ";
+    public char POST_TYPE = ' ';
+    public char AUTO_GEN = ' ';
+    public char LOW_LVL_FLG = ' ';
+    public char FX_REVAL_FLG = ' ';
+    public char SL_FLG = ' ';
+    public int GLMST = 0;
+    public String ANS_CD1 = " ";
+    public String ANS_CD2 = " ";
+    public String ANS_CD3 = " ";
+    public String ANS_CD4 = " ";
+    public String ANS_CD5 = " ";
+    public String ANS_CD6 = " ";
+    public String ANS_CD7 = " ";
+    public String ANS_CD8 = " ";
+    public String ANS_CD9 = " ";
+    public String ANS_CD10 = " ";
+    public String LOOKUP_CD = " ";
+    public short SENS_LVL = 0;
+    public char BAL_ZERO_FLG = ' ';
+    public char BAL_SIGN_FLG = ' ';
+    public char AUTO_MATCH_FLG = ' ';
+    public char AUTH_LVL = ' ';
+    public char STS = ' ';
+    public int OPEN_DATE = 0;
+    public int EFF_DATE = 0;
+    public int REOPEN_DATE = 0;
+    public int UPD_DATE = 0;
+    public int DEL_DATE = 0;
+    public int EXP_DATE = 0;
+    public char RESET_FLG = ' ';
+    public char ODE_FLG = ' ';
+    public char COMP_ZERO_FLG = ' ';
+}

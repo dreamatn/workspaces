@@ -1,0 +1,47 @@
+package com.hisun.CI;
+
+public class CIRUSHIS {
+    public CIRUSHIS_KEY KEY = new CIRUSHIS_KEY();
+    public char EC_FLG = ' ';
+    public String ACO_AC = " ";
+    public String TYPE = " ";
+    public String TX_TYPE = " ";
+    public String CUS_AC = " ";
+    public String CI_NO = " ";
+    public String CCY = " ";
+    public String LC_CCY = " ";
+    public double AMT = 0;
+    public double LC_AMT = 0;
+    public double DLY_TOT_AMT = 0;
+    public double LC_DLY_TOT_AMT = 0;
+    public int DLY_TOT_VOL = 0;
+    public int LC_DLY_TOT_VOL = 0;
+    public double MLY_TOT_AMT = 0;
+    public double LC_MLY_TOT_AMT = 0;
+    public int MLY_TOT_VOL = 0;
+    public int LC_MLY_TOT_VOL = 0;
+    public double SYY_TOT_AMT = 0;
+    public double LC_SYY_TOT_AMT = 0;
+    public double YLY_TOT_AMT = 0;
+    public double LC_YLY_TOT_AMT = 0;
+    public double SE_LMT_AMT = 0;
+    public double LC_SE_LMT_AMT = 0;
+    public double SE_TM_LMT_AMT = 0;
+    public double LC_SE_TM_LMT_AMT = 0;
+    public double BAL = 0;
+    public double LC_BAL = 0;
+    public double LMT_AMT_1 = 0;
+    public double LC_LMT_AMT_1 = 0;
+    public double LMT_AMT_2 = 0;
+    public double LC_LMT_AMT_2 = 0;
+    public double LMT_AMT_3 = 0;
+    public double LC_LMT_AMT_3 = 0;
+    public double LMT_AMT_4 = 0;
+    public double LC_LMT_AMT_4 = 0;
+    public String LC_VAL = " ";
+    public int CRT_DATE = 0;
+    public String CRT_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public String UPDTBL_TLR = " ";
+    public String TS = " ";
+}

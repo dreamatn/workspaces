@@ -1,0 +1,42 @@
+package com.hisun.PS;
+
+public class PSB8000_AWA_8000 {
+    public String RGN_CD = " ";
+    public short RGN_CD_NO = 0;
+    public String RGN_SEQ = " ";
+    public short RGN_SEQ_NO = 0;
+    public char IO_FLG = ' ';
+    public short IO_FLG_NO = 0;
+    public String PAY_STS = " ";
+    public short PAY_STS_NO = 0;
+    public int R_DT = 0;
+    public short R_DT_NO = 0;
+    public short EXP_DT = 0;
+    public short EXP_DT_NO = 0;
+    public short R_TMS = 0;
+    public short R_TMS_NO = 0;
+    public String PAY_TYP = " ";
+    public short PAY_TYP_NO = 0;
+    public int EX_DT = 0;
+    public short EX_DT_NO = 0;
+    public String SND_BR = " ";
+    public short SND_BR_NO = 0;
+    public short EX_TMS = 0;
+    public short EX_TMS_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public char CASH_ID = ' ';
+    public short CASH_ID_NO = 0;
+    public String REC_BR = " ";
+    public short REC_BR_NO = 0;
+    public double AMT = 0;
+    public short AMT_NO = 0;
+    public int TX_BR = 0;
+    public short TX_BR_NO = 0;
+    public String ORD_AC = " ";
+    public short ORD_AC_NO = 0;
+    public String BF_AC = " ";
+    public short BF_AC_NO = 0;
+    public String CERT_NO = " ";
+    public short CERT_NO_NO = 0;
+}

@@ -1,0 +1,7 @@
+package com.hisun.LN;
+
+public class LNCIHDCK {
+    public LNCIHDCK_RC RC = new LNCIHDCK_RC();
+    public LNCIHDCK_INPUT_INFO INPUT_INFO = new LNCIHDCK_INPUT_INFO();
+    public LNCIHDCK_OUTPOUT_INFO OUTPOUT_INFO = new LNCIHDCK_OUTPOUT_INFO();
+}

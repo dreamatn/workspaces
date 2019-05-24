@@ -1,0 +1,46 @@
+package com.hisun.DD;
+
+public class DDCOADMN {
+    public char FUNC = ' ';
+    public String ADP_NO = " ";
+    public String ADP_TYPE = " ";
+    public String AC = " ";
+    public String AC_NM = " ";
+    public char FILLER10 = 0X02;
+    public String CCY = " ";
+    public char CCY_TYP = ' ';
+    public int STR_DATE = 0;
+    public int EXP_DATE = 0;
+    public double OD_AMT = 0;
+    public char OD_INTYP = ' ';
+    public char OD_RFTYP = ' ';
+    public double OD_RATE = 0;
+    public char FILLER19 = 0X01;
+    public double OD_RPCT = 0;
+    public char FILLER21 = 0X01;
+    public double OD_RVAR = 0;
+    public char FILLER23 = 0X01;
+    public short OD_DAYS = 0;
+    public char LN_RCTYP = ' ';
+    public char LN_RFTYP = ' ';
+    public double LN_RATE = 0;
+    public char FILLER28 = 0X01;
+    public double LN_RPCT = 0;
+    public char FILLER30 = 0X01;
+    public double LN_RVAR = 0;
+    public char FILLER32 = 0X01;
+    public String LN_RTYP = " ";
+    public String LN_TERM = " ";
+    public char LN_LFLG = ' ';
+    public char LN_LCTYP = ' ';
+    public char LN_LFTYP = ' ';
+    public double LN_LRAT = 0;
+    public char FILLER39 = 0X01;
+    public double LN_LRPCT = 0;
+    public char FILLER41 = 0X01;
+    public double LN_LRVAR = 0;
+    public char FILLER43 = 0X01;
+    public String LN_LRTYP = " ";
+    public String LN_LRTRM = " ";
+    public String FEE_CD = " ";
+}

@@ -1,0 +1,45 @@
+package com.hisun.BP;
+
+public class BPCPOCAC_DATA_INFO {
+    public String OPEN_TLR = " ";
+    public int BR = 0;
+    public int OPEN_DT = 0;
+    public int CLO_DT = 0;
+    public char STS = ' ';
+    public String WORK_TYP = " ";
+    public String AC = " ";
+    public String ACO_AC = " ";
+    public char BV_TYP = ' ';
+    public String BV_NO = " ";
+    public String ID_TYP = " ";
+    public String ID_NO = " ";
+    public String CI_CNM = " ";
+    public String CAL_TYP = " ";
+    public char CI_TYPE = ' ';
+    public char LOSS_TYP = ' ';
+    public char CARD_FLG = ' ';
+    public int SEQ = 0;
+    public String CCY = " ";
+    public char CCY_TYPE = ' ';
+    public String AUT_TLR = " ";
+    public String OPEN_NO = " ";
+    public String CLOSE_TLR = " ";
+    public int REOPN_DATE = 0;
+    public String CLOSE_REASON = " ";
+    public String CLOSE_NO = " ";
+    public char CLOSE_AC_STS = ' ';
+    public double LOSS_RAT = 0;
+    public double LOSS_INT = 0;
+    public double LOSS_TAX = 0;
+    public double LOSS_AMT = 0;
+    public String CHNL_NO = " ";
+    public double OPEN_AMT = 0;
+    public String REMARK = " ";
+    public String PROD_CD = " ";
+    public String OTH_PRT_NM = " ";
+    public String OTH_ID_TYP = " ";
+    public String OTH_ID_NO = " ";
+    public double OPEN_RAT = 0;
+    public String AC_CNM = " ";
+    public char COL_IND = ' ';
+}

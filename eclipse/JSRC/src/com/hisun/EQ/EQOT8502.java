@@ -1,0 +1,156 @@
+package com.hisun.EQ;
+
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+import com.hisun.BP.*;
+
+import java.lang.reflect.Method;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class EQOT8502 {
+    int JIBS_tmp_int;
+    String JIBS_tmp_str[] = new String[10];
+    boolean pgmRtn = false;
+    String K_BKID_SZ = "01";
+    String WS_ERR_MSG = " ";
+    short WS_FLD_NO = 0;
+    EQCMSG_ERROR_MSG EQCMSG_ERROR_MSG = new EQCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCFMT SCCFMT = new SCCFMT();
+    SCCMPAG SCCMPAG = new SCCMPAG();
+    SCCMSG SCCMSG = new SCCMSG();
+    EQCSINFO EQCSINFO = new EQCSINFO();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    BPRPARM BPRPARM;
+    EQB1100_AWA_1100 EQB1100_AWA_1100;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        if (pgmRtn) return;
+        B000_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "EQOT8502 return!");
+        Z_RET();
+        if (pgmRtn) return;
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "EQB1100_AWA_1100>");
+        EQB1100_AWA_1100 = (EQB1100_AWA_1100) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B010_CHECK_INPUT();
+        if (pgmRtn) return;
+        B020_MAIN_PROC();
+        if (pgmRtn) return;
+    }
+    public void B010_CHECK_INPUT() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.EQ_BKID);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.EQ_AC);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.CI_NO);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.EQ_CNM);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.ID_TYP);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.ID_NO);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.CHG_RSN);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.PSBK_NO);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.NPSBK_NO);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.REMARK);
+        CEP.TRC(SCCGWA, EQB1100_AWA_1100.TRAN_FLG);
+        if (EQB1100_AWA_1100.EQ_BKID.trim().length() == 0) {
+            WS_ERR_MSG = EQCMSG_ERROR_MSG.EQ_BANKID_MUST_INPUT;
+            WS_FLD_NO = EQB1100_AWA_1100.EQ_BKID_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+            if (pgmRtn) return;
+        } else {
+            if (EQB1100_AWA_1100.EQ_BKID.equalsIgnoreCase(K_BKID_SZ)) {
+                WS_ERR_MSG = EQCMSG_ERROR_MSG.EQ_BANKID_ERROR;
+                WS_FLD_NO = EQB1100_AWA_1100.EQ_BKID_NO;
+                S000_ERR_MSG_PROC_CONTINUE();
+                if (pgmRtn) return;
+            }
+        }
+        if (EQB1100_AWA_1100.EQ_AC.trim().length() == 0) {
+            WS_ERR_MSG = EQCMSG_ERROR_MSG.EQ_EQAC_MUST_INPUT;
+            WS_FLD_NO = EQB1100_AWA_1100.EQ_AC_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+            if (pgmRtn) return;
+        }
+        if (EQB1100_AWA_1100.PSBK_NO.trim().length() == 0) {
+            WS_ERR_MSG = EQCMSG_ERROR_MSG.EQ_PSBK_NO_MUST_INPUT;
+            WS_FLD_NO = EQB1100_AWA_1100.PSBK_NO_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+            if (pgmRtn) return;
+        }
+        if (EQB1100_AWA_1100.TRAN_FLG != 'Y') {
+            if (EQB1100_AWA_1100.CHG_RSN == ' ') {
+                WS_ERR_MSG = EQCMSG_ERROR_MSG.EQ_RSN_MUST_INPUT;
+                WS_FLD_NO = EQB1100_AWA_1100.CHG_RSN_NO;
+                S000_ERR_MSG_PROC_CONTINUE();
+                if (pgmRtn) return;
+            }
+            if (EQB1100_AWA_1100.NPSBK_NO.trim().length() == 0) {
+                WS_ERR_MSG = EQCMSG_ERROR_MSG.EQ_NPSBK_NO_MUST_INPUT;
+                WS_FLD_NO = EQB1100_AWA_1100.PSBK_NO_NO;
+                S000_ERR_MSG_PROC_CONTINUE();
+                if (pgmRtn) return;
+            }
+        }
+        WS_ERR_MSG = EQCMSG_ERROR_MSG.EQ_INPUT_DATA_ERR;
+        S000_ERR_MSG_PROC_LAST();
+        if (pgmRtn) return;
+    }
+    public void B020_MAIN_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, EQCSINFO);
+        EQCSINFO.DATA.EQ_BKID = EQB1100_AWA_1100.EQ_BKID;
+        EQCSINFO.DATA.EQ_AC = EQB1100_AWA_1100.EQ_AC;
+        EQCSINFO.DATA.CI_NO = EQB1100_AWA_1100.CI_NO;
+        EQCSINFO.DATA.CHG_RSN = "" + EQB1100_AWA_1100.CHG_RSN;
+        JIBS_tmp_int = EQCSINFO.DATA.CHG_RSN.length();
+        for (int i=0;i<1-JIBS_tmp_int;i++) EQCSINFO.DATA.CHG_RSN = "0" + EQCSINFO.DATA.CHG_RSN;
+        EQCSINFO.DATA.PSBK_NO = EQB1100_AWA_1100.PSBK_NO;
+        EQCSINFO.DATA.NPSBK_NO = EQB1100_AWA_1100.NPSBK_NO;
+        EQCSINFO.DATA.REMARK = EQB1100_AWA_1100.REMARK;
+        EQCSINFO.DATA.TRAN_FLG = EQB1100_AWA_1100.TRAN_FLG;
+        EQCSINFO.FUNC = 'C';
+        S000_CALL_EQZSINFO();
+        if (pgmRtn) return;
+    }
+    public void S000_CALL_EQZSINFO() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "EQ-S-MAIN-INFO", EQCSINFO);
+    }
+    public void S000_ERR_MSG_PROC_CONTINUE() throws IOException,SQLException,Exception {
+        CEP.ERRC(SCCGWA, WS_ERR_MSG, WS_FLD_NO);
+    }
+    public void S000_ERR_MSG_PROC_LAST() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void B_MPAG() throws IOException,SQLException,Exception {
+    if (!SCCGWA.COMM_AREA.BSP_FLG.equalsIgnoreCase("BSP") && !SCCGWA.COMM_AREA.CHNL.equalsIgnoreCase("BAT")) { //FROM #IFDEF ONL
+        JIBS_tmp_str[9] = "SCZMPAG";
+        Class<?>clazz = Class.forName(JIBS_tmp_str[9].trim());
+        Object obj = clazz.newInstance();
+        Method m = clazz.getDeclaredMethod("MP",new Class[]{SCCGWA.getClass(), SCCMPAG.getClass()});
+        m.invoke(obj, SCCGWA, SCCMPAG);
+        if (SCCGWA.COMM_AREA.EXCP_FLG == 'Y') {
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    } else { //FROM #ELSE
+    } //FROM #ENDIF
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        pgmRtn = true;
+        return;
+        CEP.TRC(SCCGWA, SCCGWA.COMM_AREA.MSG_PROC_AREA.MSG_TYPE);
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

@@ -1,0 +1,164 @@
+package com.hisun.LN;
+
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+import com.hisun.CI.*;
+import com.hisun.BP.*;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class LNOT9821 {
+    String WS_MSGID = " ";
+    short WS_FLD_NO = 0;
+    String K_HIS_REMARKS = "PIN DOWN INTEREST";
+    String K_PROD_CD = "PIN DOWN";
+    String K_HIS_CPB_NM1 = "PIN DOWN";
+    String K_HIS_RMKS = "PIN DOWN";
+    LNCMSG_ERROR_MSG LNCMSG_ERROR_MSG = new LNCMSG_ERROR_MSG();
+    SCCWOUT SCCWOUT = new SCCWOUT();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCMPAG SCCMPAG = new SCCMPAG();
+    SCCFMT SCCFMT = new SCCFMT();
+    LNCOWLAD LNCOWLAD = new LNCOWLAD();
+    LNCSPINI LNCSPINI = new LNCSPINI();
+    CICCUST CICCUST = new CICCUST();
+    CICACCU CICACCU = new CICACCU();
+    CICSSTC CICSSTC = new CICSSTC();
+    BPCPFHIS BPCPFHIS = new BPCPFHIS();
+    SCCGWA SCCGWA;
+    LNB9821_AWA_9821 LNB9821_AWA_9821;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    SCCGAPV SCCGAPV;
+    SCCGMSG SCCGMSG;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        C000_FINANCE_HIS();
+        C000_OUTPUT_PROC();
+        CEP.TRC(SCCGWA, "LNOT9821 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "LNB9821_AWA_9821>");
+        LNB9821_AWA_9821 = (LNB9821_AWA_9821) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        SCCGMSG = (SCCGMSG) GWA_SC_AREA.MSG_AREA_PTR;
+        SCCGAPV = (SCCGAPV) GWA_SC_AREA.APVL_AREA_PTR;
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B010_CHECK_INPUT();
+        B020_TRANCHE_MAIN_PROC();
+        B030_OUTPUT_PROC();
+    }
+    public void B010_CHECK_INPUT() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, LNB9821_AWA_9821);
+        CEP.TRC(SCCGWA, LNB9821_AWA_9821.CONT_NO);
+        CEP.TRC(SCCGWA, LNB9821_AWA_9821.CI_NO);
+        CEP.TRC(SCCGWA, LNB9821_AWA_9821.CI_CNM);
+        CEP.TRC(SCCGWA, LNB9821_AWA_9821.BOOK_CRE);
+        CEP.TRC(SCCGWA, LNB9821_AWA_9821.PROD_CD);
+        CEP.TRC(SCCGWA, LNB9821_AWA_9821.PROD_DES);
+        CEP.TRC(SCCGWA, LNB9821_AWA_9821.CCY);
+        CEP.TRC(SCCGWA, LNB9821_AWA_9821.AMT);
+        CEP.TRC(SCCGWA, LNB9821_AWA_9821.BAL);
+        CEP.TRC(SCCGWA, LNB9821_AWA_9821.AC_MATDT);
+        CEP.TRC(SCCGWA, LNB9821_AWA_9821.VAL_DT);
+        if (LNB9821_AWA_9821.CONT_NO.trim().length() == 0) {
+            WS_MSGID = LNCMSG_ERROR_MSG.LN_CONT_NO_MUST_INPUT;
+            if (LNB9821_AWA_9821.CONT_NO.trim().length() == 0) WS_FLD_NO = 0;
+            else WS_FLD_NO = Short.parseShort(LNB9821_AWA_9821.CONT_NO);
+            S000_ERR_MSG_PROC();
+        }
+        if (LNB9821_AWA_9821.VAL_DT == 0) {
+            WS_MSGID = LNCMSG_ERROR_MSG.LN_ERR_VAL_DT_M_INPUT;
+            WS_FLD_NO = (short) LNB9821_AWA_9821.VAL_DT;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void B020_TRANCHE_MAIN_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCSPINI);
+        LNCSPINI.COMM_DATA.CONT_NO = LNB9821_AWA_9821.CONT_NO;
+        LNCSPINI.COMM_DATA.CI_NO = LNB9821_AWA_9821.CI_NO;
+        LNCSPINI.COMM_DATA.CI_CNM = LNB9821_AWA_9821.CI_CNM;
+        LNCSPINI.COMM_DATA.BOOK_CRE = LNB9821_AWA_9821.BOOK_CRE;
+        LNCSPINI.COMM_DATA.PROD_CD = LNB9821_AWA_9821.PROD_CD;
+        LNCSPINI.COMM_DATA.PROD_DES = LNB9821_AWA_9821.PROD_DES;
+        LNCSPINI.COMM_DATA.CCY = LNB9821_AWA_9821.CCY;
+        LNCSPINI.COMM_DATA.AMT = LNB9821_AWA_9821.AMT;
+        LNCSPINI.COMM_DATA.BAL = LNB9821_AWA_9821.BAL;
+        LNCSPINI.COMM_DATA.AC_MATDT = LNB9821_AWA_9821.AC_MATDT;
+        LNCSPINI.COMM_DATA.VAL_DT = LNB9821_AWA_9821.VAL_DT;
+        S000_CALL_LNZSPINI();
+    }
+    public void B030_OUTPUT_PROC() throws IOException,SQLException,Exception {
+    }
+    public void C000_FINANCE_HIS() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCPFHIS);
+        BPCPFHIS.DATA.TX_DRCR_FLG = 'D';
+        BPCPFHIS.DATA.PRINT_IND = 'Y';
+        BPCPFHIS.DATA.TX_MMO = "X8H";
+        BPCPFHIS.DATA.JRNNO = SCCGWA.COMM_AREA.JRN_NO;
+        BPCPFHIS.DATA.AC_DT = SCCGWA.COMM_AREA.AC_DATE;
+        BPCPFHIS.DATA.VCHNO = SCCGWA.COMM_AREA.VCH_NO;
+        BPCPFHIS.DATA.REF_NO = LNCSPINI.COMM_DATA.CONT_NO;
+        BPCPFHIS.DATA.AC = LNCSPINI.COMM_DATA.CONT_NO;
+        BPCPFHIS.DATA.CI_NO = LNCSPINI.COMM_DATA.CI_NO;
+        BPCPFHIS.DATA.TX_VAL_DT = LNCSPINI.COMM_DATA.VAL_DT;
+        BPCPFHIS.DATA.TX_CCY = LNCSPINI.COMM_DATA.CCY;
+        BPCPFHIS.DATA.TX_AMT = LNCSPINI.COMM_DATA.AMT;
+        BPCPFHIS.DATA.PROD_CD = LNCSPINI.COMM_DATA.PROD_CD;
+        BPCPFHIS.DATA.REMARK = K_HIS_REMARKS;
+        BPCPFHIS.DATA.FMT_CODE = "LNP21";
+        BPCPFHIS.DATA.FMT_LEN = 425;
+        BPCPFHIS.DATA.FMT_DATA = IBS.CLS2CPY(SCCGWA, LNCSPINI.COMM_DATA);
+        S000_CALL_BPZPFHIS();
+    }
+    public void C000_OUTPUT_PROC() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, LNCSPINI.COMM_DATA.CONT_NO);
+        CEP.TRC(SCCGWA, LNCSPINI.COMM_DATA.CI_NO);
+        CEP.TRC(SCCGWA, LNCSPINI.COMM_DATA.CI_CNM);
+        CEP.TRC(SCCGWA, LNCSPINI.COMM_DATA.BOOK_CRE);
+        CEP.TRC(SCCGWA, LNCSPINI.COMM_DATA.PROD_CD);
+        CEP.TRC(SCCGWA, LNCSPINI.COMM_DATA.PROD_DES);
+        CEP.TRC(SCCGWA, LNCSPINI.COMM_DATA.CCY);
+        CEP.TRC(SCCGWA, LNCSPINI.COMM_DATA.AMT);
+        CEP.TRC(SCCGWA, LNCSPINI.COMM_DATA.BAL);
+        CEP.TRC(SCCGWA, LNCSPINI.COMM_DATA.AC_MATDT);
+        CEP.TRC(SCCGWA, LNCSPINI.COMM_DATA.VAL_DT);
+        IBS.init(SCCGWA, SCCFMT);
+        SCCFMT.FMTID = "LNP21";
+        SCCFMT.DATA_PTR = LNCSPINI.COMM_DATA;
+        SCCFMT.DATA_LEN = 425;
+        IBS.FMT(SCCGWA, SCCFMT);
+    }
+    public void S000_CALL_BPZPFHIS() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-PROC-FHIS", BPCPFHIS);
+        if (BPCPFHIS.RC.RC_CODE != 0) {
+            WS_MSGID = IBS.CLS2CPY(SCCGWA, BPCPFHIS.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_CALL_LNZSPINI() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "LN-SRV-LNZSPINI", LNCSPINI);
+        if (LNCSPINI.RC.RC_RTNCODE != 0) {
+            WS_MSGID = IBS.CLS2CPY(SCCGWA, LNCSPINI.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_MSGID, WS_FLD_NO);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

@@ -1,0 +1,47 @@
+package com.hisun.TD;
+
+public class TDCOZML {
+    public String PROD_CD = " ";
+    public char END_FLG = ' ';
+    public String ACTI_DESC = " ";
+    public char FILLER4 = 0X02;
+    public int BR = 0;
+    public String C_CHNL_NO = " ";
+    public char XS_TYP = ' ';
+    public int FX_SDT = 0;
+    public int FX_DDT = 0;
+    public String PROD_TERM = " ";
+    public String ACTI_NO = " ";
+    public double QC_BAL = 0;
+    public char FILLER13 = 0X01;
+    public double TOT_BAL = 0;
+    public char FILLER15 = 0X01;
+    public double YGM_BAL = 0;
+    public char FILLER17 = 0X01;
+    public double LMT_BAL = 0;
+    public char FILLER19 = 0X01;
+    public double GM_BAL = 0;
+    public char FILLER21 = 0X01;
+    public double WY_BAL = 0;
+    public char FILLER23 = 0X01;
+    public double SJ_BAL = 0;
+    public char FILLER25 = 0X01;
+    public String LZ_TYP = " ";
+    public short PART_NUM = 0;
+    public char FX_TYP = ' ';
+    public String CHNL_NO = " ";
+    public double AGN_BAL = 0;
+    public char FILLER31 = 0X01;
+    public double AGN_USE_BAL = 0;
+    public char FILLER33 = 0X01;
+    public double AGN_CURR_BAL = 0;
+    public char FILLER35 = 0X01;
+    public double UNAGN_BAL = 0;
+    public char FILLER37 = 0X01;
+    public double UNAGN_USE_BAL = 0;
+    public char FILLER39 = 0X01;
+    public double UNAGN_CURR_BAL = 0;
+    public char FILLER41 = 0X01;
+    public String GRPS_NO = " ";
+    public char SHAR_FLG = ' ';
+}

@@ -1,0 +1,7 @@
+package com.hisun.BP;
+
+public class BPCPACTY {
+    public BPCPACTY_RC RC = new BPCPACTY_RC();
+    public BPCPACTY_INPUT_DATA INPUT_DATA = new BPCPACTY_INPUT_DATA();
+    public BPCPACTY_OUTPUT_DATA OUTPUT_DATA = new BPCPACTY_OUTPUT_DATA();
+}

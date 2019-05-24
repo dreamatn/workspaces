@@ -1,0 +1,45 @@
+package com.hisun.BP;
+
+public class BPCPLOSS_DATA_INFO {
+    public char BV_TYP = ' ';
+    public String BV_NO = " ";
+    public String AC = " ";
+    public String LOS_NO = " ";
+    public String ID_TYP = " ";
+    public String ID_NO = " ";
+    public int LOS_ORG = 0;
+    public int LOS_DT = 0;
+    public char BILL_TYP = ' ';
+    public String BILL_NO = " ";
+    public char BILL_STS = ' ';
+    public int OPEN_BR = 0;
+    public int OPEN_DT = 0;
+    public String GET_NM = " ";
+    public int STA_DT = 0;
+    public int END_DT = 0;
+    public String CI_CNM = " ";
+    public char STS = ' ';
+    public String AC_TYPE = " ";
+    public String GET_AC_NO = " ";
+    public int GET_BR = 0;
+    public String NEW_BV_NO = " ";
+    public String BV_CODE = " ";
+    public String DEP_NO = " ";
+    public double OPEN_AMT = 0;
+    public String SUP_BILL_NO = " ";
+    public int BILL_BR = 0;
+    public String LOS_RMK = " ";
+    public String OTH_NM = " ";
+    public String OTH_ID_TYP = " ";
+    public String OTH_ID_NO = " ";
+    public String LOS_NM = " ";
+    public String LOS_ID_TYP = " ";
+    public String LOS_ID_NO = " ";
+    public String LOS_TLR = " ";
+    public int LOS_TIME = 0;
+    public int RLOS_ORG = 0;
+    public String RLOS_TLR = " ";
+    public int RLOS_DT = 0;
+    public int RLOS_TIME = 0;
+    public int RLOS_DUE_TIME = 0;
+}

@@ -1,0 +1,43 @@
+package com.hisun.LN;
+
+public class LNCSDSCR_COMM_DATA {
+    public String CONTRACT_NO = " ";
+    public String RCONTRACT_NO = " ";
+    public double R_AMT = 0;
+    public int R_DUE_DT = 0;
+    public int DOMI_BR = 0;
+    public int BOOK_BR = 0;
+    public String CI_NO = " ";
+    public String CI_CNM = " ";
+    public String PROD_CD = " ";
+    public String PROD_NM = " ";
+    public char DSC_TYP = ' ';
+    public char DSC_METH = ' ';
+    public String TRAN_NO = " ";
+    public String CCY = " ";
+    public double AMT = 0;
+    public int VAL_DT = 0;
+    public int DUE_DT = 0;
+    public int BB_SDT = 0;
+    public char BILL_FRM = ' ';
+    public char SETL_FLG = ' ';
+    public double DSC_NINR = 0;
+    public double DSC_OINR = 0;
+    public double DSC_INTA = 0;
+    public String DRFT_NO = " ";
+    public char DRFT_TYP = ' ';
+    public char DRFT_BOT = ' ';
+    public char DRFT_FLG = ' ';
+    public double DRFT_AMT = 0;
+    public int DRFT_SDT = 0;
+    public int DRFT_EDT = 0;
+    public String DRFT_NM = " ";
+    public String DRFT_AC = " ";
+    public String DRFT_DNO = " ";
+    public String DRFT_DNM = " ";
+    public String DRFT_ANO = " ";
+    public String DRFT_ANM = " ";
+    public String REMARK = " ";
+    public String CALR_STD = " ";
+    public String RVS_NO = " ";
+}

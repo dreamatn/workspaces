@@ -1,0 +1,41 @@
+package com.hisun.DD;
+
+public class DDRADMN {
+    public DDRADMN_KEY KEY = new DDRADMN_KEY();
+    public int ADP_STRDATE = 0;
+    public int ADP_EXPDATE = 0;
+    public int ADP_HOLD_DATE = 0;
+    public int ADP_UNHOLD_DATE = 0;
+    public char ADP_STS = ' ';
+    public String ADP_STSW = " ";
+    public double OD_AMT = 0;
+    public String FEE_CD = " ";
+    public double DAY_MAX_OD_AMT = 0;
+    public short OD_DAYS = 0;
+    public char OD_INT_TYP = ' ';
+    public double ADV_AMT = 0;
+    public char OD_INT_RAT_FLT_TYP = ' ';
+    public double OD_INT_RAT = 0;
+    public double OD_INT_RAT_PCT = 0;
+    public double OD_INT_RAT_VAR = 0;
+    public char LN_INT_RAT_COM_TYP = ' ';
+    public char LN_INT_RAT_FLT_TYP = ' ';
+    public double LN_INT_RAT = 0;
+    public double LN_INT_RAT_PCT = 0;
+    public double LN_INT_RAT_VAR = 0;
+    public String LN_INT_RAT_TYP = " ";
+    public String LN_INT_RAT_TERM = " ";
+    public char LN_L_USE_FLG = ' ';
+    public char LN_L_COM_TYP = ' ';
+    public char LN_L_FLT_TYP = ' ';
+    public double LN_L_INT_RAT = 0;
+    public double LN_L_INT_RAT_PCT = 0;
+    public double LN_L_INT_RAT_VAR = 0;
+    public char LN_L_INT_RAT_TYP = ' ';
+    public String LN_L_INT_RAT_TERM = " ";
+    public int CRT_DATE = 0;
+    public String CRT_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public String UPDTBL_TLR = " ";
+    public String TS = " ";
+}

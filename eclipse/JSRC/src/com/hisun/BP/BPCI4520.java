@@ -1,0 +1,47 @@
+package com.hisun.BP;
+
+public class BPCI4520 {
+    public char I_FUNC = ' ';
+    public String PARM_TP = " ";
+    public String BNK = " ";
+    public int BR = 0;
+    public int EFF_DT = 0;
+    public int EXP_DT = 0;
+    public String ORG_CDES = " ";
+    public int SUPR_BR = 0;
+    public char ATTR = ' ';
+    public String TYP = " ";
+    public char LVL = ' ';
+    public String CHN_NM = " ";
+    public String CHN_ADDR = " ";
+    public String ENG_NM = " ";
+    public String ENG_ADDR = " ";
+    public String ABBR = " ";
+    public String LINK_MAN = " ";
+    public String LINK_TEL = " ";
+    public String POST = " ";
+    public char TLR_MAX = ' ';
+    public char ATH_MAX = ' ';
+    public String FX_BUSI = " ";
+    public long CNAP_NO = 0;
+    public String CALD_CD = " ";
+    public int OPN_DT = 0;
+    public char RUN_HDAY = ' ';
+    public int OPN_TM = 0;
+    public int CLS_TM = 0;
+    public int HOPN_TM = 0;
+    public int HCLS_TM = 0;
+    public String FAX = " ";
+    public String TELEX = " ";
+    public String COUN_CD = " ";
+    public String CITY_CD = " ";
+    public char UNSCH = ' ';
+    public int UNSCHT = 0;
+    public char TAX_FLG = ' ';
+    public String TRA_TYP = " ";
+    public String VIL_TYP = " ";
+    public String AREA_CD = " ";
+    public char INT_FLG = ' ';
+    public char TRA_FLG = ' ';
+    public String LIC_NO = " ";
+}

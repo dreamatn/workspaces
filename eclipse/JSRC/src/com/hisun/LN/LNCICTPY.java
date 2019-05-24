@@ -1,0 +1,7 @@
+package com.hisun.LN;
+
+public class LNCICTPY {
+    public LNCICTPY_RC RC = new LNCICTPY_RC();
+    public LNCICTPY_O_INPUT_INFO O_INPUT_INFO = new LNCICTPY_O_INPUT_INFO();
+    public LNCICTPY_OUTPOUT_INFO OUTPOUT_INFO = new LNCICTPY_OUTPOUT_INFO();
+}

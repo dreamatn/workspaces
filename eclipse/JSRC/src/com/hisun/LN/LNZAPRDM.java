@@ -1,0 +1,325 @@
+package com.hisun.LN;
+
+import com.hisun.SC.*;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class LNZAPRDM {
+    String JIBS_tmp_str[] = new String[10];
+    DBParm LNTAPRD_RD;
+    boolean pgmRtn = false;
+    char LNZAPRDM_FILLER1 = ' ';
+    char WS_UPDATE_FLG = ' ';
+    char WS_FOUND_FLG = ' ';
+    LNRAPRD LNRAPRD = new LNRAPRD();
+    LNCMSG_ERROR_MSG LNCMSG_ERROR_MSG = new LNCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCGWA SCCGWA;
+    LNCAPRDM LNCAPRDM;
+    public void MP(SCCGWA SCCGWA, LNCAPRDM LNCAPRDM) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.LNCAPRDM = LNCAPRDM;
+        CEP.TRC(SCCGWA);
+        A00_INIT_PROC();
+        if (pgmRtn) return;
+        B00_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "LNZAPRDM return!");
+        Z_RET();
+        if (pgmRtn) return;
+    }
+    public void A00_INIT_PROC() throws IOException,SQLException,Exception {
+        LNCAPRDM.RC.RC_APP = "LN";
+        LNCAPRDM.RC.RC_RTNCODE = 0;
+    }
+    public void B00_MAIN_PROC() throws IOException,SQLException,Exception {
+        B01_CHECK();
+        if (pgmRtn) return;
+        if (LNCAPRDM.FUNC == '0') {
+            B02_FUNC_WRITE();
+            if (pgmRtn) return;
+        } else if (LNCAPRDM.FUNC == '1') {
+            B03_FUNC_DELETE();
+            if (pgmRtn) return;
+        } else if (LNCAPRDM.FUNC == '2') {
+            B04_FUNC_REWRITE();
+            if (pgmRtn) return;
+        } else if (LNCAPRDM.FUNC == '3') {
+            B05_FUNC_READ();
+            if (pgmRtn) return;
+        } else if (LNCAPRDM.FUNC == '4') {
+            B06_FUNC_READ_UPDATE();
+            if (pgmRtn) return;
+        } else {
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_FUNC_CODE, LNCAPRDM.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void B01_CHECK() throws IOException,SQLException,Exception {
+        JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, LNCAPRDM.REC_DATA.KEY);
+        if (JIBS_tmp_str[0].trim().length() == 0 
+            || JIBS_tmp_str[0].equalsIgnoreCase("0")) {
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_KEY_MUST_INPUT, LNCAPRDM.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void B02_FUNC_WRITE() throws IOException,SQLException,Exception {
+        WS_UPDATE_FLG = ' ';
+        B10_READ();
+        if (pgmRtn) return;
+        if (WS_FOUND_FLG == 'Y') {
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_APRD_EXIST, LNCAPRDM.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        R00_COMA_RECA();
+        if (pgmRtn) return;
+        T00_WRITE_LNTAPRD();
+        if (pgmRtn) return;
+    }
+    public void B03_FUNC_DELETE() throws IOException,SQLException,Exception {
+        JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, LNCAPRDM.REC_DATA.KEY);
+        IBS.CPY2CLS(SCCGWA, JIBS_tmp_str[0], LNRAPRD.KEY);
+        T00_READUPDATE_LNTAPRD();
+        if (pgmRtn) return;
+        if (WS_FOUND_FLG == 'Y') {
+            T00_DELETE_LNTAPRD();
+            if (pgmRtn) return;
+        } else {
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_APRD_NOTFND, LNCAPRDM.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void B04_FUNC_REWRITE() throws IOException,SQLException,Exception {
+        R00_COMA_RECA();
+        if (pgmRtn) return;
+        T00_REWRITE_LNTAPRD();
+        if (pgmRtn) return;
+    }
+    public void B05_FUNC_READ() throws IOException,SQLException,Exception {
+        WS_UPDATE_FLG = ' ';
+        B10_READ();
+        if (pgmRtn) return;
+        if (WS_FOUND_FLG != 'Y') {
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_APRD_NOTFND, LNCAPRDM.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        R00_RECA_COMA();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, LNCAPRDM);
+        CEP.TRC(SCCGWA, LNRAPRD);
+    }
+    public void B06_FUNC_READ_UPDATE() throws IOException,SQLException,Exception {
+        WS_UPDATE_FLG = 'Y';
+        B10_READ();
+        if (pgmRtn) return;
+        if (WS_FOUND_FLG != 'Y') {
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_APRD_NOTFND, LNCAPRDM.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        R00_RECA_COMA();
+        if (pgmRtn) return;
+    }
+    public void B10_READ() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNRAPRD);
+        JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, LNCAPRDM.REC_DATA.KEY);
+        IBS.CPY2CLS(SCCGWA, JIBS_tmp_str[0], LNRAPRD.KEY);
+        if (WS_UPDATE_FLG == 'Y') {
+            T00_READUPDATE_LNTAPRD();
+            if (pgmRtn) return;
+        } else {
+            T00_READ_LNTAPRD();
+            if (pgmRtn) return;
+        }
+    }
+    public void R00_COMA_RECA() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNRAPRD);
+        CEP.TRC(SCCGWA, LNRAPRD.CAL_PERD);
+        CEP.TRC(SCCGWA, LNRAPRD.PAYP_PERD);
+        LNRAPRD.KEY.CONTRACT_NO = LNCAPRDM.REC_DATA.KEY.CONTRACT_NO;
+        LNRAPRD.PAY_MTH = LNCAPRDM.REC_DATA.PAY_MTH;
+        LNRAPRD.BPAY_MTH = LNCAPRDM.REC_DATA.BPAY_MTH;
+        LNRAPRD.INST_MTH = LNCAPRDM.REC_DATA.INST_MTH;
+        LNRAPRD.CAL_PERD = LNCAPRDM.REC_DATA.CAL_PERD;
+        LNRAPRD.CAL_PERD_UNIT = LNCAPRDM.REC_DATA.CAL_PERD_UNIT;
+        LNRAPRD.BCAL_PERD = LNCAPRDM.REC_DATA.BCAL_PERD;
+        LNRAPRD.OCAL_PERD = LNCAPRDM.REC_DATA.OCAL_PERD;
+        LNRAPRD.OCAL_PERD_UNIT = LNCAPRDM.REC_DATA.OCAL_PERD_UNIT;
+        LNRAPRD.FST_PAY_FLG = LNCAPRDM.REC_DATA.FST_PAY_FLG;
+        CEP.TRC(SCCGWA, LNCAPRDM.REC_DATA.CAL_PERD);
+        CEP.TRC(SCCGWA, LNCAPRDM.REC_DATA.PAYP_PERD);
+        LNRAPRD.PAYP_PERD = LNCAPRDM.REC_DATA.PAYP_PERD;
+        LNRAPRD.PAYP_PERD_UNIT = LNCAPRDM.REC_DATA.PAYP_PERD_UNIT;
+        LNRAPRD.BPAYP_PERD = LNCAPRDM.REC_DATA.BPAYP_PERD;
+        LNRAPRD.W_I_FLG = LNCAPRDM.REC_DATA.W_I_FLG;
+        LNRAPRD.W_I_PERD_UNIT = LNCAPRDM.REC_DATA.W_I_PERD_UNIT;
+        LNRAPRD.W_I_PERD = LNCAPRDM.REC_DATA.W_I_PERD;
+        CEP.TRC(SCCGWA, LNRAPRD.W_I_PERD);
+        CEP.TRC(SCCGWA, LNCAPRDM);
+        CEP.TRC(SCCGWA, LNRAPRD);
+        LNRAPRD.ORAT_SAME = LNCAPRDM.REC_DATA.ORAT_SAME;
+        LNRAPRD.PAY_DAY = LNCAPRDM.REC_DATA.PAY_DAY;
+        LNRAPRD.GRACE_TYP = LNCAPRDM.REC_DATA.GRACE_TYP;
+        LNRAPRD.PAY_DD_TYPE = LNCAPRDM.REC_DATA.PAY_DD_TYPE;
+        LNRAPRD.PRIN_DOG = LNCAPRDM.REC_DATA.PRIN_DOG;
+        LNRAPRD.DOG_PSTD_FLG = LNCAPRDM.REC_DATA.DOG_PSTD_FLG;
+        LNRAPRD.PRIN_DOG_MTH = LNCAPRDM.REC_DATA.PRIN_DOG_MTH;
+        LNRAPRD.INT_DOG_MTH = LNCAPRDM.REC_DATA.INT_DOG_MTH;
+        LNRAPRD.RCMP_INT = LNCAPRDM.REC_DATA.RCMP_INT;
+        LNRAPRD.DUE_AUTO_FLG = LNCAPRDM.REC_DATA.DUE_AUTO_FLG;
+        LNRAPRD.ACCRUAL_TYPE = LNCAPRDM.REC_DATA.ACCRUAL_TYPE;
+        LNRAPRD.INT_DBAS_STD = LNCAPRDM.REC_DATA.INT_DBAS_STD;
+        LNRAPRD.P_GRACE_TERM = LNCAPRDM.REC_DATA.P_GRACE_TERM;
+        CEP.TRC(SCCGWA, "33333333");
+        CEP.TRC(SCCGWA, LNCAPRDM.REC_DATA.SPEC_LN_FLG);
+        LNRAPRD.SPEC_LN_FLG = LNCAPRDM.REC_DATA.SPEC_LN_FLG;
+        LNRAPRD.GDA_APRE = LNCAPRDM.REC_DATA.GDA_APRE;
+        LNRAPRD.GDA_AUTO_DB = LNCAPRDM.REC_DATA.GDA_AUTO_DB;
+        LNRAPRD.GDA_DB_SEQ = LNCAPRDM.REC_DATA.GDA_DB_SEQ;
+        LNRAPRD.SPEC_AC_FLG = LNCAPRDM.REC_DATA.SPEC_AC_FLG;
+        LNRAPRD.CHG_DB_FLG = LNCAPRDM.REC_DATA.CHG_DB_FLG;
+        LNRAPRD.CHG_TERM_FLG = LNCAPRDM.REC_DATA.CHG_TERM_FLG;
+        LNRAPRD.HAND_CHG_RATE = LNCAPRDM.REC_DATA.HAND_CHG_RATE;
+        LNRAPRD.HAND_CHG_OPCT = LNCAPRDM.REC_DATA.HAND_CHG_OPCT;
+        LNRAPRD.HAND_CHG_AMT = LNCAPRDM.REC_DATA.HAND_CHG_AMT;
+        LNRAPRD.ACCT_MGT_RATE = LNCAPRDM.REC_DATA.ACCT_MGT_RATE;
+        LNRAPRD.PREP_CHG_RATE = LNCAPRDM.REC_DATA.PREP_CHG_RATE;
+        LNRAPRD.CRT_DATE = LNCAPRDM.REC_DATA.CRT_DATE;
+        LNRAPRD.CRT_TLR = LNCAPRDM.REC_DATA.CRT_TLR;
+        LNRAPRD.UPDTBL_DATE = LNCAPRDM.REC_DATA.UPDTBL_DATE;
+        LNRAPRD.UPDTBL_TLR = LNCAPRDM.REC_DATA.UPDTBL_TLR;
+        LNRAPRD.SUP1 = LNCAPRDM.REC_DATA.SUP1;
+        LNRAPRD.SUP2 = LNCAPRDM.REC_DATA.SUP2;
+        LNRAPRD.PAY_DD_LTERM = LNCAPRDM.REC_DATA.PAY_DD_LTERM;
+        LNRAPRD.PAY_SEQ = LNCAPRDM.REC_DATA.PAY_SEQ;
+        LNRAPRD.PAY_TRANS_FLG = LNCAPRDM.REC_DATA.PAY_TRANS_FLG;
+        LNRAPRD.TRANS_FREQ = LNCAPRDM.REC_DATA.TRANS_FREQ;
+    }
+    public void R00_RECA_COMA() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, LNRAPRD.KEY.CONTRACT_NO);
+        CEP.TRC(SCCGWA, LNRAPRD.GRACE_TYP);
+        LNCAPRDM.REC_DATA.KEY.CONTRACT_NO = LNRAPRD.KEY.CONTRACT_NO;
+        LNCAPRDM.REC_DATA.PAY_MTH = LNRAPRD.PAY_MTH;
+        LNCAPRDM.REC_DATA.BPAY_MTH = LNRAPRD.BPAY_MTH;
+        LNCAPRDM.REC_DATA.INST_MTH = LNRAPRD.INST_MTH;
+        LNCAPRDM.REC_DATA.CAL_PERD = LNRAPRD.CAL_PERD;
+        LNCAPRDM.REC_DATA.CAL_PERD_UNIT = LNRAPRD.CAL_PERD_UNIT;
+        LNCAPRDM.REC_DATA.BCAL_PERD = LNRAPRD.BCAL_PERD;
+        LNCAPRDM.REC_DATA.OCAL_PERD = LNRAPRD.OCAL_PERD;
+        LNCAPRDM.REC_DATA.OCAL_PERD_UNIT = LNRAPRD.OCAL_PERD_UNIT;
+        LNCAPRDM.REC_DATA.FST_PAY_FLG = LNRAPRD.FST_PAY_FLG;
+        LNCAPRDM.REC_DATA.PAYP_PERD = LNRAPRD.PAYP_PERD;
+        LNCAPRDM.REC_DATA.PAYP_PERD_UNIT = LNRAPRD.PAYP_PERD_UNIT;
+        LNCAPRDM.REC_DATA.BPAYP_PERD = LNRAPRD.BPAYP_PERD;
+        LNCAPRDM.REC_DATA.W_I_FLG = LNRAPRD.W_I_FLG;
+        LNCAPRDM.REC_DATA.W_I_PERD_UNIT = LNRAPRD.W_I_PERD_UNIT;
+        LNCAPRDM.REC_DATA.W_I_PERD = LNRAPRD.W_I_PERD;
+        LNCAPRDM.REC_DATA.P_GRACE_TERM = LNRAPRD.P_GRACE_TERM;
+        LNCAPRDM.REC_DATA.ORAT_SAME = LNRAPRD.ORAT_SAME;
+        LNCAPRDM.REC_DATA.PAY_DAY = LNRAPRD.PAY_DAY;
+        LNCAPRDM.REC_DATA.GRACE_TYP = LNRAPRD.GRACE_TYP;
+        LNCAPRDM.REC_DATA.PRIN_DOG = LNRAPRD.PRIN_DOG;
+        LNCAPRDM.REC_DATA.DOG_PSTD_FLG = LNRAPRD.DOG_PSTD_FLG;
+        LNCAPRDM.REC_DATA.PRIN_DOG_MTH = LNRAPRD.PRIN_DOG_MTH;
+        LNCAPRDM.REC_DATA.INT_DOG_MTH = LNRAPRD.INT_DOG_MTH;
+        LNCAPRDM.REC_DATA.RCMP_INT = LNRAPRD.RCMP_INT;
+        LNCAPRDM.REC_DATA.DUE_AUTO_FLG = LNRAPRD.DUE_AUTO_FLG;
+        LNCAPRDM.REC_DATA.ACCRUAL_TYPE = LNRAPRD.ACCRUAL_TYPE;
+        LNCAPRDM.REC_DATA.INT_DBAS_STD = LNRAPRD.INT_DBAS_STD;
+        LNCAPRDM.REC_DATA.SPEC_LN_FLG = LNRAPRD.SPEC_LN_FLG;
+        LNCAPRDM.REC_DATA.GDA_AUTO_DB = LNRAPRD.GDA_AUTO_DB;
+        LNCAPRDM.REC_DATA.GDA_APRE = LNRAPRD.GDA_APRE;
+        LNCAPRDM.REC_DATA.GDA_DB_SEQ = LNRAPRD.GDA_DB_SEQ;
+        LNCAPRDM.REC_DATA.SPEC_AC_FLG = LNRAPRD.SPEC_AC_FLG;
+        LNCAPRDM.REC_DATA.CHG_DB_FLG = LNRAPRD.CHG_DB_FLG;
+        LNCAPRDM.REC_DATA.CHG_TERM_FLG = LNRAPRD.CHG_TERM_FLG;
+        LNCAPRDM.REC_DATA.HAND_CHG_RATE = LNRAPRD.HAND_CHG_RATE;
+        LNCAPRDM.REC_DATA.HAND_CHG_OPCT = LNRAPRD.HAND_CHG_OPCT;
+        LNCAPRDM.REC_DATA.HAND_CHG_AMT = LNRAPRD.HAND_CHG_AMT;
+        LNCAPRDM.REC_DATA.ACCT_MGT_RATE = LNRAPRD.ACCT_MGT_RATE;
+        LNCAPRDM.REC_DATA.PREP_CHG_RATE = LNRAPRD.PREP_CHG_RATE;
+        LNCAPRDM.REC_DATA.CRT_DATE = LNRAPRD.CRT_DATE;
+        LNCAPRDM.REC_DATA.CRT_TLR = LNRAPRD.CRT_TLR;
+        LNCAPRDM.REC_DATA.UPDTBL_DATE = LNRAPRD.UPDTBL_DATE;
+        LNCAPRDM.REC_DATA.UPDTBL_TLR = LNRAPRD.UPDTBL_TLR;
+        LNCAPRDM.REC_DATA.SUP1 = LNRAPRD.SUP1;
+        LNCAPRDM.REC_DATA.SUP2 = LNRAPRD.SUP2;
+        LNCAPRDM.REC_DATA.TS = LNRAPRD.TS;
+        LNCAPRDM.REC_DATA.PAY_DD_LTERM = LNRAPRD.PAY_DD_LTERM;
+        LNCAPRDM.REC_DATA.PAY_DD_TYPE = LNRAPRD.PAY_DD_TYPE;
+        LNCAPRDM.REC_DATA.PAY_SEQ = LNRAPRD.PAY_SEQ;
+        LNCAPRDM.REC_DATA.PAY_TRANS_FLG = LNRAPRD.PAY_TRANS_FLG;
+        LNCAPRDM.REC_DATA.TRANS_FREQ = LNRAPRD.TRANS_FREQ;
+    }
+    public void T00_WRITE_LNTAPRD() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, LNCAPRDM.REC_DATA.KEY.CONTRACT_NO);
+        LNRAPRD.CRT_DATE = SCCGWA.COMM_AREA.AC_DATE;
+        LNRAPRD.CRT_TLR = SCCGWA.COMM_AREA.TL_ID;
+        LNRAPRD.UPDTBL_DATE = SCCGWA.COMM_AREA.AC_DATE;
+        LNRAPRD.UPDTBL_TLR = SCCGWA.COMM_AREA.TL_ID;
+        LNTAPRD_RD = new DBParm();
+        LNTAPRD_RD.TableName = "LNTAPRD";
+        IBS.WRITE(SCCGWA, LNRAPRD, LNTAPRD_RD);
+        if (SCCGWA.COMM_AREA.DBIO_FLG != '0') {
+            CEP.TRC(SCCGWA, "20180601TEST");
+        }
+    }
+    public void T00_DELETE_LNTAPRD() throws IOException,SQLException,Exception {
+        LNTAPRD_RD = new DBParm();
+        LNTAPRD_RD.TableName = "LNTAPRD";
+        IBS.DELETE(SCCGWA, LNRAPRD, LNTAPRD_RD);
+    }
+    public void T00_READ_LNTAPRD() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, LNCAPRDM.REC_DATA.KEY);
+        CEP.TRC(SCCGWA, LNRAPRD.KEY);
+        LNTAPRD_RD = new DBParm();
+        LNTAPRD_RD.TableName = "LNTAPRD";
+        IBS.READ(SCCGWA, LNRAPRD, LNTAPRD_RD);
+        WS_FOUND_FLG = ' ';
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            WS_FOUND_FLG = 'Y';
+        }
+        CEP.TRC(SCCGWA, WS_FOUND_FLG);
+    }
+    public void T00_READUPDATE_LNTAPRD() throws IOException,SQLException,Exception {
+        LNRAPRD.UPDTBL_DATE = SCCGWA.COMM_AREA.AC_DATE;
+        LNRAPRD.UPDTBL_TLR = SCCGWA.COMM_AREA.TL_ID;
+        LNTAPRD_RD = new DBParm();
+        LNTAPRD_RD.TableName = "LNTAPRD";
+        LNTAPRD_RD.upd = true;
+        IBS.READ(SCCGWA, LNRAPRD, LNTAPRD_RD);
+        WS_FOUND_FLG = ' ';
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            WS_FOUND_FLG = 'Y';
+        }
+    }
+    public void T00_REWRITE_LNTAPRD() throws IOException,SQLException,Exception {
+        LNRAPRD.UPDTBL_DATE = SCCGWA.COMM_AREA.AC_DATE;
+        LNRAPRD.UPDTBL_TLR = SCCGWA.COMM_AREA.TL_ID;
+        LNTAPRD_RD = new DBParm();
+        LNTAPRD_RD.TableName = "LNTAPRD";
+        IBS.REWRITE(SCCGWA, LNRAPRD, LNTAPRD_RD);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+    if (SCCGWA.COMM_AREA.BSP_FLG.equalsIgnoreCase("BSP") || SCCGWA.COMM_AREA.CHNL.equalsIgnoreCase("BAT")) { //FROM #IFDEF BAT
+        if (LNCAPRDM.RC.RC_RTNCODE != 0) {
+            CEP.TRC(SCCGWA, "LNCAPRDM=");
+            CEP.TRC(SCCGWA, LNCAPRDM);
+            CEP.TRC(SCCGWA, "LNRAPRD =");
+            CEP.TRC(SCCGWA, LNRAPRD);
+        }
+    } //FROM #ENDIF
+        pgmRtn = true;
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

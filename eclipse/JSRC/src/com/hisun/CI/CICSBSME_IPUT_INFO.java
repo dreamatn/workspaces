@@ -1,0 +1,48 @@
+package com.hisun.CI;
+
+public class CICSBSME_IPUT_INFO {
+    public int DATE = 0;
+    public long JRNNO = 0;
+    public short SEQ_NO = 0;
+    public String BK = " ";
+    public int SEND_BR = 0;
+    public int TIME = 0;
+    public String APPCORD = " ";
+    public String MMO = " ";
+    public String CHNL_NO = " ";
+    public String AC_NO1 = " ";
+    public String CARD_NO1 = " ";
+    public String AC_NO2 = " ";
+    public String CARD_NO2 = " ";
+    public String AC_NO3 = " ";
+    public String CARD_NO3 = " ";
+    public String CCY1 = " ";
+    public double AMT1 = 0;
+    public String CCY2 = " ";
+    public double AMT2 = 0;
+    public String CCY3 = " ";
+    public double AMT3 = 0;
+    public String CCY4 = " ";
+    public double AMT4 = 0;
+    public char AC_TYPE = ' ';
+    public char DC_FLG = ' ';
+    public char ACPA_FLG = ' ';
+    public char SUCFAI_FLG = ' ';
+    public char AUTOREP_FLG = ' ';
+    public char FORDER_LMT_FLG = ' ';
+    public char FEE_FLG = ' ';
+    public char AC_OPEN_FLG = ' ';
+    public char PASSWORD_FLG = ' ';
+    public char ADJUST_AC_FLG = ' ';
+    public char LN_AC_FLG = ' ';
+    public char INT_UNLOAD_FLG = ' ';
+    public char OTH_FLG = ' ';
+    public short NUM1 = 0;
+    public short NUM2 = 0;
+    public short NUM3 = 0;
+    public int DATE1 = 0;
+    public int DATE2 = 0;
+    public short BP_SEQ = 0;
+    public String AC_NAME = " ";
+    public String FILLER76 = " ";
+}

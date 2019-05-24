@@ -1,0 +1,42 @@
+package com.hisun.SO;
+
+public class SOZBSRV_WS_REC_OUT {
+    String WS_ID = " ";
+    String WS_FILLER11 = "  ";
+    String WS_NAME = " ";
+    char WS_FILLER12 = 0X02;
+    char WS_FILLER13 = ' ';
+    char WS_STUS = ' ';
+    String WS_FILLER14 = "    ";
+    char WS_TYPE = ' ';
+    String WS_FILLER15 = "    ";
+    String WS_CTRL_WORD = " ";
+    String WS_FILLER16 = "      ";
+    short WS_AUTH_LVL = 0;
+    String WS_FILLER17 = "     ";
+    String WS_PGM_NAME = " ";
+    String WS_FILLER18 = "   ";
+    char WS_READ_IND = ' ';
+    char WS_FILLER19 = ' ';
+    char WS_BROW_IND = ' ';
+    char WS_FILLER20 = ' ';
+    char WS_WRITE_IND = ' ';
+    char WS_FILLER21 = ' ';
+    char WS_UPD_IND = ' ';
+    char WS_FILLER22 = ' ';
+    char WS_DEL_IND = ' ';
+    String WS_FILLER23 = "       ";
+    short WS_READ_LVL = 0;
+    char WS_FILLER24 = ' ';
+    short WS_BROW_LVL = 0;
+    char WS_FILLER25 = ' ';
+    short WS_WRITE_LVL = 0;
+    char WS_FILLER26 = ' ';
+    short WS_UPD_LVL = 0;
+    char WS_FILLER27 = ' ';
+    short WS_DEL_LVL = 0;
+    String WS_FILLER28 = "        ";
+    String WS_CRE_USER = " ";
+    String WS_FILLER29 = "       ";
+    int WS_CRE_DATE = 0;
+}

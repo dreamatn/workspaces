@@ -1,0 +1,42 @@
+package com.hisun.TD;
+
+public class TDCI5003_CCY_INF {
+    public String MIN_CCYC01 = " ";
+    public double ADD_AMTC01 = 0;
+    public char FAVO_FLG01 = ' ';
+    public double MIN_AMTC01 = 0;
+    public double FST_AMTC01 = 0;
+    public double MDRW_AMT01 = 0;
+    public double MLET_AMT01 = 0;
+    public double MAX_AMT01 = 0;
+    public String RUL_CD101 = " ";
+    public String RUL_CD201 = " ";
+    public String RUL_CD301 = " ";
+    public String RUL_CD401 = " ";
+    public String RUL_CD501 = " ";
+    public String RUL_CD601 = " ";
+    public String RUL_CD701 = " ";
+    public String RUL_CD801 = " ";
+    public String RUL_CD901 = " ";
+    public String RUL_CD1001 = " ";
+    public String TERM01 = " ";
+    public char TERM_T101 = ' ';
+    public String TERM101 = " ";
+    public char TERM_T201 = ' ';
+    public String TERM201 = " ";
+    public char TERM_T301 = ' ';
+    public String TERM301 = " ";
+    public char TERM_T401 = ' ';
+    public String TERM401 = " ";
+    public char TERM_T501 = ' ';
+    public String TERM501 = " ";
+    public char TERM_T601 = ' ';
+    public String TERM601 = " ";
+    public char INT_RUL01 = ' ';
+    public String RAT_CD01 = " ";
+    public String OFRAT_CD01 = " ";
+    public char FLOW_FLG01 = ' ';
+    public String NERAT_CD01 = " ";
+    public String PRRAT_CD01 = " ";
+    public String DOCU_NO01 = " ";
+}

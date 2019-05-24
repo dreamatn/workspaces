@@ -1,0 +1,46 @@
+package com.hisun.DD;
+
+public class DDCUOPAC {
+    public String PROD_CODE = " ";
+    public String CI_NO = " ";
+    public String CI_CNM = " ";
+    public String CI_ENM = " ";
+    public char AC_TYP = ' ';
+    public String CCY = " ";
+    public char CCY_TYPE = ' ';
+    public String AC_ATTR_LAB = " ";
+    public char PSBK_FLG = ' ';
+    public char CARD_FLG = ' ';
+    public String PSBK_NO = " ";
+    public String CARD_NO = " ";
+    public char CARD_TYP = ' ';
+    public char DRAW_MTH = ' ';
+    public String PSWD = " ";
+    public String REMARK = " ";
+    public String AC = " ";
+    public String ACAC = " ";
+    public char JOINT_CARD_FLG = ' ';
+    public char SOCIAL_CARD_FLG = ' ';
+    public char OPEN_SOC_CARD_FLG = ' ';
+    public String FRG_TYPE = " ";
+    public String FRG_CODE = " ";
+    public String FR_OP_NO = " ";
+    public char AC_TYPE = ' ';
+    public String AGID_TYP = " ";
+    public String AGID_NO = " ";
+    public String AG_NM = " ";
+    public String CUS_MGR = " ";
+    public String REG_CENT = " ";
+    public String SUB_BIZ = " ";
+    public String POST_AC = " ";
+    public char ACNO_FLG = ' ';
+    public char CUS_COND = ' ';
+    public char ACO_AC_TYP = ' ';
+    public String YW_TYP = " ";
+    public char INT_TYP = ' ';
+    public char DR_FLG = ' ';
+    public char CARD_MTH = ' ';
+    public char CMAD_TYP = ' ';
+    public int CI_AC_SEQ = 0;
+    public long CI_AC_SEQ11 = 0;
+}

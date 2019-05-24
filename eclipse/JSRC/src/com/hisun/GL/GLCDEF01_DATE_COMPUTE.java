@@ -1,0 +1,8 @@
+package com.hisun.GL;
+
+public class GLCDEF01_DATE_COMPUTE {
+    public int COMP_DATE1 = 0;
+    public GLCDEF01_REDEFINES527 REDEFINES527 = new GLCDEF01_REDEFINES527();
+    public int COMP_DATE2 = 0;
+    public GLCDEF01_REDEFINES532 REDEFINES532 = new GLCDEF01_REDEFINES532();
+}

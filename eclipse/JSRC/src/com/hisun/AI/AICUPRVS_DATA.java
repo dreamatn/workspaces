@@ -1,0 +1,43 @@
+package com.hisun.AI;
+
+public class AICUPRVS_DATA {
+    public char FUNC = ' ';
+    public String GL_BOOK = " ";
+    public String AC = " ";
+    public String ITM = " ";
+    public String CCY = " ";
+    public int BR = 0;
+    public char SIGN = ' ';
+    public double AMT = 0;
+    public char RED_FLG = ' ';
+    public String RVS_NO = " ";
+    public int RVS_SEQ = 0;
+    public char SUS_FLG = ' ';
+    public String CI_NO = " ";
+    public String REF_NO = " ";
+    public int TX_DT = 0;
+    public int VAL_DT = 0;
+    public String PART = " ";
+    public String TR_CODE = " ";
+    public int TR_BR = 0;
+    public String TR_TELLER = " ";
+    public String SET_NO = " ";
+    public int SET_SEQ = 0;
+    public String APP = " ";
+    public String CHNL_NO = " ";
+    public String PAY_MAN = " ";
+    public int PAY_BR = 0;
+    public String THEIR_AC = " ";
+    public int GLMST = 0;
+    public String TX_SUP_TLR = " ";
+    public String DESC = " ";
+    public String CNTR_TYPE = " ";
+    public String PROD_TYPE = " ";
+    public String AC_NO = " ";
+    public String EVENT_TYPE = " ";
+    public String MSG_ID = " ";
+    public AICUPRVS_SUS_INFO SUS_INFO = new AICUPRVS_SUS_INFO();
+    public char RETURN_FLG = ' ';
+    public String FILLER = " ";
+    public int RVS_EXP = 0;
+}

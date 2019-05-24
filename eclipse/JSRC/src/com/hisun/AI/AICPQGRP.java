@@ -1,0 +1,7 @@
+package com.hisun.AI;
+
+public class AICPQGRP {
+    public AICPQGRP_RC RC = new AICPQGRP_RC();
+    public AICPQGRP_INPUT_DATA INPUT_DATA = new AICPQGRP_INPUT_DATA();
+    public AICPQGRP_OUTPUT_DATA OUTPUT_DATA = new AICPQGRP_OUTPUT_DATA();
+}

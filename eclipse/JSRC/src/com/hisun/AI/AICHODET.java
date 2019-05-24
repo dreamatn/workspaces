@@ -1,0 +1,44 @@
+package com.hisun.AI;
+
+public class AICHODET {
+    public char CHECK_FLG = ' ';
+    public int SAVE_TEMP_NO = 0;
+    public int ENTRY_NO = 0;
+    public String TLT_ID = " ";
+    public int CREATE_DATE = 0;
+    public char ENTRY_TYPE = ' ';
+    public char FUNC = ' ';
+    public String REV_NO = " ";
+    public char RB_FLG = ' ';
+    public int AC_SEQ = 0;
+    public char ENTRY_AUTH_LEVEL = ' ';
+    public int BCH = 0;
+    public String AC = " ";
+    public String GL_BOOK_FLG = " ";
+    public String ITM_NO = " ";
+    public String CCY = " ";
+    public char INOFF = ' ';
+    public int VALUE_DATE = 0;
+    public char ACTION_CODE = ' ';
+    public double AMOUNT = 0;
+    public String NARR_CD = " ";
+    public String TRN_DESC = " ";
+    public String ANS_CD1 = " ";
+    public String ANS_CD2 = " ";
+    public String ANS_CD3 = " ";
+    public String ANS_CD4 = " ";
+    public String ANS_CD5 = " ";
+    public String ANS_CD6 = " ";
+    public String ANS_CD7 = " ";
+    public String ANS_CD8 = " ";
+    public String ANS_CD9 = " ";
+    public String ANS_CD10 = " ";
+    public String CIFNO = " ";
+    public String CN_NO = " ";
+    public String CN_TYPE = " ";
+    public String PROD_TYPE = " ";
+    public String REF_NO = " ";
+    public String PORTFO_CD = " ";
+    public int UPDTBL_DATE = 0;
+    public String TS = " ";
+}

@@ -1,0 +1,42 @@
+package com.hisun.BP;
+
+public class BPB5520_AWA_5520 {
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String CI_ENM = " ";
+    public short CI_ENM_NO = 0;
+    public String CI_CNM = " ";
+    public short CI_CNM_NO = 0;
+    public String EXR_TYP = " ";
+    public short EXR_TYP_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public int EFF_DT = 0;
+    public short EFF_DT_NO = 0;
+    public int EXP_DT = 0;
+    public short EXP_DT_NO = 0;
+    public char CMP_FLG = ' ';
+    public short CMP_FLG_NO = 0;
+    public double CS_BUY_P = 0;
+    public short CS_BUY_P_NO = 0;
+    public double FX_BUY_P = 0;
+    public short FX_BUY_P_NO = 0;
+    public double CS_SEL_P = 0;
+    public short CS_SEL_P_NO = 0;
+    public double FX_SEL_P = 0;
+    public short FX_SEL_P_NO = 0;
+    public int CRE_DT = 0;
+    public short CRE_DT_NO = 0;
+    public int CRE_BR = 0;
+    public short CRE_BR_NO = 0;
+    public String CRE_TLR = " ";
+    public short CRE_TLR_NO = 0;
+    public int UPD_DT = 0;
+    public short UPD_DT_NO = 0;
+    public int UPD_TM = 0;
+    public short UPD_TM_NO = 0;
+    public int UPD_BR = 0;
+    public short UPD_BR_NO = 0;
+    public String UPD_TLR = " ";
+    public short UPD_TLR_NO = 0;
+}

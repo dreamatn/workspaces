@@ -1,0 +1,6 @@
+package com.hisun.GL;
+
+public class GLCDEF02_GLMST_ITM {
+    public GLCDEF02_GLMST1_INFO GLMST1_INFO = new GLCDEF02_GLMST1_INFO();
+    public GLCDEF02_GLMST2_INFO GLMST2_INFO = new GLCDEF02_GLMST2_INFO();
+}

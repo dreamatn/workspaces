@@ -1,0 +1,42 @@
+package com.hisun.LN;
+
+public class LNB4310_AWA_4310 {
+    public char FCN_CD = ' ';
+    public short FCN_CD_NO = 0;
+    public String CONT_NO = " ";
+    public short CONT_NO_NO = 0;
+    public int VAL_DT = 0;
+    public short VAL_DT_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String CI_CNM = " ";
+    public short CI_CNM_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public double LN_PRIN = 0;
+    public short LN_PRIN_NO = 0;
+    public double LN_BAL = 0;
+    public short LN_BAL_NO = 0;
+    public double PAY_PRIN = 0;
+    public short PAY_PRIN_NO = 0;
+    public char INT_MODE = ' ';
+    public short INT_MODE_NO = 0;
+    public double PAY_INT = 0;
+    public short PAY_INT_NO = 0;
+    public double PC_RATE = 0;
+    public short PC_RATE_NO = 0;
+    public double PC_AMT = 0;
+    public short PC_AMT_NO = 0;
+    public double PAY_AMT = 0;
+    public short PAY_AMT_NO = 0;
+    public double HRG_AMT = 0;
+    public short HRG_AMT_NO = 0;
+    public char ADJ_FLG = ' ';
+    public short ADJ_FLG_NO = 0;
+    public short SUB_TERM = 0;
+    public short SUB_TERM_NO = 0;
+    public String REMARK = " ";
+    public short REMARK_NO = 0;
+}

@@ -1,0 +1,43 @@
+package com.hisun.CI;
+
+public class CICO3080_DTL {
+    public int LC_NO = 0;
+    public int SEQ = 0;
+    public String CON_TYP = " ";
+    public String LVL_CON_TYP = " ";
+    public short LVL = 0;
+    public String LC_CCY = " ";
+    public int DAY_STA_DT = 0;
+    public int DAY_END_DT = 0;
+    public double TXN_LMT_AMT = 0;
+    public char FILLER11 = 0X01;
+    public double DLY_LMT_AMT = 0;
+    public char FILLER13 = 0X01;
+    public int DLY_LMT_VOL = 0;
+    public double MLY_LMT_AMT = 0;
+    public char FILLER16 = 0X01;
+    public int MLY_LMT_VOL = 0;
+    public double SYY_LMT_AMT = 0;
+    public char FILLER19 = 0X01;
+    public double YLY_LMT_AMT = 0;
+    public char FILLER21 = 0X01;
+    public double TM_LMT_AMT = 0;
+    public char FILLER23 = 0X01;
+    public double SE_LMT_AMT = 0;
+    public char FILLER25 = 0X01;
+    public double LMT_AMT_1 = 0;
+    public char FILLER27 = 0X01;
+    public double LMT_AMT_2 = 0;
+    public char FILLER29 = 0X01;
+    public double LMT_AMT_3 = 0;
+    public char FILLER31 = 0X01;
+    public double LMT_AMT_4 = 0;
+    public char FILLER33 = 0X01;
+    public char REL_TYP = ' ';
+    public double BAL_LMT_AMT = 0;
+    public char FILLER36 = 0X01;
+    public char BAL_TYP = ' ';
+    public String LMT_CTL_STSW = " ";
+    public String ACT_SCENE = " ";
+    public char FILLER40 = 0X02;
+}

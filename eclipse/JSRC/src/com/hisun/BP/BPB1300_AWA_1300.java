@@ -1,0 +1,44 @@
+package com.hisun.BP;
+
+public class BPB1300_AWA_1300 {
+    public String SEQ_TYPE = " ";
+    public short SEQ_TYPE_NO = 0;
+    public String SEQ_NAME = " ";
+    public short SEQ_NAME_NO = 0;
+    public String SEQ_DESC = " ";
+    public short SEQ_DESC_NO = 0;
+    public long SEQ_NO = 0;
+    public short SEQ_NO_NO = 0;
+    public long OLD_SEQ = 0;
+    public short OLD_SEQ_NO = 0;
+    public long FIRST_NO = 0;
+    public short FIRST_NO_NO = 0;
+    public char INIT_FLG = ' ';
+    public short INIT_FLG_NO = 0;
+    public char SKIP_FLG = ' ';
+    public short SKIP_FLG_NO = 0;
+    public char OBL_FLG = ' ';
+    public short OBL_FLG_NO = 0;
+    public char VIP_FLG = ' ';
+    public short VIP_FLG_NO = 0;
+    public int VAL_DATE = 0;
+    public short VAL_DATE_NO = 0;
+    public long MAX_SEQ = 0;
+    public short MAX_SEQ_NO = 0;
+    public char MAX_FLG = ' ';
+    public short MAX_FLG_NO = 0;
+    public long WARN_SEQ = 0;
+    public short WARN_SEQ_NO = 0;
+    public long OBL_MIN = 0;
+    public short OBL_MIN_NO = 0;
+    public long OBL_MAX = 0;
+    public short OBL_MAX_NO = 0;
+    public String UPD_TLR = " ";
+    public short UPD_TLR_NO = 0;
+    public int UPD_DATE = 0;
+    public short UPD_DATE_NO = 0;
+    public int BR = 0;
+    public short BR_NO = 0;
+    public short STEP_NUM = 0;
+    public short STEP_NUM_NO = 0;
+}

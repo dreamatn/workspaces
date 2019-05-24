@@ -1,0 +1,62 @@
+package com.hisun.PY;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import com.hisun.BP.BPCAOTH;
+import com.hisun.BP.BPCFFTXI;
+import com.hisun.BP.BPCPNHIS;
+import com.hisun.BP.BPCPOEWA;
+import com.hisun.BP.BPCQCNGL;
+import com.hisun.BP.BPCSGSEQ;
+import com.hisun.BP.BPCTCALF;
+import com.hisun.BP.BPCUCNGM;
+import com.hisun.CI.CICACCU;
+import com.hisun.CI.CICQACRI;
+import com.hisun.DC.DCCPACTY;
+import com.hisun.DD.DDCIMMST;
+import com.hisun.SC.SCCCALL;
+import com.hisun.SC.SCCEXCP;
+import com.hisun.SC.SCCFMT;
+import com.hisun.SC.SCCGBPA_BP_AREA;
+import com.hisun.SC.SCCGSCA_SC_AREA;
+import com.hisun.SC.SCCGWA;
+import com.hisun.SC.SCCMSG;
+
+public class PYOT1100 {
+    boolean pgmRtn = false;
+    String K_FMT_CD = "PYG01";
+    String K_SEQ_TYPE = "SEQ";
+    String K_SEQ_CODE = "PYNO";
+    String K_CNTR_TYPE = "COLT";
+    String K_EVENT_CODE = "DR";
+    String CPN_U_BPZPNHIS = "BP-REC-NHIS";
+    String WS_ERR_MSG = " ";
+    PYOT1100_WS_OUTPUT_DATA WS_OUTPUT_DATA = new PYOT1100_WS_OUTPUT_DATA();
+    PYCMSG_ERROR_MSG PYCMSG_ERROR_MSG = new PYCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCFMT SCCFMT = new SCCFMT();
+    SCCMSG SCCMSG = new SCCMSG();
+    DCCPACTY DCCPACTY = new DCCPACTY();
+    BPCPNHIS BPCPNHIS = new BPCPNHIS();
+    DDCIMMST DDCIMMST = new DDCIMMST();
+    BPCSGSEQ BPCSGSEQ = new BPCSGSEQ();
+    BPCQCNGL BPCQCNGL = new BPCQCNGL();
+    BPCAOTH BPCAOTH = new BPCAOTH();
+    BPCUCNGM BPCUCNGM = new BPCUCNGM();
+    BPCPOEWA BPCPOEWA = new BPCPOEWA();
+    CICQACRI CICQACRI = new CICQACRI();
+    BPCFFTXI BPCFFTXI = new BPCFFTXI();
+    BPCTCALF BPCTCALF = new BPCTCALF();
+    PYCPCFTA PYCPCFTA = new PYCPCFTA();
+    CICACCU CICACCU = new CICACCU();
+    PYCI1100 PYCI1100 = new PYCI1100();
+    PYRCLCT PYRCLCT = new PYRCLCT();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    PYB1100_AWA_1100 PYB1100_AWA_1100;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);

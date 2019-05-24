@@ -1,0 +1,48 @@
+package com.hisun.AI;
+
+public class AIRODE {
+    public AIRODE_KEY KEY = new AIRODE_KEY();
+    public char ENTRY_TYPE = ' ';
+    public char ENTRY_STS = ' ';
+    public char ENTRY_AUTH_LEVEL = ' ';
+    public int BCH = 0;
+    public String AC = " ";
+    public String GL_BOOK_FLG = " ";
+    public String ITM_NO = " ";
+    public String CCY = " ";
+    public char INOFF = ' ';
+    public int VALUE_DATE = 0;
+    public char ACTION_CODE = ' ';
+    public char RED_FLG = ' ';
+    public double AMOUNT = 0;
+    public String REV_NO = " ";
+    public int AC_SEQ = 0;
+    public int RVS_EXP = 0;
+    public char RVS_FLG = ' ';
+    public String NARR_CD = " ";
+    public String TRN_DESC = " ";
+    public String ANS_CD1 = " ";
+    public String ANS_CD2 = " ";
+    public String ANS_CD3 = " ";
+    public String ANS_CD4 = " ";
+    public String ANS_CD5 = " ";
+    public String ANS_CD6 = " ";
+    public String ANS_CD7 = " ";
+    public String ANS_CD8 = " ";
+    public String ANS_CD9 = " ";
+    public String ANS_CD10 = " ";
+    public String CIFNO = " ";
+    public String CN_NO = " ";
+    public String CN_TYPE = " ";
+    public String PROD_TYPE = " ";
+    public String REF_NO = " ";
+    public String PORTFO_CD = " ";
+    public String RES_CENT = " ";
+    public String LINE = " ";
+    public String INT_DEALINGS = " ";
+    public char RESERVE = ' ';
+    public int OWNER_BK = 0;
+    public String LAST_UPD_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public String TS = " ";
+}

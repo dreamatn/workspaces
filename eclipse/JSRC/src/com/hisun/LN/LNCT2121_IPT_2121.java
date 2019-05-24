@@ -1,0 +1,45 @@
+package com.hisun.LN;
+
+public class LNCT2121_IPT_2121 {
+    public String TRAN_NO = " ";
+    public String TRAN_NAM = " ";
+    public int BOOK_CRE = 0;
+    public int DOMI_BR = 0;
+    public String CONT_NO = " ";
+    public char DSC_TYP = ' ';
+    public char DSC_METH = ' ';
+    public String CCY = " ";
+    public double AMT = 0;
+    public String ID_TYP = " ";
+    public String ID_NO = " ";
+    public String CI_NO = " ";
+    public String CI_CNM = " ";
+    public String PROD_CD = " ";
+    public long LMT_NO = 0;
+    public String DRAW_AC_TYP = " ";
+    public String DRAW_AC = " ";
+    public String PAY_AC_TYP = " ";
+    public String PAY_AC = " ";
+    public double DSC_NINT_RAT = 0;
+    public double DSC_OINT_RAT = 0;
+    public double DSC_INT_AMT = 0;
+    public char PAYI_METH = ' ';
+    public String PAYI_AC_TYP = " ";
+    public String PAYI_AC = " ";
+    public double PAYI_MFZF_AMT = 0;
+    public double DRFT_AMT = 0;
+    public String DRFT_NO = " ";
+    public char DRFT_TYP = ' ';
+    public char DRFT_LOC_FLG = ' ';
+    public int DRFT_SDT = 0;
+    public int DRFT_EDT = 0;
+    public int START_DT = 0;
+    public int MATU_DT = 0;
+    public String PAYER_AC = " ";
+    public String PAYER_NM = " ";
+    public long PAYER_CNAPS_NO = 0;
+    public String PAYER_CNAPS_NM = " ";
+    public String REMARK = " ";
+    public double EX_RATE = 0;
+    public double T_C_EQUI = 0;
+}

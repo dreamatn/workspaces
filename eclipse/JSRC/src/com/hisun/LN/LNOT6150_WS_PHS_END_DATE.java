@@ -1,0 +1,6 @@
+package com.hisun.LN;
+
+public class LNOT6150_WS_PHS_END_DATE {
+    int WS_PHS_END_DT = 0;
+    LNOT6150_REDEFINES42 REDEFINES42 = new LNOT6150_REDEFINES42();
+}

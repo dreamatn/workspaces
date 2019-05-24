@@ -1,0 +1,7 @@
+package com.hisun.CI;
+
+public class CICSXGOD {
+    public CICSXGOD_RC RC = new CICSXGOD_RC();
+    public CICSXGOD_INPUT_DATA INPUT_DATA = new CICSXGOD_INPUT_DATA();
+    public CICSXGOD_OUTPUT_DATA OUTPUT_DATA = new CICSXGOD_OUTPUT_DATA();
+}

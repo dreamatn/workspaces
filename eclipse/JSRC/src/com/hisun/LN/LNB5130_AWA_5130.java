@@ -1,0 +1,44 @@
+package com.hisun.LN;
+
+public class LNB5130_AWA_5130 {
+    public char CONT_TYP = ' ';
+    public short CONT_TYP_NO = 0;
+    public String CONT_NO = " ";
+    public short CONT_NO_NO = 0;
+    public String PART_BK = " ";
+    public short PART_BK_NO = 0;
+    public char CI_TYPE = ' ';
+    public short CI_TYPE_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public char STL_TYP = ' ';
+    public short STL_TYP_NO = 0;
+    public char MWHD_FLG = ' ';
+    public short MWHD_FLG_NO = 0;
+    public String AC_TYP = " ";
+    public short AC_TYP_NO = 0;
+    public String AC_NO = " ";
+    public short AC_NO_NO = 0;
+    public String REMARK = " ";
+    public short REMARK_NO = 0;
+    public String S_ACTYP1 = " ";
+    public short S_ACTYP1_NO = 0;
+    public String S_AC1 = " ";
+    public short S_AC1_NO = 0;
+    public String S_ACTYP2 = " ";
+    public short S_ACTYP2_NO = 0;
+    public String S_AC2 = " ";
+    public short S_AC2_NO = 0;
+    public String S_ACTYP3 = " ";
+    public short S_ACTYP3_NO = 0;
+    public String S_AC3 = " ";
+    public short S_AC3_NO = 0;
+    public String S_ACTYP4 = " ";
+    public short S_ACTYP4_NO = 0;
+    public String S_AC4 = " ";
+    public short S_AC4_NO = 0;
+    public int PAGE_ROW = 0;
+    public short PAGE_ROW_NO = 0;
+    public int PAGE_NUM = 0;
+    public short PAGE_NUM_NO = 0;
+}

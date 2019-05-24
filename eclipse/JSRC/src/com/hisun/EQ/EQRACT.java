@@ -1,0 +1,41 @@
+package com.hisun.EQ;
+
+public class EQRACT {
+    public EQRACT_KEY KEY = new EQRACT_KEY();
+    public String ACO_AC = " ";
+    public String PROD_CD = " ";
+    public String CI_NO = " ";
+    public String EQ_ACT = " ";
+    public String EQ_CINO = " ";
+    public char EQ_TYP = ' ';
+    public String TEL_NO = " ";
+    public String EQ_ADDR = " ";
+    public String CCY = " ";
+    public double EQ_QTY = 0;
+    public double FRZ_QTY = 0;
+    public double PLG_QTY = 0;
+    public char AC_STS = ' ';
+    public String AC_STS_WORD = " ";
+    public String DIV_AC = " ";
+    public int LS_DIVIDEND_DT = 0;
+    public int LS_DIV_PROC_DT = 0;
+    public double LS_DIV_AMT = 0;
+    public int LS_COUPON_DT = 0;
+    public int LS_CPN_PROC_DT = 0;
+    public double LS_CPN_QTY = 0;
+    public int ADD_BR = 0;
+    public String ADD_TLR = " ";
+    public int ADD_DT = 0;
+    public int WDAL_BR = 0;
+    public String WDAL_TLR = " ";
+    public int WDAL_DT = 0;
+    public int LSTX_DT = 0;
+    public int CHG_CNT = 0;
+    public String REMARK = " ";
+    public int CRT_DATE = 0;
+    public String CRT_TLR = " ";
+    public int OWNER_BK = 0;
+    public int UPDTBL_DATE = 0;
+    public String UPDTBL_TLR = " ";
+    public String TS = " ";
+}

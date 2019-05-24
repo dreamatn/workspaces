@@ -1,0 +1,43 @@
+package com.hisun.CI;
+
+public class CICMGFX {
+    public CICMGFX_RC RC = new CICMGFX_RC();
+    public char FUNC = ' ';
+    public String CI_NO = " ";
+    public String AGT_NO = " ";
+    public String ID_TYP = " ";
+    public String ID_NO = " ";
+    public char PACK_NO = ' ';
+    public String CI_NM = " ";
+    public String REL_NM = " ";
+    public String OCCUP = " ";
+    public String ADR_NM = " ";
+    public String POS_CODE = " ";
+    public String FAX = " ";
+    public String TEL = " ";
+    public String CP_CODE = " ";
+    public double MON_AMT = 0;
+    public int MON_P_NO = 0;
+    public char EFF_FLG = ' ';
+    public int EFF_DATE = 0;
+    public int EXP_DATE = 0;
+    public char SPAP_FLG = ' ';
+    public String SIGN_AC1 = " ";
+    public String SIGN_AC2 = " ";
+    public String SIGN_AC3 = " ";
+    public String SIGN_AC4 = " ";
+    public String SIGN_AC5 = " ";
+    public char PRE_SER1 = ' ';
+    public char PRE_SER2 = ' ';
+    public char PRE_SER3 = ' ';
+    public char PRE_SER4 = ' ';
+    public char PRE_SER5 = ' ';
+    public char PRE_SER6 = ' ';
+    public char PRE_SER7 = ' ';
+    public char PRE_SER8 = ' ';
+    public String FLDK = " ";
+    public double CUM_CPAY_AMT = 0;
+    public int CUM_CPEOP_NUM = 0;
+    public int CUM_CPAY_SUM = 0;
+    public char CPA_MON_FLG = ' ';
+}

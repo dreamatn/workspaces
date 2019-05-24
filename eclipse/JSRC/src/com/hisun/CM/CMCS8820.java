@@ -1,0 +1,48 @@
+package com.hisun.CM;
+
+public class CMCS8820 {
+    public char TR_TYPE = ' ';
+    public String REQ_SYS_JRN = " ";
+    public int REQ_DATE = 0;
+    public String REQ_SYS = " ";
+    public String REQ_CHNL = " ";
+    public String TL_NO = " ";
+    public int TR_BR = 0;
+    public String AP_REF = " ";
+    public String CHN_BUS_TYP = " ";
+    public String OPEN_TYPE = " ";
+    public String CI_NO = " ";
+    public String NAME = " ";
+    public char BV_TYP = ' ';
+    public String BV_CODE = " ";
+    public String BV_NO = " ";
+    public String ID_TYPE = " ";
+    public String ID_NO = " ";
+    public String PROD_CD = " ";
+    public String CCY = " ";
+    public double AMT = 0;
+    public String TERM = " ";
+    public char RATE_FLG = ' ';
+    public double FLT_RAT = 0;
+    public double PCT_S = 0;
+    public char PSW_TYPE = ' ';
+    public String PSW = " ";
+    public char CROS_CR_FLG = ' ';
+    public char CROS_DR_FLG = ' ';
+    public char INSRT_MTH = ' ';
+    public String BUS_RMK = " ";
+    public String UNIT_NO = " ";
+    public String UNIT_NAME = " ";
+    public String UNIT_AC = " ";
+    public String SMR = " ";
+    public char PROC_STS = ' ';
+    public String RET_CODE = " ";
+    public String RET_MSG = " ";
+    public int DATE = 0;
+    public long JRNNO = 0;
+    public String VCH_NO = " ";
+    public String CUSAC = " ";
+    public int VAL_DATE = 0;
+    public int EXP_DATE = 0;
+    public double INT_RAT = 0;
+}

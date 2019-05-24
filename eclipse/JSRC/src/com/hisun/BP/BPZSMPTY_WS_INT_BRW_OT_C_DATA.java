@@ -1,0 +1,12 @@
+package com.hisun.BP;
+
+public class BPZSMPTY_WS_INT_BRW_OT_C_DATA {
+    char BPZSMPTY_FILLER163 = '-';
+    char BPZSMPTY_FILLER164 = 'C';
+    String WS_IBOT_C_TYPE = " ";
+    String WS_IBOT_C_CODE = " ";
+    String WS_IBOT_C_NAME = " ";
+    char BPZSMPTY_FILLER168 = 0X02;
+    BPZSMPTY_WS_IBOT_C_EFF_DATE WS_IBOT_C_EFF_DATE = new BPZSMPTY_WS_IBOT_C_EFF_DATE();
+    BPZSMPTY_WS_IBOT_EXP_DATE WS_IBOT_EXP_DATE = new BPZSMPTY_WS_IBOT_EXP_DATE();
+}

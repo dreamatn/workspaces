@@ -1,0 +1,9 @@
+package com.hisun.BP;
+
+public class BPOT9297_WS_P_DATA_9297 {
+    short BPOT9297_FILLER31 = 0;
+    char BPOT9297_FILLER32 = ' ';
+    short WS_P_LEN_9297 = 0;
+    BPOT9297_BPOT9297_FILLER34 BPOT9297_FILLER34 = new BPOT9297_BPOT9297_FILLER34();
+    String BPOT9297_FILLER41 = " ";
+}

@@ -1,0 +1,42 @@
+package com.hisun.DC;
+
+public class DCCORHOL_DATA {
+    public String HLD_NO = " ";
+    public String AC = " ";
+    public char HLD_TYP = ' ';
+    public char SPR_TYP = ' ';
+    public String CCY = " ";
+    public char CCY_TYP = ' ';
+    public double BEF_AMT = 0;
+    public char FILLER9 = 0X01;
+    public int EFF_DT = 0;
+    public int EXP_DT = 0;
+    public char RHLD_TYP = ' ';
+    public double RAMT = 0;
+    public char FILLER14 = 0X01;
+    public double REM_AMT = 0;
+    public char FILLER16 = 0X01;
+    public String CHG_NO = " ";
+    public char FILLER18 = 0X02;
+    public String SPR_NM = " ";
+    public char FILLER20 = 0X02;
+    public String RSN = " ";
+    public char FILLER22 = 0X02;
+    public String RMK = " ";
+    public char FILLER24 = 0X02;
+    public int CHG_BR = 0;
+    public String LAW_NM1 = " ";
+    public char FILLER27 = 0X02;
+    public String LAW_NO1 = " ";
+    public char FILLER29 = 0X02;
+    public String LAW_NM2 = " ";
+    public char FILLER31 = 0X02;
+    public String LAW_NO2 = " ";
+    public char FILLER33 = 0X02;
+    public double CURR_BAL = 0;
+    public char FILLER35 = 0X01;
+    public double AVL_AMT = 0;
+    public char FILLER37 = 0X01;
+    public double ACC_HLD_AMT = 0;
+    public char FILLER39 = 0X01;
+}

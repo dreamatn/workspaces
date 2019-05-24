@@ -1,0 +1,42 @@
+package com.hisun.BP;
+
+public class BPRFADT {
+    public BPRFADT_KEY KEY = new BPRFADT_KEY();
+    public String CHG_AC = " ";
+    public String CARD_PSBK_NO = " ";
+    public String TX_CI = " ";
+    public String PRD_CD = " ";
+    public char CHG_AC_TY = ' ';
+    public char FEE_SRC = ' ';
+    public String FEE_CODE = " ";
+    public String CCY = " ";
+    public char CCY_TYPE = ' ';
+    public int SALE_DATE = 0;
+    public int CHG_BR = 0;
+    public double CHG_AMT = 0;
+    public short ACC_RECH_CNT = 0;
+    public double CUR_OWE_AMT = 0;
+    public double ACC_CHG_AMT = 0;
+    public double VAT_AMT = 0;
+    public String CMMT_NO = " ";
+    public String BSNS_NO = " ";
+    public char AMO_FLG = ' ';
+    public int AMO_SDT = 0;
+    public int AMO_EDT = 0;
+    public char PRC_STS = ' ';
+    public char CHG_STS = ' ';
+    public String TRT_CHNL = " ";
+    public int TRT_BR = 0;
+    public String SRC_TR_CD = " ";
+    public String PRDT_CODE = " ";
+    public String SRC_TR_NAME = " ";
+    public String REMARK = " ";
+    public int CREATE_DATE = 0;
+    public int CREATE_TIME = 0;
+    public int UPDATE_DATE = 0;
+    public String CREATE_TELL = " ";
+    public String LAST_TELL = " ";
+    public String SUP_TEL1 = " ";
+    public String SUP_TEL2 = " ";
+    public String TS = " ";
+}

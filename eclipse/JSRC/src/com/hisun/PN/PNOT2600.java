@@ -1,0 +1,123 @@
+package com.hisun.PN;
+
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class PNOT2600 {
+    String CPN_U_PNZUDMIS = "PN-U-DMIS-PNT";
+    char K_ERROR = 'E';
+    String K_OUTPUT_FMT = "PN260";
+    String WS_ERR_MSG = " ";
+    short WS_FLD_NO = 0;
+    PNCMSG_ERROR_MSG PNCMSG_ERROR_MSG = new PNCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCFMT SCCFMT = new SCCFMT();
+    PNCUDMIS PNCUDMIS = new PNCUDMIS();
+    PNCODMIS PNCODMIS = new PNCODMIS();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    PNB2600_AWA_2600 PNB2600_AWA_2600;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "PNOT2600 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "PNB2600_AWA_2600>");
+        PNB2600_AWA_2600 = (PNB2600_AWA_2600) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B100_IPT_CHK_PROC();
+        B200_MIS_PNT_PROC();
+    }
+    public void B100_IPT_CHK_PROC() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, PNB2600_AWA_2600.BILL_KND);
+        if (PNB2600_AWA_2600.BILL_KND.trim().length() == 0) {
+            CEP.ERRC(SCCGWA, PNCMSG_ERROR_MSG.PN_KND_MUST_IPT, PNB2600_AWA_2600.BILL_KND_NO);
+        }
+        CEP.TRC(SCCGWA, PNB2600_AWA_2600.FUNC);
+        if (PNB2600_AWA_2600.FUNC == ' ') {
+            CEP.ERRC(SCCGWA, PNCMSG_ERROR_MSG.PN_FUNC_NOT_IPT, PNB2600_AWA_2600.FUNC_NO);
+        }
+        CEP.TRC(SCCGWA, PNB2600_AWA_2600.BILL_NO);
+        if (PNB2600_AWA_2600.BILL_NO.trim().length() == 0) {
+            CEP.ERRC(SCCGWA, PNCMSG_ERROR_MSG.PN_NO_MUST_IPT, PNB2600_AWA_2600.BILL_NO_NO);
+        }
+        if (SCCGWA.COMM_AREA.MSG_PROC_AREA.MSG_TYPE == K_ERROR 
+            && SCCGWA.COMM_AREA.MSG_PROC_AREA.MSG_ID.MSG_CODE != 0) {
+            CEP.ERR(SCCGWA, PNCMSG_ERROR_MSG.PN_INPUT_DATA_ERR);
+        }
+    }
+    public void B200_MIS_PNT_PROC() throws IOException,SQLException,Exception {
+        B210_MIS_PNT_PROC();
+        B220_FMT_OUTPUT_PROC();
+    }
+    public void B210_MIS_PNT_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, PNCUDMIS);
+        PNCUDMIS.DATA.FUNC = PNB2600_AWA_2600.FUNC;
+        PNCUDMIS.DATA.KND = PNB2600_AWA_2600.BILL_KND;
+        PNCUDMIS.DATA.DRFT_NO = PNB2600_AWA_2600.BILL_NO;
+        PNCUDMIS.DATA.ISS_DATE = PNB2600_AWA_2600.ISS_DATE;
+        PNCUDMIS.DATA.ISS_AMT = PNB2600_AWA_2600.ISS_AMT;
+        PNCUDMIS.DATA.LOS_DATE = PNB2600_AWA_2600.LOS_DATE;
+        PNCUDMIS.DATA.LOS_ADDR = PNB2600_AWA_2600.LOS_ADDR;
+        PNCUDMIS.DATA.APP_NM = PNB2600_AWA_2600.APP_NM;
+        PNCUDMIS.DATA.APP_ADDR = PNB2600_AWA_2600.APP_ADDR;
+        PNCUDMIS.DATA.APP_TEL = PNB2600_AWA_2600.APP_TEL;
+        PNCUDMIS.DATA.ID_TYPE = PNB2600_AWA_2600.ID_TYPE;
+        PNCUDMIS.DATA.ID_NO = PNB2600_AWA_2600.ID_NO;
+        PNCUDMIS.DATA.REASON = PNB2600_AWA_2600.REASON;
+        PNCUDMIS.DATA.PAY_DATE = PNB2600_AWA_2600.PAY_DATE;
+        PNCUDMIS.DATA.FEE_FLG = PNB2600_AWA_2600.FEE_FLG;
+        PNCUDMIS.DATA.FEE_AC = PNB2600_AWA_2600.FEE_AC;
+        PNCUDMIS.DATA.STP_DATE = PNB2600_AWA_2600.STP_DATE;
+        PNCUDMIS.DATA.STP_RENO = PNB2600_AWA_2600.STP_RENO;
+        PNCUDMIS.DATA.STP_RSN = PNB2600_AWA_2600.STP_RSN;
+        PNCUDMIS.DATA.RM_NM = PNB2600_AWA_2600.RM_NM;
+        PNCUDMIS.DATA.RM_ADDR = PNB2600_AWA_2600.RM_ADDR;
+        PNCUDMIS.DATA.RM_TEL = PNB2600_AWA_2600.RM_TEL;
+        PNCUDMIS.DATA.RM_IDTY = PNB2600_AWA_2600.RM_IDTY;
+        PNCUDMIS.DATA.RM_IDNO = PNB2600_AWA_2600.RM_IDNO;
+        PNCUDMIS.DATA.RM_SMR = PNB2600_AWA_2600.RM_SMR;
+        PNCUDMIS.DATA.DFT_CINO = PNB2600_AWA_2600.DFT_CINO;
+        PNCUDMIS.DATA.TXN_FEE = PNB2600_AWA_2600.TXN_FEE;
+        S000_CALL_PNZUDMIS();
+    }
+    public void B220_FMT_OUTPUT_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, PNCODMIS);
+        CEP.TRC(SCCGWA, PNCUDMIS.DATA.TXN_FEE);
+        PNCODMIS.DATA.TXN_FEE = PNCUDMIS.DATA.TXN_FEE;
+        CEP.TRC(SCCGWA, PNCODMIS.DATA.TXN_FEE);
+        CEP.TRC(SCCGWA, PNCODMIS);
+        IBS.init(SCCGWA, SCCFMT);
+        SCCFMT.FMTID = K_OUTPUT_FMT;
+        SCCFMT.DATA_PTR = PNCODMIS;
+        SCCFMT.DATA_LEN = 17;
+        IBS.FMT(SCCGWA, SCCFMT);
+    }
+    public void S000_CALL_PNZUDMIS() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, CPN_U_PNZUDMIS, PNCUDMIS);
+        if (PNCUDMIS.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, PNCUDMIS.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG, WS_FLD_NO);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

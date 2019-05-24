@@ -1,0 +1,44 @@
+package com.hisun.LN;
+
+public class LNRLNAC {
+    public LNRLNAC_KEY KEY = new LNRLNAC_KEY();
+    public String STATUS = " ";
+    public String RELA_GUAR = " ";
+    public String SUB_REF = " ";
+    public String PURPOSE = " ";
+    public char SOUR_FUND = ' ';
+    public int BR = 0;
+    public String PROD_CD = " ";
+    public long LMT_NO = 0;
+    public String CCY = " ";
+    public double AMOUNT = 0;
+    public int START_DATE = 0;
+    public int EXPIRY_DATE = 0;
+    public int CLOSE_DATE = 0;
+    public char HOLIDAY_METHOD = ' ';
+    public char HOLIDAY_OVERRIDE = ' ';
+    public String REF_CTY_CODE1 = " ";
+    public String REF_CTY_CODE2 = " ";
+    public String REF_CTY_CODE3 = " ";
+    public String REF_CTY_CODE4 = " ";
+    public String REF_CTY_CODE5 = " ";
+    public double USED_AMT = 0;
+    public double ACCU_USED_AMT = 0;
+    public double AVAIL_AMT = 0;
+    public int EXTEND_EXP_DATE = 0;
+    public String EXTEND_REASON = " ";
+    public short NEXT_CONTRACT_SEQ = 0;
+    public int NEXT_SEQ = 0;
+    public String REMARK1 = " ";
+    public String REMARK2 = " ";
+    public String REMARK3 = " ";
+    public String REMARK4 = " ";
+    public String REMARK5 = " ";
+    public int CRT_DATE = 0;
+    public String CRT_TLR = " ";
+    public int UPDTBL_DATE = 0;
+    public String UPDTBL_TLR = " ";
+    public String SUP1 = " ";
+    public String SUP2 = " ";
+    public String TS = " ";
+}

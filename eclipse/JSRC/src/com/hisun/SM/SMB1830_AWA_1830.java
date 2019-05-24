@@ -1,0 +1,46 @@
+package com.hisun.SM;
+
+public class SMB1830_AWA_1830 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String PTYP = " ";
+    public short PTYP_NO = 0;
+    public String CODE = " ";
+    public short CODE_NO = 0;
+    public int EFFDATE = 0;
+    public short EFFDATE_NO = 0;
+    public int EXPDATE = 0;
+    public short EXPDATE_NO = 0;
+    public String DESC = " ";
+    public short DESC_NO = 0;
+    public String CDESC = " ";
+    public short CDESC_NO = 0;
+    public short LEN = 0;
+    public short LEN_NO = 0;
+    public String FMT_CODE = " ";
+    public short FMT_CODE_NO = 0;
+    public String AWA_FMT = " ";
+    public short AWA_FMT_NO = 0;
+    public char FLD_VCH = ' ';
+    public short FLD_VCH_NO = 0;
+    public int LTH = 0;
+    public short LTH_NO = 0;
+    public int FLD_CNT = 0;
+    public short FLD_CNT_NO = 0;
+    public String SEQ_NO = " ";
+    public short SEQ_NO_NO = 0;
+    public String FLD_NAME = " ";
+    public short FLD_NAME_NO = 0;
+    public String FLD_CASE = " ";
+    public short FLD_CASE_NO = 0;
+    public String FLD_ITEM = " ";
+    public short FLD_ITEM_NO = 0;
+    public String FLD_CTL = " ";
+    public short FLD_CTL_NO = 0;
+    public String FLD_RMK = " ";
+    public short FLD_RMK_NO = 0;
+    public char FUNC1 = ' ';
+    public short FUNC1_NO = 0;
+    public String FLD_TXT = " ";
+    public short FLD_TXT_NO = 0;
+}

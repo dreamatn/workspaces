@@ -1,0 +1,7 @@
+package com.hisun.CI;
+
+public class CICQACAC_O_DATA {
+    public CICQACAC_O_ACR_DATA O_ACR_DATA = new CICQACAC_O_ACR_DATA();
+    public CICQACAC_O_ACAC_DATA O_ACAC_DATA = new CICQACAC_O_ACAC_DATA();
+    public CICQACAC_O_OLD_ACR_DATA O_OLD_ACR_DATA = new CICQACAC_O_OLD_ACR_DATA();
+}

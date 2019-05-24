@@ -1,0 +1,42 @@
+package com.hisun.BP;
+
+public class BPB5137_AWA_5137 {
+    public String IR_NAME = " ";
+    public short IR_NAME_NO = 0;
+    public String PRICE_TP = " ";
+    public short PRICE_TP_NO = 0;
+    public String IR_CODE = " ";
+    public short IR_CODE_NO = 0;
+    public String CCY_NAME = " ";
+    public short CCY_NAME_NO = 0;
+    public String REF_IND = " ";
+    public short REF_IND_NO = 0;
+    public String PER_NAME = " ";
+    public short PER_NAME_NO = 0;
+    public double BID = 0;
+    public short BID_NO = 0;
+    public double OFFER = 0;
+    public short OFFER_NO = 0;
+    public double MID = 0;
+    public short MID_NO = 0;
+    public short TICK_SIZ = 0;
+    public short TICK_SIZ_NO = 0;
+    public char TRAD_FLG = ' ';
+    public short TRAD_FLG_NO = 0;
+    public int START_DT = 0;
+    public short START_DT_NO = 0;
+    public int END_DT = 0;
+    public short END_DT_NO = 0;
+    public int UPD_DT = 0;
+    public short UPD_DT_NO = 0;
+    public int UPD_TM = 0;
+    public short UPD_TM_NO = 0;
+    public String FILLER_1 = " ";
+    public short FILLER_1_NO = 0;
+    public String FILLER_2 = " ";
+    public short FILLER_2_NO = 0;
+    public String FILLER_3 = " ";
+    public short FILLER_3_NO = 0;
+    public String FILLER_4 = " ";
+    public short FILLER_4_NO = 0;
+}

@@ -1,0 +1,44 @@
+package com.hisun.LN;
+
+public class LNCBUIF {
+    public String LOAN_AC = " ";
+    public String DRAW_NO = " ";
+    public String CONT_NO = " ";
+    public int TR_DT = 0;
+    public String CI_NO = " ";
+    public String CI_NM = " ";
+    public String SUB_ITM = " ";
+    public double PRIN = 0;
+    public String CCY = " ";
+    public double RATE = 0;
+    public double BAL = 0;
+    public double NO_BAL = 0;
+    public double OD_BAL = 0;
+    public double DULL_BAL = 0;
+    public double BAD_BAL = 0;
+    public double INT_IBAL = 0;
+    public double INT_OBAL = 0;
+    public double OINT = 0;
+    public double L_BAL = 0;
+    public int VAL_DT = 0;
+    public int DUE_DT = 0;
+    public String FN_DT = " ";
+    public double TA_BAL = 0;
+    public double TAL_BAL = 0;
+    public short TA_TMS = 0;
+    public short LCA_TMS = 0;
+    public short EXT_TMS = 0;
+    public char ADVN_FLG = ' ';
+    public String PB_ACNO = " ";
+    public String PI_ACNO = " ";
+    public String BAILACNO = " ";
+    public String PAY_ACNO = " ";
+    public int BR = 0;
+    public String CLS4 = " ";
+    public String RET_TYP = " ";
+    public double BAIL_PCT = 0;
+    public char PM_TYP = ' ';
+    public String TM_SQ = " ";
+    public String BU_STS = " ";
+    public String CTL_TYPE = " ";
+}

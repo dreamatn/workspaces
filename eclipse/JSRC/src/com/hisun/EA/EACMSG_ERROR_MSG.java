@@ -1,0 +1,48 @@
+package com.hisun.EA;
+
+public class EACMSG_ERROR_MSG {
+    public String EA_NORMAL = "EA0000";
+    public String EA_BIND_AC_NOT_MATCH = "EA2005";
+    public String EA_AC_NAME_NOT_MATCH = "EA2006";
+    public String EA_AC_CANNOT_TRAN_OUT = "EA2007";
+    public String EA_AC_CANNOT_OPEN = "EA2008";
+    public String EA_AC_PROD_NOT_MATCH = "EA2009";
+    public String EA_SWLM_AC_FLG_NOT_MATC = "EA2010";
+    public String EA_SWLM_DC_FLG_NOT_MATC = "EA2011";
+    public String EA_SWLM_LST_FLG_NOT_MAT = "EA2012";
+    public String EA_SWLM_LST_AC_NOT_MATC = "EA2013";
+    public String EA_SWLM_IO_FLG_NOT_MATC = "EA2014";
+    public String EA_SWLM_INFO_NOTFOUND = "EA2015";
+    public String EA_SBIND_CARD_NO_NOT_MA = "EA2016";
+    public String EA_CON_BNK_NO_NOT_INPUT = "EA2017";
+    public String EA_CON_AC_NOT_MATCH = "EA2019";
+    public String EA_AC_NM_NOT_MATCH = "EA2020";
+    public String EA_ID_TYPE_NOT_MATCH = "EA2021";
+    public String EA_ID_NO_NOT_MATCH = "EA2022";
+    public String EA_PSW_MUST_INPUT = "EA2023";
+    public String EA_BIND_AC_TYP_MISMATCH = "EA2024";
+    public String EA_BND_THREE_NOT_FULL = "EA2025";
+    public String EA_BND_BNK_NM_INPUT = "EA2026";
+    public String EA_BND_CI_NO_NOT_SAME = "EA2027";
+    public String EA_NOT_SETTLE_AC = "EA2028";
+    public String EA_NOT_BIND_AC = "EA2029";
+    public String OPEN_CI_NO_INPUT = "EA2030";
+    public String OPEN_AC_NM_INPUT = "EA2031";
+    public String EA_OPEN_AC_TYP_MISMATCH = "EA2032";
+    public String EA_OPEN_PROD_INPUT = "EA2033";
+    public String OPEN_AC_TYP_INPUT = "EA2034";
+    public String EA_SWLM_AC_EXIST = "EA2035";
+    public String EA_BIND_AC_NOT_ACT = "EA2036";
+    public String EA_BIND_IO_INCORRECT = "EA2037";
+    public String EA_SBIND_CARD_NOT_INPUT = "EA2601";
+    public String EA_INPUT_ERROR = "EA4100";
+    public String EA_RECORD_NOTFND = "EA4101";
+    public String EA_BIND_AC_NOT_I = "EA4102";
+    public String EA_BIND_AC_NOT_II = "EA4103";
+    public String EA_BIND_AC_TOO_MORE = "EA4104";
+    public String EA_BIND_AC_TOO_LESS = "EA4105";
+    public String EA_BIND_AC_NOT_DIFF = "EA4106";
+    public String EA_FUNC_ERROR = "EA4200";
+    public String EA_CHNL_MUST_INPUT = "EA4201";
+    public String EA_CARD_NOT_NORMAL_STS = "EA4202";
+}

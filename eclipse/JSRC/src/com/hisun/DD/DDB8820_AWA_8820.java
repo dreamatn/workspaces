@@ -1,0 +1,42 @@
+package com.hisun.DD;
+
+public class DDB8820_AWA_8820 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public String CUS_AC = " ";
+    public short CUS_AC_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public char CCY_TYP = ' ';
+    public short CCY_TYP_NO = 0;
+    public String PROL_NO = " ";
+    public short PROL_NO_NO = 0;
+    public int STRDT = 0;
+    public short STRDT_NO = 0;
+    public int EXPDT = 0;
+    public short EXPDT_NO = 0;
+    public double BAL_AMT = 0;
+    public short BAL_AMT_NO = 0;
+    public String AC = " ";
+    public short AC_NO = 0;
+    public String PROD_CD = " ";
+    public short PROD_CD_NO = 0;
+    public String CNTR_TYP = " ";
+    public short CNTR_TYP_NO = 0;
+    public char CI_TYP = ' ';
+    public short CI_TYP_NO = 0;
+    public String FIN_TYP = " ";
+    public short FIN_TYP_NO = 0;
+    public char AC_TYP = ' ';
+    public short AC_TYP_NO = 0;
+    public char PROP_TYP = ' ';
+    public short PROP_TYP_NO = 0;
+    public String TERM_CD = " ";
+    public short TERM_CD_NO = 0;
+    public String LOAN_TYP = " ";
+    public short LOAN_TYP_NO = 0;
+    public char WE_FLG = ' ';
+    public short WE_FLG_NO = 0;
+    public char DT_FREE = ' ';
+    public short DT_FREE_NO = 0;
+}

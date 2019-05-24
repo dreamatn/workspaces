@@ -1,0 +1,45 @@
+package com.hisun.CI;
+
+public class CICEADRP {
+    public String CI_NO = " ";
+    public long SEQ_NO = 0;
+    public String ADR_TYPE = " ";
+    public String LANG_CD = " ";
+    public String CNTY_CD = " ";
+    public String PROVINCE = " ";
+    public String CITY = " ";
+    public String COUNTY = " ";
+    public String TOWN = " ";
+    public String SUB_TOWN = " ";
+    public String STREET = " ";
+    public String BUILD_NAME = " ";
+    public String BUILD_NO = " ";
+    public String APMNT_NO = " ";
+    public String POST_CD = " ";
+    public String POST_BOX_NO = " ";
+    public String POST_BOX_DESC = " ";
+    public String ADR_NM = " ";
+    public String ADR_NM2 = " ";
+    public String ADR_NM3 = " ";
+    public String REMARK = " ";
+    public String REMARK2 = " ";
+    public String REMARK3 = " ";
+    public String BILL_FLG = " ";
+    public String DEFA_FLG = " ";
+    public String VLD_INDIC = " ";
+    public String SYSTM_CD = " ";
+    public String SRC_UNQ_ID = " ";
+    public String SRC_UNQ_ID2 = " ";
+    public String CRT_TM = " ";
+    public String UPD_TM = " ";
+    public String END_TM = " ";
+    public String ECIF_CRT_TM = " ";
+    public String ECIF_UPD_TM = " ";
+    public String CRT_EMPLYE_NO = " ";
+    public String UPD_EMPLYE_NO = " ";
+    public String CRT_SYSTM = " ";
+    public String UPD_SYSTM = " ";
+    public String CRT_CHNL = " ";
+    public String UPD_CHNL = " ";
+    public String PTY_NO = " ";
+}

@@ -1,0 +1,46 @@
+package com.hisun.TD;
+
+public class TDOT1360_WS_DATA {
+    int WS_SER_DATE = 0;
+    char WS_BV_TYP = ' ';
+    String WS_STSW = " ";
+    String WS_CCY = " ";
+    char WS_CCY_TYP = ' ';
+    int WS_AC_BK = 0;
+    int WS_AC_BR = 0;
+    int WS_OPEN_DATE = 0;
+    String WS_OPEN_TLR = " ";
+    String WS_PROD_CD = " ";
+    String WS_PRDAC_CD = " ";
+    String WS_TERM = " ";
+    String WS_SPE_FLG = " ";
+    char WS_CALR_STD = ' ';
+    int WS_PVAL_DATE = 0;
+    int WS_VAL_DATE = 0;
+    int WS_EXP_DATE = 0;
+    int WS_STR_DATE = 0;
+    int WS_END_DATE = 0;
+    char WS_INSTR_MTH = ' ';
+    double WS_BAL = 0;
+    char TDOT1360_FILLER38 = 0X01;
+    double WS_FBAL = 0;
+    char TDOT1360_FILLER40 = 0X01;
+    double WS_PBAL = 0;
+    char TDOT1360_FILLER42 = 0X01;
+    int WS_LBAL_DATE = 0;
+    int WS_PROC_NUM = 0;
+    int WS_SER_TIME = 0;
+    double WS_EXP_INT = 0;
+    char TDOT1360_FILLER47 = 0X01;
+    double WS_DRW_INT = 0;
+    char TDOT1360_FILLER49 = 0X01;
+    double WS_DRW_TAX = 0;
+    char TDOT1360_FILLER51 = 0X01;
+    String WS_OIC_NO = " ";
+    int WS_LAST_BR = 0;
+    String WS_CRT_TLR = " ";
+    int WS_CRT_DATE = 0;
+    String WS_UPDTBL_TLR = " ";
+    int WS_UPDTBL_DATE = 0;
+    String WS_TS = " ";
+}

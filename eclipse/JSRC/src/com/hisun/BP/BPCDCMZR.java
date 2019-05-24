@@ -1,0 +1,7 @@
+package com.hisun.BP;
+
+public class BPCDCMZR {
+    public BPCDCMZR_RC RC = new BPCDCMZR_RC();
+    public BPCDCMZR_INPUT_DATA INPUT_DATA = new BPCDCMZR_INPUT_DATA();
+    public BPCDCMZR_OUTPUT_DATA OUTPUT_DATA = new BPCDCMZR_OUTPUT_DATA();
+}

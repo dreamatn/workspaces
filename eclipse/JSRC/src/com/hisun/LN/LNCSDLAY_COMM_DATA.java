@@ -1,0 +1,45 @@
+package com.hisun.LN;
+
+public class LNCSDLAY_COMM_DATA {
+    public String CONT_NO = " ";
+    public String CI_NO = " ";
+    public String CI_CNM = " ";
+    public char FILLER8 = 0X02;
+    public int BOOK_CRE = 0;
+    public String PROD_TYP = " ";
+    public String PROD_NM = " ";
+    public char FILLER12 = 0X02;
+    public String CCY = " ";
+    public double AMT = 0;
+    public double BAL = 0;
+    public int MATU_DT = 0;
+    public char PEN_FLG = ' ';
+    public int VAL_DT = 0;
+    public int DMATU_DT = 0;
+    public char ADJ_FLG = ' ';
+    public char RAT_MTH = ' ';
+    public char FLP_UNIT = ' ';
+    public String FLPERD = " ";
+    public char FLT_FLG = ' ';
+    public short FLT_DAY = 0;
+    public int FLT_DAYS = 0;
+    public char FLT_MTH = ' ';
+    public char IRAT_CD = ' ';
+    public String RAT_PD = " ";
+    public double RAT_VAR = 0;
+    public double RAT_PCT = 0;
+    public double RAT_INT = 0;
+    public double IN_RATE = 0;
+    public double INT_RAT = 0;
+    public char FILLER35 = 0X01;
+    public char PEN_RATT = ' ';
+    public double PEN_IRA = 0;
+    public char FILLER38 = 0X01;
+    public char CPND_USE = ' ';
+    public char CPNDRATT = ' ';
+    public double CPND_IRA = 0;
+    public char FILLER42 = 0X01;
+    public char ABUSRATT = ' ';
+    public double ABUS_IRA = 0;
+    public char FILLER45 = 0X01;
+}

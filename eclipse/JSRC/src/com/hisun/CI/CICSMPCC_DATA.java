@@ -1,0 +1,44 @@
+package com.hisun.CI;
+
+public class CICSMPCC_DATA {
+    public String CI_NO = " ";
+    public String OCCUP = " ";
+    public double PER_IND = 0;
+    public double FAM_IND = 0;
+    public String MARI = " ";
+    public String CORP_NM = " ";
+    public String CORP_IND = " ";
+    public String CON_CNTY = " ";
+    public String CON_L1 = " ";
+    public String CON_L2 = " ";
+    public String CON_L3 = " ";
+    public String CON_L4 = " ";
+    public String CON_L5 = " ";
+    public String CON_L6 = " ";
+    public String CON_L7 = " ";
+    public String CON_E2 = " ";
+    public String CON_ADR = " ";
+    public String CON_POST = " ";
+    public String COM_CNTY = " ";
+    public String COM_L1 = " ";
+    public String COM_L2 = " ";
+    public String COM_L3 = " ";
+    public String COM_L4 = " ";
+    public String COM_L5 = " ";
+    public String COM_L6 = " ";
+    public String COM_L7 = " ";
+    public String COM_E2 = " ";
+    public String COM_ADR = " ";
+    public String COM_POST = " ";
+    public String FAR_CNTY = " ";
+    public String FAR_L1 = " ";
+    public String FAR_L2 = " ";
+    public String FAR_L3 = " ";
+    public String FAR_L4 = " ";
+    public String FAR_L5 = " ";
+    public String FAR_L6 = " ";
+    public String FAR_L7 = " ";
+    public String FAR_E2 = " ";
+    public String FAR_ADR = " ";
+    public String FAR_POST = " ";
+}

@@ -1,0 +1,46 @@
+package com.hisun.LN;
+
+public class LNB5200_AWA_5200 {
+    public int PROJ_NO = 0;
+    public short PROJ_NO_NO = 0;
+    public String PROJ_NM = " ";
+    public short PROJ_NM_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String CI_NM = " ";
+    public short CI_NM_NO = 0;
+    public String PAY_AC = " ";
+    public short PAY_AC_NO = 0;
+    public String IA_AC = " ";
+    public short IA_AC_NO = 0;
+    public char TYP = ' ';
+    public short TYP_NO = 0;
+    public short TERM = 0;
+    public short TERM_NO = 0;
+    public short ST_TERM = 0;
+    public short ST_TERM_NO = 0;
+    public short SUB_SEQ = 0;
+    public short SUB_SEQ_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public double FIXE_AMT = 0;
+    public short FIXE_AMT_NO = 0;
+    public double SUBS_PCT = 0;
+    public short SUBS_PCT_NO = 0;
+    public char AMT_TYP = ' ';
+    public short AMT_TYP_NO = 0;
+    public double SUBS_RAT = 0;
+    public short SUBS_RAT_NO = 0;
+    public String RMK = " ";
+    public short RMK_NO = 0;
+    public int PAGE_ROW = 0;
+    public short PAGE_ROW_NO = 0;
+    public int PAGE_NUM = 0;
+    public short PAGE_NUM_NO = 0;
+    public String MIB_SEQ = " ";
+    public short MIB_SEQ_NO = 0;
+    public String CREV_NO = " ";
+    public short CREV_NO_NO = 0;
+    public char FUN_CD = ' ';
+    public short FUN_CD_NO = 0;
+}

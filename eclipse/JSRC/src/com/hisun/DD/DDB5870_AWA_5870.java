@@ -1,0 +1,40 @@
+package com.hisun.DD;
+
+public class DDB5870_AWA_5870 {
+    public String VS_AC = " ";
+    public short VS_AC_NO = 0;
+    public String VS_MAC = " ";
+    public short VS_MAC_NO = 0;
+    public String VS_ACNM = " ";
+    public short VS_ACNM_NO = 0;
+    public String CCY = " ";
+    public short CCY_NO = 0;
+    public char CCY_TYP = ' ';
+    public short CCY_TYP_NO = 0;
+    public String VS_AC_NM = " ";
+    public short VS_AC_NM_NO = 0;
+    public String VS_CN_NM = " ";
+    public short VS_CN_NM_NO = 0;
+    public String VS_CN_TL = " ";
+    public short VS_CN_TL_NO = 0;
+    public String VS_CN_AR = " ";
+    public short VS_CN_AR_NO = 0;
+    public String VS_IDTYP = " ";
+    public short VS_IDTYP_NO = 0;
+    public String VS_IDNO = " ";
+    public short VS_IDNO_NO = 0;
+    public String VS_MMO = " ";
+    public short VS_MMO_NO = 0;
+    public String VS_SYSNO = " ";
+    public short VS_SYSNO_NO = 0;
+    public String REMARK = " ";
+    public short REMARK_NO = 0;
+    public char VS_FLG = ' ';
+    public short VS_FLG_NO = 0;
+    public String CHNLNO = " ";
+    public short CHNLNO_NO = 0;
+    public String VS_INTAC = " ";
+    public short VS_INTAC_NO = 0;
+    public int DD_OP_BR = 0;
+    public short DD_OP_BR_NO = 0;
+}

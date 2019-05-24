@@ -1,0 +1,139 @@
+package com.hisun.LN;
+
+import com.hisun.SM.*;
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class LNOT1100 {
+    String JIBS_tmp_str[] = new String[10];
+    char K_ERROR = 'E';
+    LNOT1100_WS_TEMP_VARIABLE WS_TEMP_VARIABLE = new LNOT1100_WS_TEMP_VARIABLE();
+    short WS_I = 0;
+    LNCX706 LNCX706 = new LNCX706();
+    SMCMSG_ERROR_MSG SMCMSG_ERROR_MSG = new SMCMSG_ERROR_MSG();
+    SCCWOUT SCCWOUT = new SCCWOUT();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCMPAG SCCMPAG = new SCCMPAG();
+    SCCFMT SCCFMT = new SCCFMT();
+    LNCPAYSM LNCPAYSM = new LNCPAYSM();
+    SCCGWA SCCGWA;
+    LNB1100_AWA_1100 LNB1100_AWA_1100;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROCESS();
+        B000_MAIN_PROCESS();
+        CEP.TRC(SCCGWA, "LNOT1100 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROCESS() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "LNB1100_AWA_1100>");
+        LNB1100_AWA_1100 = (LNB1100_AWA_1100) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+    }
+    public void B000_MAIN_PROCESS() throws IOException,SQLException,Exception {
+        B100_CHECK_INPUT();
+        B200_CALL_LNZPAYSM();
+        B300_OUTPUT_PROCESS();
+    }
+    public void B100_CHECK_INPUT() throws IOException,SQLException,Exception {
+        if (LNB1100_AWA_1100.FUNC != 'I' 
+            && LNB1100_AWA_1100.FUNC != 'A' 
+            && LNB1100_AWA_1100.FUNC != 'M' 
+            && LNB1100_AWA_1100.FUNC != 'D') {
+            IBS.CPY2CLS(SCCGWA, SMCMSG_ERROR_MSG.SM_INPUT_ERROR, WS_TEMP_VARIABLE.WS_MSGID);
+            IBS.CPY2CLS(SCCGWA, SMCMSG_ERROR_MSG.SM_INPUT_ERROR, LNCPAYSM.RC);
+            WS_TEMP_VARIABLE.WS_FLD_NO = LNB1100_AWA_1100.FUNC_NO;
+            S000_ERR_MSG_PROC_CONTINUE();
+        }
+        R00_CHECK_ERROR();
+    }
+    public void R00_CHECK_ERROR() throws IOException,SQLException,Exception {
+        if (SCCGWA.COMM_AREA.MSG_PROC_AREA.MSG_TYPE == K_ERROR 
+            && SCCGWA.COMM_AREA.MSG_PROC_AREA.MSG_ID.MSG_CODE == 0) {
+            IBS.CPY2CLS(SCCGWA, SMCMSG_ERROR_MSG.SM_INPUT_ERROR, WS_TEMP_VARIABLE.WS_MSGID);
+            WS_TEMP_VARIABLE.WS_FLD_NO = 0;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void B200_CALL_LNZPAYSM() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCPAYSM);
+        LNCPAYSM.FUNC = LNB1100_AWA_1100.FUNC;
+        LNCPAYSM.KEY.TYP = LNB1100_AWA_1100.PTYP;
+        LNCPAYSM.KEY.CD = LNB1100_AWA_1100.CODE;
+        LNCPAYSM.EFF_DATE = LNB1100_AWA_1100.EFFDATE;
+        LNCPAYSM.EXP_DATE = LNB1100_AWA_1100.EXPDATE;
+        LNCPAYSM.DESC = LNB1100_AWA_1100.DESC;
+        LNCPAYSM.CDESC = LNB1100_AWA_1100.CDESC;
+        LNCPAYSM.DATA_TXT.REPY_MTH = LNB1100_AWA_1100.REPY_MTH;
+        CEP.TRC(SCCGWA, LNCPAYSM.FUNC);
+        CEP.TRC(SCCGWA, LNCPAYSM.KEY.TYP);
+        CEP.TRC(SCCGWA, LNCPAYSM.KEY.CD);
+        CEP.TRC(SCCGWA, LNCPAYSM.EFF_DATE);
+        CEP.TRC(SCCGWA, LNCPAYSM.EXP_DATE);
+        for (WS_I = 1; WS_I <= 5; WS_I += 1) {
+            LNCPAYSM.DATA_TXT.DATA[WS_I-1].P_FLG = LNB1100_AWA_1100.DATA[WS_I-1].P_FLG;
+            LNCPAYSM.DATA_TXT.DATA[WS_I-1].I_FLG = LNB1100_AWA_1100.DATA[WS_I-1].I_FLG;
+            LNCPAYSM.DATA_TXT.DATA[WS_I-1].O_FLG = LNB1100_AWA_1100.DATA[WS_I-1].O_FLG;
+            LNCPAYSM.DATA_TXT.DATA[WS_I-1].L_FLG = LNB1100_AWA_1100.DATA[WS_I-1].L_FLG;
+            LNCPAYSM.DATA_TXT.DATA[WS_I-1].F_FLG = LNB1100_AWA_1100.DATA[WS_I-1].F_FLG;
+            LNCPAYSM.DATA_TXT.DATA[WS_I-1].FUL_PAY_FLG = LNB1100_AWA_1100.DATA[WS_I-1].FUL_PFLG;
+            LNCPAYSM.DATA_TXT.DATA[WS_I-1].CRS_PAY_FLG = LNB1100_AWA_1100.DATA[WS_I-1].CRS_PFLG;
+        }
+        S000_CALL_LNZPAYSM();
+    }
+    public void B300_OUTPUT_PROCESS() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCX706);
+        IBS.init(SCCGWA, SCCFMT);
+        LNCX706.TYPE = LNCPAYSM.KEY.TYP;
+        LNCX706.CODE = LNCPAYSM.KEY.CD;
+        LNCX706.DESC = LNCPAYSM.DESC;
+        LNCX706.CDESC = LNCPAYSM.CDESC;
+        LNCX706.EFF_DATE = LNCPAYSM.EFF_DATE;
+        LNCX706.EXP_DATE = LNCPAYSM.EXP_DATE;
+        LNCX706.REPY_MTH = LNCPAYSM.DATA_TXT.REPY_MTH;
+        for (WS_I = 1; WS_I <= 5; WS_I += 1) {
+            LNCX706.DATA[WS_I-1].P_FLG = LNCPAYSM.DATA_TXT.DATA[WS_I-1].P_FLG;
+            LNCX706.DATA[WS_I-1].I_FLG = LNCPAYSM.DATA_TXT.DATA[WS_I-1].I_FLG;
+            LNCX706.DATA[WS_I-1].O_FLG = LNCPAYSM.DATA_TXT.DATA[WS_I-1].O_FLG;
+            LNCX706.DATA[WS_I-1].L_FLG = LNCPAYSM.DATA_TXT.DATA[WS_I-1].L_FLG;
+            LNCX706.DATA[WS_I-1].F_FLG = LNCPAYSM.DATA_TXT.DATA[WS_I-1].F_FLG;
+            LNCX706.DATA[WS_I-1].FUL_PAY_FLG = LNCPAYSM.DATA_TXT.DATA[WS_I-1].FUL_PAY_FLG;
+            LNCX706.DATA[WS_I-1].CRS_PAY_FLG = LNCPAYSM.DATA_TXT.DATA[WS_I-1].CRS_PAY_FLG;
+        }
+        SCCFMT.FMTID = "LN110";
+        SCCFMT.DATA_PTR = LNCX706;
+        SCCFMT.DATA_LEN = 150;
+        IBS.FMT(SCCGWA, SCCFMT);
+    }
+    public void S000_CALL_LNZPAYSM() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "LN-PRM-PAYSQ-MAINT", LNCPAYSM);
+        if (LNCPAYSM.RC.RC_RTNCODE != 0) {
+            WS_TEMP_VARIABLE.WS_MSGID.WS_MSG_AP = LNCPAYSM.RC.RC_APP;
+            WS_TEMP_VARIABLE.WS_MSGID.WS_MSG_CODE = LNCPAYSM.RC.RC_RTNCODE;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, WS_TEMP_VARIABLE.WS_MSGID);
+        CEP.ERR(SCCGWA, JIBS_tmp_str[0], WS_TEMP_VARIABLE.WS_FLD_NO);
+    }
+    public void S000_ERR_MSG_PROC_CONTINUE() throws IOException,SQLException,Exception {
+        JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, WS_TEMP_VARIABLE.WS_MSGID);
+        CEP.ERRC(SCCGWA, JIBS_tmp_str[0], WS_TEMP_VARIABLE.WS_FLD_NO);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

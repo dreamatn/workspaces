@@ -1,0 +1,47 @@
+package com.hisun.LN;
+
+public class LNCIDES_IPLN_AREA {
+    public String CONTRACT_NO = " ";
+    public int SUB_CTA_NO = 0;
+    public char TYPE = ' ';
+    public short TERM_NO = 0;
+    public int VAL_DT = 0;
+    public int DUE_DT = 0;
+    public double RATE = 0;
+    public double P_REC_AMT = 0;
+    public double P_PAY_AMT = 0;
+    public double P_OS_AMT = 0;
+    public double I_ADJ_AMT = 0;
+    public double I_ADJ_STOP = 0;
+    public double I_REC_AMT = 0;
+    public double I_PAY_AMT = 0;
+    public double I_WAV_AMT = 0;
+    public double I_REC_AMT_STOP = 0;
+    public double I_PAY_AMT_STOP = 0;
+    public double I_WAV_AMT_STOP = 0;
+    public double I_OS_AMT = 0;
+    public double F_WAV_AMT = 0;
+    public double F_REC_AMT = 0;
+    public double F_PAY_AMT = 0;
+    public double F_OS_AMT = 0;
+    public double L_REC_AMT = 0;
+    public double L_PAY_AMT = 0;
+    public double L_WAV_AMT = 0;
+    public double L_WAV_AMT_STOP = 0;
+    public double L_REC_AMT_STOP = 0;
+    public double L_PAY_AMT_STOP = 0;
+    public double L_OS_AMT = 0;
+    public double O_WAV_AMT = 0;
+    public double O_REC_AMT = 0;
+    public double O_PAY_AMT = 0;
+    public double O_WAV_AMT_STOP = 0;
+    public double O_REC_AMT_STOP = 0;
+    public double O_PAY_AMT_STOP = 0;
+    public double O_OS_AMT = 0;
+    public double HANDLING_CHG = 0;
+    public int PI_STOP_DT = 0;
+    public char INT_CAPT_IND = ' ';
+    public char INT_STUS = ' ';
+    public double BAL_INT = 0;
+    public String FILLER44 = " ";
+}

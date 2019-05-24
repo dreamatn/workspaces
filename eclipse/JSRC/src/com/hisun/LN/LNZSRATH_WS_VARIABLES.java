@@ -1,0 +1,11 @@
+package com.hisun.LN;
+
+public class LNZSRATH_WS_VARIABLES {
+    LNZSRATH_WS_TEMP_VARIABLE WS_TEMP_VARIABLE = new LNZSRATH_WS_TEMP_VARIABLE();
+    short MAX_COL_NO = 0;
+    short TS_CNT = 0;
+    String TS_REC = " ";
+    short LEN = 0;
+    LNZSRATH_WS_TS_CNTL WS_TS_CNTL = new LNZSRATH_WS_TS_CNTL();
+    LNZSRATH_WS_SPE_OUT WS_SPE_OUT = new LNZSRATH_WS_SPE_OUT();
+}

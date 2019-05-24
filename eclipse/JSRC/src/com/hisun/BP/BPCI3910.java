@@ -1,0 +1,46 @@
+package com.hisun.BP;
+
+public class BPCI3910 {
+    public char FUNC = ' ';
+    public String BPRD_TYP = " ";
+    public int BR = 0;
+    public String CODE = " ";
+    public int EFF_DATE = 0;
+    public int EXP_DATE = 0;
+    public char TYPE = ' ';
+    public String BV_CNM = " ";
+    public String BV_ENM = " ";
+    public String BV_CNMS = " ";
+    public String BV_ENMS = " ";
+    public char BV_CFLG = ' ';
+    public char LEVEL = ' ';
+    public short HEAD_LEN = 0;
+    public short NO_LEN = 0;
+    public char USE_MODE = ' ';
+    public char USE_CTL = ' ';
+    public char CTL_FLG = ' ';
+    public char CNT_FLG = ' ';
+    public short CNT_UT = 0;
+    public String CCY = " ";
+    public char AC_TYP = ' ';
+    public char CUT_FLG = ' ';
+    public char OUT_FLG = ' ';
+    public char SELL_FLG = ' ';
+    public short AUTO_DAY = 0;
+    public char PP_FLG = ' ';
+    public String VAL_DAY = " ";
+    public int B_LMT = 0;
+    public int V_LMT = 0;
+    public int B_LMTUP = 0;
+    public int V_LMTUP = 0;
+    public char STS = ' ';
+    public double COST_PRI = 0;
+    public double SER_CHAR = 0;
+    public char BV_RANGE = ' ';
+    public short BOOK_ROW = 0;
+    public short PAGE_ROW = 0;
+    public char CHK_FLG = ' ';
+    public String BV_SRC = " ";
+    public short STR_POS = 0;
+    public String REL_BV = " ";
+}

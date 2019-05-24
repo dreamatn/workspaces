@@ -1,0 +1,42 @@
+package com.hisun.DD;
+
+public class DDB5230_AWA_5230 {
+    public String CARD_NO = " ";
+    public short CARD_NO_NO = 0;
+    public String AC = " ";
+    public short AC_NO = 0;
+    public String AC_CNAME = " ";
+    public short AC_CNAME_NO = 0;
+    public String AC_ENAME = " ";
+    public short AC_ENAME_NO = 0;
+    public String PSBK_NO = " ";
+    public short PSBK_NO_NO = 0;
+    public char PAY_MTHO = ' ';
+    public short PAY_MTHO_NO = 0;
+    public String PSWD_O = " ";
+    public short PSWD_O_NO = 0;
+    public char PAY_MTHN = ' ';
+    public short PAY_MTHN_NO = 0;
+    public char CIPW_FLG = ' ';
+    public short CIPW_FLG_NO = 0;
+    public char UCIP_FLG = ' ';
+    public short UCIP_FLG_NO = 0;
+    public String PSWD_N = " ";
+    public short PSWD_N_NO = 0;
+    public String ID_TYPE = " ";
+    public short ID_TYPE_NO = 0;
+    public String ID_NO = " ";
+    public short ID_NO_NO = 0;
+    public String SIGN_NO = " ";
+    public short SIGN_NO_NO = 0;
+    public char CR_N = ' ';
+    public short CR_N_NO = 0;
+    public char DR_N = ' ';
+    public short DR_N_NO = 0;
+    public String OIC_NO = " ";
+    public short OIC_NO_NO = 0;
+    public String ID_TYP_O = " ";
+    public short ID_TYP_O_NO = 0;
+    public String ID_NO_O = " ";
+    public short ID_NO_O_NO = 0;
+}

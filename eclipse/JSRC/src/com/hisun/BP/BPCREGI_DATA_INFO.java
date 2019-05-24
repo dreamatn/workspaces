@@ -1,0 +1,41 @@
+package com.hisun.BP;
+
+public class BPCREGI_DATA_INFO {
+    public String LOS_NO = " ";
+    public String AC = " ";
+    public char AC_TYPE = ' ';
+    public char STS = ' ';
+    public String PSBK_NO = " ";
+    public String N_PSBK_NO = " ";
+    public char BV_TYP = ' ';
+    public String BV_CODE = " ";
+    public String BV_NO = " ";
+    public char LOS_TYP = ' ';
+    public char HLD_FLG = ' ';
+    public String RPT_NM = " ";
+    public String ID_TYP = " ";
+    public String ID_NO = " ";
+    public String LOS_RMK = " ";
+    public int LOS_ORG = 0;
+    public String LOS_TLR = " ";
+    public int LOS_TIME = 0;
+    public int RLOS_ORG = 0;
+    public String RLOS_TLR = " ";
+    public int RLOS_TIME = 0;
+    public int CREATE_DT = 0;
+    public String CREATE_TLR = " ";
+    public int OWNER_BK = 0;
+    public int LAST_UPD_DT = 0;
+    public String LAST_UPD_TLR = " ";
+    public int OPEN_DATE = 0;
+    public int CLOSE_DATE = 0;
+    public String OPEN_TLR = " ";
+    public String CLOSE_TLR = " ";
+    public String CCY = " ";
+    public String PROD_CD = " ";
+    public char CI_TYPE = ' ';
+    public char CARD_FLG = ' ';
+    public String CARD_NO = " ";
+    public String MAIN_AC = " ";
+    public int SEQ = 0;
+}

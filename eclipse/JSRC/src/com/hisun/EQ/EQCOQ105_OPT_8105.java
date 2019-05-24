@@ -1,0 +1,48 @@
+package com.hisun.EQ;
+
+public class EQCOQ105_OPT_8105 {
+    public String EQ_BKID = " ";
+    public String PROD_CD = " ";
+    public String PROD_NM = " ";
+    public char FILLER4 = ' ';
+    public String EQ_AC = " ";
+    public String EQ_ACT = " ";
+    public String EQ_CINO = " ";
+    public String PSBK_NO = " ";
+    public String CI_NO = " ";
+    public String EQ_CNM = " ";
+    public char FILLER11 = ' ';
+    public String ID_TYP = " ";
+    public String ID_NO = " ";
+    public char FILLER14 = ' ';
+    public String TEL_NO = " ";
+    public String EQ_ADDR = " ";
+    public char FILLER17 = ' ';
+    public char EQ_TYP = ' ';
+    public String CCY = " ";
+    public double EQ_QTY = 0;
+    public char FILLER21 = ' ';
+    public double FRZ_QTY = 0;
+    public char FILLER23 = ' ';
+    public double PLG_QTY = 0;
+    public char FILLER25 = ' ';
+    public int LS_DVDT = 0;
+    public int LS_DPDT = 0;
+    public double LS_DVAMT = 0;
+    public char FILLER29 = ' ';
+    public int LS_CPNDT = 0;
+    public int LS_CPPDT = 0;
+    public double LS_CPQTY = 0;
+    public char FILLER33 = ' ';
+    public int ADD_BR = 0;
+    public int ADD_DT = 0;
+    public int WDAL_BR = 0;
+    public int WDAL_DT = 0;
+    public int LSTX_DT = 0;
+    public int LSUP_DT = 0;
+    public String LSUP_TLR = " ";
+    public char AC_STS = ' ';
+    public double WDAL_QTY = 0;
+    public char FILLER43 = ' ';
+    public String DIV_AC = " ";
+}

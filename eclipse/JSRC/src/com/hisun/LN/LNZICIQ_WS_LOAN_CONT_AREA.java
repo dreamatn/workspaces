@@ -1,0 +1,7 @@
+package com.hisun.LN;
+
+public class LNZICIQ_WS_LOAN_CONT_AREA {
+    short WS_LOAN_CONT_AREA_LEN1 = 0;
+    String WS_LOAN_CONT_AREA_TEXT1 = " ";
+    LNZICIQ_REDEFINES169 REDEFINES169 = new LNZICIQ_REDEFINES169();
+}

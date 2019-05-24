@@ -1,0 +1,45 @@
+package com.hisun.VT;
+
+public class VTZSOTAX_WS_OUTPUT {
+    int WS_DT = 0;
+    String WS_SET_NO = " ";
+    int WS_SET_SEQ = 0;
+    String WS_CHNL_NO = " ";
+    int WS_TR_BR = 0;
+    int WS_BR = 0;
+    String WS_PROD_CD = " ";
+    String WS_ITM = " ";
+    int WS_AC_SEQ = 0;
+    String WS_CI_NO = " ";
+    String WS_CCY = " ";
+    double WS_YJ_OBAL = 0;
+    char VTZSOTAX_FILLER21 = 0X02;
+    double WS_YJ_BAL = 0;
+    char VTZSOTAX_FILLER23 = 0X02;
+    double WS_YJ_TAX_BAL = 0;
+    char VTZSOTAX_FILLER25 = 0X02;
+    double WS_MEMO_OBAL = 0;
+    char VTZSOTAX_FILLER27 = 0X02;
+    double WS_MEMO_BAL = 0;
+    char VTZSOTAX_FILLER29 = 0X02;
+    double WS_MEMO_TAX_BAL = 0;
+    char VTZSOTAX_FILLER31 = 0X02;
+    double WS_SH_OBAL = 0;
+    char VTZSOTAX_FILLER33 = 0X02;
+    double WS_SH_BAL = 0;
+    char VTZSOTAX_FILLER35 = 0X02;
+    double WS_SH_TAX_BAL = 0;
+    char VTZSOTAX_FILLER37 = 0X02;
+    String WS_CODE = " ";
+    char WS_VAT_TYPE = ' ';
+    short WS_RATE = 0;
+    double WS_EX_RATE = 0;
+    char VTZSOTAX_FILLER42 = 0X02;
+    String WS_BILL_NO = " ";
+    char WS_BILL_FLG = ' ';
+    String WS_SPC_FLG = " ";
+    int WS_EC_DATE = 0;
+    String WS_EC_SET_NO = " ";
+    int WS_TR_DATE = 0;
+    String WS_TR_SET_NO = " ";
+}

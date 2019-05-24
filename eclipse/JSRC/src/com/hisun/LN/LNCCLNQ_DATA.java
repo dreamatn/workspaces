@@ -1,0 +1,46 @@
+package com.hisun.LN;
+
+public class LNCCLNQ_DATA {
+    public String CONT_NO = " ";
+    public String SUB_CONT_NO = " ";
+    public String CONT_TYPE = " ";
+    public char CTL_FLG = ' ';
+    public String FATHER_CONTRACT = " ";
+    public String PROD_CD = " ";
+    public String CCY = " ";
+    public int VAL_DT = 0;
+    public int DUE_DT = 0;
+    public int BOOK_BR = 0;
+    public int DOMI_BR = 0;
+    public double EXCHANGE_RATE = 0;
+    public int LAST_F_VAL_DATE = 0;
+    public double AMT = 0;
+    public double TOT_AMT = 0;
+    public int LAST_TX_SEQ = 0;
+    public String DW_MTH = " ";
+    public char STS = ' ';
+    public String CTL_STSW = " ";
+    public int IC_CAL_VAL_DT = 0;
+    public int IC_CAL_DUE_DT = 0;
+    public int INT_CUT_DT = 0;
+    public double CUR_RAT = 0;
+    public double CUR_PO_RAT = 0;
+    public int PD_PROJ_NO = 0;
+    public String CI_NO = " ";
+    public String CI_SNAME = " ";
+    public String CITY_CD = " ";
+    public String CI_ENAME = " ";
+    public String CI_CNAME = " ";
+    public char CI_ATTR = ' ';
+    public char CI_TYP = ' ';
+    public String ID_TYPE = " ";
+    public String IDNO = " ";
+    public double N1_BAL = 0;
+    public double N2_BAL = 0;
+    public double N_BAL = 0;
+    public double O_BAL = 0;
+    public double TOT_BAL = 0;
+    public double PAY_AMT = 0;
+    public double PRIN = 0;
+    public String PROD_NAME = " ";
+}

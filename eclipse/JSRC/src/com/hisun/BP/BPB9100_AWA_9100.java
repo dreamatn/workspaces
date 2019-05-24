@@ -1,0 +1,44 @@
+package com.hisun.BP;
+
+public class BPB9100_AWA_9100 {
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+    public int ACCT_CTR = 0;
+    public short ACCT_CTR_NO = 0;
+    public String PRD_TYPE = " ";
+    public short PRD_TYPE_NO = 0;
+    public String ENG_DESC = " ";
+    public short ENG_DESC_NO = 0;
+    public String CHN_DESC = " ";
+    public short CHN_DESC_NO = 0;
+    public String FEE_TYPE = " ";
+    public short FEE_TYPE_NO = 0;
+    public char PAY_IND = ' ';
+    public short PAY_IND_NO = 0;
+    public char PAY_MTHD = ' ';
+    public short PAY_MTHD_NO = 0;
+    public char SET_FREQ = ' ';
+    public short SET_FREQ_NO = 0;
+    public short PRD_CONT = 0;
+    public short PRD_CONT_NO = 0;
+    public int SET_DT = 0;
+    public short SET_DT_NO = 0;
+    public char HOL_OVER = ' ';
+    public short HOL_OVER_NO = 0;
+    public char HOL_MTHD = ' ';
+    public short HOL_MTHD_NO = 0;
+    public char CFL_IND = ' ';
+    public short CFL_IND_NO = 0;
+    public String INT_BAS = " ";
+    public short INT_BAS_NO = 0;
+    public String MSG_PRI = " ";
+    public short MSG_PRI_NO = 0;
+    public int EFF_DATE = 0;
+    public short EFF_DATE_NO = 0;
+    public int EXP_DATE = 0;
+    public short EXP_DATE_NO = 0;
+    public String EXT_APP = " ";
+    public short EXT_APP_NO = 0;
+    public String CINO = " ";
+    public short CINO_NO = 0;
+}

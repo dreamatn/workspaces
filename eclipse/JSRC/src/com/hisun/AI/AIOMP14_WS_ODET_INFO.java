@@ -1,0 +1,44 @@
+package com.hisun.AI;
+
+public class AIOMP14_WS_ODET_INFO {
+    int WS_ODET_ENTRY = 0;
+    String WS_ODET_GL_BOOK = " ";
+    int WS_ODET_VAL_DT = 0;
+    char WS_ODET_EN_TYP = ' ';
+    int WS_ODET_CREATE_DATE = 0;
+    int WS_ODET_ACCT_CTR = 0;
+    String WS_ODET_CUR = " ";
+    String WS_ODET_COA_NO = " ";
+    String WS_ODET_COA_NM = " ";
+    char AIOMP14_FILLER70 = 0X02;
+    int WS_ODET_AC_SEQ = 0;
+    String WS_ODET_AC = " ";
+    String WS_ODET_ACNM = " ";
+    char AIOMP14_FILLER74 = 0X02;
+    String WS_ODET_CIFNO = " ";
+    String WS_ODET_CIFNM = " ";
+    char AIOMP14_FILLER77 = 0X02;
+    char WS_ODET_ACT_CD = ' ';
+    double WS_ODET_AMT = 0;
+    char AIOMP14_FILLER80 = 0X01;
+    char WS_ODET_RB_FLG = ' ';
+    String WS_ODET_REV_NO = " ";
+    String WS_ODET_NARR = " ";
+    String WS_ODET_DESC = " ";
+    char AIOMP14_FILLER85 = 0X02;
+    String WS_ODET_REF_NO = " ";
+    String WS_ODET_PROD_CD = " ";
+    String WS_ODET_PRO_NAME = " ";
+    char AIOMP14_FILLER89 = 0X02;
+    char WS_ODET_RVS_FLG = ' ';
+    char WS_ODET_RVS_TYP = ' ';
+    char WS_ODET_CHECK_FLG = ' ';
+    char WS_ODET_FUNC = ' ';
+    String WS_ODET_PRO_CD = " ";
+    String WS_ODET_TLTID = " ";
+    int WS_ODET_TMP_NO = 0;
+    char WS_ODET_AUTH_LVL = ' ';
+    String WS_ODET_TMPL_NAME = " ";
+    char AIOMP14_FILLER99 = 0X02;
+    int WS_ODET_RVS_EXP = 0;
+}

@@ -1,0 +1,42 @@
+package com.hisun.DC;
+
+public class DCCUATMS_OUTPUT {
+    public int JAN_CNT = 0;
+    public int FEB_CNT = 0;
+    public int MAR_CNT = 0;
+    public int APR_CNT = 0;
+    public int MAY_CNT = 0;
+    public int JUN_CNT = 0;
+    public int JUL_CNT = 0;
+    public int AUG_CNT = 0;
+    public int SEP_CNT = 0;
+    public int OCT_CNT = 0;
+    public int NOV_CNT = 0;
+    public int DEC_CNT = 0;
+    public int O_CNT = 0;
+    public double JAN_AMT = 0;
+    public char FILLER42 = 0X01;
+    public double FEB_AMT = 0;
+    public char FILLER44 = 0X01;
+    public double MAR_AMT = 0;
+    public char FILLER46 = 0X01;
+    public double APR_AMT = 0;
+    public char FILLER48 = 0X01;
+    public double MAY_AMT = 0;
+    public char FILLER50 = 0X01;
+    public double JUN_AMT = 0;
+    public char FILLER52 = 0X01;
+    public double JUL_AMT = 0;
+    public char FILLER54 = 0X01;
+    public double AUG_AMT = 0;
+    public char FILLER56 = 0X01;
+    public double SEP_AMT = 0;
+    public char FILLER58 = 0X01;
+    public double OCT_AMT = 0;
+    public char FILLER60 = 0X01;
+    public double NOV_AMT = 0;
+    public char FILLER62 = 0X01;
+    public double DEC_AMT = 0;
+    public char FILLER64 = 0X01;
+    public double O_AMT = 0;
+}

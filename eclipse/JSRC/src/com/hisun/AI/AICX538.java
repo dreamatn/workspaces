@@ -1,0 +1,42 @@
+package com.hisun.AI;
+
+public class AICX538 {
+    public int TR_DT = 0;
+    public int TR_TM = 0;
+    public int AC_DT = 0;
+    public int VAL_DT = 0;
+    public String VCHNO = " ";
+    public int SEQ = 0;
+    public long JRNNO = 0;
+    public String TX_CD = " ";
+    public char TYP = ' ';
+    public int TR_BR = 0;
+    public int BR = 0;
+    public String ITM = " ";
+    public String CCY = " ";
+    public char DRCRFLG = ' ';
+    public double AMT = 0;
+    public char FILLER16 = 0X01;
+    public char EC_IND = ' ';
+    public String VCHRF_NO = " ";
+    public String BR_AC = " ";
+    public String CI_NO = " ";
+    public String OPPO_NO = " ";
+    public String BSREF_NO = " ";
+    public String PRDMO_CD = " ";
+    public String PROD_CD = " ";
+    public String EVEN_CD = " ";
+    public int GL_MSTNO = 0;
+    public String APP = " ";
+    public String CHNL_NO = " ";
+    public String TLR_NO = " ";
+    public char ODE_FLG = ' ';
+    public String REF_NO = " ";
+    public char RED_FLG = ' ';
+    public String CREV_NO = " ";
+    public String NARR_CD = " ";
+    public String TXN_NARR = " ";
+    public char FILLER36 = 0X02;
+    public String DESC = " ";
+    public char FILLER38 = 0X02;
+}

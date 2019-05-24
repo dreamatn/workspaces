@@ -1,0 +1,421 @@
+package com.hisun.AI;
+
+import com.hisun.BP.*;
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class AIOT5702 {
+    int JIBS_tmp_int;
+    DBParm AITCMIB_RD;
+    DBParm AITITUS_RD;
+    String CPN_S_MIB_MAIN = "AI-S-MAIN-MIB  ";
+    String TBL_AITCMIB = "AITCMIB";
+    String WS_GLBOOK = " ";
+    String WS_ITM = " ";
+    int WS_SEQ = 0;
+    String WS_ERR_MSG = " ";
+    short WS_FLD_NO = 0;
+    char WS_COA_FLG = ' ';
+    short WS_BOOK_CNT = 0;
+    AIOT5702_WS_CONSTANT WS_CONSTANT = new AIOT5702_WS_CONSTANT();
+    char WS_REC_STATUS = ' ';
+    AICMSG_ERROR_MSG AICMSG_ERROR_MSG = new AICMSG_ERROR_MSG();
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCMSG SCCMSG = new SCCMSG();
+    AICPQITM AICPQITM = new AICPQITM();
+    AICSCMIB AICSCMIB = new AICSCMIB();
+    BPCPQORG BPCPQORG = new BPCPQORG();
+    BPCQBKPM BPCQBKPM = new BPCQBKPM();
+    AIRITUS AIRITUS = new AIRITUS();
+    AIRCMIB AIRCMIB = new AIRCMIB();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    AIB5700_AWA_5700 AIB5700_AWA_5700;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "AIOT5702 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "AIB5700_AWA_5700>");
+        AIB5700_AWA_5700 = (AIB5700_AWA_5700) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B010_CHECK_INPUT();
+        B020_UPD_REC_PROC();
+    }
+    public void B010_CHECK_INPUT() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.ITM);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.GL_BOOK);
+        if (AIB5700_AWA_5700.ITM.trim().length() > 0) {
+            IBS.init(SCCGWA, AICPQITM);
+            AICPQITM.INPUT_DATA.NO = AIB5700_AWA_5700.ITM;
+            AICPQITM.INPUT_DATA.BOOK_FLG = AIB5700_AWA_5700.GL_BOOK;
+            CEP.TRC(SCCGWA, AICPQITM.INPUT_DATA.BOOK_FLG);
+            S00_CALL_AIZPQITM();
+        }
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.BR);
+        if (AIB5700_AWA_5700.BR != 0 
+            && AIB5700_AWA_5700.BR != 999999) {
+            IBS.init(SCCGWA, BPCPQORG);
+            BPCPQORG.BR = AIB5700_AWA_5700.BR;
+            S00_CALL_BPZPQORG();
+            CEP.TRC(SCCGWA, BPCPQORG.ATTR);
+            if (BPCPQORG.ATTR != '2' 
+                && BPCPQORG.ATTR != '0') {
+                WS_ERR_MSG = AICMSG_ERROR_MSG.AI_NOT_BOOK_BR;
+                S000_ERR_MSG_PROC();
+            }
+        }
+        AIRITUS.KEY.BR = AIB5700_AWA_5700.BR;
+        AIRITUS.KEY.ITM_NO = AIB5700_AWA_5700.ITM;
+        B010_1_GET_COA_FLG();
+        AIRITUS.KEY.COA_FLG = "" + WS_COA_FLG;
+        JIBS_tmp_int = AIRITUS.KEY.COA_FLG.length();
+        for (int i=0;i<1-JIBS_tmp_int;i++) AIRITUS.KEY.COA_FLG = "0" + AIRITUS.KEY.COA_FLG;
+        T000_READ_AITITUS();
+        if (WS_CONSTANT.WS_DB2_REC_STATUS == 'N') {
+            T000_STARTBR_AITITUS_FIRST();
+            if (WS_CONSTANT.WS_DB2_REC_STATUS == 'F') {
+                WS_ERR_MSG = AICMSG_ERROR_MSG.AI_BR_CANNOT_USE_ITM;
+                S000_ERR_MSG_PROC();
+            }
+        }
+        if (AIB5700_AWA_5700.SEQ == 0) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_CMIB_SEQ_NOT_ZERO;
+            S000_ERR_MSG_PROC();
+        }
+        if (AIB5700_AWA_5700.SUS_TYP != 'N' 
+            && AIB5700_AWA_5700.DC_CTL != 'B' 
+            && AIB5700_AWA_5700.DC_CTL != AIB5700_AWA_5700.SUS_TYP) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_DCCTL_NOSAME_SUSTYP;
+            S000_ERR_MSG_PROC();
+        }
+        if (AIB5700_AWA_5700.ONL_UPD == 'N' 
+            && AIB5700_AWA_5700.SUS_TYP != 'N') {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_ONL_N_SUS_N;
+            S000_ERR_MSG_PROC();
+        }
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.DC_CTL);
+        if (AIB5700_AWA_5700.ONL_UPD == 'N' 
+            && AIB5700_AWA_5700.DC_CTL != 'B' 
+            && AIB5700_AWA_5700.BAL_OD != 'Y') {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.NOT_ONL_UPD_MUST_B;
+            S000_ERR_MSG_PROC();
+        }
+        if (AIB5700_AWA_5700.HOT_FLG == 'H' 
+            && AIB5700_AWA_5700.ONL_UPD != 'Y') {
+            CEP.ERR(SCCGWA, AICMSG_ERROR_MSG.AI_HOT_H_ONL_NOTY);
+        }
+        if (AIB5700_AWA_5700.HOT_FLG == 'H' 
+            && AIB5700_AWA_5700.SUS_TYP != 'N') {
+            CEP.ERR(SCCGWA, AICMSG_ERROR_MSG.AI_HOT_H_RVS_NOTN);
+        }
+        if (AIB5700_AWA_5700.HOT_FLG == 'H' 
+            && AIB5700_AWA_5700.SEQ == 999999) {
+            CEP.ERR(SCCGWA, AICMSG_ERROR_MSG.AI_HOT_H_SEQ_INVALID);
+        }
+        if (AICPQITM.OUTPUT_DATA.BAL_SIGN_FLG != 'B' 
+            && AICPQITM.OUTPUT_DATA.BAL_SIGN_FLG != AIB5700_AWA_5700.DC_CTL) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.BAL_SIGN_NOT_ITM;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void B020_UPD_REC_PROC() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, AICSCMIB);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.GL_BOOK);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.BR);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.ITM);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.SEQ);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.ITM_NM);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.AC_TYP);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.CCY_RNG);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.DC_CTL);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.BAL_OD);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.DTL_FLG);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.SUS_TYP);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.SW_TYP);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.SUS_TRM);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.SUS_UNIT);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.AC_EXPDT);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.ALW_AI);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.DIR);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.ONL_UPD);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.CARD_FLG);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.DR_LMT);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.CR_LMT);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.CHK_FLG);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.EFF_DT);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.EXP_DT);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.APP1);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.APP2);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.APP3);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.APP4);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.APP5);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.APP6);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.APP7);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.APP8);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.APP9);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.APP10);
+        AICSCMIB.FUNC = 'A';
+        AICSCMIB.GL_BOOK = AIB5700_AWA_5700.GL_BOOK;
+        AICSCMIB.BR = AIB5700_AWA_5700.BR;
+        AICSCMIB.ITM = AIB5700_AWA_5700.ITM;
+        AICSCMIB.SEQ = AIB5700_AWA_5700.SEQ;
+        AICSCMIB.CHS_NM = AIB5700_AWA_5700.ITM_NM;
+        AICSCMIB.AC_TYP = AIB5700_AWA_5700.AC_TYP;
+        AICSCMIB.CCY_LMT = AIB5700_AWA_5700.CCY_RNG;
+        AICSCMIB.BAL_DIR = AIB5700_AWA_5700.DC_CTL;
+        AICSCMIB.BAL_RFLG = AIB5700_AWA_5700.BAL_OD;
+        AICSCMIB.DTL_FLG = AIB5700_AWA_5700.DTL_FLG;
+        AICSCMIB.RVS_TYP = AIB5700_AWA_5700.SUS_TYP;
+        AICSCMIB.RVS_KND = AIB5700_AWA_5700.SW_TYP;
+        AICSCMIB.RVS_EXP = AIB5700_AWA_5700.SUS_TRM;
+        AICSCMIB.RVS_UNIT = AIB5700_AWA_5700.SUS_UNIT;
+        AICSCMIB.AC_EXP = AIB5700_AWA_5700.AC_EXPDT;
+        AICSCMIB.MANUAL_FLG = AIB5700_AWA_5700.ALW_AI;
+        AICSCMIB.AMT_DIR = AIB5700_AWA_5700.DIR;
+        AICSCMIB.ONL_FLG = AIB5700_AWA_5700.ONL_UPD;
+        AICSCMIB.CARD_FLG = AIB5700_AWA_5700.CARD_FLG;
+        AICSCMIB.HOT_FLG = AIB5700_AWA_5700.HOT_FLG;
+        AICSCMIB.DRLT_BAL = AIB5700_AWA_5700.DR_LMT;
+        AICSCMIB.CRLT_BAL = AIB5700_AWA_5700.CR_LMT;
+        AICSCMIB.BAL_CHK = AIB5700_AWA_5700.CHK_FLG;
+        AICSCMIB.APP1 = AIB5700_AWA_5700.APP1;
+        AICSCMIB.APP2 = AIB5700_AWA_5700.APP2;
+        AICSCMIB.APP3 = AIB5700_AWA_5700.APP3;
+        AICSCMIB.APP4 = AIB5700_AWA_5700.APP4;
+        AICSCMIB.APP5 = AIB5700_AWA_5700.APP5;
+        AICSCMIB.APP6 = AIB5700_AWA_5700.APP6;
+        AICSCMIB.APP7 = AIB5700_AWA_5700.APP7;
+        AICSCMIB.APP8 = AIB5700_AWA_5700.APP8;
+        AICSCMIB.APP9 = AIB5700_AWA_5700.APP9;
+        AICSCMIB.APP10 = AIB5700_AWA_5700.APP10;
+        AICSCMIB.EFF_DATE = AIB5700_AWA_5700.EFF_DT;
+        AICSCMIB.EXP_DATE = AIB5700_AWA_5700.EXP_DT;
+        AICSCMIB.STS = AIB5700_AWA_5700.STS;
+        CEP.TRC(SCCGWA, AICSCMIB.HOT_FLG);
+        CEP.TRC(SCCGWA, AICSCMIB.GL_BOOK);
+        CEP.TRC(SCCGWA, AICSCMIB.BR);
+        CEP.TRC(SCCGWA, AICSCMIB.ITM);
+        CEP.TRC(SCCGWA, AICSCMIB.SEQ);
+        S00_CALL_AIZSCMIB();
+    }
+    public void B011_CHECK_CHSNM_DATA() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, AIRCMIB);
+        WS_GLBOOK = AIB5700_AWA_5700.GL_BOOK;
+        WS_SEQ = AIB5700_AWA_5700.SEQ;
+        WS_ITM = AIB5700_AWA_5700.ITM;
+        AITCMIB_RD = new DBParm();
+        AITCMIB_RD.TableName = "AITCMIB";
+        AITCMIB_RD.where = "GL_BOOK = :WS_GLBOOK "
+            + "AND ITM = :WS_ITM "
+            + "AND SEQ = :WS_SEQ";
+        AITCMIB_RD.fst = true;
+        AITCMIB_RD.order = "DESC";
+        IBS.READ(SCCGWA, AIRCMIB, this, AITCMIB_RD);
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            CEP.TRC(SCCGWA, "FOUND1");
+        } else if (SCCGWA.COMM_AREA.DBIO_FLG == '1') {
+            CEP.TRC(SCCGWA, "NOT FOUND");
+        } else {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.MSG_TEXT_D.TABLE_NAME = TBL_AITCMIB;
+            SCCEXCP.MSG_TEXT.SYS_INFO = IBS.CLS2CPY(SCCGWA, SCCEXCP.MSG_TEXT.MSG_TEXT_D);
+            SCCEXCP.MSG_TEXT.MSG_TEXT_D.DB_FUNC = "READNEXT";
+            B_DB_EXCP();
+        }
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            CEP.TRC(SCCGWA, AIRCMIB);
+            CEP.TRC(SCCGWA, AIRCMIB.CHS_NM);
+            if (!AIB5700_AWA_5700.ITM_NM.equalsIgnoreCase(AIRCMIB.CHS_NM)) {
+                WS_ERR_MSG = AICMSG_ERROR_MSG.CMIB_CHSNM_NOTSAME;
+                S000_ERR_MSG_PROC();
+            }
+        }
+    }
+    public void S00_CALL_AIZPQITM() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "AI-P-INQ-ITM", AICPQITM);
+        CEP.TRC(SCCGWA, AICPQITM.RC);
+        CEP.TRC(SCCGWA, AICPQITM.OUTPUT_DATA.BAL_SIGN_FLG);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.DC_CTL);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.AC_TYP);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.SUS_TYP);
+        CEP.TRC(SCCGWA, AICPQITM.OUTPUT_DATA.BAL_SIGN_FLG);
+        CEP.TRC(SCCGWA, AICPQITM.OUTPUT_DATA.STS);
+        CEP.TRC(SCCGWA, AICPQITM.OUTPUT_DATA.EFF_DATE);
+        CEP.TRC(SCCGWA, AICPQITM.OUTPUT_DATA.EXP_DATE);
+        if (AICPQITM.RC.RTNCODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, AICPQITM.RC);
+            S000_ERR_MSG_PROC();
+        }
+        if (AICPQITM.OUTPUT_DATA.STS == 'C' 
+            || AICPQITM.OUTPUT_DATA.STS == 'H' 
+            || AICPQITM.OUTPUT_DATA.STS == 'S') {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_ITM_STS_ERROR;
+            S000_ERR_MSG_PROC();
+        }
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.EXP_DT);
+        if (AIB5700_AWA_5700.EXP_DT == 0) {
+            AIB5700_AWA_5700.EXP_DT = AICPQITM.OUTPUT_DATA.EXP_DATE;
+        }
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.EXP_DT);
+        if (AICPQITM.OUTPUT_DATA.RED_FLG == 'N') {
+            if (AIB5700_AWA_5700.BAL_OD != AICPQITM.OUTPUT_DATA.RED_FLG) {
+                WS_ERR_MSG = AICMSG_ERROR_MSG.RED_F_MUST_EQ_GL;
+                S000_ERR_MSG_PROC();
+            }
+        }
+        if ((AICPQITM.OUTPUT_DATA.BAL_SIGN_FLG == 'C' 
+            && AIB5700_AWA_5700.SUS_TYP == 'D') 
+            || (AICPQITM.OUTPUT_DATA.BAL_SIGN_FLG == 'D' 
+            && AIB5700_AWA_5700.SUS_TYP == 'C')) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.SUS_TYP_MUST_EQ_GL;
+            S000_ERR_MSG_PROC();
+        }
+        CEP.TRC(SCCGWA, AICPQITM.OUTPUT_DATA.ODE_FLG);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.ALW_AI);
+        if (AICPQITM.OUTPUT_DATA.ODE_FLG == 'N' 
+            && AIB5700_AWA_5700.ALW_AI == 'Y') {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_CAN_NOT_ODE;
+            S000_ERR_MSG_PROC();
+        }
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.AC_EXPDT);
+        CEP.TRC(SCCGWA, AIB5700_AWA_5700.EFF_DT);
+        if (AIB5700_AWA_5700.AC_EXPDT < AIB5700_AWA_5700.EFF_DT) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_EXPDT_LESS_EFFDT;
+            S000_ERR_MSG_PROC();
+        }
+        if (AIB5700_AWA_5700.AC_EXPDT > AICPQITM.OUTPUT_DATA.EXP_DATE) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_EXPDT_LESS_ITM_EXPDT;
+            S000_ERR_MSG_PROC();
+        }
+        if (AIB5700_AWA_5700.EFF_DT < AICPQITM.OUTPUT_DATA.EFF_DATE) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.GL_EFF_MUST_GT_CMIB;
+            S000_ERR_MSG_PROC();
+        }
+        if (AIB5700_AWA_5700.EXP_DT > AICPQITM.OUTPUT_DATA.EXP_DATE) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.GL_EXP_MUST_GT_CMIB;
+            S000_ERR_MSG_PROC();
+        }
+        if (AIB5700_AWA_5700.EXP_DT <= SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_EXP_MUST_GT_ACDT;
+            S000_ERR_MSG_PROC();
+        }
+        if (AIB5700_AWA_5700.AC_EXPDT < SCCGWA.COMM_AREA.AC_DATE) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AC_EXP_MUST_GT_AC_DT;
+            S000_ERR_MSG_PROC();
+        }
+        if (AIB5700_AWA_5700.AC_EXPDT < AIB5700_AWA_5700.EXP_DT) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AC_EXP_MUST_GT_EXP_DT;
+            S000_ERR_MSG_PROC();
+        }
+        if (AIB5700_AWA_5700.EFF_DT >= AIB5700_AWA_5700.EXP_DT) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.EFF_DT_MUST_GT_EXP_DT;
+            S000_ERR_MSG_PROC();
+        }
+        if (AICPQITM.OUTPUT_DATA.MIB_FLG == 'N' 
+            || (AICPQITM.OUTPUT_DATA.MIB_FLG == 'G' 
+            && AIB5700_AWA_5700.SEQ != 1)) {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.ITM_CANNOT_OPEN_CMIB;
+            S000_ERR_MSG_PROC();
+        }
+        if (AICPQITM.OUTPUT_DATA.MIB_FLG == 'G') {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_G_TO_MIB_AUTH;
+            S000_ERR_MSG_PROC();
+        }
+        if (AICPQITM.OUTPUT_DATA.MIB_FLG == 'G' 
+            && AIB5700_AWA_5700.SUS_TYP != 'N') {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_G_TO_MIB_NOTRVS;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void B010_1_GET_COA_FLG() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCQBKPM);
+        WS_REC_STATUS = 'N';
+        BPCQBKPM.FUNC = 'B';
+        S000_CALL_BPZQBKPM();
+        for (WS_BOOK_CNT = 1; WS_REC_STATUS != 'Y' 
+            && WS_BOOK_CNT <= 10; WS_BOOK_CNT += 1) {
+            if (BPCQBKPM.DATA[WS_BOOK_CNT-1].BOOK_FLG.equalsIgnoreCase(AIB5700_AWA_5700.GL_BOOK)) {
+                WS_COA_FLG = BPCQBKPM.DATA[WS_BOOK_CNT-1].COA_FLG.charAt(0);
+                WS_REC_STATUS = 'Y';
+            }
+        }
+        if (WS_REC_STATUS == 'N') {
+            CEP.ERR(SCCGWA, AICMSG_ERROR_MSG.GL_BOOK_NOT_VAL);
+        }
+    }
+    public void T000_READ_AITITUS() throws IOException,SQLException,Exception {
+        AITITUS_RD = new DBParm();
+        AITITUS_RD.TableName = "AITITUS";
+        IBS.READ(SCCGWA, AIRITUS, AITITUS_RD);
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            WS_CONSTANT.WS_DB2_REC_STATUS = 'F';
+        } else if (SCCGWA.COMM_AREA.DBIO_FLG == '1') {
+            WS_CONSTANT.WS_DB2_REC_STATUS = 'N';
+        } else {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_SYS_ERR;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_CALL_BPZQBKPM() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-Q-MAINT-AMBKP", BPCQBKPM);
+        CEP.TRC(SCCGWA, BPCQBKPM.RC.RC_RTNCODE);
+        if (BPCQBKPM.RC.RC_RTNCODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCQBKPM.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S00_CALL_BPZPQORG() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "BP-P-INQ-ORG", BPCPQORG);
+        CEP.TRC(SCCGWA, BPCPQORG.RC.RC_CODE);
+        if (BPCPQORG.RC.RC_CODE != 0) {
+            WS_ERR_MSG = IBS.CLS2CPY(SCCGWA, BPCPQORG.RC);
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S00_CALL_AIZSCMIB() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "AI-S-MAIN-CMIB", AICSCMIB);
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_ERR_MSG);
+    }
+    public void T000_STARTBR_AITITUS_FIRST() throws IOException,SQLException,Exception {
+        AITITUS_RD = new DBParm();
+        AITITUS_RD.TableName = "AITITUS";
+        AITITUS_RD.where = "COA_FLG = :AIRITUS.KEY.COA_FLG "
+            + "AND ITM_NO = :AIRITUS.KEY.ITM_NO "
+            + "AND BR < > :AIRITUS.KEY.BR";
+        AITITUS_RD.fst = true;
+        IBS.READ(SCCGWA, AIRITUS, this, AITITUS_RD);
+        if (SCCGWA.COMM_AREA.DBIO_FLG == '0') {
+            WS_CONSTANT.WS_DB2_REC_STATUS = 'F';
+        } else if (SCCGWA.COMM_AREA.DBIO_FLG == '1') {
+            WS_CONSTANT.WS_DB2_REC_STATUS = 'N';
+        } else {
+            WS_ERR_MSG = AICMSG_ERROR_MSG.AI_SYS_ERR;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void S000_ERR_MSG_PROC_CONTINUE() throws IOException,SQLException,Exception {
+        CEP.ERRC(SCCGWA, WS_ERR_MSG, WS_FLD_NO);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

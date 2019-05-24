@@ -1,0 +1,7 @@
+package com.hisun.BP;
+
+public class BPCTIFAV {
+    public BPCTIFAV_RC RC = new BPCTIFAV_RC();
+    public BPCTIFAV_INPUT_AREA INPUT_AREA = new BPCTIFAV_INPUT_AREA();
+    public BPCTIFAV_OUTPUT_AREA OUTPUT_AREA = new BPCTIFAV_OUTPUT_AREA();
+}

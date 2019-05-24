@@ -1,0 +1,154 @@
+package com.hisun.TD;
+
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class TDOT1130 {
+    String WS_MSGID = " ";
+    TDCMSG_ERROR_MSG TDCMSG_ERROR_MSG = new TDCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCMSG SCCMSG = new SCCMSG();
+    SCCFMT SCCFMT = new SCCFMT();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCBINF SCCBINF = new SCCBINF();
+    TDCTDHC TDCTDHC = new TDCTDHC();
+    SCCGWA SCCGWA;
+    TDB1110_AWA_1110 TDB1110_AWA_1110;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "TDOT1130 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "TDB1110_AWA_1110>");
+        TDB1110_AWA_1110 = (TDB1110_AWA_1110) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B010_CHECK_INPUT();
+        B030_GET_LIST();
+    }
+    public void B010_CHECK_INPUT() throws IOException,SQLException,Exception {
+        if (TDB1110_AWA_1110.PROD_CD.trim().length() == 0) {
+            WS_MSGID = TDCMSG_ERROR_MSG.TD_PRD_NOT_MATCH;
+            S000_ERR_MSG_PROC();
+        }
+        if (TDB1110_AWA_1110.BV_TYP == ' ') {
+            WS_MSGID = TDCMSG_ERROR_MSG.TD_BV_TYP_ERR;
+            S000_ERR_MSG_PROC();
+        }
+        if (TDB1110_AWA_1110.ID_TYP.equalsIgnoreCase("0")) {
+            WS_MSGID = TDCMSG_ERROR_MSG.TD_ID_TYPE_ERROR;
+            S000_ERR_MSG_PROC();
+        }
+        if (TDB1110_AWA_1110.ID_NO.equalsIgnoreCase("0")) {
+            WS_MSGID = TDCMSG_ERROR_MSG.TD_ID_NO_MST_IPT;
+            S000_ERR_MSG_PROC();
+        }
+        if (TDB1110_AWA_1110.CI_NO.trim().length() == 0) {
+            WS_MSGID = TDCMSG_ERROR_MSG.TD_CI_ID_NO_ERROR;
+            S000_ERR_MSG_PROC();
+        }
+        if (TDB1110_AWA_1110.CCY.trim().length() == 0) {
+            WS_MSGID = TDCMSG_ERROR_MSG.TD_CCY_NOT_MATCH;
+            S000_ERR_MSG_PROC();
+        }
+        CEP.TRC(SCCGWA, TDB1110_AWA_1110.BV_TYP);
+        if (TDB1110_AWA_1110.BV_TYP == '4') {
+            TDB1110_AWA_1110.DRAW_MTH = '1';
+        }
+        if (TDB1110_AWA_1110.DRAW_MTH == ' ') {
+            WS_MSGID = TDCMSG_ERROR_MSG.TD_INVALID_DRAW_MTH;
+            S000_ERR_MSG_PROC();
+        }
+        if (TDB1110_AWA_1110.TXN_AMT == 0) {
+            WS_MSGID = TDCMSG_ERROR_MSG.TD_INVALID_IPT;
+            S000_ERR_MSG_PROC();
+        }
+        if (TDB1110_AWA_1110.VAL_DT == 0) {
+            WS_MSGID = TDCMSG_ERROR_MSG.TD_INVALID_VAL_DT;
+            S000_ERR_MSG_PROC();
+        }
+        if (TDB1110_AWA_1110.CT_FLG == ' ') {
+            WS_MSGID = TDCMSG_ERROR_MSG.TD_INVALID_CT_FLG;
+            S000_ERR_MSG_PROC();
+        }
+    }
+    public void B030_GET_LIST() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, TDB1110_AWA_1110.ID_NO);
+        CEP.TRC(SCCGWA, TDB1110_AWA_1110.CI_NO);
+        CEP.TRC(SCCGWA, TDB1110_AWA_1110.AC_TRK2);
+        CEP.TRC(SCCGWA, TDB1110_AWA_1110.AC_TRK3);
+        CEP.TRC(SCCGWA, TDB1110_AWA_1110.OPP_TRK2);
+        CEP.TRC(SCCGWA, TDB1110_AWA_1110.OPP_TRK3);
+        IBS.init(SCCGWA, TDCTDHC);
+        TDCTDHC.PROD_CD = TDB1110_AWA_1110.PROD_CD;
+        TDCTDHC.BV_CD = TDB1110_AWA_1110.BV_CD;
+        TDCTDHC.BV_TYP = TDB1110_AWA_1110.BV_TYP;
+        TDCTDHC.PRT_FLG = TDB1110_AWA_1110.PRT_FLG;
+        TDCTDHC.BV_NO = TDB1110_AWA_1110.BV_NO;
+        TDCTDHC.MAIN_AC = TDB1110_AWA_1110.MAIN_AC;
+        TDCTDHC.CARD_NO = TDB1110_AWA_1110.CARD_NO;
+        TDCTDHC.CVV = TDB1110_AWA_1110.CVV;
+        TDCTDHC.ID_TYP = TDB1110_AWA_1110.ID_TYP;
+        TDCTDHC.ID_NO = TDB1110_AWA_1110.ID_NO;
+        TDCTDHC.CI_NO = TDB1110_AWA_1110.CI_NO;
+        TDCTDHC.NAME = TDB1110_AWA_1110.NAME;
+        TDCTDHC.ADDR = TDB1110_AWA_1110.ADDR;
+        TDCTDHC.TEL = TDB1110_AWA_1110.TEL;
+        TDCTDHC.CCY = TDB1110_AWA_1110.CCY;
+        TDCTDHC.CCY_TYP = TDB1110_AWA_1110.CCY_TYP;
+        TDCTDHC.FC_CD = TDB1110_AWA_1110.FC_CD;
+        TDCTDHC.TXN_AMT = TDB1110_AWA_1110.TXN_AMT;
+        TDCTDHC.DRAW_MTH = TDB1110_AWA_1110.DRAW_MTH;
+        TDCTDHC.CUS_PSW_FLG = TDB1110_AWA_1110.PSW_FLG;
+        TDCTDHC.PSW = TDB1110_AWA_1110.PSW;
+        TDCTDHC.CROS_DR_FLG = TDB1110_AWA_1110.CS_D_FLG;
+        TDCTDHC.VAL_DT = TDB1110_AWA_1110.VAL_DT;
+        TDCTDHC.REMARK = TDB1110_AWA_1110.REMARK;
+        TDCTDHC.CT_FLG = TDB1110_AWA_1110.CT_FLG;
+        TDCTDHC.OPP_AC = TDB1110_AWA_1110.OPP_AC;
+        TDCTDHC.OPP_BV_NO = TDB1110_AWA_1110.OPP_BVNO;
+        TDCTDHC.OPP_CARD_NO = TDB1110_AWA_1110.OPP_CANO;
+        TDCTDHC.OPP_NAME = TDB1110_AWA_1110.OPP_NAME;
+        TDCTDHC.OPP_REV_NO = TDB1110_AWA_1110.OPP_RVNO;
+        TDCTDHC.OPP_DRAW_MTH = TDB1110_AWA_1110.OPP_DWMH;
+        TDCTDHC.OPP_PSW = TDB1110_AWA_1110.OPP_PSW;
+        TDCTDHC.OPP_ID_TYP = TDB1110_AWA_1110.OPP_IDTP;
+        TDCTDHC.OPP_ID_NO = TDB1110_AWA_1110.OPP_ID;
+        TDCTDHC.CHQ_TYPE = TDB1110_AWA_1110.CHQ_TYPE;
+        TDCTDHC.CHQ_NO = TDB1110_AWA_1110.CHQ_NO;
+        TDCTDHC.CHQ_DATE = TDB1110_AWA_1110.CHQ_DATE;
+        TDCTDHC.PAY_PSW = TDB1110_AWA_1110.PAY_PSW;
+        TDCTDHC.TXN_CHNL = TDB1110_AWA_1110.TXN_CHNL;
+        TDCTDHC.TXN_PNT = TDB1110_AWA_1110.TXN_PNT;
+        TDCTDHC.AC = TDB1110_AWA_1110.AC;
+        TDCTDHC.CALR_STD = TDB1110_AWA_1110.CALR_STD;
+        TDCTDHC.PSBK_SEQ = TDB1110_AWA_1110.PSBK_SEQ;
+        TDCTDHC.AG_BR = TDB1110_AWA_1110.AG_BR;
+        TDCTDHC.AC_TRK2 = TDB1110_AWA_1110.AC_TRK2;
+        TDCTDHC.AC_TRK3 = TDB1110_AWA_1110.AC_TRK3;
+        TDCTDHC.OPP_TRK2 = TDB1110_AWA_1110.OPP_TRK2;
+        TDCTDHC.OPP_TRK3 = TDB1110_AWA_1110.OPP_TRK3;
+        S000_CALL_TDZTDHC();
+        CEP.TRC(SCCGWA, TDCTDHC.AC);
+        TDB1110_AWA_1110.AC = TDCTDHC.AC;
+    }
+    public void S000_CALL_TDZTDHC() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "TD-TDH-CR", TDCTDHC);
+    }
+    public void S000_ERR_MSG_PROC() throws IOException,SQLException,Exception {
+        CEP.ERR(SCCGWA, WS_MSGID, SCCBINF);
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

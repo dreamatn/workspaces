@@ -1,0 +1,6 @@
+package com.hisun.CM;
+
+public class CMZS9970_WS_HOST_FNAME_INFO {
+    String CMZS9970_FILLER19 = "MO=";
+    CMZS9970_WS_RTN_FILE WS_RTN_FILE = new CMZS9970_WS_RTN_FILE();
+}

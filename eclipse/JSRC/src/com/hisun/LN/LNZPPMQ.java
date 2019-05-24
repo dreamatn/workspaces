@@ -1,0 +1,580 @@
+package com.hisun.LN;
+
+import com.hisun.SC.*;
+import com.hisun.BP.*;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class LNZPPMQ {
+    String JIBS_tmp_str[] = new String[10];
+    boolean pgmRtn = false;
+    String K_MDLPM_CODE = "LN";
+    LNZPPMQ_WS_PRM_KEY WS_PRM_KEY = new LNZPPMQ_WS_PRM_KEY();
+    LNZPPMQ_WS_RELETE_PROD WS_RELETE_PROD = new LNZPPMQ_WS_RELETE_PROD();
+    LNZPPMQ_WS_RELETE_CONTRACT WS_RELETE_CONTRACT = new LNZPPMQ_WS_RELETE_CONTRACT();
+    String WS_CHANG_WAY = " ";
+    char WS_UPDATE_FLG = ' ';
+    char WS_FOUND_FLG = ' ';
+    char WS_CMMT_EXIST_FLG = ' ';
+    LNRCMMT LNRCMMT = new LNRCMMT();
+    LNRCONT LNRCONT = new LNRCONT();
+    LNCMSG_ERROR_MSG LNCMSG_ERROR_MSG = new LNCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCCKDT SCCCKDT = new SCCCKDT();
+    SCCCLDT SCCCLDT = new SCCCLDT();
+    LNCLOANM LNCLOANM = new LNCLOANM();
+    LNCCTLPM LNCCTLPM = new LNCCTLPM();
+    LNCAPRDM LNCAPRDM = new LNCAPRDM();
+    BPCSCGWY BPCSCGWY = new BPCSCGWY();
+    LNCMDLPM LNCMDLPM = new LNCMDLPM();
+    LNCCMTPM LNCCMTPM = new LNCCMTPM();
+    LNCRCMMT LNCRCMMT = new LNCRCMMT();
+    LNCRCONT LNCRCONT = new LNCRCONT();
+    LNRAGRE LNRAGRE = new LNRAGRE();
+    SCCGWA SCCGWA;
+    LNCPPMQ LNCPPMQ;
+    public void MP(SCCGWA SCCGWA, LNCPPMQ LNCPPMQ) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.LNCPPMQ = LNCPPMQ;
+        CEP.TRC(SCCGWA);
+        A00_INIT_PROC();
+        if (pgmRtn) return;
+        B00_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, "LNZPPMQ return!");
+        Z_RET();
+        if (pgmRtn) return;
+    }
+    public void A00_INIT_PROC() throws IOException,SQLException,Exception {
+        LNCPPMQ.RC.RC_APP = "LN";
+        LNCPPMQ.RC.RC_RTNCODE = 0;
+        CEP.TRC(SCCGWA, LNCPPMQ.KEY.KEY_VALUE.CONTRACT_NO);
+        CEP.TRC(SCCGWA, LNCPPMQ.KEY.KEY_VALUE.PROD_CD);
+    }
+    public void B00_MAIN_PROC() throws IOException,SQLException,Exception {
+        B000_CHECK();
+        if (pgmRtn) return;
+        if (LNCPPMQ.KEY.KEY_METH != ' ') {
+            B100_SET_RELATE_PROD();
+            if (pgmRtn) return;
+        }
+        B100_GET_RELATE_DATA();
+        if (pgmRtn) return;
+        B100_MAIN_PROC();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CMT);
+        CEP.TRC(SCCGWA, LNCCTLPM.DATA_TXT);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT);
+        B000_DUMP();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PROD_MOD);
+    }
+    public void B000_CHECK() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, LNCPPMQ.KEY.REQ_INSTRUCT.REQ_MODULE_PARM);
+        if ((LNCPPMQ.KEY.REQ_INSTRUCT.REQ_MODULE_PARM != 'Y' 
+            && LNCPPMQ.KEY.REQ_INSTRUCT.REQ_MODULE_PARM != 'N')) {
+            CEP.TRC(SCCGWA, "PPMQ-REQ-MOD-VALID ERROR:");
+            CEP.TRC(SCCGWA, LNCPPMQ.KEY.REQ_INSTRUCT.REQ_MODULE_PARM);
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_FUNC_CODE, LNCPPMQ.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        if ((LNCPPMQ.KEY.REQ_INSTRUCT.REQ_COMMIT_PARM != 'Y' 
+            && LNCPPMQ.KEY.REQ_INSTRUCT.REQ_COMMIT_PARM != 'N')) {
+            CEP.TRC(SCCGWA, "PPMQ-REQ-CMT-VALID ERROR:");
+            CEP.TRC(SCCGWA, LNCPPMQ.KEY.REQ_INSTRUCT.REQ_COMMIT_PARM);
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_FUNC_CODE, LNCPPMQ.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        if ((LNCPPMQ.KEY.REQ_INSTRUCT.REQ_CONTRACT_PARM != 'Y' 
+            && LNCPPMQ.KEY.REQ_INSTRUCT.REQ_CONTRACT_PARM != 'N')) {
+            CEP.TRC(SCCGWA, "PPMQ-REQ-CMT-VALID ERROR:");
+            CEP.TRC(SCCGWA, LNCPPMQ.KEY.REQ_INSTRUCT.REQ_CONTRACT_PARM);
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_FUNC_CODE, LNCPPMQ.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        if (LNCPPMQ.KEY.REQ_INSTRUCT.REQ_MODULE_PARM == 'N' 
+            && LNCPPMQ.KEY.REQ_INSTRUCT.REQ_COMMIT_PARM == 'N' 
+            && LNCPPMQ.KEY.REQ_INSTRUCT.REQ_CONTRACT_PARM == 'N') {
+            CEP.TRC(SCCGWA, "MUST SET REQUIRE PARM.   ");
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_FUNC_CODE, LNCPPMQ.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        if ((LNCPPMQ.KEY.KEY_METH != 'P' 
+            && LNCPPMQ.KEY.KEY_METH != 'C')) {
+            CEP.TRC(SCCGWA, "PPMQ-SELECT-VALID  ERROR:");
+            CEP.TRC(SCCGWA, LNCPPMQ.KEY.KEY_METH);
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_FUNC_CODE, LNCPPMQ.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        if (LNCPPMQ.KEY.KEY_METH != ' ') {
+            if ((LNCPPMQ.KEY.KEY_VALUE.LEVEL != 'C' 
+                && LNCPPMQ.KEY.KEY_VALUE.LEVEL != 'D')) {
+                CEP.TRC(SCCGWA, "PPMQ-LEVEL-VALID   ERROR:");
+                CEP.TRC(SCCGWA, LNCPPMQ.KEY.KEY_VALUE.LEVEL);
+                IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_FUNC_CODE, LNCPPMQ.RC);
+                Z_RET();
+                if (pgmRtn) return;
+            }
+            if (LNCPPMQ.KEY.KEY_VALUE.LEVEL == 'C' 
+                && LNCPPMQ.KEY.REQ_INSTRUCT.REQ_CONTRACT_PARM == 'Y') {
+                CEP.TRC(SCCGWA, "PPMQ-REQ-CRT-PARM-Y ERR:");
+                CEP.TRC(SCCGWA, LNCPPMQ.KEY.KEY_VALUE.LEVEL);
+                IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_FUNC_CODE, LNCPPMQ.RC);
+                Z_RET();
+                if (pgmRtn) return;
+            }
+            if (LNCPPMQ.KEY.KEY_METH == 'P' 
+                && ((LNCPPMQ.KEY.KEY_VALUE.LEVEL == 'C' 
+                && LNCPPMQ.KEY.REQ_INSTRUCT.REQ_CONTRACT_PARM == 'Y') 
+                || (LNCPPMQ.KEY.KEY_VALUE.LEVEL == 'D' 
+                && LNCPPMQ.KEY.REQ_INSTRUCT.REQ_COMMIT_PARM == 'Y'))) {
+                CEP.TRC(SCCGWA, "PPMQ-REQ-PARM ERROR:    ");
+                CEP.TRC(SCCGWA, LNCPPMQ.KEY.KEY_VALUE.LEVEL);
+                IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_FUNC_CODE, LNCPPMQ.RC);
+                Z_RET();
+                if (pgmRtn) return;
+            }
+        } else {
+            if (LNCPPMQ.KEY.REQ_INSTRUCT.REQ_COMMIT_PARM == 'Y' 
+                || LNCPPMQ.KEY.REQ_INSTRUCT.REQ_CONTRACT_PARM == 'Y') {
+                CEP.TRC(SCCGWA, "NEED SET PRODUCT OR CONT:");
+                CEP.TRC(SCCGWA, LNCPPMQ.KEY.KEY_VALUE.LEVEL);
+                IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_FUNC_CODE, LNCPPMQ.RC);
+                Z_RET();
+                if (pgmRtn) return;
+            }
+        }
+        if (LNCPPMQ.KEY.KEY_METH == 'P' 
+            && LNCPPMQ.KEY.KEY_VALUE.PROD_CD.trim().length() == 0) {
+            CEP.TRC(SCCGWA, "SELECT BY PROD AND NO PROD.");
+            CEP.TRC(SCCGWA, LNCPPMQ.KEY.KEY_METH);
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_FUNC_CODE, LNCPPMQ.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        if (LNCPPMQ.KEY.KEY_METH == 'C' 
+            && LNCPPMQ.KEY.KEY_VALUE.CONTRACT_NO.trim().length() == 0) {
+            CEP.TRC(SCCGWA, "SELECT BY CONTRACT AND NO CONT.");
+            CEP.TRC(SCCGWA, LNCPPMQ.KEY.KEY_METH);
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_FUNC_CODE, LNCPPMQ.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void B100_SET_RELATE_PROD() throws IOException,SQLException,Exception {
+        if (LNCPPMQ.KEY.KEY_METH == 'P') {
+            if (LNCPPMQ.KEY.KEY_VALUE.LEVEL == 'C') {
+                WS_RELETE_PROD.WS_REL_CMT_PROD = LNCPPMQ.KEY.KEY_VALUE.PROD_CD;
+            } else {
+                WS_RELETE_PROD.WS_REL_DD_PROD = LNCPPMQ.KEY.KEY_VALUE.PROD_CD;
+            }
+        }
+        if (LNCPPMQ.KEY.KEY_METH == 'C') {
+            if (LNCPPMQ.KEY.KEY_VALUE.LEVEL == 'C') {
+                WS_RELETE_CONTRACT.WS_REL_CMT_CONT = LNCPPMQ.KEY.KEY_VALUE.CONTRACT_NO;
+                B100_GET_CMMT_INF();
+                if (pgmRtn) return;
+                WS_RELETE_PROD.WS_REL_CMT_PROD = LNRCMMT.PROD_CD;
+            } else {
+                WS_RELETE_CONTRACT.WS_REL_DD_CONT = LNCPPMQ.KEY.KEY_VALUE.CONTRACT_NO;
+                B100_GET_CONT_INF();
+                if (pgmRtn) return;
+                WS_RELETE_PROD.WS_REL_DD_PROD = LNRCONT.PROD_CD;
+                if (LNCPPMQ.KEY.REQ_INSTRUCT.REQ_COMMIT_PARM == 'Y') {
+                    if (WS_CMMT_EXIST_FLG == 'Y') {
+                        WS_RELETE_CONTRACT.WS_REL_CMT_CONT = LNRCONT.FATHER_CONTRACT;
+                        B100_GET_CMMT_INF();
+                        if (pgmRtn) return;
+                        WS_RELETE_PROD.WS_REL_CMT_PROD = LNRCMMT.PROD_CD;
+                    } else {
+                        CEP.TRC(SCCGWA, "PPMQ-REQ-CMT-INVALID, CHANGE TO NONE ");
+                        LNCPPMQ.KEY.REQ_INSTRUCT.REQ_COMMIT_PARM = 'N';
+                    }
+                }
+            }
+        }
+    }
+    public void B100_GET_RELATE_DATA() throws IOException,SQLException,Exception {
+        if (LNCPPMQ.KEY.REQ_INSTRUCT.REQ_MODULE_PARM == 'Y') {
+            B100_GET_MDL_DATA();
+            if (pgmRtn) return;
+        }
+        if (LNCPPMQ.KEY.REQ_INSTRUCT.REQ_COMMIT_PARM == 'Y') {
+            B100_GET_CMT_DATA();
+            if (pgmRtn) return;
+        }
+        if (LNCPPMQ.KEY.REQ_INSTRUCT.REQ_CONTRACT_PARM == 'Y') {
+            B100_GET_LOAN_DATA();
+            if (pgmRtn) return;
+        }
+    }
+    public void B100_GET_MDL_DATA() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCMDLPM);
+        LNCMDLPM.FUNC = 'I';
+        LNCMDLPM.KEY.TYPE = "LNMDL";
+        LNCMDLPM.KEY.CODE = K_MDLPM_CODE;
+        CEP.TRC(SCCGWA, LNCMDLPM.FUNC);
+        CEP.TRC(SCCGWA, LNCMDLPM.KEY);
+        S000_CALL_LNZMDLPM();
+        if (pgmRtn) return;
+    }
+    public void B100_GET_CMT_DATA() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCSCGWY);
+        CEP.TRC(SCCGWA, LNCPPMQ.VOUCH_TYP);
+        if (LNCPPMQ.KEY.KEY_VALUE.CONTRACT_NO.trim().length() > 0 
+            && !LNRCONT.CONTRACT_TYPE.equalsIgnoreCase("CLDL") 
+            && !LNRCONT.CONTRACT_TYPE.equalsIgnoreCase("CLDP")) {
+            BPCSCGWY.CHANG_WAY = WS_CHANG_WAY;
+            LNCPPMQ.VOUCH_TYP = WS_CHANG_WAY;
+        } else {
+            BPCSCGWY.CHANG_WAY = LNCPPMQ.VOUCH_TYP;
+        }
+        BPCSCGWY.CHANG_WAY = " ";
+        CEP.TRC(SCCGWA, BPCSCGWY.PRDT_CODE);
+        BPCSCGWY.PRDT_CODE = LNCPPMQ.KEY.KEY_VALUE.PROD_CD;
+        BPCSCGWY.FUNC = 'Q';
+        WS_PRM_KEY.WS_PRM_CD = "CLDD000001";
+        CEP.TRC(SCCGWA, WS_PRM_KEY.WS_PRM_CD);
+        if (WS_PRM_KEY.WS_PRM_CD.trim().length() == 0) {
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_PROD_NOTFND, LNCPPMQ.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        IBS.init(SCCGWA, LNCCMTPM);
+        LNCCMTPM.FUNC = 'I';
+        LNCCMTPM.KEY.TYPE = "PRDPR";
+        LNCCMTPM.KEY.CODE = WS_PRM_KEY.WS_PRM_CD;
+        CEP.TRC(SCCGWA, LNCCMTPM.KEY.CODE);
+        S000_CALL_LNZCMTPM();
+        if (pgmRtn) return;
+    }
+    public void B100_GET_LOAN_DATA() throws IOException,SQLException,Exception {
+        B100_GET_CTLPM_INF();
+        if (pgmRtn) return;
+        if (LNCPPMQ.KEY.KEY_METH == 'C') {
+            B100_GET_APRD_INF();
+            if (pgmRtn) return;
+        }
+    }
+    public void B100_GET_CMMT_INF() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCRCMMT);
+        IBS.init(SCCGWA, LNRCMMT);
+        LNCRCMMT.FUNC = 'I';
+        LNRCMMT.KEY.CONTRACT_NO = WS_RELETE_CONTRACT.WS_REL_CMT_CONT;
+        LNCRCMMT.REC_PTR = LNRCMMT;
+        LNCRCMMT.REC_LEN = 1235;
+        S000_CALL_LNZRCMMT();
+        if (pgmRtn) return;
+    }
+    public void B100_GET_CONT_INF() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCRCONT);
+        IBS.init(SCCGWA, LNRCONT);
+        LNCRCONT.FUNC = 'I';
+        LNRCONT.KEY.CONTRACT_NO = WS_RELETE_CONTRACT.WS_REL_DD_CONT;
+        LNCRCONT.REC_PTR = LNRCONT;
+        LNCRCONT.REC_LEN = 416;
+        S000_CALL_LNZRCONT();
+        if (pgmRtn) return;
+        WS_CHANG_WAY = " ";
+        if (LNRCONT.FATHER_CONTRACT.trim().length() == 0) {
+            WS_CMMT_EXIST_FLG = 'N';
+        } else {
+            WS_CMMT_EXIST_FLG = 'N';
+        }
+    }
+    public void B100_GET_APRD_INF() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, LNCAPRDM);
+        LNCAPRDM.FUNC = '3';
+        LNCAPRDM.REC_DATA.KEY.CONTRACT_NO = WS_RELETE_CONTRACT.WS_REL_DD_CONT;
+        if (!LNRCONT.CONTRACT_TYPE.equalsIgnoreCase("CLDP")) {
+            S000_CALL_LNZAPRDM();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, LNCAPRDM.REC_DATA.P_GRACE_TERM);
+    }
+    public void B100_GET_CTLPM_INF() throws IOException,SQLException,Exception {
+        IBS.init(SCCGWA, BPCSCGWY);
+        CEP.TRC(SCCGWA, LNCPPMQ.VOUCH_TYP);
+        CEP.TRC(SCCGWA, LNCPPMQ.KEY.KEY_VALUE.CONTRACT_NO);
+        if (LNCPPMQ.KEY.KEY_VALUE.CONTRACT_NO.trim().length() > 0 
+            && !LNRCONT.CONTRACT_TYPE.equalsIgnoreCase("CLDL") 
+            && !LNRCONT.CONTRACT_TYPE.equalsIgnoreCase("CLDP")) {
+            CEP.TRC(SCCGWA, "YE000");
+            BPCSCGWY.CHANG_WAY = WS_CHANG_WAY;
+            LNCPPMQ.VOUCH_TYP = WS_CHANG_WAY;
+        } else {
+            CEP.TRC(SCCGWA, "YE001");
+            BPCSCGWY.CHANG_WAY = LNCPPMQ.VOUCH_TYP;
+        }
+        BPCSCGWY.CHANG_WAY = " ";
+        BPCSCGWY.PRDT_CODE = WS_RELETE_PROD.WS_REL_DD_PROD;
+        BPCSCGWY.FUNC = 'Q';
+        CEP.TRC(SCCGWA, BPCSCGWY.CHANG_WAY);
+        CEP.TRC(SCCGWA, BPCSCGWY.PRDT_CODE);
+        BPCSCGWY.PARM_CODE = "CLDDC00001";
+        if (BPCSCGWY.PARM_CODE.trim().length() == 0) {
+            IBS.CPY2CLS(SCCGWA, LNCMSG_ERROR_MSG.LN_ERR_PROD_NOTFND, LNCPPMQ.RC);
+            Z_RET();
+            if (pgmRtn) return;
+        }
+        CEP.TRC(SCCGWA, BPCSCGWY.PARM_CODE);
+        IBS.init(SCCGWA, LNCCTLPM);
+        LNCCTLPM.FUNC = 'I';
+        LNCCTLPM.KEY.TYP = "PRDPR";
+        LNCCTLPM.KEY.CD = BPCSCGWY.PARM_CODE;
+        CEP.TRC(SCCGWA, BPCSCGWY.PARM_CODE);
+        CEP.TRC(SCCGWA, LNCCTLPM.KEY.CD);
+        S000_CALL_LNZCTLPM();
+        if (pgmRtn) return;
+        CEP.TRC(SCCGWA, LNCCTLPM.DATA_TXT.PRODMO);
+    }
+    public void B100_MAIN_PROC() throws IOException,SQLException,Exception {
+        if (LNCPPMQ.KEY.REQ_INSTRUCT.REQ_MODULE_PARM == 'Y') {
+            B150_MOVE_MDLP();
+            if (pgmRtn) return;
+        }
+        if (LNCPPMQ.KEY.REQ_INSTRUCT.REQ_COMMIT_PARM == 'Y') {
+            B180_MOVE_CMTPM();
+            if (pgmRtn) return;
+        }
+        if (LNCPPMQ.KEY.REQ_INSTRUCT.REQ_CONTRACT_PARM == 'Y') {
+            B110_MOVE_CTLPM();
+            if (pgmRtn) return;
+            if (LNCPPMQ.KEY.KEY_METH == 'C') {
+                B120_MOVE_APRDM();
+                if (pgmRtn) return;
+            }
+        }
+    }
+    public void B150_MOVE_MDLP() throws IOException,SQLException,Exception {
+        LNCPPMQ.DATA_EFF_DEFINE.DATA_MDL_DEFINE.GET_MDL_STS = 'Y';
+        LNCPPMQ.DATA_EFF_DEFINE.DATA_MDL_DEFINE.EFF_DATE_MDL = LNCMDLPM.EFF_DATE;
+        LNCPPMQ.DATA_EFF_DEFINE.DATA_MDL_DEFINE.EXP_DATE_MDL = LNCMDLPM.EXP_DATE;
+        JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, LNCMDLPM.DATA_TXT);
+        IBS.CPY2CLS(SCCGWA, JIBS_tmp_str[0], LNCPPMQ.DATA_MDL);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_MDL);
+    }
+    public void B180_MOVE_CMTPM() throws IOException,SQLException,Exception {
+        LNCPPMQ.DATA_EFF_DEFINE.DATA_CMT_DEFINE.GET_CMT_STS = 'Y';
+        LNCPPMQ.DATA_EFF_DEFINE.DATA_CMT_DEFINE.EFF_DATE_CMT = LNCCMTPM.EFF_DATE;
+        LNCPPMQ.DATA_EFF_DEFINE.DATA_CMT_DEFINE.EXP_DATE_CMT = LNCCMTPM.EXP_DATE;
+        LNCPPMQ.DATA_CMT.PRODMOC = LNCCMTPM.DATA_TXT.PRODMO;
+        LNCPPMQ.DATA_CMT.PRODC_MOD = LNCCMTPM.DATA_TXT.PROD_MOD;
+        LNCPPMQ.DATA_CMT.CMT_BAL_FLG = LNCCMTPM.DATA_TXT.BAL_FLG;
+        LNCPPMQ.DATA_CMT.CMT_PROD_CLS = LNCCMTPM.DATA_TXT.PROD_CLS;
+        LNCPPMQ.DATA_CMT.CMT_SYS_FLG = LNCCMTPM.DATA_TXT.SYS_FLG;
+        LNCPPMQ.DATA_CMT.CMT_OVER_FLG = LNCCMTPM.DATA_TXT.OVER_FLG;
+        LNCPPMQ.DATA_CMT.AUTO_FLG = LNCCMTPM.DATA_TXT.AUTO_DISB;
+        LNCPPMQ.DATA_CMT.ADV_CODE = LNCCMTPM.DATA_TXT.ADV_CODE;
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_EFF_DEFINE.DATA_CMT_DEFINE.EFF_DATE_CMT);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_EFF_DEFINE.DATA_CMT_DEFINE.EXP_DATE_CMT);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CMT);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CMT.PRODMOC);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CMT.PRODC_MOD);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CMT.CMT_BAL_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CMT.CMT_PROD_CLS);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CMT.CMT_SYS_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CMT.CMT_OVER_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CMT.AUTO_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CMT.ADV_CODE);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CMT);
+    }
+    public void B110_MOVE_CTLPM() throws IOException,SQLException,Exception {
+        LNCPPMQ.DATA_EFF_DEFINE.DATA_TXT_DEFINE.GET_CTR_STS = 'Y';
+        LNCPPMQ.DATA_EFF_DEFINE.DATA_TXT_DEFINE.EFF_DATE = LNCCTLPM.EFF_DATE;
+        LNCPPMQ.DATA_EFF_DEFINE.DATA_TXT_DEFINE.EXP_DATE = LNCCTLPM.EXP_DATE;
+        LNCPPMQ.DATA_TXT.PRODMO = LNCCTLPM.DATA_TXT.PRODMO;
+        CEP.TRC(SCCGWA, "NCB000");
+        CEP.TRC(SCCGWA, LNCCTLPM.DATA_TXT.PRODMO);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PRODMO);
+        LNCPPMQ.DATA_TXT.PROD_MOD = LNCCTLPM.DATA_TXT.PROD_MOD;
+        LNCPPMQ.DATA_TXT.PROD_CLS = LNCCTLPM.DATA_TXT.PROD_CLS;
+        LNCPPMQ.DATA_TXT.ACCRUAL_TYPE = LNCCTLPM.DATA_TXT.ACCRUAL_TYPE;
+        LNCPPMQ.DATA_TXT.PAY_LEVL = LNCCTLPM.DATA_TXT.PAY_LEVL;
+    }
+    public void B120_MOVE_APRDM() throws IOException,SQLException,Exception {
+        LNCPPMQ.DATA_CONT_SPC.CONT_PAY_MTH = LNCAPRDM.REC_DATA.PAY_MTH;
+        LNCPPMQ.DATA_CONT_SPC.CONT_BPAY_MTH = LNCAPRDM.REC_DATA.BPAY_MTH;
+        LNCPPMQ.DATA_CONT_SPC.CONT_INST_MTH = LNCAPRDM.REC_DATA.INST_MTH;
+        LNCPPMQ.DATA_CONT_SPC.CONT_CAL_PERD = LNCAPRDM.REC_DATA.CAL_PERD;
+        LNCPPMQ.DATA_CONT_SPC.CONT_CAL_UNIT = LNCAPRDM.REC_DATA.CAL_PERD_UNIT;
+        LNCPPMQ.DATA_CONT_SPC.COMT_BCAL_PERD = LNCAPRDM.REC_DATA.BCAL_PERD;
+        LNCPPMQ.DATA_CONT_SPC.CONT_OCAL_PERD = LNCAPRDM.REC_DATA.OCAL_PERD;
+        LNCPPMQ.DATA_CONT_SPC.CONT_OCAL_UNIT = LNCAPRDM.REC_DATA.OCAL_PERD_UNIT;
+        LNCPPMQ.DATA_CONT_SPC.CONT_FST_PAY_FLG = LNCAPRDM.REC_DATA.FST_PAY_FLG;
+        LNCPPMQ.DATA_CONT_SPC.CONT_PAYP_PERD = LNCAPRDM.REC_DATA.PAYP_PERD;
+        LNCPPMQ.DATA_CONT_SPC.CONT_PAYP_UNIT = LNCAPRDM.REC_DATA.PAYP_PERD_UNIT;
+        LNCPPMQ.DATA_CONT_SPC.COMT_BPAYP_PERD = LNCAPRDM.REC_DATA.BPAYP_PERD;
+        LNCPPMQ.DATA_CONT_SPC.CONT_P_GRACE_TERM = LNCAPRDM.REC_DATA.P_GRACE_TERM;
+        LNCPPMQ.DATA_CONT_SPC.CONT_PAY_DD_TYPE = LNCAPRDM.REC_DATA.PAY_DD_TYPE;
+        LNCPPMQ.DATA_CONT_SPC.CONT_PAY_DD_LTERM = LNCAPRDM.REC_DATA.PAY_DD_LTERM;
+        LNCPPMQ.DATA_CONT_SPC.CONT_ORAT_SAME = LNCAPRDM.REC_DATA.ORAT_SAME;
+        LNCPPMQ.DATA_CONT_SPC.CONT_PAY_DAY = LNCAPRDM.REC_DATA.PAY_DAY;
+        LNCPPMQ.DATA_CONT_SPC.CONT_PRIN_DOG = LNCAPRDM.REC_DATA.PRIN_DOG;
+        LNCPPMQ.DATA_TXT.PRIN_DOG = LNCAPRDM.REC_DATA.PRIN_DOG;
+        LNCPPMQ.DATA_CONT_SPC.CONT_DOG_PSTD_FLG = LNCAPRDM.REC_DATA.DOG_PSTD_FLG;
+        LNCPPMQ.DATA_CONT_SPC.CONT_PRIN_DOG_MTH = LNCAPRDM.REC_DATA.PRIN_DOG_MTH;
+        LNCPPMQ.DATA_TXT.PRIN_DOG_MTH = LNCAPRDM.REC_DATA.PRIN_DOG_MTH;
+        LNCPPMQ.DATA_CONT_SPC.CONT_INT_DOG_MTH = LNCAPRDM.REC_DATA.INT_DOG_MTH;
+        if (LNCAPRDM.REC_DATA.INT_DOG_MTH != ' ') {
+            LNCPPMQ.DATA_TXT.IDOG_MTH = LNCAPRDM.REC_DATA.INT_DOG_MTH;
+        }
+        LNCPPMQ.DATA_CONT_SPC.CONT_RCMP_INT = LNCAPRDM.REC_DATA.RCMP_INT;
+        LNCPPMQ.DATA_CONT_SPC.CONT_DUE_AUTO_FLG = LNCAPRDM.REC_DATA.DUE_AUTO_FLG;
+        LNCPPMQ.DATA_CONT_SPC.CONT_ACCRUAL_TYPE = LNCAPRDM.REC_DATA.ACCRUAL_TYPE;
+        LNCPPMQ.DATA_CONT_SPC.CONT_INT_DBAS_STD = LNCAPRDM.REC_DATA.INT_DBAS_STD;
+        LNCPPMQ.DATA_CONT_SPC.CONT_SPEC_LN_FLG = LNCAPRDM.REC_DATA.SPEC_LN_FLG;
+        LNCPPMQ.DATA_CONT_SPC.CONT_GDA_APREF = LNCAPRDM.REC_DATA.GDA_APRE;
+        LNCPPMQ.DATA_CONT_SPC.CONT_GDA_AUTO_DB = LNCAPRDM.REC_DATA.GDA_AUTO_DB;
+        LNCPPMQ.DATA_CONT_SPC.CONT_GDA_DB_SEQ = LNCAPRDM.REC_DATA.GDA_DB_SEQ;
+        LNCPPMQ.DATA_CONT_SPC.CONT_CHG_DB_FLG = LNCAPRDM.REC_DATA.CHG_DB_FLG;
+        LNCPPMQ.DATA_CONT_SPC.CONT_HAND_CHG_RATE = LNCAPRDM.REC_DATA.HAND_CHG_RATE;
+        LNCPPMQ.DATA_CONT_SPC.CONT_HAND_CHG_OPCT = LNCAPRDM.REC_DATA.HAND_CHG_OPCT;
+        LNCPPMQ.DATA_CONT_SPC.CONT_ACCT_MGT_RATE = LNCAPRDM.REC_DATA.ACCT_MGT_RATE;
+        LNCPPMQ.DATA_CONT_SPC.CONT_PREP_CHG_RATE = LNCAPRDM.REC_DATA.PREP_CHG_RATE;
+        LNCPPMQ.DATA_CONT_SPC.CONT_GRACE_TYP = LNCAPRDM.REC_DATA.GRACE_TYP;
+        LNCPPMQ.DATA_CONT_SPC.CONT_PAY_SEQ = LNCAPRDM.REC_DATA.PAY_SEQ;
+        LNCPPMQ.DATA_CONT_SPC.CONT_PAY_TRANS_FLG = LNCAPRDM.REC_DATA.PAY_TRANS_FLG;
+        LNCPPMQ.DATA_CONT_SPC.CONT_TRANS_FREQ = LNCAPRDM.REC_DATA.TRANS_FREQ;
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_PAY_MTH);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_INST_MTH);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_CAL_PERD);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_CAL_UNIT);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_OCAL_PERD);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_OCAL_UNIT);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_FST_PAY_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_PAYP_PERD);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_PAYP_UNIT);
+        CEP.TRC(SCCGWA, LNCAPRDM.REC_DATA.P_GRACE_TERM);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_P_GRACE_TERM);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_PAY_DD_TYPE);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_PAY_DD_LTERM);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_ORAT_SAME);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_PAY_DAY);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_PRIN_DOG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_DOG_PSTD_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_PRIN_DOG_MTH);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_INT_DOG_MTH);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_DUE_AUTO_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_ACCRUAL_TYPE);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_INT_DBAS_STD);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_SPEC_LN_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_GDA_AUTO_DB);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_GDA_DB_SEQ);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_CHG_DB_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_CONT_SPC.CONT_TRUST_PAY_FLG);
+    }
+    public void B000_DUMP() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PRODMO);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PROD_MOD);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.BAL_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PROD_CLS);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.SYS_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.OVER_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.HOL_FLAG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.CAP_FROM);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.CINT_RUL);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.BUD_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.ACCRUAL_TYPE);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PAY_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.INT_MTH);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PAY_SEQ_MSK1);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PAY_PSEQ_CD1);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PAY_SEQ_MSK2);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PAY_PSEQ_CD2);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PAY_SEQ_MSK3);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PAY_PSEQ_CD3);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.DUE_AUTO_FLG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PAY_LEVL);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PRIN_DOG);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.IDOG_MTH);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PRIN_DOG_MTH);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.PRPY_INT_MTH);
+        CEP.TRC(SCCGWA, LNCPPMQ.DATA_TXT.SUN_FLG);
+    }
+    public void S000_CALL_LNZAPRDM() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "LN-SRC-APRD-MAINT", LNCAPRDM);
+        if (LNCAPRDM.RC.RC_RTNCODE != 0) {
+            LNCPPMQ.RC.RC_APP = LNCAPRDM.RC.RC_APP;
+            LNCPPMQ.RC.RC_RTNCODE = LNCAPRDM.RC.RC_RTNCODE;
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_LNZMDLPM() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "LN-PRM-MDLP-MAINT", LNCMDLPM);
+        if (LNCMDLPM.RC.RC_RTNCODE != 0) {
+            LNCPPMQ.RC.RC_APP = LNCMDLPM.RC.RC_APP;
+            LNCPPMQ.RC.RC_RTNCODE = LNCMDLPM.RC.RC_RTNCODE;
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_LNZCMTPM() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "LN-PRM-CMTPM-MAINT", LNCCMTPM);
+        if (LNCCMTPM.RC.RC_RTNCODE != 0) {
+            LNCPPMQ.RC.RC_APP = LNCCMTPM.RC.RC_APP;
+            LNCPPMQ.RC.RC_RTNCODE = LNCCMTPM.RC.RC_RTNCODE;
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_LNZCTLPM() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "LN-PRM-CTLPM-MAINT", LNCCTLPM);
+        if (LNCCTLPM.RC.RC_RTNCODE != 0) {
+            LNCPPMQ.RC.RC_APP = LNCCTLPM.RC.RC_APP;
+            LNCPPMQ.RC.RC_RTNCODE = LNCCTLPM.RC.RC_RTNCODE;
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_BPZSCGWY() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, BPCSCGWY.PRDT_CODE);
+        CEP.TRC(SCCGWA, BPCSCGWY.CHANG_WAY);
+        IBS.CALLCPN(SCCGWA, "BP-S-MAINT-CGWY", BPCSCGWY);
+        if (BPCSCGWY.RC.RC_CODE != 0) {
+            LNCPPMQ.RC.RC_APP = BPCSCGWY.RC.RC_MMO;
+            LNCPPMQ.RC.RC_RTNCODE = BPCSCGWY.RC.RC_CODE;
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_LNZRCMMT() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "LN-RSC-LNTCMMT", LNCRCMMT);
+        if (LNCRCMMT.RC.RC_CODE != 0) {
+            LNCPPMQ.RC.RC_APP = LNCRCMMT.RC.RC_MMO;
+            LNCPPMQ.RC.RC_RTNCODE = LNCRCMMT.RC.RC_CODE;
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void S000_CALL_LNZRCONT() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "LN-RSC-LNTCONT", LNCRCONT);
+        if (LNCRCONT.RC.RC_CODE != 0) {
+            LNCPPMQ.RC.RC_APP = LNCRCONT.RC.RC_MMO;
+            LNCPPMQ.RC.RC_RTNCODE = LNCRCONT.RC.RC_CODE;
+            Z_RET();
+            if (pgmRtn) return;
+        }
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+    if (SCCGWA.COMM_AREA.BSP_FLG.equalsIgnoreCase("BSP") || SCCGWA.COMM_AREA.CHNL.equalsIgnoreCase("BAT")) { //FROM #IFDEF BAT
+        if (LNCPPMQ.RC.RC_RTNCODE != 0) {
+            CEP.TRC(SCCGWA, "LNCPPMQ=");
+            CEP.TRC(SCCGWA, LNCPPMQ);
+        }
+    } //FROM #ENDIF
+        pgmRtn = true;
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

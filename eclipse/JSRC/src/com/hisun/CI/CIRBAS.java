@@ -1,0 +1,44 @@
+package com.hisun.CI;
+
+public class CIRBAS {
+    public CIRBAS_KEY KEY = new CIRBAS_KEY();
+    public char CI_TYP = ' ';
+    public char CI_ATTR = ' ';
+    public String SVR_LVL = " ";
+    public String SVR_LVL1 = " ";
+    public String SVR_LVL2 = " ";
+    public String SVR_LVL3 = " ";
+    public String STSW = " ";
+    public String VER_STSW = " ";
+    public String IDE_STSW = " ";
+    public int OPN_BR = 0;
+    public int OPEN_DT = 0;
+    public int CLOSE_DT = 0;
+    public char ORGIN_TP = ' ';
+    public String ORIGIN = " ";
+    public String ORIGIN2 = " ";
+    public String CI_NM = " ";
+    public String ID_TYPE = " ";
+    public String ID_NO = " ";
+    public String ID_RGN = " ";
+    public String TAX_BANK = " ";
+    public String TAX_AC_NO = " ";
+    public char TAX_TYPE = ' ';
+    public String TAX_DIST_NO = " ";
+    public char FTA_FLG = ' ';
+    public int OWNER_BK = 0;
+    public int OWNER_BR = 0;
+    public String OIC_NO = " ";
+    public String RESP_CD = " ";
+    public String SUB_DP = " ";
+    public String OPEN_CHNL = " ";
+    public String NRA_TAX_TYP = " ";
+    public int SEARCH_DT = 0;
+    public String CRT_TLR = " ";
+    public int CRT_DT = 0;
+    public int CRT_BR = 0;
+    public String UPD_TLR = " ";
+    public int UPD_BR = 0;
+    public int UPD_DT = 0;
+    public String TS = " ";
+}

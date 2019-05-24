@@ -1,0 +1,12 @@
+package com.hisun.LN;
+
+public class LNZSPDQ_WS_OUT_RECODE {
+    LNZSPDQ_WS_OUT_HEAD WS_OUT_HEAD = new LNZSPDQ_WS_OUT_HEAD();
+    LNZSPDQ_WS_PARS_INFO[] WS_PARS_INFO = new LNZSPDQ_WS_PARS_INFO[10];
+    LNZSPDQ_WS_CMMT_INF WS_CMMT_INF = new LNZSPDQ_WS_CMMT_INF();
+    LNZSPDQ_WS_OUT_INFO[] WS_OUT_INFO = new LNZSPDQ_WS_OUT_INFO[10];
+    public LNZSPDQ_WS_OUT_RECODE() {
+        for (int i=0;i<10;i++) WS_PARS_INFO[i] = new LNZSPDQ_WS_PARS_INFO();
+        for (int i=0;i<10;i++) WS_OUT_INFO[i] = new LNZSPDQ_WS_OUT_INFO();
+    }
+}

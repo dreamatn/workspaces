@@ -1,0 +1,7 @@
+package com.hisun.BP;
+
+public class BPCTCFEE {
+    public BPCTCFEE_RC RC = new BPCTCFEE_RC();
+    public BPCTCFEE_INPUT_AREA INPUT_AREA = new BPCTCFEE_INPUT_AREA();
+    public BPCTCFEE_OUTPUT_AREA OUTPUT_AREA = new BPCTCFEE_OUTPUT_AREA();
+}

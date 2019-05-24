@@ -1,0 +1,40 @@
+package com.hisun.BP;
+
+public class BPB1102_AWA_1102 {
+    public String FEE_CODE = " ";
+    public short FEE_CODE_NO = 0;
+    public String FEE_DESC = " ";
+    public short FEE_DESC_NO = 0;
+    public char EXG_TYP = ' ';
+    public short EXG_TYP_NO = 0;
+    public char OWN_FLG = ' ';
+    public short OWN_FLG_NO = 0;
+    public String TX_MMO = " ";
+    public short TX_MMO_NO = 0;
+    public char CHG_TYPE = ' ';
+    public short CHG_TYPE_NO = 0;
+    public double TX_BR_PE = 0;
+    public short TX_BR_PE_NO = 0;
+    public double AC_BR_PE = 0;
+    public short AC_BR_PE_NO = 0;
+    public double AC2_BR_P = 0;
+    public short AC2_BR_P_NO = 0;
+    public char AMOT_FLG = ' ';
+    public short AMOT_FLG_NO = 0;
+    public String REB_CODE = " ";
+    public short REB_CODE_NO = 0;
+    public char DEBT_MTH = ' ';
+    public short DEBT_MTH_NO = 0;
+    public char RECH_MTH = ' ';
+    public short RECH_MTH_NO = 0;
+    public short MRECH_CN = 0;
+    public short MRECH_CN_NO = 0;
+    public int STR_DATE = 0;
+    public short STR_DATE_NO = 0;
+    public int END_DATE = 0;
+    public short END_DATE_NO = 0;
+    public double UP_AMT = 0;
+    public short UP_AMT_NO = 0;
+    public double DWN_AMT = 0;
+    public short DWN_AMT_NO = 0;
+}

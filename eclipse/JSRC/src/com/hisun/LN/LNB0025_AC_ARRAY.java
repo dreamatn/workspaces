@@ -1,0 +1,46 @@
+package com.hisun.LN;
+
+public class LNB0025_AC_ARRAY {
+    public char AC_FLG2 = ' ';
+    public short AC_FLG2_NO = 0;
+    public String STL_MTH2 = " ";
+    public short STL_MTH2_NO = 0;
+    public String REC_AC2 = " ";
+    public short REC_AC2_NO = 0;
+    public String AC_CNM2 = " ";
+    public short AC_CNM2_NO = 0;
+    public String CHQ_NO2 = " ";
+    public short CHQ_NO2_NO = 0;
+    public String PAY_PSWD = " ";
+    public short PAY_PSWD_NO = 0;
+    public char CHQ_TYP2 = ' ';
+    public short CHQ_TYP2_NO = 0;
+    public int ISS_DTE2 = 0;
+    public short ISS_DTE2_NO = 0;
+    public String RVS_NO2 = " ";
+    public short RVS_NO2_NO = 0;
+    public String AC_CNM = " ";
+    public short AC_CNM_NO = 0;
+    public String DEP_AC2 = " ";
+    public short DEP_AC2_NO = 0;
+    public double PAY_AMT2 = 0;
+    public short PAY_AMT2_NO = 0;
+    public String REC_CCY2 = " ";
+    public short REC_CCY2_NO = 0;
+    public char EX_DIR2 = ' ';
+    public short EX_DIR2_NO = 0;
+    public double EX_RATE2 = 0;
+    public short EX_RATE2_NO = 0;
+    public int EX_TIME2 = 0;
+    public short EX_TIME2_NO = 0;
+    public double EQ_AMT2 = 0;
+    public short EQ_AMT2_NO = 0;
+    public char AMT_FRM2 = ' ';
+    public short AMT_FRM2_NO = 0;
+    public short DRAW_SE2 = 0;
+    public short DRAW_SE2_NO = 0;
+    public String EVENT_CD = " ";
+    public short EVENT_CD_NO = 0;
+    public String PROD_CDO = " ";
+    public short PROD_CDO_NO = 0;
+}

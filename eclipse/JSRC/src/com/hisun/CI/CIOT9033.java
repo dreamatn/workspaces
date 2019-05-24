@@ -1,0 +1,112 @@
+package com.hisun.CI;
+
+import com.hisun.SC.*;
+import com.hisun.TC.XStreamUtil;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class CIOT9033 {
+    CICMSG_ERROR_MSG CICMSG_ERROR_MSG = new CICMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    SCCCALL SCCCALL = new SCCCALL();
+    SCCFMT SCCFMT = new SCCFMT();
+    SCCMSG SCCMSG = new SCCMSG();
+    CICSUFC CICSUFC = new CICSUFC();
+    SCCGWA SCCGWA;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    CIB9033_AWA_9033 CIB9033_AWA_9033;
+    public void MP(SCCGWA SCCGWA) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "CIOT9033 return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        SCCGWA.COMM_AREA.AWA_AREA_PTR = SCCGWA.COMM_AREA.AWA_AREA_PTR.replaceAll("BODY>", "CIB9033_AWA_9033>");
+        CIB9033_AWA_9033 = (CIB9033_AWA_9033) XStreamUtil.xmlToBean(SCCGWA.COMM_AREA.AWA_AREA_PTR);
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        IBS.init(SCCGWA, CICSUFC);
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        B010_CHECK_INPUT_DATA();
+        B020_UPDATE_FINANCIAL_INF();
+    }
+    public void B010_CHECK_INPUT_DATA() throws IOException,SQLException,Exception {
+        CEP.TRC(SCCGWA, CIB9033_AWA_9033.CI_NO);
+        if (CIB9033_AWA_9033.CI_NO.trim().length() == 0) {
+            CEP.TRC(SCCGWA, "CI-NO MUST INPUT");
+            CEP.ERRC(SCCGWA, CICMSG_ERROR_MSG.CI_NO_MUST_INPUT);
+        }
+        CEP.TRC(SCCGWA, CIB9033_AWA_9033.CI_TYP);
+        if (CIB9033_AWA_9033.CI_TYP == ' ') {
+            CEP.TRC(SCCGWA, "CI-TYP MUST INPUT");
+            CEP.ERRC(SCCGWA, CICMSG_ERROR_MSG.CI_TYP_MUST_INPUT);
+        } else {
+            if (CIB9033_AWA_9033.CI_TYP != '3') {
+                CEP.TRC(SCCGWA, "CI-TYP MUST BE FINANCIAL");
+                CEP.ERRC(SCCGWA, CICMSG_ERROR_MSG.CI_TYP_INPUT_ERR);
+            }
+        }
+        CEP.TRC(SCCGWA, CIB9033_AWA_9033.ID_TYPE);
+        CEP.TRC(SCCGWA, CIB9033_AWA_9033.ID_NO);
+        CEP.TRC(SCCGWA, CIB9033_AWA_9033.CI_NM);
+        if (CIB9033_AWA_9033.ID_TYPE.trim().length() == 0 
+            || CIB9033_AWA_9033.ID_NO.trim().length() == 0 
+            || CIB9033_AWA_9033.CI_NM.trim().length() == 0) {
+            CEP.TRC(SCCGWA, "IDNM MUST INPUT");
+            CEP.ERRC(SCCGWA, CICMSG_ERROR_MSG.CI_MUST_INPUT, "三要素必须输�?");
+        }
+        CEP.ERR(SCCGWA);
+    }
+    public void B020_UPDATE_FINANCIAL_INF() throws IOException,SQLException,Exception {
+        CICSUFC.DATA.CI_NO = CIB9033_AWA_9033.CI_NO;
+        CICSUFC.DATA.ID_TYPE = CIB9033_AWA_9033.ID_TYPE;
+        CICSUFC.DATA.ID_NO = CIB9033_AWA_9033.ID_NO;
+        CICSUFC.DATA.EXP_DT = CIB9033_AWA_9033.EXP_DT;
+        CICSUFC.DATA.CI_NM = CIB9033_AWA_9033.CI_NM;
+        CICSUFC.DATA.CI_ENM = CIB9033_AWA_9033.CI_ENM;
+        CICSUFC.DATA.CI_TYP = CIB9033_AWA_9033.CI_TYP;
+        CICSUFC.DATA.CI_ATTR = CIB9033_AWA_9033.CI_ATTR;
+        CICSUFC.DATA.STS = CIB9033_AWA_9033.STSW;
+        CICSUFC.DATA.OPEN_DT = CIB9033_AWA_9033.OPEN_DT;
+        CICSUFC.DATA.OWNER_BK = CIB9033_AWA_9033.OWNER_BK;
+        CICSUFC.DATA.CLOSE_DT = CIB9033_AWA_9033.CLOSE_DT;
+        CICSUFC.DATA.OPN_CHNL = CIB9033_AWA_9033.OPN_CHNL;
+        CICSUFC.DATA.SUB_TYP = CIB9033_AWA_9033.SUB_TYP;
+        CICSUFC.DATA.ORG_TYPE = CIB9033_AWA_9033.ORG_TYPE;
+        CICSUFC.DATA.FIN_TYPE = CIB9033_AWA_9033.FIN_TYPE;
+        CICSUFC.DATA.FTA_FLG = CIB9033_AWA_9033.FTA_FLG;
+        CICSUFC.DATA.SVR_LVL = CIB9033_AWA_9033.SVR_LVL;
+        CICSUFC.DATA.TAX_BANK = CIB9033_AWA_9033.TAX_BANK;
+        CICSUFC.DATA.TAX_AC = CIB9033_AWA_9033.TAX_AC;
+        CICSUFC.DATA.TAX_TYPE = CIB9033_AWA_9033.TAX_TYPE;
+        CICSUFC.DATA.TAX_DSNO = CIB9033_AWA_9033.TAX_DSNO;
+        CICSUFC.DATA.RESIDENT = CIB9033_AWA_9033.RESIDENT;
+        CICSUFC.DATA.INT_TYPE = CIB9033_AWA_9033.INT_TYPE;
+        CICSUFC.DATA.INDUS1 = CIB9033_AWA_9033.INDUS1;
+        CICSUFC.DATA.SID_FLG = CIB9033_AWA_9033.SID_FLG;
+        CICSUFC.DATA.PB_AP_NO = CIB9033_AWA_9033.PB_AP_NO;
+        CICSUFC.DATA.OIC_NO = CIB9033_AWA_9033.OIC_NO;
+        CICSUFC.DATA.RESP_CD = CIB9033_AWA_9033.RESP_CD;
+        CICSUFC.DATA.SUB_DP = CIB9033_AWA_9033.SUB_DP;
+        CICSUFC.DATA.INFO_IND = CIB9033_AWA_9033.INFO_IND;
+        S000_CALL_CIZSUFC();
+    }
+    public void S000_CALL_CIZSUFC() throws IOException,SQLException,Exception {
+        IBS.CALLCPN(SCCGWA, "CI-UPD-CI-FINANCIAL", CICSUFC);
+        if (CICSUFC.RC.RC_CODE != 0) {
+            CEP.ERR(SCCGWA, CICSUFC.RC);
+        }
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}

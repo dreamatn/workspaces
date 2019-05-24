@@ -1,0 +1,40 @@
+package com.hisun.LN;
+
+public class LNB0024_STL_DATA {
+    public String STL_MTH2 = " ";
+    public short STL_MTH2_NO = 0;
+    public String CHQ_NO2 = " ";
+    public short CHQ_NO2_NO = 0;
+    public String PAY_PSWD = " ";
+    public short PAY_PSWD_NO = 0;
+    public char CHQ_TYPE = ' ';
+    public short CHQ_TYPE_NO = 0;
+    public int ISS_DATE = 0;
+    public short ISS_DATE_NO = 0;
+    public String DEP_AC2 = " ";
+    public short DEP_AC2_NO = 0;
+    public char AC_FLG2 = ' ';
+    public short AC_FLG2_NO = 0;
+    public String CI_CNM2 = " ";
+    public short CI_CNM2_NO = 0;
+    public double PAY_AMT2 = 0;
+    public short PAY_AMT2_NO = 0;
+    public String RVS_NO2 = " ";
+    public short RVS_NO2_NO = 0;
+    public char AMT_FRM2 = ' ';
+    public short AMT_FRM2_NO = 0;
+    public String REC_CCY2 = " ";
+    public short REC_CCY2_NO = 0;
+    public char EX_DIR2 = ' ';
+    public short EX_DIR2_NO = 0;
+    public double EX_RATE2 = 0;
+    public short EX_RATE2_NO = 0;
+    public int EX_TIME2 = 0;
+    public short EX_TIME2_NO = 0;
+    public double EQ_AMT2 = 0;
+    public short EQ_AMT2_NO = 0;
+    public String EVENT_CD = " ";
+    public short EVENT_CD_NO = 0;
+    public String PROD_CDO = " ";
+    public short PROD_CDO_NO = 0;
+}

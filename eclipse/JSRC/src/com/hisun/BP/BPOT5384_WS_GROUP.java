@@ -1,0 +1,43 @@
+package com.hisun.BP;
+
+public class BPOT5384_WS_GROUP {
+    double WS_STR_AMT = 0;
+    String WS_A_T_01 = " ";
+    String WS_A_T_02 = " ";
+    String WS_A_T_03 = " ";
+    String WS_A_T_04 = " ";
+    String WS_A_T_05 = " ";
+    String WS_A_T_06 = " ";
+    String WS_A_T_07 = " ";
+    String WS_A_T_08 = " ";
+    String WS_A_T_09 = " ";
+    String WS_A_T_10 = " ";
+    String WS_G_N_01 = " ";
+    String WS_G_N_02 = " ";
+    String WS_G_N_03 = " ";
+    String WS_G_N_04 = " ";
+    String WS_G_N_05 = " ";
+    String WS_G_N_06 = " ";
+    String WS_G_N_07 = " ";
+    String WS_G_N_08 = " ";
+    String WS_G_N_09 = " ";
+    String WS_G_N_10 = " ";
+    String WS_C_N_01 = " ";
+    String WS_C_N_02 = " ";
+    String WS_C_N_03 = " ";
+    String WS_C_N_04 = " ";
+    String WS_C_N_05 = " ";
+    String WS_C_N_06 = " ";
+    String WS_C_N_07 = " ";
+    String WS_C_N_08 = " ";
+    String WS_C_N_09 = " ";
+    String WS_C_N_10 = " ";
+    double WS_CBUY_SP = 0;
+    char BPOT5384_FILLER47 = 0X01;
+    double WS_CSEL_SP = 0;
+    char BPOT5384_FILLER49 = 0X01;
+    double WS_FBUY_SP = 0;
+    char BPOT5384_FILLER51 = 0X01;
+    double WS_FSEL_SP = 0;
+    char BPOT5384_FILLER53 = 0X01;
+}

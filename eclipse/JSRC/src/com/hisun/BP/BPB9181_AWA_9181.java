@@ -1,0 +1,42 @@
+package com.hisun.BP;
+
+public class BPB9181_AWA_9181 {
+    public String FEE_CODE = " ";
+    public short FEE_CODE_NO = 0;
+    public String FEE_DESC = " ";
+    public short FEE_DESC_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public int CHG_BR = 0;
+    public short CHG_BR_NO = 0;
+    public int STA_DATE = 0;
+    public short STA_DATE_NO = 0;
+    public int END_DATE = 0;
+    public short END_DATE_NO = 0;
+    public char CHG_FREQ = ' ';
+    public short CHG_FREQ_NO = 0;
+    public short FREQ_CNT = 0;
+    public short FREQ_CNT_NO = 0;
+    public char REL_SRC = ' ';
+    public short REL_SRC_NO = 0;
+    public String REL_CTRT = " ";
+    public short REL_CTRT_NO = 0;
+    public char AC_TYP = ' ';
+    public short AC_TYP_NO = 0;
+    public String CHG_MEDI = " ";
+    public short CHG_MEDI_NO = 0;
+    public String CHG_CCY = " ";
+    public short CHG_CCY_NO = 0;
+    public char CCY_TYPE = ' ';
+    public short CCY_TYPE_NO = 0;
+    public double AMT_TERM = 0;
+    public short AMT_TERM_NO = 0;
+    public double AMT_ALL = 0;
+    public short AMT_ALL_NO = 0;
+    public int SALE_DT = 0;
+    public short SALE_DT_NO = 0;
+    public String CREV_NO = " ";
+    public short CREV_NO_NO = 0;
+    public String FEE_RMK = " ";
+    public short FEE_RMK_NO = 0;
+}

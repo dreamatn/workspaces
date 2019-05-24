@@ -1,0 +1,46 @@
+package com.hisun.BP;
+
+public class BPB9140_AWA_9140 {
+    public String CTRT_NO = " ";
+    public short CTRT_NO_NO = 0;
+    public String RCTRT_NO = " ";
+    public short RCTRT_NO_NO = 0;
+    public String CI_NO = " ";
+    public short CI_NO_NO = 0;
+    public String AB_NAME = " ";
+    public short AB_NAME_NO = 0;
+    public String PROD_TYP = " ";
+    public short PROD_TYP_NO = 0;
+    public String FEE_TYPE = " ";
+    public short FEE_TYPE_NO = 0;
+    public char PAY_IND = ' ';
+    public short PAY_IND_NO = 0;
+    public char PAY_METH = ' ';
+    public short PAY_METH_NO = 0;
+    public int SETT_DT = 0;
+    public short SETT_DT_NO = 0;
+    public String CHG_CCY = " ";
+    public short CHG_CCY_NO = 0;
+    public double CHG_AMT = 0;
+    public short CHG_AMT_NO = 0;
+    public double ADJ_AMT = 0;
+    public short ADJ_AMT_NO = 0;
+    public String REMARK = " ";
+    public short REMARK_NO = 0;
+    public String TICKET = " ";
+    public short TICKET_NO = 0;
+    public double AMT_REAL = 0;
+    public short AMT_REAL_NO = 0;
+    public String CCY_REAL = " ";
+    public short CCY_REAL_NO = 0;
+    public double RATE = 0;
+    public short RATE_NO = 0;
+    public int EXG_DT = 0;
+    public short EXG_DT_NO = 0;
+    public int EXG_TM = 0;
+    public short EXG_TM_NO = 0;
+    public int OSETT_DT = 0;
+    public short OSETT_DT_NO = 0;
+    public char FUNC = ' ';
+    public short FUNC_NO = 0;
+}

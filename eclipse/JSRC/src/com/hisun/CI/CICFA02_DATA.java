@@ -1,0 +1,40 @@
+package com.hisun.CI;
+
+public class CICFA02_DATA {
+    public String ACAC_NO = " ";
+    public String AGR_NO = " ";
+    public String STA_NO = " ";
+    public int AGR_SEQ = 0;
+    public String AID = " ";
+    public String AC_CNM = " ";
+    public char FILLER22 = 0X02;
+    public char STS = ' ';
+    public String STSW = " ";
+    public String FRM_APP = " ";
+    public String CNTRCT_TYP = " ";
+    public String PROD_CD = " ";
+    public double BAL = 0;
+    public char FILLER29 = 0X01;
+    public double AVA_BAL = 0;
+    public char FILLER31 = 0X01;
+    public double LAST_BAL = 0;
+    public char FILLER33 = 0X01;
+    public String CCY = " ";
+    public char CR_FLG = ' ';
+    public String BV_NO = " ";
+    public String TERMS = " ";
+    public double INT_RAT = 0;
+    public char FILLER39 = 0X01;
+    public double EXP_INT = 0;
+    public char FILLER41 = 0X01;
+    public int EXP_DT = 0;
+    public int OPEN_DT = 0;
+    public int OPEN_BR = 0;
+    public int END_DT = 0;
+    public String DAC_STSW = " ";
+    public char CI_TYP = ' ';
+    public char BV_TYP = ' ';
+    public char DRAW_MTH = ' ';
+    public String FRG_CODE = " ";
+    public char JF_FLG = ' ';
+}

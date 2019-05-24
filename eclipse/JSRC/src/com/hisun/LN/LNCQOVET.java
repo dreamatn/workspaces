@@ -1,0 +1,6 @@
+package com.hisun.LN;
+
+public class LNCQOVET {
+    public LNCQOVET_INPUT_DATA INPUT_DATA = new LNCQOVET_INPUT_DATA();
+    public LNCQOVET_OUTPUT_DATA OUTPUT_DATA = new LNCQOVET_OUTPUT_DATA();
+}

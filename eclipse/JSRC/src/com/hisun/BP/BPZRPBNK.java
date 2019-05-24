@@ -1,0 +1,205 @@
+package com.hisun.BP;
+
+import com.hisun.SC.*;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class BPZRPBNK {
+    int JIBS_tmp_int;
+    DBParm BPTPBNK_RD;
+    String K_PGM_NAME = "BPZRPBNK";
+    int WS_LEN = 0;
+    BPCMSG_ERROR_MSG BPCMSG_ERROR_MSG = new BPCMSG_ERROR_MSG();
+    SCCEXCP SCCEXCP = new SCCEXCP();
+    BPRPBNK BPRPBNK = new BPRPBNK();
+    BPRPBANK BPRPBANK = new BPRPBANK();
+    SCCGWA SCCGWA;
+    BPCRPEXT BPCRPEXT;
+    SCCGSCA_SC_AREA GWA_SC_AREA;
+    SCCGBPA_BP_AREA GWA_BP_AREA;
+    String LK_DATA = " ";
+    public void MP(SCCGWA SCCGWA, BPCRPEXT BPCRPEXT) throws IOException,SQLException,Exception {
+        this.SCCGWA = SCCGWA;
+        this.BPCRPEXT = BPCRPEXT;
+        CEP.TRC(SCCGWA);
+        A000_INIT_PROC();
+        B000_MAIN_PROC();
+        CEP.TRC(SCCGWA, "BPZRPBNK return!");
+        Z_RET();
+    }
+    public void A000_INIT_PROC() throws IOException,SQLException,Exception {
+        LK_DATA = IBS.CLS2CPY(SCCGWA, BPCRPEXT.DAT_POINTER);
+        GWA_BP_AREA = (SCCGBPA_BP_AREA) SCCGWA.BP_AREA_PTR;
+        GWA_SC_AREA = (SCCGSCA_SC_AREA) SCCGWA.SC_AREA_PTR;
+        IBS.init(SCCGWA, BPRPBNK);
+    }
+    public void B000_MAIN_PROC() throws IOException,SQLException,Exception {
+        BPCRPEXT.DAT_LEN = 225;
+        BPRPBNK.KEY.TYPE = BPCRPEXT.TYP;
+        BPRPBNK.KEY.CODE = BPCRPEXT.CD;
+        BPRPBNK.KEY.EFF_DATE = BPCRPEXT.EFF_DATE;
+        if (BPCRPEXT.FUNC == 'A') {
+            B010_CREATE_RECORD_PROC();
+        } else if (BPCRPEXT.FUNC == 'U') {
+            B020_UPDATE_RECORD_PROC();
+        } else if (BPCRPEXT.FUNC == 'D') {
+            B030_DELETE_RECORD_PROC();
+        } else if (BPCRPEXT.FUNC == 'Q') {
+            B040_QUERY_RECORD_PROC();
+        } else {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "INVALID FUNC(" + BPCRPEXT.FUNC + ")";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void B010_CREATE_RECORD_PROC() throws IOException,SQLException,Exception {
+        R010_PUT_IN();
+        T000_WRITE_BPTPBNK();
+    }
+    public void B020_UPDATE_RECORD_PROC() throws IOException,SQLException,Exception {
+        T000_READ_BPTPBNK_UPD();
+        R010_PUT_IN();
+        T000_REWRITE_BPTPBNK();
+    }
+    public void B030_DELETE_RECORD_PROC() throws IOException,SQLException,Exception {
+        T000_READ_BPTPBNK_UPD();
+        T000_DELETE_BPTPBNK();
+    }
+    public void B040_QUERY_RECORD_PROC() throws IOException,SQLException,Exception {
+        T000_READ_BPTPBNK();
+        R020_GET_OUT();
+    }
+    public void R010_PUT_IN() throws IOException,SQLException,Exception {
+        if (LK_DATA == null) LK_DATA = "";
+        JIBS_tmp_int = LK_DATA.length();
+        for (int i=0;i<9500-JIBS_tmp_int;i++) LK_DATA += " ";
+        IBS.CPY2CLS(SCCGWA, LK_DATA.substring(0, BPCRPEXT.DAT_LEN), BPRPBANK.DATA_TXT);
+        BPRPBNK.CHN_NM = BPRPBANK.DATA_TXT.CHN_NM;
+        BPRPBNK.ENG_NM = BPRPBANK.DATA_TXT.ENG_NM;
+        BPRPBNK.AC_CHK = BPRPBANK.DATA_TXT.AC_CHK;
+        BPRPBNK.CI_CHK = BPRPBANK.DATA_TXT.CI_CHK;
+        BPRPBNK.FX_RATE = BPRPBANK.DATA_TXT.FX_RATE;
+        BPRPBNK.MAX_LVL = BPRPBANK.DATA_TXT.MAX_LVL;
+        BPRPBNK.AUH_LVL = BPRPBANK.DATA_TXT.AUH_LVL;
+        BPRPBNK.HEAD_BR = BPRPBANK.DATA_TXT.HEAD_BR;
+        BPRPBNK.LOC_CCY = BPRPBANK.DATA_TXT.LOC_CCY1;
+        BPRPBNK.EVA_CCY = BPRPBANK.DATA_TXT.EVA_CCY;
+        BPRPBNK.TOT_CCY = BPRPBANK.DATA_TXT.TOT_CCY;
+        BPRPBNK.TAI_FEN = BPRPBANK.DATA_TXT.TAI_FEN;
+        BPRPBNK.TLR_COND = BPRPBANK.DATA_TXT.TLR_COND;
+        BPRPBNK.CALD_BUI = BPRPBANK.DATA_TXT.CALD_BUI;
+        BPRPBNK.CALD_SYS = BPRPBANK.DATA_TXT.CALD_SYS;
+        BPRPBNK.INT_TAX = BPRPBANK.DATA_TXT.INT_TAX;
+        BPRPBNK.COUN_CD = BPRPBANK.DATA_TXT.COUN_CD;
+        BPRPBNK.CITY_CD = BPRPBANK.DATA_TXT.CITY_CD;
+        BPRPBNK.SG_IN_CNT = BPRPBANK.DATA_TXT.SG_IN_CNT;
+        BPRPBNK.CLS = BPRPBANK.DATA_TXT.CLS;
+        BPRPBNK.FEE_FLG = BPRPBANK.DATA_TXT.FEE_FLG;
+        BPRPBNK.OPN_TM = BPRPBANK.DATA_TXT.OPN_TM;
+        BPRPBNK.CLS_TM = BPRPBANK.DATA_TXT.CLS_TM;
+        BPRPBNK.HOPN_TM = BPRPBANK.DATA_TXT.HOPN_TM;
+        BPRPBNK.HCLS_TM = BPRPBANK.DATA_TXT.HCLS_TM;
+        BPRPBNK.O_CHK_FL = BPRPBANK.DATA_TXT.O_CHK_FL;
+        BPRPBNK.V_CHK_FL = BPRPBANK.DATA_TXT.V_CHK_FL;
+        BPRPBNK.AUDIT_FL = BPRPBANK.DATA_TXT.AUDIT_FL;
+        BPRPBNK.H_E_TIME = BPRPBANK.DATA_TXT.H_E_TIME;
+        BPRPBNK.ERP_BRAN = BPRPBANK.DATA_TXT.ERP_BRAN;
+        BPRPBNK.EX_RA = BPRPBANK.DATA_TXT.EX_RA;
+    }
+    public void R020_GET_OUT() throws IOException,SQLException,Exception {
+        BPRPBANK.DATA_TXT.CHN_NM = BPRPBNK.CHN_NM;
+        BPRPBANK.DATA_TXT.ENG_NM = BPRPBNK.ENG_NM;
+        BPRPBANK.DATA_TXT.AC_CHK = BPRPBNK.AC_CHK;
+        BPRPBANK.DATA_TXT.CI_CHK = BPRPBNK.CI_CHK;
+        BPRPBANK.DATA_TXT.FX_RATE = BPRPBNK.FX_RATE;
+        BPRPBANK.DATA_TXT.MAX_LVL = BPRPBNK.MAX_LVL;
+        BPRPBANK.DATA_TXT.AUH_LVL = BPRPBNK.AUH_LVL;
+        BPRPBANK.DATA_TXT.HEAD_BR = BPRPBNK.HEAD_BR;
+        BPRPBANK.DATA_TXT.LOC_CCY1 = BPRPBNK.LOC_CCY;
+        BPRPBANK.DATA_TXT.EVA_CCY = BPRPBNK.EVA_CCY;
+        BPRPBANK.DATA_TXT.TOT_CCY = BPRPBNK.TOT_CCY;
+        BPRPBANK.DATA_TXT.TAI_FEN = BPRPBNK.TAI_FEN;
+        BPRPBANK.DATA_TXT.TLR_COND = BPRPBNK.TLR_COND;
+        BPRPBANK.DATA_TXT.CALD_BUI = BPRPBNK.CALD_BUI;
+        BPRPBANK.DATA_TXT.CALD_SYS = BPRPBNK.CALD_SYS;
+        BPRPBANK.DATA_TXT.INT_TAX = BPRPBNK.INT_TAX;
+        BPRPBANK.DATA_TXT.COUN_CD = BPRPBNK.COUN_CD;
+        BPRPBANK.DATA_TXT.CITY_CD = BPRPBNK.CITY_CD;
+        BPRPBANK.DATA_TXT.SG_IN_CNT = BPRPBNK.SG_IN_CNT;
+        BPRPBANK.DATA_TXT.CLS = BPRPBNK.CLS;
+        BPRPBANK.DATA_TXT.FEE_FLG = BPRPBNK.FEE_FLG;
+        BPRPBANK.DATA_TXT.OPN_TM = BPRPBNK.OPN_TM;
+        BPRPBANK.DATA_TXT.CLS_TM = BPRPBNK.CLS_TM;
+        BPRPBANK.DATA_TXT.HOPN_TM = BPRPBNK.HOPN_TM;
+        BPRPBANK.DATA_TXT.HCLS_TM = BPRPBNK.HCLS_TM;
+        BPRPBANK.DATA_TXT.O_CHK_FL = BPRPBNK.O_CHK_FL;
+        BPRPBANK.DATA_TXT.V_CHK_FL = BPRPBNK.V_CHK_FL;
+        BPRPBANK.DATA_TXT.AUDIT_FL = BPRPBNK.AUDIT_FL;
+        BPRPBANK.DATA_TXT.H_E_TIME = BPRPBNK.H_E_TIME;
+        BPRPBANK.DATA_TXT.ERP_BRAN = BPRPBNK.ERP_BRAN;
+        BPRPBANK.DATA_TXT.EX_RA = BPRPBNK.EX_RA;
+        if (LK_DATA == null) LK_DATA = "";
+        JIBS_tmp_int = LK_DATA.length();
+        for (int i=0;i<9500-JIBS_tmp_int;i++) LK_DATA += " ";
+        JIBS_tmp_str[0] = IBS.CLS2CPY(SCCGWA, BPRPBANK.DATA_TXT);
+        LK_DATA = JIBS_tmp_str[0] + LK_DATA.substring(BPCRPEXT.DAT_LEN);
+    }
+    public void T000_READ_BPTPBNK() throws IOException,SQLException,Exception {
+        BPTPBNK_RD = new DBParm();
+        BPTPBNK_RD.TableName = "BPTPBNK";
+        IBS.READ(SCCGWA, BPRPBNK, BPTPBNK_RD);
+        if (SCCGWA.COMM_AREA.DBIO_FLG != '0') {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "MSG (" + IBS.CLS2CPY(SCCGWA, BPRPBNK.KEY) + ") NOT FOUND";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void T000_WRITE_BPTPBNK() throws IOException,SQLException,Exception {
+        BPTPBNK_RD = new DBParm();
+        BPTPBNK_RD.TableName = "BPTPBNK";
+        IBS.WRITE(SCCGWA, BPRPBNK, BPTPBNK_RD);
+        if (SCCGWA.COMM_AREA.DBIO_FLG != '0') {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "MSG (" + IBS.CLS2CPY(SCCGWA, BPRPBNK.KEY) + ") DUPLICATE";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void T000_READ_BPTPBNK_UPD() throws IOException,SQLException,Exception {
+        BPTPBNK_RD = new DBParm();
+        BPTPBNK_RD.TableName = "BPTPBNK";
+        BPTPBNK_RD.upd = true;
+        IBS.READ(SCCGWA, BPRPBNK, BPTPBNK_RD);
+        if (SCCGWA.COMM_AREA.DBIO_FLG != '0') {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "MSG (" + IBS.CLS2CPY(SCCGWA, BPRPBNK.KEY) + ") NOT FOUND";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void T000_REWRITE_BPTPBNK() throws IOException,SQLException,Exception {
+        BPTPBNK_RD = new DBParm();
+        BPTPBNK_RD.TableName = "BPTPBNK";
+        IBS.REWRITE(SCCGWA, BPRPBNK, BPTPBNK_RD);
+        if (SCCGWA.COMM_AREA.DBIO_FLG != '0') {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "MSG (" + IBS.CLS2CPY(SCCGWA, BPRPBNK.KEY) + ") NOT FOUND";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void T000_DELETE_BPTPBNK() throws IOException,SQLException,Exception {
+        BPTPBNK_RD = new DBParm();
+        BPTPBNK_RD.TableName = "BPTPBNK";
+        IBS.DELETE(SCCGWA, BPRPBNK, BPTPBNK_RD);
+        if (SCCGWA.COMM_AREA.DBIO_FLG != '0') {
+            IBS.init(SCCGWA, SCCEXCP);
+            SCCEXCP.MSG_TEXT.KEY_OR_OTHER = "MSG (" + IBS.CLS2CPY(SCCGWA, BPRPBNK.KEY) + ") NOT FOUND";
+            CEP.EXCP(SCCGWA, SCCEXCP.MSG_TEXT.KEY_OR_OTHER);
+        }
+    }
+    public void Z_RET() throws IOException,SQLException,Exception {
+        return;
+    }
+    public void B_DB_EXCP() throws IOException,SQLException,Exception {
+        throw new SQLException(SCCGWA.e);
+    }
+}
