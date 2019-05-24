@@ -2,12 +2,71 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b11dcec4-74f6-4418-bd3c-8adacb10e296" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/kits/draw_forked_tree.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kits/draw_pentagram.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kits/mongodb.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kits/pop_city.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../eclipse/.metadata/.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.mylyn/.tasks.xml.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../../eclipse/.metadata/.mylyn/.tasks.xml.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.mylyn/tasks.xml.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../../eclipse/.metadata/.mylyn/tasks.xml.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/12/f05526e4117600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/17/4011303d127600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/25/60b369c9117600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/34/d00d538f107600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/3c/e000fc90267600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/40/d06cf9f3287600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/41/20ea11f2127600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/41/80f5a6d3267600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/42/a0f45d831e7600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/49/904bb359297600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/4a/90eb27ac1c7600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/52/c0e6ec86297600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/62/d025d0641e7600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/65/502ddd94137600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/7b/d0d1106b267600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/7d/b032c7ec117600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/85/903aa11e1e7600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/89/8061c2bd1e7600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/8c/702283a2137600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/98/a03f2465267600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/99/b07d2a4d127600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/9a/e09d44e6187600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/a/7042fab5277600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/ab/7052e45d267600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/ab/f07d3e3c157600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/ae/102e9e84247600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/b1/b03e71ff257600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/b3/70c60be2297600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/bd/a0b76783297600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/c1/3078c4f26b7b00191aceef638269da17" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/c2/60dc81de297600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/c8/106944e6137600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/d2/a0cd2d9a137600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/d8/f04ce5ae137600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/e1/7077e814197600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/e4/20f2dc51267600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/e5/c01913ae1c7600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/e7/20a6bc14117600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/e7/705124011c7600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/e7/d00e23c0137600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/ea/706d66ff1e7600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/eb/80ab84711d7600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/ec/50a318501a7600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/ee/00e9aa7d1e7600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/ef/904e7527197600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/f0/00c24854267600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/f1/10979e36137600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/f5/b0799ef4187600191d72849ec7581cd2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.history/fd/b0f3387d267600191f0e942085aa17f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.projects/algorithm/.indexes/af/history.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.projects/algorithm/.indexes/e4/b9/22/81/48/history.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.projects/algorithm/org.eclipse.jdt.core/state.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.root/7.tree" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" beforeDir="false" afterPath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" beforeDir="false" afterPath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.jdt.core/205139659.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.jdt.core/externalFilesCache" beforeDir="false" afterPath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.jdt.core/externalFilesCache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.pde.core/.cache/clean-cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../eclipse/.metadata/.plugins/org.eclipse.pde.core/.cache/clean-cache.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/pyvenv.cfg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,14 +77,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pop_city.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pop_city.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kits/pop_city.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+            <state relative-caret-position="68">
+              <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plane.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/fly/plane.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1037">
+              <caret line="368" column="34" selection-start-line="368" selection-start-column="16" selection-end-line="368" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -70,6 +138,7 @@
         <option value="$PROJECT_DIR$/kits/draw_forked_tree.py" />
         <option value="$PROJECT_DIR$/kits/mongodb.py" />
         <option value="$PROJECT_DIR$/kits/pop_city.py" />
+        <option value="$PROJECT_DIR$/fly/plane.py" />
       </list>
     </option>
   </component>
@@ -87,7 +156,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -103,17 +171,23 @@
             <path>
               <item name="learn" type="b2602c69:ProjectViewProjectNode" />
               <item name="learn" type="462c0819:PsiDirectoryNode" />
+              <item name="fly" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="learn" type="b2602c69:ProjectViewProjectNode" />
+              <item name="learn" type="462c0819:PsiDirectoryNode" />
               <item name="kits" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="D:/dev_app/Anaconda3" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -136,25 +210,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.pop_city">
-    <configuration name="draw" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="learn" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kits" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="D:\workspaces\pyProject\learn\kits\draw_pentagram.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
+  <component name="RunManager" selected="Python.plane">
     <configuration name="draw_forked_tree" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="learn" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -227,6 +283,24 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="plane" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="learn" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/fly" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fly/plane.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="pop_city" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="learn" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -247,19 +321,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.hello" />
-      <item itemvalue="Python.draw" />
       <item itemvalue="Python.draw_pentagram" />
       <item itemvalue="Python.draw_forked_tree" />
       <item itemvalue="Python.pop_city" />
       <item itemvalue="Python.mongodb" />
+      <item itemvalue="Python.plane" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.plane" />
         <item itemvalue="Python.pop_city" />
         <item itemvalue="Python.mongodb" />
         <item itemvalue="Python.draw_forked_tree" />
         <item itemvalue="Python.draw_pentagram" />
-        <item itemvalue="Python.draw" />
       </list>
     </recent_temporary>
   </component>
@@ -295,12 +369,12 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.25382262" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25297618" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" x="416" y="224" width="999" height="258" id="Event Log" order="10" sideWeight="0.4625382" side_tool="true" weight="0.32969034" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49617738" weight="0.32786885" />
       <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.53746176" weight="0.32969034" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977064" visible="true" weight="0.3272727" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4977064" weight="0.32561985" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49923548" weight="0.32786885" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -315,19 +389,19 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977064" visible="true" weight="0.32786885" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25382262" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977064" visible="true" weight="0.32786885" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.53746176" weight="0.32969034" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3989071" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49923548" weight="0.32786885" />
       <window_info anchor="bottom" x="416" y="224" width="999" height="258" id="Event Log" order="10" sideWeight="0.4625382" side_tool="true" weight="0.32969034" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49617738" weight="0.32786885" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -381,6 +455,33 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/kits/pop_city.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fly/plane.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5440">
+          <caret line="320" column="32" lean-forward="true" selection-start-line="320" selection-start-column="32" selection-end-line="320" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kits/pop_city.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kits/pop_city.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
           <folding>
@@ -414,9 +515,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="9" lean-forward="true" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -442,9 +540,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
           <caret line="22" column="28" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -569,11 +664,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/kits/pop_city.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        <state relative-caret-position="68">
+          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fly/plane.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="368" column="34" selection-start-line="368" selection-start-column="16" selection-end-line="368" selection-end-column="34" />
         </state>
       </provider>
     </entry>
